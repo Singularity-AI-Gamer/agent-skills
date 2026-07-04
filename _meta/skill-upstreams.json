@@ -1,30 +1,40 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "updated_at": "2026-07-04",
   "purpose": "Track verified original upstream repositories for Skill-hub skills so future upgrades can compare evidence-backed sources instead of guessing by skill name.",
+  "scope": {
+    "startsFrom": [
+      "_meta/skill-upstreams.json",
+      "_meta/skills-lock.json"
+    ],
+    "localSkillCount": 61,
+    "sharedSkillCount": 52,
+    "projectSkillCount": 9
+  },
   "rules": [
     "Only entries with classification=open-source and updatePolicy=mirror or mapped are eligible for automated upgrade.",
     "Entries marked candidate or unknown require more evidence before overwrite.",
-    "Self-made and project-private skills are manual unless the owner adds an explicit upstream."
+    "Self-made and project-private/local skills are manual unless the owner adds an explicit upstream.",
+    "No upstream is considered verified without repository URL, upstream path, ref, commit, and evidence of directory comparison or an explicit source link."
   ],
-  "sources": [
-    {
-      "name": "data-scraper-agent",
-      "path": "skills/06-data-search/data-scraper-agent/",
-      "classification": "open-source",
-      "upstream": {
-        "url": "https://github.com/affaan-m/ECC",
-        "path": "skills/data-scraper-agent/",
-        "ref": "main"
-      },
-      "lastChecked": {
-        "date": "2026-07-04",
-        "commit": "49128b5763b7ac0b50acef35ac0bcca08d1576af"
-      },
-      "updatePolicy": "mirror",
-      "status": "upgraded",
-      "notes": "Exact upstream directory found; updated frontmatter metadata layout."
+  "classifications": {
+    "open-source": "Original upstream repository/path/ref/commit verified; updatePolicy controls whether automated updates are allowed.",
+    "candidate": "Likely source exists, but immutable source path/commit or content equivalence is not proven.",
+    "unknown": "No verified source or self/local provenance established yet.",
+    "self": "Evidence indicates a self-authored or owner-maintained skill; external updates disabled.",
+    "local": "Repository/project-local or pipeline-local skill; external updates disabled."
+  },
+  "verificationSummary": {
+    "countsByClassification": {
+      "open-source": 21,
+      "self": 6,
+      "local": 33,
+      "candidate": 1
     },
+    "githubCodeSearch": "Blocked by GitHub API rate limit during broad exact-name search; unresolved entries keep verificationPath commands for later retry.",
+    "readOnlyAuditCommand": ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1"
+  },
+  "sources": [
     {
       "name": "deep-research",
       "path": "skills/01-agent-engineering/deep-research/",
@@ -39,16 +49,68 @@
         "commit": "49128b5763b7ac0b50acef35ac0bcca08d1576af"
       },
       "updatePolicy": "mirror",
-      "status": "upgraded",
-      "notes": "Exact upstream directory found; local eval file removed to mirror upstream."
+      "status": "current",
+      "evidence": [
+        "Prior source index entry existed or explicit local URL was present.",
+        "Repository cloned or fetched during this audit.",
+        "Read-only normalized hash audit verified the recorded upstream directory/status."
+      ],
+      "verificationPath": [
+        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        "Compare normalized file hashes before any mirror or mapped update."
+      ],
+      "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit."
     },
     {
-      "name": "healthcare-cdss-patterns",
-      "path": "skills/10-business-industry/healthcare-cdss-patterns/",
+      "name": "find-skills",
+      "path": "skills/01-agent-engineering/find-skills/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/vercel-labs/skills",
+        "path": "skills/find-skills/",
+        "ref": "main"
+      },
+      "lastChecked": {
+        "date": "2026-07-04",
+        "commit": "2adcfe5a4cce0ce5f4d5547a997b2a161ec5d127"
+      },
+      "updatePolicy": "mapped",
+      "status": "mapped-drift",
+      "evidence": [
+        "Prior source index entry existed or explicit local URL was present.",
+        "Repository cloned or fetched during this audit.",
+        "Read-only normalized hash audit verified the recorded upstream directory/status."
+      ],
+      "verificationPath": [
+        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        "Compare normalized file hashes before any mirror or mapped update."
+      ],
+      "notes": "Upstream directory verified. Local SKILL.md intentionally changes trigger language and install scope, so automatic mirror is disabled."
+    },
+    {
+      "name": "project-cleanup-audit",
+      "path": "skills/01-agent-engineering/project-cleanup-audit/",
+      "classification": "self",
+      "updatePolicy": "none",
+      "status": "self-or-local-unverified",
+      "evidence": [
+        "Skill enforces the same evidence-first cleanup rule as this repository AGENTS instruction.",
+        "Exact web search did not identify a matching original repository; a similarly named cleanup marketplace skill was not content-equivalent.",
+        "No explicit upstream URL appears in inspected local files."
+      ],
+      "verificationPath": [
+        "Run gh search code with exact title and unique operating-rule phrases when GitHub code search rate limit resets.",
+        "Compare the bundled scripts/references, not only SKILL.md, before marking open-source."
+      ],
+      "notes": "Manual maintenance only unless owner provides an explicit upstream and comparison commit."
+    },
+    {
+      "name": "santa-method",
+      "path": "skills/01-agent-engineering/santa-method/",
       "classification": "open-source",
       "upstream": {
         "url": "https://github.com/affaan-m/ECC",
-        "path": "skills/healthcare-cdss-patterns/",
+        "path": "skills/santa-method/",
         "ref": "main"
       },
       "lastChecked": {
@@ -56,59 +118,59 @@
         "commit": "49128b5763b7ac0b50acef35ac0bcca08d1576af"
       },
       "updatePolicy": "mirror",
-      "status": "upgraded",
-      "notes": "Exact upstream directory found; updated frontmatter metadata layout."
+      "status": "current",
+      "evidence": [
+        "Prior source index entry existed or explicit local URL was present.",
+        "Repository cloned or fetched during this audit.",
+        "Read-only normalized hash audit verified the recorded upstream directory/status."
+      ],
+      "verificationPath": [
+        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        "Compare normalized file hashes before any mirror or mapped update."
+      ],
+      "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit."
     },
     {
-      "name": "healthcare-emr-patterns",
-      "path": "skills/10-business-industry/healthcare-emr-patterns/",
+      "name": "skill-creator",
+      "path": "skills/01-agent-engineering/skill-creator/",
       "classification": "open-source",
       "upstream": {
-        "url": "https://github.com/affaan-m/ECC",
-        "path": "skills/healthcare-emr-patterns/",
+        "url": "https://github.com/anthropics/skills",
+        "path": "skills/skill-creator/",
         "ref": "main"
       },
       "lastChecked": {
         "date": "2026-07-04",
-        "commit": "49128b5763b7ac0b50acef35ac0bcca08d1576af"
+        "commit": "9d2f1ae187231d8199c64b5b762e1bdf2244733d"
       },
       "updatePolicy": "mirror",
-      "status": "upgraded",
-      "notes": "Exact upstream directory found; updated frontmatter metadata layout."
+      "status": "current",
+      "evidence": [
+        "Prior source index entry existed or explicit local URL was present.",
+        "Repository cloned or fetched during this audit.",
+        "Read-only normalized hash audit verified the recorded upstream directory/status."
+      ],
+      "verificationPath": [
+        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        "Compare normalized file hashes before any mirror or mapped update."
+      ],
+      "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit."
     },
     {
-      "name": "healthcare-eval-harness",
-      "path": "skills/10-business-industry/healthcare-eval-harness/",
-      "classification": "open-source",
-      "upstream": {
-        "url": "https://github.com/affaan-m/ECC",
-        "path": "skills/healthcare-eval-harness/",
-        "ref": "main"
-      },
-      "lastChecked": {
-        "date": "2026-07-04",
-        "commit": "49128b5763b7ac0b50acef35ac0bcca08d1576af"
-      },
-      "updatePolicy": "mirror",
-      "status": "upgraded",
-      "notes": "Exact upstream directory found; updated frontmatter metadata layout."
-    },
-    {
-      "name": "healthcare-phi-compliance",
-      "path": "skills/10-business-industry/healthcare-phi-compliance/",
-      "classification": "open-source",
-      "upstream": {
-        "url": "https://github.com/affaan-m/ECC",
-        "path": "skills/healthcare-phi-compliance/",
-        "ref": "main"
-      },
-      "lastChecked": {
-        "date": "2026-07-04",
-        "commit": "49128b5763b7ac0b50acef35ac0bcca08d1576af"
-      },
-      "updatePolicy": "mirror",
-      "status": "upgraded",
-      "notes": "Exact upstream directory found; updated frontmatter metadata layout."
+      "name": "skill-upgrade",
+      "path": "skills/01-agent-engineering/skill-upgrade/",
+      "classification": "self",
+      "updatePolicy": "none",
+      "status": "self-maintained-generic-upgrade-skill",
+      "evidence": [
+        "Skill is maintained in this Skill-hub repository and is now designed as a generic local and repository skill upgrade workflow.",
+        "The bundled check_upstreams.ps1 helper supports Skill Hub repository source indexes and local skill root inventory/fast-forward checks."
+      ],
+      "verificationPath": [
+        "Use this repository commit as the canonical source until a separate upstream package exists.",
+        "Run .\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1 -Mode Repo and -Mode Local to verify both supported modes."
+      ],
+      "notes": "Self-maintained generic upgrade skill; external automatic updates disabled."
     },
     {
       "name": "liquid-glass-design",
@@ -125,15 +187,101 @@
       },
       "updatePolicy": "mirror",
       "status": "current",
-      "notes": "Normalized hashes matched upstream."
+      "evidence": [
+        "Prior source index entry existed or explicit local URL was present.",
+        "Repository cloned or fetched during this audit.",
+        "Read-only normalized hash audit verified the recorded upstream directory/status."
+      ],
+      "verificationPath": [
+        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        "Compare normalized file hashes before any mirror or mapped update."
+      ],
+      "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit."
     },
     {
-      "name": "remotion-video-creation",
-      "path": "skills/07-media-content/remotion-video-creation/",
+      "name": "frontend-design",
+      "path": "skills/03-frameworks/frontend-design/",
+      "classification": "candidate",
+      "candidate": {
+        "url": "https://github.com/affaan-m/everything-claude-code",
+        "path": "skills/frontend-design/",
+        "ref": "historical-main"
+      },
+      "updatePolicy": "none",
+      "status": "candidate-historical-source-unverified",
+      "evidence": [
+        "Local frontmatter says origin: ECC.",
+        "Public skill registries show affaan-m/everything-claude-code/frontend-design with matching body text.",
+        "Current affaan-m/everything-claude-code main at 49128b5763b7ac0b50acef35ac0bcca08d1576af no longer contains skills/frontend-design; it contains frontend-design-direction instead."
+      ],
+      "verificationPath": [
+        "Recover the historical commit or registry artifact that contained skills/frontend-design/SKILL.md.",
+        "Compare normalized local SKILL.md against that historical tree before changing classification to open-source.",
+        "If no immutable upstream commit can be found, keep updatePolicy=none."
+      ],
+      "notes": "Likely source exists, but the current upstream tree or immutable source commit is not proven safe for overwrite."
+    },
+    {
+      "name": "bioc-fulltext-fetch",
+      "path": "skills/06-data-search/bioc-fulltext-fetch/",
+      "classification": "local",
+      "updatePolicy": "none",
+      "status": "local-pipeline-skill-unverified-upstream",
+      "evidence": [
+        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
+        "No explicit upstream repository URL was found in inspected local files.",
+        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
+      ],
+      "verificationPath": [
+        "gh search code '\"name: bioc-fulltext-fetch\" filename:SKILL.md' --limit 10",
+        "Search one unique body phrase from SKILL.md via web/GitHub.",
+        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
+      ],
+      "notes": "Local/manual until an original upstream repository is proven."
+    },
+    {
+      "name": "clinical-trials-v2",
+      "path": "skills/06-data-search/clinical-trials-v2/",
+      "classification": "local",
+      "updatePolicy": "none",
+      "status": "local-pipeline-skill-unverified-upstream",
+      "evidence": [
+        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
+        "No explicit upstream repository URL was found in inspected local files.",
+        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
+      ],
+      "verificationPath": [
+        "gh search code '\"name: clinical-trials-v2\" filename:SKILL.md' --limit 10",
+        "Search one unique body phrase from SKILL.md via web/GitHub.",
+        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
+      ],
+      "notes": "Local/manual until an original upstream repository is proven."
+    },
+    {
+      "name": "cn-clinical-guidelines-fetch",
+      "path": "skills/06-data-search/cn-clinical-guidelines-fetch/",
+      "classification": "local",
+      "updatePolicy": "none",
+      "status": "local-pipeline-skill-unverified-upstream",
+      "evidence": [
+        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
+        "No explicit upstream repository URL was found in inspected local files.",
+        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
+      ],
+      "verificationPath": [
+        "gh search code '\"name: cn-clinical-guidelines-fetch\" filename:SKILL.md' --limit 10",
+        "Search one unique body phrase from SKILL.md via web/GitHub.",
+        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
+      ],
+      "notes": "Local/manual until an original upstream repository is proven."
+    },
+    {
+      "name": "data-scraper-agent",
+      "path": "skills/06-data-search/data-scraper-agent/",
       "classification": "open-source",
       "upstream": {
         "url": "https://github.com/affaan-m/ECC",
-        "path": "skills/remotion-video-creation/",
+        "path": "skills/data-scraper-agent/",
         "ref": "main"
       },
       "lastChecked": {
@@ -142,135 +290,168 @@
       },
       "updatePolicy": "mirror",
       "status": "current",
-      "notes": "Exact same 32 normalized files. remotion-dev/skills is a separate candidate with different skill name/path."
+      "evidence": [
+        "Prior source index entry existed or explicit local URL was present.",
+        "Repository cloned or fetched during this audit.",
+        "Read-only normalized hash audit verified the recorded upstream directory/status."
+      ],
+      "verificationPath": [
+        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        "Compare normalized file hashes before any mirror or mapped update."
+      ],
+      "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit."
     },
     {
-      "name": "santa-method",
-      "path": "skills/01-agent-engineering/santa-method/",
+      "name": "europepmc-search",
+      "path": "skills/06-data-search/europepmc-search/",
+      "classification": "local",
+      "updatePolicy": "none",
+      "status": "local-pipeline-skill-unverified-upstream",
+      "evidence": [
+        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
+        "No explicit upstream repository URL was found in inspected local files.",
+        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
+      ],
+      "verificationPath": [
+        "gh search code '\"name: europepmc-search\" filename:SKILL.md' --limit 10",
+        "Search one unique body phrase from SKILL.md via web/GitHub.",
+        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
+      ],
+      "notes": "Local/manual until an original upstream repository is proven."
+    },
+    {
+      "name": "evidence-appendix-sync",
+      "path": "skills/06-data-search/evidence-appendix-sync/",
+      "classification": "local",
+      "updatePolicy": "none",
+      "status": "local-pipeline-skill-unverified-upstream",
+      "evidence": [
+        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
+        "No explicit upstream repository URL was found in inspected local files.",
+        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
+      ],
+      "verificationPath": [
+        "gh search code '\"name: evidence-appendix-sync\" filename:SKILL.md' --limit 10",
+        "Search one unique body phrase from SKILL.md via web/GitHub.",
+        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
+      ],
+      "notes": "Local/manual until an original upstream repository is proven."
+    },
+    {
+      "name": "market-research-reports",
+      "path": "skills/06-data-search/market-research-reports/",
+      "classification": "local",
+      "updatePolicy": "none",
+      "status": "local-pipeline-skill-unverified-upstream",
+      "evidence": [
+        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
+        "No explicit upstream repository URL was found in inspected local files.",
+        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
+      ],
+      "verificationPath": [
+        "gh search code '\"name: market-research-reports\" filename:SKILL.md' --limit 10",
+        "Search one unique body phrase from SKILL.md via web/GitHub.",
+        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
+      ],
+      "notes": "Local/manual until an original upstream repository is proven."
+    },
+    {
+      "name": "market-sizing-mece-foundation",
+      "path": "skills/06-data-search/market-sizing-mece-foundation/",
+      "classification": "local",
+      "updatePolicy": "none",
+      "status": "local-pipeline-skill-unverified-upstream",
+      "evidence": [
+        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
+        "No explicit upstream repository URL was found in inspected local files.",
+        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
+      ],
+      "verificationPath": [
+        "gh search code '\"name: market-sizing-mece-foundation\" filename:SKILL.md' --limit 10",
+        "Search one unique body phrase from SKILL.md via web/GitHub.",
+        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
+      ],
+      "notes": "Local/manual until an original upstream repository is proven."
+    },
+    {
+      "name": "medical-evidence-grading",
+      "path": "skills/06-data-search/medical-evidence-grading/",
+      "classification": "local",
+      "updatePolicy": "none",
+      "status": "local-pipeline-skill-unverified-upstream",
+      "evidence": [
+        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
+        "No explicit upstream repository URL was found in inspected local files.",
+        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
+      ],
+      "verificationPath": [
+        "gh search code '\"name: medical-evidence-grading\" filename:SKILL.md' --limit 10",
+        "Search one unique body phrase from SKILL.md via web/GitHub.",
+        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
+      ],
+      "notes": "Local/manual until an original upstream repository is proven."
+    },
+    {
+      "name": "medical-research",
+      "path": "skills/06-data-search/medical-research/",
       "classification": "open-source",
       "upstream": {
-        "url": "https://github.com/affaan-m/ECC",
-        "path": "skills/santa-method/",
+        "url": "https://github.com/gexijin/vibe",
+        "path": ".claude/skills/medical-research/",
         "ref": "main"
       },
       "lastChecked": {
         "date": "2026-07-04",
-        "commit": "49128b5763b7ac0b50acef35ac0bcca08d1576af"
-      },
-      "updatePolicy": "mirror",
-      "status": "upgraded",
-      "notes": "Exact upstream directory found; updated frontmatter metadata layout."
-    },
-    {
-      "name": "docx",
-      "path": "skills/07-media-content/docx/",
-      "classification": "open-source",
-      "upstream": {
-        "url": "https://github.com/anthropics/skills",
-        "path": "skills/docx/",
-        "ref": "main"
-      },
-      "lastChecked": {
-        "date": "2026-07-04",
-        "commit": "9d2f1ae187231d8199c64b5b762e1bdf2244733d"
-      },
-      "updatePolicy": "mirror",
-      "normalization": {
-        "trimTrailingWhitespace": true
-      },
-      "status": "upgraded",
-      "notes": "Mirrored current Anthropic document skill layout, then normalized trailing whitespace/final blank lines so git diff checks pass."
-    },
-    {
-      "name": "pptx",
-      "path": "skills/07-media-content/pptx/",
-      "classification": "open-source",
-      "upstream": {
-        "url": "https://github.com/anthropics/skills",
-        "path": "skills/pptx/",
-        "ref": "main"
-      },
-      "lastChecked": {
-        "date": "2026-07-04",
-        "commit": "9d2f1ae187231d8199c64b5b762e1bdf2244733d"
-      },
-      "updatePolicy": "mirror",
-      "normalization": {
-        "trimTrailingWhitespace": true
-      },
-      "status": "upgraded",
-      "notes": "Mirrored current Anthropic presentation skill layout, then normalized trailing whitespace/final blank lines so git diff checks pass."
-    },
-    {
-      "name": "xlsx",
-      "path": "skills/07-media-content/xlsx/",
-      "classification": "open-source",
-      "upstream": {
-        "url": "https://github.com/anthropics/skills",
-        "path": "skills/xlsx/",
-        "ref": "main"
-      },
-      "lastChecked": {
-        "date": "2026-07-04",
-        "commit": "9d2f1ae187231d8199c64b5b762e1bdf2244733d"
-      },
-      "updatePolicy": "mirror",
-      "normalization": {
-        "trimTrailingWhitespace": true
-      },
-      "status": "upgraded",
-      "notes": "Mirrored current Anthropic spreadsheet skill layout, then normalized trailing whitespace/final blank lines so git diff checks pass."
-    },
-    {
-      "name": "skill-creator",
-      "path": "skills/01-agent-engineering/skill-creator/",
-      "classification": "open-source",
-      "upstream": {
-        "url": "https://github.com/anthropics/skills",
-        "path": "skills/skill-creator/",
-        "ref": "main"
-      },
-      "lastChecked": {
-        "date": "2026-07-04",
-        "commit": "9d2f1ae187231d8199c64b5b762e1bdf2244733d"
-      },
-      "updatePolicy": "mirror",
-      "status": "upgraded",
-      "notes": "Local content matched Anthropic skill-creator; only LICENSE.txt copyright placeholder differed and was updated."
-    },
-    {
-      "name": "imagegen",
-      "path": "skills/07-media-content/imagegen/",
-      "classification": "open-source",
-      "upstream": {
-        "url": "https://github.com/openai/skills",
-        "path": "skills/.system/imagegen/",
-        "ref": "main"
-      },
-      "lastChecked": {
-        "date": "2026-07-04",
-        "commit": "49f948faa9258a0c61caceaf225e179651397431"
-      },
-      "updatePolicy": "mirror",
-      "status": "upgraded",
-      "notes": "Mirrored current OpenAI system image generation skill."
-    },
-    {
-      "name": "pdf",
-      "path": "skills/07-media-content/pdf/",
-      "classification": "open-source",
-      "upstream": {
-        "url": "https://github.com/openai/skills",
-        "path": "skills/.curated/pdf/",
-        "ref": "main"
-      },
-      "lastChecked": {
-        "date": "2026-07-04",
-        "commit": "49f948faa9258a0c61caceaf225e179651397431"
+        "commit": "7ad9fd231d406376d2ee4d6021338c432f23094c"
       },
       "updatePolicy": "mirror",
       "status": "current",
-      "notes": "Normalized hashes matched OpenAI current version."
+      "evidence": [
+        "Prior source index entry existed or explicit local URL was present.",
+        "Repository cloned or fetched during this audit.",
+        "Read-only normalized hash audit verified the recorded upstream directory/status."
+      ],
+      "verificationPath": [
+        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        "Compare normalized file hashes before any mirror or mapped update."
+      ],
+      "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit."
+    },
+    {
+      "name": "nmpa-drug-registry-lookup",
+      "path": "skills/06-data-search/nmpa-drug-registry-lookup/",
+      "classification": "local",
+      "updatePolicy": "none",
+      "status": "local-pipeline-skill-unverified-upstream",
+      "evidence": [
+        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
+        "No explicit upstream repository URL was found in inspected local files.",
+        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
+      ],
+      "verificationPath": [
+        "gh search code '\"name: nmpa-drug-registry-lookup\" filename:SKILL.md' --limit 10",
+        "Search one unique body phrase from SKILL.md via web/GitHub.",
+        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
+      ],
+      "notes": "Local/manual until an original upstream repository is proven."
+    },
+    {
+      "name": "pubmed-eutils",
+      "path": "skills/06-data-search/pubmed-eutils/",
+      "classification": "local",
+      "updatePolicy": "none",
+      "status": "local-pipeline-skill-unverified-upstream",
+      "evidence": [
+        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
+        "No explicit upstream repository URL was found in inspected local files.",
+        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
+      ],
+      "verificationPath": [
+        "gh search code '\"name: pubmed-eutils\" filename:SKILL.md' --limit 10",
+        "Search one unique body phrase from SKILL.md via web/GitHub.",
+        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
+      ],
+      "notes": "Local/manual until an original upstream repository is proven."
     },
     {
       "name": "pubmed-search",
@@ -287,24 +468,125 @@
       },
       "updatePolicy": "mirror",
       "status": "current",
-      "notes": "Normalized hashes matched upstream."
+      "evidence": [
+        "Prior source index entry existed or explicit local URL was present.",
+        "Repository cloned or fetched during this audit.",
+        "Read-only normalized hash audit verified the recorded upstream directory/status."
+      ],
+      "verificationPath": [
+        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        "Compare normalized file hashes before any mirror or mapped update."
+      ],
+      "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit."
     },
     {
-      "name": "medical-research",
-      "path": "skills/06-data-search/medical-research/",
+      "name": "pubtator-entity-search",
+      "path": "skills/06-data-search/pubtator-entity-search/",
+      "classification": "local",
+      "updatePolicy": "none",
+      "status": "local-pipeline-skill-unverified-upstream",
+      "evidence": [
+        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
+        "No explicit upstream repository URL was found in inspected local files.",
+        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
+      ],
+      "verificationPath": [
+        "gh search code '\"name: pubtator-entity-search\" filename:SKILL.md' --limit 10",
+        "Search one unique body phrase from SKILL.md via web/GitHub.",
+        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
+      ],
+      "notes": "Local/manual until an original upstream repository is proven."
+    },
+    {
+      "name": "report-bundle-builder",
+      "path": "skills/06-data-search/report-bundle-builder/",
+      "classification": "local",
+      "updatePolicy": "none",
+      "status": "local-pipeline-skill-unverified-upstream",
+      "evidence": [
+        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
+        "No explicit upstream repository URL was found in inspected local files.",
+        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
+      ],
+      "verificationPath": [
+        "gh search code '\"name: report-bundle-builder\" filename:SKILL.md' --limit 10",
+        "Search one unique body phrase from SKILL.md via web/GitHub.",
+        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
+      ],
+      "notes": "Local/manual until an original upstream repository is proven."
+    },
+    {
+      "name": "docx",
+      "path": "skills/07-media-content/docx/",
       "classification": "open-source",
       "upstream": {
-        "url": "https://github.com/gexijin/vibe",
-        "path": ".claude/skills/medical-research/",
+        "url": "https://github.com/anthropics/skills",
+        "path": "skills/docx/",
         "ref": "main"
       },
       "lastChecked": {
         "date": "2026-07-04",
-        "commit": "7ad9fd231d406376d2ee4d6021338c432f23094c"
+        "commit": "9d2f1ae187231d8199c64b5b762e1bdf2244733d"
       },
       "updatePolicy": "mirror",
-      "status": "upgraded",
-      "notes": "SKILL.md and pubmed_search.py already matched; upstream README.md and EXAMPLES.md were added."
+      "status": "current",
+      "evidence": [
+        "Prior source index entry existed or explicit local URL was present.",
+        "Repository cloned or fetched during this audit.",
+        "Read-only normalized hash audit verified the recorded upstream directory/status."
+      ],
+      "verificationPath": [
+        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        "Compare normalized file hashes before any mirror or mapped update."
+      ],
+      "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit.",
+      "normalization": {
+        "trimTrailingWhitespace": true
+      }
+    },
+    {
+      "name": "editorial-presentation-html",
+      "path": "skills/07-media-content/editorial-presentation-html/",
+      "classification": "self",
+      "updatePolicy": "none",
+      "status": "self-inaccessible-upstream",
+      "evidence": [
+        "README identifies YQ Editorial Presentation Skill.",
+        "README installation block references https://github.com/EthanYoQ/editorial-presentation-skill.git.",
+        "git ls-remote for that repository returned Repository not found during this audit.",
+        "SKILL.md cites a local source version path under C:\\Vibe Coding Project\\AI Square."
+      ],
+      "verificationPath": [
+        "Ask repository owner to make EthanYoQ/editorial-presentation-skill accessible or provide a replacement upstream URL.",
+        "After access is available, compare normalized tree and record commit before enabling mapped or mirror updates."
+      ],
+      "notes": "Manual maintenance only unless owner provides an explicit upstream and comparison commit."
+    },
+    {
+      "name": "imagegen",
+      "path": "skills/07-media-content/imagegen/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/openai/skills",
+        "path": "skills/.system/imagegen/",
+        "ref": "main"
+      },
+      "lastChecked": {
+        "date": "2026-07-04",
+        "commit": "49f948faa9258a0c61caceaf225e179651397431"
+      },
+      "updatePolicy": "mirror",
+      "status": "current",
+      "evidence": [
+        "Prior source index entry existed or explicit local URL was present.",
+        "Repository cloned or fetched during this audit.",
+        "Read-only normalized hash audit verified the recorded upstream directory/status."
+      ],
+      "verificationPath": [
+        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        "Compare normalized file hashes before any mirror or mapped update."
+      ],
+      "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit."
     },
     {
       "name": "jianying-editor",
@@ -320,11 +602,295 @@
         "commit": "f421c8a036f4fda888a83b38fc90bb9c00d6faa9"
       },
       "updatePolicy": "mirror",
+      "status": "current",
+      "evidence": [
+        "Prior source index entry existed or explicit local URL was present.",
+        "Repository cloned or fetched during this audit.",
+        "Read-only normalized hash audit verified the recorded upstream directory/status."
+      ],
+      "verificationPath": [
+        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        "Compare normalized file hashes before any mirror or mapped update."
+      ],
+      "notes": "Explicit GitHub clone URL exists in local README; exact upstream directory verified by read-only normalized hash audit.",
       "normalization": {
         "trimTrailingWhitespace": true
+      }
+    },
+    {
+      "name": "pdf",
+      "path": "skills/07-media-content/pdf/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/openai/skills",
+        "path": "skills/.curated/pdf/",
+        "ref": "main"
       },
-      "status": "upgraded-with-whitespace-normalization",
-      "notes": "Explicit GitHub clone URL existed in local README; mirrored current upstream excluding .git, then normalized trailing whitespace/final blank lines so git diff checks pass."
+      "lastChecked": {
+        "date": "2026-07-04",
+        "commit": "49f948faa9258a0c61caceaf225e179651397431"
+      },
+      "updatePolicy": "mirror",
+      "status": "current",
+      "evidence": [
+        "Prior source index entry existed or explicit local URL was present.",
+        "Repository cloned or fetched during this audit.",
+        "Read-only normalized hash audit verified the recorded upstream directory/status."
+      ],
+      "verificationPath": [
+        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        "Compare normalized file hashes before any mirror or mapped update."
+      ],
+      "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit."
+    },
+    {
+      "name": "ppt-nano",
+      "path": "skills/07-media-content/ppt-nano/",
+      "classification": "self",
+      "updatePolicy": "none",
+      "status": "self-local-workflow",
+      "evidence": [
+        "README hardcodes local workspace path /home/ubuntu/.openclaw/workspace/skills/ppt-nano.",
+        "README describes project-specific dvcode/nanobanana workflow and local reference images.",
+        "No verified upstream repository was found in the inspected files or web exact-name search."
+      ],
+      "verificationPath": [
+        "Search exact unique phrases from README and SKILL.md in GitHub code search when rate limit resets.",
+        "If a source repo is found, compare styles/ assets and scripts before changing classification."
+      ],
+      "notes": "Manual maintenance only unless owner provides an explicit upstream and comparison commit."
+    },
+    {
+      "name": "pptx",
+      "path": "skills/07-media-content/pptx/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/anthropics/skills",
+        "path": "skills/pptx/",
+        "ref": "main"
+      },
+      "lastChecked": {
+        "date": "2026-07-04",
+        "commit": "9d2f1ae187231d8199c64b5b762e1bdf2244733d"
+      },
+      "updatePolicy": "mirror",
+      "status": "current",
+      "evidence": [
+        "Prior source index entry existed or explicit local URL was present.",
+        "Repository cloned or fetched during this audit.",
+        "Read-only normalized hash audit verified the recorded upstream directory/status."
+      ],
+      "verificationPath": [
+        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        "Compare normalized file hashes before any mirror or mapped update."
+      ],
+      "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit.",
+      "normalization": {
+        "trimTrailingWhitespace": true
+      }
+    },
+    {
+      "name": "remotion-video-creation",
+      "path": "skills/07-media-content/remotion-video-creation/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/affaan-m/ECC",
+        "path": "skills/remotion-video-creation/",
+        "ref": "main"
+      },
+      "lastChecked": {
+        "date": "2026-07-04",
+        "commit": "49128b5763b7ac0b50acef35ac0bcca08d1576af"
+      },
+      "updatePolicy": "mirror",
+      "status": "current",
+      "evidence": [
+        "Prior source index entry existed or explicit local URL was present.",
+        "Repository cloned or fetched during this audit.",
+        "Read-only normalized hash audit verified the recorded upstream directory/status."
+      ],
+      "verificationPath": [
+        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        "Compare normalized file hashes before any mirror or mapped update."
+      ],
+      "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit. Remotion official skill is tracked only as an alternative candidate."
+    },
+    {
+      "name": "wechat-article",
+      "path": "skills/07-media-content/wechat-article/",
+      "classification": "self",
+      "updatePolicy": "none",
+      "status": "self-or-local-unverified",
+      "evidence": [
+        "Skill is a Chinese writing workflow with no explicit upstream URL found in inspected files.",
+        "No verified original repository was identified during this audit."
+      ],
+      "verificationPath": [
+        "Search exact frontmatter description and unique section headings in GitHub code search.",
+        "If only marketplace mirrors are found, keep as candidate until an original repo commit is available."
+      ],
+      "notes": "Manual maintenance only unless owner provides an explicit upstream and comparison commit."
+    },
+    {
+      "name": "xlsx",
+      "path": "skills/07-media-content/xlsx/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/anthropics/skills",
+        "path": "skills/xlsx/",
+        "ref": "main"
+      },
+      "lastChecked": {
+        "date": "2026-07-04",
+        "commit": "9d2f1ae187231d8199c64b5b762e1bdf2244733d"
+      },
+      "updatePolicy": "mirror",
+      "status": "current",
+      "evidence": [
+        "Prior source index entry existed or explicit local URL was present.",
+        "Repository cloned or fetched during this audit.",
+        "Read-only normalized hash audit verified the recorded upstream directory/status."
+      ],
+      "verificationPath": [
+        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        "Compare normalized file hashes before any mirror or mapped update."
+      ],
+      "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit.",
+      "normalization": {
+        "trimTrailingWhitespace": true
+      }
+    },
+    {
+      "name": "decision-tree-with-lp-embedding",
+      "path": "skills/08-writing-marketing/decision-tree-with-lp-embedding/",
+      "classification": "local",
+      "updatePolicy": "none",
+      "status": "local-pipeline-skill-unverified-upstream",
+      "evidence": [
+        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
+        "No explicit upstream repository URL was found in inspected local files.",
+        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
+      ],
+      "verificationPath": [
+        "gh search code '\"name: decision-tree-with-lp-embedding\" filename:SKILL.md' --limit 10",
+        "Search one unique body phrase from SKILL.md via web/GitHub.",
+        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
+      ],
+      "notes": "Local/manual until an original upstream repository is proven."
+    },
+    {
+      "name": "yq-article-style-imitation",
+      "path": "skills/08-writing-marketing/yq-article-style-imitation/",
+      "classification": "self",
+      "updatePolicy": "none",
+      "status": "self-authored",
+      "evidence": [
+        "Skill name has YQ prefix and body refers to Ethan-specific direct imitation mode.",
+        "No explicit upstream URL appears in the skill files inspected during this audit."
+      ],
+      "verificationPath": [
+        "Search exact unique body phrases in GitHub code search when rate limit resets.",
+        "If no public repo exists, keep updatePolicy=none as self-authored."
+      ],
+      "notes": "Manual maintenance only unless owner provides an explicit upstream and comparison commit."
+    },
+    {
+      "name": "citation-anchor-resolver",
+      "path": "skills/10-business-industry/citation-anchor-resolver/",
+      "classification": "local",
+      "updatePolicy": "none",
+      "status": "local-pipeline-skill-unverified-upstream",
+      "evidence": [
+        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
+        "No explicit upstream repository URL was found in inspected local files.",
+        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
+      ],
+      "verificationPath": [
+        "gh search code '\"name: citation-anchor-resolver\" filename:SKILL.md' --limit 10",
+        "Search one unique body phrase from SKILL.md via web/GitHub.",
+        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
+      ],
+      "notes": "Local/manual until an original upstream repository is proven."
+    },
+    {
+      "name": "cite-bound-content-generator",
+      "path": "skills/10-business-industry/cite-bound-content-generator/",
+      "classification": "local",
+      "updatePolicy": "none",
+      "status": "local-pipeline-skill-unverified-upstream",
+      "evidence": [
+        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
+        "No explicit upstream repository URL was found in inspected local files.",
+        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
+      ],
+      "verificationPath": [
+        "gh search code '\"name: cite-bound-content-generator\" filename:SKILL.md' --limit 10",
+        "Search one unique body phrase from SKILL.md via web/GitHub.",
+        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
+      ],
+      "notes": "Local/manual until an original upstream repository is proven."
+    },
+    {
+      "name": "content-verification-layer",
+      "path": "skills/10-business-industry/content-verification-layer/",
+      "classification": "local",
+      "updatePolicy": "none",
+      "status": "local-pipeline-skill-unverified-upstream",
+      "evidence": [
+        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
+        "No explicit upstream repository URL was found in inspected local files.",
+        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
+      ],
+      "verificationPath": [
+        "gh search code '\"name: content-verification-layer\" filename:SKILL.md' --limit 10",
+        "Search one unique body phrase from SKILL.md via web/GitHub.",
+        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
+      ],
+      "notes": "Local/manual until an original upstream repository is proven."
+    },
+    {
+      "name": "contract-elicitor",
+      "path": "skills/10-business-industry/contract-elicitor/",
+      "classification": "local",
+      "updatePolicy": "none",
+      "status": "local-pipeline-skill-unverified-upstream",
+      "evidence": [
+        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
+        "No explicit upstream repository URL was found in inspected local files.",
+        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
+      ],
+      "verificationPath": [
+        "gh search code '\"name: contract-elicitor\" filename:SKILL.md' --limit 10",
+        "Search one unique body phrase from SKILL.md via web/GitHub.",
+        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
+      ],
+      "notes": "Local/manual until an original upstream repository is proven."
+    },
+    {
+      "name": "contract-review",
+      "path": "skills/10-business-industry/contract-review/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/xfs96192/claude-config",
+        "path": "skills/contract-review/",
+        "ref": "main"
+      },
+      "lastChecked": {
+        "date": "2026-07-04",
+        "commit": "5f2f92723780bb2d3c1c8076016da27559ee6159"
+      },
+      "updatePolicy": "mapped",
+      "status": "mapped-drift",
+      "evidence": [
+        "Prior source index entry existed or explicit local URL was present.",
+        "Repository cloned or fetched during this audit.",
+        "Read-only normalized hash audit verified the recorded upstream directory/status."
+      ],
+      "verificationPath": [
+        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        "Compare normalized file hashes before any mirror or mapped update."
+      ],
+      "notes": "Upstream directory verified through LobeHub source link and clone. Local SKILL.md localizes the frontmatter description; other files matched in normalized comparison."
     },
     {
       "name": "creating-financial-models",
@@ -340,63 +906,412 @@
         "commit": "3393bdaedde4fb26b4944a14710471f07c204fc1"
       },
       "updatePolicy": "mapped",
-      "status": "manual-current",
-      "notes": "Script contents match upstream but local repo keeps scripts under scripts/ and has Chinese trigger text; do not mirror without reviewing this local adaptation."
+      "status": "mapped-drift",
+      "evidence": [
+        "Prior source index entry existed or explicit local URL was present.",
+        "Repository cloned or fetched during this audit.",
+        "Read-only normalized hash audit verified the recorded upstream directory/status."
+      ],
+      "verificationPath": [
+        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        "Compare normalized file hashes before any mirror or mapped update."
+      ],
+      "notes": "Upstream verified, but local repo keeps scripts under scripts/ and has Chinese trigger text. Audit found mapped drift; do not mirror without reviewing local adaptations."
+    },
+    {
+      "name": "design-system-injector",
+      "path": "skills/10-business-industry/design-system-injector/",
+      "classification": "local",
+      "updatePolicy": "none",
+      "status": "local-pipeline-skill-unverified-upstream",
+      "evidence": [
+        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
+        "No explicit upstream repository URL was found in inspected local files.",
+        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
+      ],
+      "verificationPath": [
+        "gh search code '\"name: design-system-injector\" filename:SKILL.md' --limit 10",
+        "Search one unique body phrase from SKILL.md via web/GitHub.",
+        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
+      ],
+      "notes": "Local/manual until an original upstream repository is proven."
+    },
+    {
+      "name": "disease-market-sizing-html-template",
+      "path": "skills/10-business-industry/disease-market-sizing-html-template/",
+      "classification": "local",
+      "updatePolicy": "none",
+      "status": "local-pipeline-skill-unverified-upstream",
+      "evidence": [
+        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
+        "No explicit upstream repository URL was found in inspected local files.",
+        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
+      ],
+      "verificationPath": [
+        "gh search code '\"name: disease-market-sizing-html-template\" filename:SKILL.md' --limit 10",
+        "Search one unique body phrase from SKILL.md via web/GitHub.",
+        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
+      ],
+      "notes": "Local/manual until an original upstream repository is proven."
+    },
+    {
+      "name": "disease-market-sizing-orchestration",
+      "path": "skills/10-business-industry/disease-market-sizing-orchestration/",
+      "classification": "local",
+      "updatePolicy": "none",
+      "status": "local-pipeline-skill-unverified-upstream",
+      "evidence": [
+        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
+        "No explicit upstream repository URL was found in inspected local files.",
+        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
+      ],
+      "verificationPath": [
+        "gh search code '\"name: disease-market-sizing-orchestration\" filename:SKILL.md' --limit 10",
+        "Search one unique body phrase from SKILL.md via web/GitHub.",
+        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
+      ],
+      "notes": "Local/manual until an original upstream repository is proven."
+    },
+    {
+      "name": "disease-stratifier",
+      "path": "skills/10-business-industry/disease-stratifier/",
+      "classification": "local",
+      "updatePolicy": "none",
+      "status": "local-pipeline-skill-unverified-upstream",
+      "evidence": [
+        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
+        "No explicit upstream repository URL was found in inspected local files.",
+        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
+      ],
+      "verificationPath": [
+        "gh search code '\"name: disease-stratifier\" filename:SKILL.md' --limit 10",
+        "Search one unique body phrase from SKILL.md via web/GitHub.",
+        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
+      ],
+      "notes": "Local/manual until an original upstream repository is proven."
+    },
+    {
+      "name": "drug-citation-verifier",
+      "path": "skills/10-business-industry/drug-citation-verifier/",
+      "classification": "local",
+      "updatePolicy": "none",
+      "status": "local-pipeline-skill-unverified-upstream",
+      "evidence": [
+        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
+        "No explicit upstream repository URL was found in inspected local files.",
+        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
+      ],
+      "verificationPath": [
+        "gh search code '\"name: drug-citation-verifier\" filename:SKILL.md' --limit 10",
+        "Search one unique body phrase from SKILL.md via web/GitHub.",
+        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
+      ],
+      "notes": "Local/manual until an original upstream repository is proven."
+    },
+    {
+      "name": "healthcare-cdss-patterns",
+      "path": "skills/10-business-industry/healthcare-cdss-patterns/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/affaan-m/ECC",
+        "path": "skills/healthcare-cdss-patterns/",
+        "ref": "main"
+      },
+      "lastChecked": {
+        "date": "2026-07-04",
+        "commit": "49128b5763b7ac0b50acef35ac0bcca08d1576af"
+      },
+      "updatePolicy": "mirror",
+      "status": "current",
+      "evidence": [
+        "Prior source index entry existed or explicit local URL was present.",
+        "Repository cloned or fetched during this audit.",
+        "Read-only normalized hash audit verified the recorded upstream directory/status."
+      ],
+      "verificationPath": [
+        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        "Compare normalized file hashes before any mirror or mapped update."
+      ],
+      "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit."
+    },
+    {
+      "name": "healthcare-emr-patterns",
+      "path": "skills/10-business-industry/healthcare-emr-patterns/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/affaan-m/ECC",
+        "path": "skills/healthcare-emr-patterns/",
+        "ref": "main"
+      },
+      "lastChecked": {
+        "date": "2026-07-04",
+        "commit": "49128b5763b7ac0b50acef35ac0bcca08d1576af"
+      },
+      "updatePolicy": "mirror",
+      "status": "current",
+      "evidence": [
+        "Prior source index entry existed or explicit local URL was present.",
+        "Repository cloned or fetched during this audit.",
+        "Read-only normalized hash audit verified the recorded upstream directory/status."
+      ],
+      "verificationPath": [
+        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        "Compare normalized file hashes before any mirror or mapped update."
+      ],
+      "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit."
+    },
+    {
+      "name": "healthcare-eval-harness",
+      "path": "skills/10-business-industry/healthcare-eval-harness/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/affaan-m/ECC",
+        "path": "skills/healthcare-eval-harness/",
+        "ref": "main"
+      },
+      "lastChecked": {
+        "date": "2026-07-04",
+        "commit": "49128b5763b7ac0b50acef35ac0bcca08d1576af"
+      },
+      "updatePolicy": "mirror",
+      "status": "current",
+      "evidence": [
+        "Prior source index entry existed or explicit local URL was present.",
+        "Repository cloned or fetched during this audit.",
+        "Read-only normalized hash audit verified the recorded upstream directory/status."
+      ],
+      "verificationPath": [
+        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        "Compare normalized file hashes before any mirror or mapped update."
+      ],
+      "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit."
+    },
+    {
+      "name": "healthcare-phi-compliance",
+      "path": "skills/10-business-industry/healthcare-phi-compliance/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/affaan-m/ECC",
+        "path": "skills/healthcare-phi-compliance/",
+        "ref": "main"
+      },
+      "lastChecked": {
+        "date": "2026-07-04",
+        "commit": "49128b5763b7ac0b50acef35ac0bcca08d1576af"
+      },
+      "updatePolicy": "mirror",
+      "status": "current",
+      "evidence": [
+        "Prior source index entry existed or explicit local URL was present.",
+        "Repository cloned or fetched during this audit.",
+        "Read-only normalized hash audit verified the recorded upstream directory/status."
+      ],
+      "verificationPath": [
+        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        "Compare normalized file hashes before any mirror or mapped update."
+      ],
+      "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit."
+    },
+    {
+      "name": "ifi-market-sizing-skill",
+      "path": "skills/10-business-industry/ifi-market-sizing-skill/",
+      "classification": "local",
+      "updatePolicy": "none",
+      "status": "local-pipeline-skill-unverified-upstream",
+      "evidence": [
+        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
+        "No explicit upstream repository URL was found in inspected local files.",
+        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
+      ],
+      "verificationPath": [
+        "gh search code '\"name: ifi-market-sizing-skill\" filename:SKILL.md' --limit 10",
+        "Search one unique body phrase from SKILL.md via web/GitHub.",
+        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
+      ],
+      "notes": "Local/manual until an original upstream repository is proven."
+    },
+    {
+      "name": "session-resume",
+      "path": "skills/10-business-industry/session-resume/",
+      "classification": "local",
+      "updatePolicy": "none",
+      "status": "local-pipeline-skill-unverified-upstream",
+      "evidence": [
+        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
+        "No explicit upstream repository URL was found in inspected local files.",
+        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
+      ],
+      "verificationPath": [
+        "gh search code '\"name: session-resume\" filename:SKILL.md' --limit 10",
+        "Search one unique body phrase from SKILL.md via web/GitHub.",
+        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
+      ],
+      "notes": "Local/manual until an original upstream repository is proven."
+    },
+    {
+      "name": "aliyun-openapi-mcp-ops",
+      "path": "projects/ai-seed-project/aliyun-openapi-mcp-ops/",
+      "classification": "local",
+      "updatePolicy": "none",
+      "status": "project-local",
+      "evidence": [
+        "Path is under projects/, so it is scoped to a specific local project.",
+        "No evidence in skills-lock.json indicates this is an installable upstream skill package."
+      ],
+      "verificationPath": [
+        "If this project skill is later published, add its repository URL and compare the exact project subdirectory before changing classification."
+      ],
+      "notes": "Project-private or project-derived skill; do not auto-upgrade from external sources."
+    },
+    {
+      "name": "feishu-automation",
+      "path": "projects/ai-seed-project/feishu-automation/",
+      "classification": "local",
+      "updatePolicy": "none",
+      "status": "project-local",
+      "evidence": [
+        "Path is under projects/, so it is scoped to a specific local project.",
+        "No evidence in skills-lock.json indicates this is an installable upstream skill package."
+      ],
+      "verificationPath": [
+        "If this project skill is later published, add its repository URL and compare the exact project subdirectory before changing classification."
+      ],
+      "notes": "Project-private or project-derived skill; do not auto-upgrade from external sources."
+    },
+    {
+      "name": "aliyun-swas-manage",
+      "path": "projects/ai-seed-project-phase-one-feishu/aliyun-swas-manage/",
+      "classification": "local",
+      "updatePolicy": "none",
+      "status": "project-local",
+      "evidence": [
+        "Path is under projects/, so it is scoped to a specific local project.",
+        "No evidence in skills-lock.json indicates this is an installable upstream skill package."
+      ],
+      "verificationPath": [
+        "If this project skill is later published, add its repository URL and compare the exact project subdirectory before changing classification."
+      ],
+      "notes": "Project-private or project-derived skill; do not auto-upgrade from external sources."
+    },
+    {
+      "name": "feishu-card-ws",
+      "path": "projects/ai-seed-project-phase-one-feishu/feishu-card-ws/",
+      "classification": "local",
+      "updatePolicy": "none",
+      "status": "project-local",
+      "evidence": [
+        "Path is under projects/, so it is scoped to a specific local project.",
+        "No evidence in skills-lock.json indicates this is an installable upstream skill package."
+      ],
+      "verificationPath": [
+        "If this project skill is later published, add its repository URL and compare the exact project subdirectory before changing classification."
+      ],
+      "notes": "Project-private or project-derived skill; do not auto-upgrade from external sources."
+    },
+    {
+      "name": "hui-rui-lan",
+      "path": "projects/alk-plus-tracker/hui-rui-lan/",
+      "classification": "local",
+      "updatePolicy": "none",
+      "status": "project-local",
+      "evidence": [
+        "Path is under projects/, so it is scoped to a specific local project.",
+        "No evidence in skills-lock.json indicates this is an installable upstream skill package."
+      ],
+      "verificationPath": [
+        "If this project skill is later published, add its repository URL and compare the exact project subdirectory before changing classification."
+      ],
+      "notes": "Project-private or project-derived skill; do not auto-upgrade from external sources."
+    },
+    {
+      "name": "163-email-ground-truth",
+      "path": "projects/codex-invoice/163-email-ground-truth/",
+      "classification": "local",
+      "updatePolicy": "none",
+      "status": "project-local",
+      "evidence": [
+        "Path is under projects/, so it is scoped to a specific local project.",
+        "No evidence in skills-lock.json indicates this is an installable upstream skill package."
+      ],
+      "verificationPath": [
+        "If this project skill is later published, add its repository URL and compare the exact project subdirectory before changing classification."
+      ],
+      "notes": "Project-private or project-derived skill; do not auto-upgrade from external sources."
+    },
+    {
+      "name": "controlled-lockcheck-autofix",
+      "path": "projects/codex-invoice/controlled-lockcheck-autofix/",
+      "classification": "local",
+      "updatePolicy": "none",
+      "status": "project-local",
+      "evidence": [
+        "Path is under projects/, so it is scoped to a specific local project.",
+        "No evidence in skills-lock.json indicates this is an installable upstream skill package."
+      ],
+      "verificationPath": [
+        "If this project skill is later published, add its repository URL and compare the exact project subdirectory before changing classification."
+      ],
+      "notes": "Project-private or project-derived skill; do not auto-upgrade from external sources."
+    },
+    {
+      "name": "email-batch-test",
+      "path": "projects/codex-invoice/email-batch-test/",
+      "classification": "local",
+      "updatePolicy": "none",
+      "status": "project-local",
+      "evidence": [
+        "Path is under projects/, so it is scoped to a specific local project.",
+        "No evidence in skills-lock.json indicates this is an installable upstream skill package."
+      ],
+      "verificationPath": [
+        "If this project skill is later published, add its repository URL and compare the exact project subdirectory before changing classification."
+      ],
+      "notes": "Project-private or project-derived skill; do not auto-upgrade from external sources."
+    },
+    {
+      "name": "qq-email-ground-truth",
+      "path": "projects/codex-invoice/qq-email-ground-truth/",
+      "classification": "local",
+      "updatePolicy": "none",
+      "status": "project-local",
+      "evidence": [
+        "Path is under projects/, so it is scoped to a specific local project.",
+        "No evidence in skills-lock.json indicates this is an installable upstream skill package."
+      ],
+      "verificationPath": [
+        "If this project skill is later published, add its repository URL and compare the exact project subdirectory before changing classification."
+      ],
+      "notes": "Project-private or project-derived skill; do not auto-upgrade from external sources."
     }
   ],
-  "candidates": [
-    {
-      "name": "frontend-design",
-      "path": "skills/03-frameworks/frontend-design/",
-      "candidateSource": "https://github.com/affaan-m/ECC",
-      "evidence": "Public registries preserve the old frontend-design text, but the current repository no longer has an exact skills/frontend-design path; current ECC has frontend-design-direction instead.",
-      "status": "unverified-do-not-overwrite"
-    },
-    {
-      "name": "editorial-presentation-html",
-      "path": "skills/07-media-content/editorial-presentation-html/",
-      "candidateSource": "https://github.com/EthanYoQ/editorial-presentation-skill",
-      "evidence": "Local README references this repository, but GitHub API did not resolve it during this audit. Treat as self-made/manual until accessible.",
-      "status": "self-or-inaccessible"
-    },
+  "alternateCandidates": [
     {
       "name": "remotion-video-creation",
       "path": "skills/07-media-content/remotion-video-creation/",
-      "candidateSource": "https://github.com/remotion-dev/skills/tree/main/skills/remotion",
-      "evidence": "Remotion official repository has a newer/different remotion skill, but local content exactly matches ECC's remotion-video-creation name and directory.",
+      "candidate": {
+        "url": "https://github.com/remotion-dev/skills",
+        "path": "skills/remotion/",
+        "ref": "main"
+      },
+      "evidence": [
+        "Remotion maintains an official skill repository, but the local skill exactly matched ECC remotion-video-creation in the prior normalized audit.",
+        "Do not replace the ECC source without a deliberate migration decision."
+      ],
       "status": "alternative-upstream-not-used"
+    },
+    {
+      "name": "frontend-design",
+      "path": "skills/03-frameworks/frontend-design/",
+      "candidate": {
+        "url": "https://github.com/affaan-m/everything-claude-code",
+        "path": "skills/frontend-design/",
+        "ref": "historical-main"
+      },
+      "evidence": [
+        "Public registries preserve matching frontend-design text.",
+        "Current upstream main no longer contains the exact path, so this is not safe for automated mirroring."
+      ],
+      "status": "candidate-historical-source-unverified"
     }
-  ],
-  "needs_source_discovery": [
-    "find-skills",
-    "project-cleanup-audit",
-    "bioc-fulltext-fetch",
-    "clinical-trials-v2",
-    "cn-clinical-guidelines-fetch",
-    "europepmc-search",
-    "evidence-appendix-sync",
-    "market-research-reports",
-    "market-sizing-mece-foundation",
-    "medical-evidence-grading",
-    "nmpa-drug-registry-lookup",
-    "pubmed-eutils",
-    "pubtator-entity-search",
-    "report-bundle-builder",
-    "ppt-nano",
-    "wechat-article",
-    "decision-tree-with-lp-embedding",
-    "yq-article-style-imitation",
-    "citation-anchor-resolver",
-    "cite-bound-content-generator",
-    "content-verification-layer",
-    "contract-elicitor",
-    "contract-review",
-    "design-system-injector",
-    "disease-market-sizing-html-template",
-    "disease-market-sizing-orchestration",
-    "disease-stratifier",
-    "drug-citation-verifier",
-    "ifi-market-sizing-skill",
-    "session-resume"
   ]
 }

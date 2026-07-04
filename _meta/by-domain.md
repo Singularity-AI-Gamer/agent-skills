@@ -22,7 +22,7 @@
 | **project-cleanup-audit** | [skills/01-agent-engineering/project-cleanup-audit/](../skills/01-agent-engineering/project-cleanup-audit/) | 证据优先清理本地项目仓库：审计体积、分类无用文件、备份并安全删除生成物。 |
 | **santa-method** | [skills/01-agent-engineering/santa-method/](../skills/01-agent-engineering/santa-method/) | 多 Agent 对抗验证收敛循环，两个独立审查都通过后才出交付。 |
 | **skill-creator** | [skills/01-agent-engineering/skill-creator/](../skills/01-agent-engineering/skill-creator/) | 创建、修改和优化 skill，并可跑 eval 衡量触发准确率与性能。 |
-| **skill-hub-upgrade** | [skills/01-agent-engineering/skill-hub-upgrade/](../skills/01-agent-engineering/skill-hub-upgrade/) | 维护 Skill-hub 的上游来源索引，按证据比对开源 skill 并执行安全升级。 |
+| **skill-upgrade** | [skills/01-agent-engineering/skill-upgrade/](../skills/01-agent-engineering/skill-upgrade/) | 通用 skill 升级流程：按证据比对 Skill Hub 来源索引或本地 skill 根目录，安全升级可验证上游。 |
 
 ## 02 编程语言（1）
 

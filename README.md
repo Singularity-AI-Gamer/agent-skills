@@ -1,59 +1,91 @@
 <div align="center">
 
-[English](README.md) | **中文**
+[English](README_EN.md) | **中文**
 
 </div>
 
-# Skill-hub - AI 提示词库与 Agent 技能库
+# Skill-hub - AI Agent 技能库
 
-Skill-hub 是一个公开的中文 AI 提示词库、AI Agent 技能库和 `SKILL.md` 工作流仓库，面向需要沉淀 Codex、Claude Code、Antigravity 等 AI 编程工具用法的个人开发者；当前包含 **61** 个可复用技能，按能力域、技术栈和项目私有技能组织，便于检索、本地同步与复用。
+Skill-hub 是一个公开的中文 AI 提示词库、AI Agent 技能库和 `SKILL.md` 工作流仓库，面向需要沉淀 Codex、Claude Code、Antigravity 等 AI 编程工具用法的个人开发者。仓库当前包含 **61** 个可复用技能，其中 **52** 个共享技能按能力域组织，**9** 个项目私有技能按项目归档，便于检索、本地同步、来源追踪和持续维护。
 
-**搜索意图：** 适合正在找 AI 提示词、提示词库、AI Agent 技能库、Codex 技能、Claude Code 技能和 AI 编程工作流的人。
+**搜索意图：** 适合正在查找 AI 提示词、提示词库、AI Agent 技能库、Codex 技能、Claude Code 技能、AI 编程工作流和 `SKILL.md` 工作流模板的人。
 
-**快速入口：** [按名字查](./_meta/by-name.md) · [按能力域查](./_meta/by-domain.md) · [按技术栈查](./_meta/by-platform.md) · [机器可读索引](./_meta/skills-lock.json) · [本地设置](#本地设置使用者自配)
+**信任边界：** 这是个人展示与学习仓库，不是 OpenAI、Anthropic、Claude Code 或 Antigravity 官方技能库，也不是通用提示词市场。仓库公开，请只使用占位符填写凭据，不要提交真实密钥、客户数据、内部资料或个人隐私。
 
-**边界说明：** 这是个人展示与学习仓库，不是 OpenAI、Anthropic、Claude Code 或 Antigravity 官方技能库，也不是通用提示词市场。仓库公开，请只使用占位符填写凭据，不要提交真实密钥或隐私数据。
+**快速入口：** [按名字查](./_meta/by-name.md) | [按能力域查](./_meta/by-domain.md) | [按技术栈查](./_meta/by-platform.md) | [机器可读索引](./_meta/skills-lock.json) | [来源索引](./_meta/skill-upstreams.json)
 
-**典型场景：** 查找可复用的 Agent 技能、整理自己的 Codex/Claude Code 工作流、把项目经验沉淀成 `SKILL.md`、为 AI 编程任务建立可复用的提示词和自动化步骤。
+## <img src="assets/README/icons/map.svg" width="20" alt=""> 仓库定位
 
-## 仓库定位
+Skill-hub 不是单一提示词合集，而是面向 Agent 使用的技能仓库。每个技能通常包含触发条件、执行步骤、约束、参考资料或脚本，让 AI 编程助手能在相似任务中复用稳定流程。
 
-- **备份与单一源**：线上备份，丢失时可从这里拉回。
-- **便于查找**：提供三种检索入口（字母 / 能力域 / 技术栈），帮你快速确认某个技能是否已经沉淀，还是需要新建。
-- **共享 + 项目私有并存**：通用技能位于 `skills/`；仅对某个具体仓库生效的私有技能位于 `projects/`。
+| 定位 | 说明 |
+|---|---|
+| <img src="assets/README/icons/overview.svg" width="20" alt=""> 个人知识库 | 把分散在 Codex、Claude Code、Antigravity 和本地项目里的工作流沉淀成可读、可同步的 `SKILL.md`。 |
+| <img src="assets/README/icons/categories.svg" width="20" alt=""> 技能目录 | 用能力域、技术栈和项目归属组织技能，方便第一次读到的人快速判断仓库覆盖范围。 |
+| <img src="assets/README/icons/index.svg" width="20" alt=""> 检索入口 | 通过 `_meta/` 下的索引按名称、能力域或技术栈查找技能。 |
+| <img src="assets/README/icons/source-index.svg" width="20" alt=""> 来源追踪 | 用 `_meta/skill-upstreams.json` 记录已验证上游，避免升级时只凭技能名猜测来源。 |
+| <img src="assets/README/icons/privacy.svg" width="20" alt=""> 公开边界 | 所有入库技能必须脱敏；真实凭据和私有数据只应保留在本地环境。 |
 
-## 目录结构
+## <img src="assets/README/icons/categories.svg" width="20" alt=""> 技能种类
 
-```
+共享技能位于 `skills/`，项目私有技能位于 `projects/`。当前分类来自 `_meta/skills-lock.json` 和 `_meta/by-domain.md`。
+
+| 类别 | 数量 | 目录 | 适合查什么 |
+|---|---:|---|---|
+| <img src="assets/README/icons/overview.svg" width="20" alt=""> Agent 工程 | 6 | `skills/01-agent-engineering/` | Agent 构建、调试、自治循环、技能创建、对抗验证、skill 升级。 |
+| <img src="assets/README/icons/format.svg" width="20" alt=""> 编程语言 | 1 | `skills/02-coding-languages/` | 语言级编码标准、设计模式和测试规范。 |
+| <img src="assets/README/icons/package.svg" width="20" alt=""> 框架与技术栈 | 1 | `skills/03-frameworks/` | 前端设计、框架级实现模式和技术栈约束。 |
+| <img src="assets/README/icons/index.svg" width="20" alt=""> 数据与检索 | 15 | `skills/06-data-search/` | 数据抓取、搜索、深度研究、PubMed、临床试验和报告交付。 |
+| <img src="assets/README/icons/format.svg" width="20" alt=""> 媒体与内容制作 | 10 | `skills/07-media-content/` | PPT、PDF、DOCX、XLSX、图像、视频、公众号文章和演示内容。 |
+| <img src="assets/README/icons/seo.svg" width="20" alt=""> 写作与营销 | 2 | `skills/08-writing-marketing/` | 风格仿写、营销写作和面向传播的结构化内容。 |
+| <img src="assets/README/icons/source-index.svg" width="20" alt=""> 行业与业务 | 17 | `skills/10-business-industry/` | 医疗、法律、金融、市场规模、引用校验和行业报告流程。 |
+| <img src="assets/README/icons/directory.svg" width="20" alt=""> 项目私有 | 9 | `projects/` | 只对特定项目生效的技能，例如邮箱测试、飞书、阿里云或发票项目流程。 |
+
+## <img src="assets/README/icons/directory.svg" width="20" alt=""> 目录结构
+
+```text
 skills/                        # 52 个共享技能，分 7 个能力域
-├── 01-agent-engineering/      Agent 工程（构建、调试、自治循环、harness 等）
-├── 02-coding-languages/       编程语言（Swift + 通用）
-├── 03-frameworks/             框架栈（前端设计等）
-├── 06-data-search/            数据抓取、检索、深度研究
-├── 07-media-content/          多媒体（PPT、视频、PDF、图像）
-├── 08-writing-marketing/      写作、风格仿写与营销
-└── 10-business-industry/      行业业务（医疗、法律、金融等）
+|-- 01-agent-engineering/      # Agent 构建、调试、自治循环、harness
+|-- 02-coding-languages/       # 编程语言
+|-- 03-frameworks/             # 框架与技术栈
+|-- 06-data-search/            # 数据抓取、检索、深度研究
+|-- 07-media-content/          # PPT、视频、PDF、文档、图像
+|-- 08-writing-marketing/      # 写作、风格仿写、营销
+`-- 10-business-industry/      # 医疗、法律、金融、市场研究等行业技能
 
 projects/                      # 9 个项目私有技能
-_meta/                         # 中文索引入口
-docs/                          # 约定文档
-scripts/                       # 同步与 Junction 建立脚本
+_meta/                         # 中文索引、机器可读映射、来源索引
+docs/                          # 目录约定与隐私脱敏说明
+scripts/                       # Junction 建立、同步、索引重建脚本
+assets/README/icons/           # README 使用的 Lucide SVG 图标
 ```
 
-## 如何查找技能
+## <img src="assets/README/icons/index.svg" width="20" alt=""> 索引入口
 
-按你关心的维度选一个入口：
+第一次阅读时，建议先从索引入口开始，而不是直接浏览所有目录。
 
-| 入口 | 适合场景 |
-|---|---|
-| [按名字查](./_meta/by-name.md) | 已经知道技能名（如 `deep-research`） |
-| [按能力域查](./_meta/by-domain.md) | 想找 "Agent 工程" / "测试" / "行业业务" 一类 |
-| [按技术栈查](./_meta/by-platform.md) | 想找 "Python 相关" / "浏览器自动化" 一类 |
-| [机器可读](./_meta/skills-lock.json) | 脚本、自动化、外部工具集成 |
+| 入口 | 文件 | 适合场景 |
+|---|---|---|
+| <img src="assets/README/icons/index.svg" width="20" alt=""> 按名字查 | [`_meta/by-name.md`](./_meta/by-name.md) | 已经知道技能名，例如 `deep-research` 或 `skill-creator`。 |
+| <img src="assets/README/icons/categories.svg" width="20" alt=""> 按能力域查 | [`_meta/by-domain.md`](./_meta/by-domain.md) | 想浏览 Agent 工程、数据检索、媒体内容、行业业务等大类。 |
+| <img src="assets/README/icons/package.svg" width="20" alt=""> 按技术栈查 | [`_meta/by-platform.md`](./_meta/by-platform.md) | 想找 Python、浏览器自动化、Office 文档、医学数据库等相关技能。 |
+| <img src="assets/README/icons/source-index.svg" width="20" alt=""> 机器可读索引 | [`_meta/skills-lock.json`](./_meta/skills-lock.json) | 给脚本、自动化、外部工具读取技能清单、路径、分类和数量。 |
 
-## 技能格式
+## <img src="assets/README/icons/source-index.svg" width="20" alt=""> 来源索引
 
-每个技能是一个目录 + 内含 `SKILL.md`，YAML frontmatter 如下：
+[`_meta/skill-upstreams.json`](./_meta/skill-upstreams.json) 是 Skill-hub 的来源索引。它记录已验证的开源上游、候选来源、本地或项目私有来源、上游路径、最近检查信息、升级策略和状态。具体数量和分类摘要以该文件中的 `verificationSummary`、`sources` 和相关字段为准。
+
+来源索引用来回答三个维护问题：
+
+- 这个技能是自制、项目私有、开源镜像，还是经过本地映射改造。
+- 如果上游更新，哪些技能允许自动或半自动比对升级。
+- 哪些技能证据不足，不能仅凭名称覆盖本地版本。
+
+未在来源索引中明确标注的技能，不应被当作可自动覆盖的上游镜像。
+
+## <img src="assets/README/icons/format.svg" width="20" alt=""> 技能格式
+
+每个技能是一个目录，核心文件是 `SKILL.md`。推荐 frontmatter 保持简洁，便于不同 Agent 读取。
 
 ```markdown
 ---
@@ -64,13 +96,18 @@ description: 一句话触发条件：什么场景下 Agent 应该使用这个技
 # 正文：指令、参考、示例
 ```
 
-同一套 frontmatter 可被多个 AI Agent 通用。
+`description` 应该描述触发条件，而不是营销话术。详细命名规则见 [`docs/directory-conventions.md`](./docs/directory-conventions.md)。
 
-## 本地设置（使用者自配）
+## <img src="assets/README/icons/install.svg" width="20" alt=""> 安装与本地接入
 
-多个 Agent 的 skills 目录路径各不相同，本地常用 Windows Directory Junction 指向同一份源，避免多份副本。
+普通使用者可以把仓库作为技能源克隆到本地，再把自己的 Agent 技能目录指向同一份源。
 
-脚本：[`scripts/setup-junctions.ps1`](./scripts/setup-junctions.ps1)
+```powershell
+git clone <this-repository-url> skill-hub
+cd skill-hub
+```
+
+Windows 上常用 Directory Junction 让多个 Agent 共享同一份技能目录，避免维护多份副本。
 
 ```powershell
 # 预览
@@ -80,33 +117,71 @@ description: 一句话触发条件：什么场景下 Agent 应该使用这个技
 .\scripts\setup-junctions.ps1 -Source "D:\path\to\your\skills"
 ```
 
-## 同步机制
+不同工具的实际技能目录不同，脚本只负责建立本地目录连接；不会替你配置远程账号、密钥或私有服务。
 
-本地习惯扁平结构，仓库按能力域分层。两个脚本双向同步：
+## <img src="assets/README/icons/sync.svg" width="20" alt=""> 同步流程
 
-- [`scripts/sync-push.ps1`](./scripts/sync-push.ps1)：本地扁平 → 仓库分组
-- [`scripts/sync-pull.ps1`](./scripts/sync-pull.ps1)：仓库分组 → 本地扁平
-- [`scripts/build-indexes.ps1`](./scripts/build-indexes.ps1)：重建 `_meta/` 下的索引
+本地使用时可以保持扁平技能目录，仓库内则按能力域分组。同步脚本负责在两种结构之间转换。
 
-映射关系来自 [`_meta/skills-lock.json`](./_meta/skills-lock.json)。
+| 操作 | 脚本 | 作用 |
+|---|---|---|
+| <img src="assets/README/icons/push.svg" width="20" alt=""> 推送到仓库 | [`scripts/sync-push.ps1`](./scripts/sync-push.ps1) | 把本地扁平技能目录同步到仓库分组目录。 |
+| <img src="assets/README/icons/install.svg" width="20" alt=""> 拉回本地 | [`scripts/sync-pull.ps1`](./scripts/sync-pull.ps1) | 把仓库分组目录同步回本地扁平目录。 |
+| <img src="assets/README/icons/index.svg" width="20" alt=""> 重建索引 | [`scripts/build-indexes.ps1`](./scripts/build-indexes.ps1) | 根据仓库中的 `SKILL.md` 重建 `_meta/` 下的索引文件。 |
 
-## 分类与命名约定
+同步前建议先查看 `git status` 和 `git diff`，确认没有把真实凭据、临时输出或项目私有草稿带入公开仓库。
 
-见 [`docs/directory-conventions.md`](./docs/directory-conventions.md)。
+## <img src="assets/README/icons/upgrade.svg" width="20" alt=""> 升级与维护流程
 
-## 隐私与脱敏
+维护 Skill-hub 时，优先按证据升级，而不是按技能名猜测。
 
-仓库公开，所有技能在纳入仓库前都做过脱敏扫描：
+1. 查看 [`_meta/skill-upstreams.json`](./_meta/skill-upstreams.json)，确认技能是否有已验证上游。
+2. 只对 `classification=open-source` 且 `updatePolicy=mirror` 或 `updatePolicy=mapped` 的条目执行上游比对。
+3. 对 `candidate`、`unknown`、自制技能和项目私有技能，先补证据或人工审查，不直接覆盖。
+4. 升级后运行 [`scripts/build-indexes.ps1`](./scripts/build-indexes.ps1)，让 `_meta/` 索引反映最新技能数量、路径和描述。
+5. 用 `git diff` 审查技能内容、索引变化和脱敏情况，再提交。
 
-- 邮箱、手机号 → 占位符
-- API Key / Token / Secret → 占位符
-- 本地用户目录 → `%USERPROFILE%` 或 `~`
-- 私有工具 / 服务名 → 通用描述
+仓库内的 [`skills/01-agent-engineering/skill-upgrade/`](./skills/01-agent-engineering/skill-upgrade/) 记录了面向 Agent 的升级流程，可用于维护 Skill-hub 来源索引，也可用于检查本地 skill 安装目录。
 
-详见 [`docs/privacy-audit.md`](./docs/privacy-audit.md)。
+## <img src="assets/README/icons/maintenance.svg" width="20" alt=""> 维护约定
 
-**使用他人技能时，请按 `<YOUR_*>` / `<your-*>` 占位符填入自己的凭据；请勿将填入真实凭据的文件再提交回仓库。**
+- 新增共享技能时，先放入合适的 `skills/<domain>/` 子目录，并保持目录名为 kebab-case。
+- 新增项目私有技能时，放入 `projects/<project-name>/`，避免混入通用技能目录。
+- 修改技能描述后，运行索引重建脚本，确保 `by-name`、`by-domain`、`by-platform` 和机器索引一致。
+- 修改上游来源判断时，必须有证据；不要把未证实的相似仓库写成确定来源。
+- 不修改别人的工作区改动；提交前只整理自己本次触碰的 README、图标或明确授权文件。
 
-## 许可
+## <img src="assets/README/icons/privacy.svg" width="20" alt=""> 隐私边界
+
+仓库是公开的。所有技能在纳入仓库前都应做脱敏扫描，规则见 [`docs/privacy-audit.md`](./docs/privacy-audit.md)。
+
+| 内容类型 | 入库要求 |
+|---|---|
+| <img src="assets/README/icons/privacy.svg" width="20" alt=""> API Key、Token、Secret、授权码 | 用 `<YOUR_*_TOKEN>` 或 `<YOUR_*_KEY>` 等占位符替代。 |
+| <img src="assets/README/icons/privacy.svg" width="20" alt=""> 邮箱、手机号、个人姓名 | 用示例邮箱、`<your-phone>`、`用户` 或 `Anon` 替代。 |
+| <img src="assets/README/icons/privacy.svg" width="20" alt=""> 本地用户目录 | 改写为 `%USERPROFILE%` 或 `~`。 |
+| <img src="assets/README/icons/privacy.svg" width="20" alt=""> 公司内部工具名、客户名、项目代号 | 改写为通用描述，除非这些名称本来就是公开信息。 |
+| <img src="assets/README/icons/privacy.svg" width="20" alt=""> 已签名 URL、真实日志、生产数据 | 不入库；如已泄漏，先轮换凭据，再清理工作区和历史。 |
+
+使用本仓库技能时，请在本地填入自己的凭据；不要把填入真实凭据的文件提交回公开仓库。
+
+## <img src="assets/README/icons/seo.svg" width="20" alt=""> GitHub SEO 与发现路径
+
+本 README 保留并强化 GitHub SEO 关键词与定位，但不把关键词堆成列表，也不声称已有排名或流量结果。
+
+| 关键词族 | README 中的自然表达 |
+|---|---|
+| <img src="assets/README/icons/seo.svg" width="20" alt=""> 核心品类 | AI 提示词库、AI Agent 技能库、`SKILL.md` 工作流仓库。 |
+| <img src="assets/README/icons/seo.svg" width="20" alt=""> 使用场景 | AI 编程工作流、可复用 Agent 技能、本地同步、技能维护、来源追踪。 |
+| <img src="assets/README/icons/seo.svg" width="20" alt=""> 平台关系 | Codex 技能、Claude Code 技能、Antigravity 工作流。 |
+| <img src="assets/README/icons/seo.svg" width="20" alt=""> 边界说明 | 非官方技能库、非通用提示词市场、公开仓库需要脱敏。 |
+
+当前可验证事实是：仓库提供 README、索引、来源索引、同步脚本和公开 GitHub 页面。真实搜索曝光、Baidu/Bing 收录、AI 搜索引用和 GitHub 排名仍需要后续基线测量，不能从 README 改写本身直接推出结论。
+
+## <img src="assets/README/icons/source-index.svg" width="20" alt=""> 图标来源
+
+README 图标统一来自 Lucide 图标集，通过 `better-icons` MCP 获取后保存到 [`assets/README/icons/`](./assets/README/icons/)。不使用 Emoji、Unicode 图形字符或手写 SVG path 作为 README 图标。
+
+## <img src="assets/README/icons/overview.svg" width="20" alt=""> 许可
 
 仅用于个人展示与学习，默认不接受外部 PR。

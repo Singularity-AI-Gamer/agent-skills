@@ -61,7 +61,7 @@
 | 55 | **santa-method** | [skills/01-agent-engineering/santa-method/](../skills/01-agent-engineering/santa-method/) | 多 Agent 对抗验证收敛循环，两个独立审查都通过后才出交付。 |
 | 56 | **session-resume** | [skills/10-business-industry/session-resume/](../skills/10-business-industry/session-resume/) | disease-market-sizing 管线中断后恢复，无需从头开始。 |
 | 57 | **skill-creator** | [skills/01-agent-engineering/skill-creator/](../skills/01-agent-engineering/skill-creator/) | 创建、修改和优化 skill，并可跑 eval 衡量触发准确率与性能。 |
-| 58 | **skill-hub-upgrade** | [skills/01-agent-engineering/skill-hub-upgrade/](../skills/01-agent-engineering/skill-hub-upgrade/) | 维护 Skill-hub 的上游来源索引，按证据比对开源 skill 并执行安全升级。 |
+| 58 | **skill-upgrade** | [skills/01-agent-engineering/skill-upgrade/](../skills/01-agent-engineering/skill-upgrade/) | 通用 skill 升级流程：按证据比对 Skill Hub 来源索引或本地 skill 根目录，安全升级可验证上游。 |
 | 59 | **wechat-article** | [skills/07-media-content/wechat-article/](../skills/07-media-content/wechat-article/) | 傅盛风格的公众号文章创作：对话式、故事驱动、有观点。 |
 | 60 | **xlsx** | [skills/07-media-content/xlsx/](../skills/07-media-content/xlsx/) | 电子表格 .xlsx/.csv 等创建、编辑、公式、格式、数据分析与可视化。 |
 | 61 | **yq-article-style-imitation** | [skills/08-writing-marketing/yq-article-style-imitation/](../skills/08-writing-marketing/yq-article-style-imitation/) | 任意作家文章风格仿写：验证作者原文、拆解表达 DNA、生成并修复公众号/小红书稿。 |

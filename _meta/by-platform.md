@@ -229,6 +229,6 @@ Agent 构建、调试、深度研究、技能创建与对抗验证编排。
 
 | 技能名 | 路径 | 中文简介 |
 |---|---|---|
-| **skill-hub-upgrade** | [skills/01-agent-engineering/skill-hub-upgrade/](../skills/01-agent-engineering/skill-hub-upgrade/) | 维护 Skill-hub 的上游来源索引，按证据比对开源 skill 并执行安全升级。 |
+| **skill-upgrade** | [skills/01-agent-engineering/skill-upgrade/](../skills/01-agent-engineering/skill-upgrade/) | 通用 skill 升级流程：按证据比对 Skill Hub 来源索引或本地 skill 根目录，安全升级可验证上游。 |
 
 <!-- AUTO-GENERATED: END by-platform.md 新增待分类 -->
