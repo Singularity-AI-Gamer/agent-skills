@@ -1,7 +1,6 @@
 ---
 name: "imagegen"
-description: "Generate or edit raster images (photos, illustrations, textures, sprites, UI mockups, product shots, infographics, transparent cutouts). Use this skill whenever the user wants to create, draw, design, illustrate, or edit any image or visual asset—even if they don't say 'imagegen' explicitly. Covers: new image generation with or without reference images, image editing (inpainting, background swap, object removal, style transfer, compositing), and batch asset production. Skip when the task is better served by editing existing SVG/vector/code assets directly, or when the user explicitly wants deterministic code-native output rather than a generated bitmap."
-compatibility: "built-in image_gen tool (no API key needed); CLI fallback requires OPENAI_API_KEY and 'uv pip install openai'"
+description: "Generate or edit raster images when the task benefits from AI-created bitmap visuals such as photos, illustrations, textures, sprites, mockups, or transparent-background cutouts. Use when Codex should create a brand-new image, transform an existing image, or derive visual variants from references, and the output should be a bitmap asset rather than repo-native code or vector. Do not use when the task is better handled by editing existing SVG/vector/code-native assets, extending an established icon or logo system, or building the visual directly in HTML/CSS/canvas."
 ---
 
 # Image Generation Skill
@@ -46,6 +45,18 @@ Fallback-only docs/resources for CLI mode:
 - `references/image-api.md`
 - `references/codex-network.md`
 - `scripts/image_gen.py`
+
+## When to use
+- Generate a new image (concept art, product shot, cover, website hero)
+- Generate a new image using one or more reference images for style, composition, or mood
+- Edit an existing image (inpainting, lighting or weather transformations, background replacement, object removal, compositing, transparent background)
+- Produce many assets or variants for one task
+
+## When not to use
+- Extending or matching an existing SVG/vector icon set, logo system, or illustration library inside the repo
+- Creating simple shapes, diagrams, wireframes, or icons that are better produced directly in SVG, HTML/CSS, or canvas
+- Making a small project-local asset edit when the source file already exists in an editable native format
+- Any task where the user clearly wants deterministic code-native output instead of a generated bitmap
 
 ## Decision tree
 
@@ -96,13 +107,29 @@ Assume the user wants a new image unless they clearly ask to change an existing 
 16. For batches, persist only the selected finals in the workspace unless the user explicitly asked to keep discarded variants.
 17. Always report the final saved path for any workspace-bound asset, plus the final prompt and whether the built-in tool or fallback CLI mode was used.
 
-## Prompt augmentation and best practices
+## Prompt augmentation
+
+Reformat user prompts into a structured, production-oriented spec. Make the user's goal clearer and more actionable, but do not blindly add detail.
+
+Treat this as prompt-shaping guidance, not a closed schema. Use only the lines that help, and add a short extra labeled line when it materially improves clarity.
+
+### Specificity policy
 
 Use the user's prompt specificity to decide how much augmentation is appropriate:
-- **Specific prompt** → normalize and structure only; do not expand.
-- **Generic prompt** → add tasteful augmentation (composition, polish level, layout hints) that materially improves output.
 
-Not allowed: extra characters/objects not implied, brand names not implied, arbitrary placement.
+- If the prompt is already specific and detailed, preserve that specificity and only normalize/structure it.
+- If the prompt is generic, you may add tasteful augmentation when it will materially improve the result.
+
+Allowed augmentations:
+- composition or framing hints
+- polish level or intended-use hints
+- practical layout guidance
+- reasonable scene concreteness that supports the stated request
+
+Not allowed augmentations:
+- extra characters or objects that are not implied by the request
+- brand names, slogans, palettes, or narrative beats that are not implied
+- arbitrary side-specific placement unless the surrounding layout supports it
 
 ## Use-case taxonomy (exact slugs)
 
@@ -181,6 +208,23 @@ Primary request: replace only the background with a warm sunset gradient
 Constraints: change only the background; keep the product and its edges unchanged; no text; no watermark
 ```
 
+## Prompting best practices
+- Structure prompt as scene/backdrop -> subject -> details -> constraints.
+- Include intended use (ad, UI mock, infographic) to set the mode and polish level.
+- Use camera/composition language for photorealism.
+- Only use SVG/vector stand-ins when the user explicitly asked for vector output or a non-image placeholder.
+- Quote exact text and specify typography + placement.
+- For tricky words, spell them letter-by-letter and require verbatim rendering.
+- For multi-image inputs, reference images by index and describe how they should be used.
+- For edits, repeat invariants every iteration to reduce drift.
+- Iterate with single-change follow-ups.
+- If the prompt is generic, add only the extra detail that will materially help.
+- If the prompt is already detailed, normalize it instead of expanding it.
+- For explicit CLI fallback only, see `references/cli.md` and `references/image-api.md` for `quality`, `input_fidelity`, masks, output format, and output-path guidance.
+
+More principles shared by both modes: `references/prompting.md`.
+Copy/paste specs shared by both modes: `references/sample-prompts.md`.
+
 ## Guidance by asset type
 Asset-type templates (website assets, game assets, wireframes, logo) are consolidated in `references/sample-prompts.md`.
 
@@ -227,12 +271,9 @@ If installation is not possible in this environment, tell the user which depende
 - Network approvals / sandbox settings for CLI mode: `references/codex-network.md`
 
 ## Reference map
-
-| 文件 | 适用模式 |
-|------|----------|
-| `references/prompting.md` | 两种模式共用 |
-| `references/sample-prompts.md` | 两种模式共用 |
-| `references/cli.md` | CLI fallback 专用 |
-| `references/image-api.md` | CLI fallback 专用 |
-| `references/codex-network.md` | CLI fallback 专用 |
-| `scripts/image_gen.py` | CLI fallback 专用（勿在 built-in 模式加载） |
+- `references/prompting.md`: shared prompting principles for both modes.
+- `references/sample-prompts.md`: shared copy/paste prompt recipes for both modes.
+- `references/cli.md`: fallback-only CLI usage via `scripts/image_gen.py`.
+- `references/image-api.md`: fallback-only API/CLI parameter reference.
+- `references/codex-network.md`: fallback-only network/sandbox troubleshooting for CLI mode.
+- `scripts/image_gen.py`: fallback-only CLI implementation. Do not load or use it unless the user explicitly chooses CLI mode.

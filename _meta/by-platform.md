@@ -219,3 +219,16 @@ Agent 构建、调试、深度研究、技能创建与对抗验证编排。
 | **controlled-lockcheck-autofix** | [projects/codex-invoice/controlled-lockcheck-autofix/](../projects/codex-invoice/controlled-lockcheck-autofix/) | QQ 受控前端 lockcheck 自动化：失败分类、受限自动修复、打包门的证据留存。 |
 | **email-batch-test** | [projects/codex-invoice/email-batch-test/](../projects/codex-invoice/email-batch-test/) | 跑批测试标准与双邮箱回归门禁：P0/P1/P2 标准与保护区改动的双邮箱验证。 |
 | **qq-email-ground-truth** | [projects/codex-invoice/qq-email-ground-truth/](../projects/codex-invoice/qq-email-ground-truth/) | 构建/重建/审计/比对 QQ 邮箱发票真值集，验证跑批输出。 |
+
+<!-- AUTO-GENERATED: BEGIN by-platform.md 新增待分类 -->
+## 新增待分类（TODO：由 build-indexes.ps1 自动追加，请手工并入上方对应章节）
+
+下列 skill 在现有 by-platform.md 中未被提及。build-indexes 不做自动归类，请手工合并。
+
+### 共享技能
+
+| 技能名 | 路径 | 中文简介 |
+|---|---|---|
+| **skill-hub-upgrade** | [skills/01-agent-engineering/skill-hub-upgrade/](../skills/01-agent-engineering/skill-hub-upgrade/) | 维护 Skill-hub 的上游来源索引，按证据比对开源 skill 并执行安全升级。 |
+
+<!-- AUTO-GENERATED: END by-platform.md 新增待分类 -->

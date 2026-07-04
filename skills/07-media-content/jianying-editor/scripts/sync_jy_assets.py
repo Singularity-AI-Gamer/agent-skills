@@ -4,11 +4,27 @@ import json
 import csv
 import shutil
 import subprocess
+import sys
 
-# 1. 路径定义
-LOCAL_APP_DATA = os.getenv('LOCALAPPDATA')
-JY_USER_DATA = os.path.join(LOCAL_APP_DATA, r"JianyingPro\User Data")
-JY_CACHE_MUSIC = os.path.join(JY_USER_DATA, r"Cache\music")
+# 1. 路径定义 (跨平台)
+if sys.platform == "darwin":
+    # ---- macOS ----
+    _home = os.path.expanduser("~")
+    # 剪映 macOS 数据目录 (优先检测沙盒容器路径，其次检测非沙盒路径)
+    _container_base = os.path.join(
+        _home, "Library", "Containers", "com.lemon.lvpro", "Data",
+        "Library", "Application Support", "JianyingPro", "User Data",
+    )
+    _appsupp_base = os.path.join(
+        _home, "Library", "Application Support", "JianyingPro", "User Data",
+    )
+    JY_USER_DATA = _container_base if os.path.exists(_container_base) else _appsupp_base
+    JY_CACHE_MUSIC = os.path.join(JY_USER_DATA, "Cache", "music")
+else:
+    # ---- Windows ----
+    LOCAL_APP_DATA = os.getenv('LOCALAPPDATA', '')
+    JY_USER_DATA = os.path.join(LOCAL_APP_DATA, "JianyingPro", "User Data")
+    JY_CACHE_MUSIC = os.path.join(JY_USER_DATA, "Cache", "music")
 
 # Skill 根目录 (scripts 的上一级)
 SKILL_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -29,7 +45,7 @@ def get_duration_ffprobe(file_path):
 
 def sync_music_cache_robust():
     print(f"🔄 Starting Robust Sync from: {JY_CACHE_MUSIC}")
-    
+
     # 1. 读取 downLoadcfg 获取物理文件映射
     cfg_path = os.path.join(JY_CACHE_MUSIC, "downLoadcfg")
     if not os.path.exists(cfg_path):
@@ -50,7 +66,7 @@ def sync_music_cache_robust():
 
     # 2. 尝试连接数据库获取元数据 (Best Effort)
     db_map = {} # mid -> {name, author}
-    db_root = os.path.join(JY_USER_DATA, r"Cache\ressdk_db")
+    db_root = os.path.join(JY_USER_DATA, "Cache", "ressdk_db")
     if os.path.exists(db_root):
         for root, dirs, files in os.walk(db_root):
             if "rp.db" in files:
@@ -66,7 +82,7 @@ def sync_music_cache_robust():
                     conn.close()
                 except Exception:
                     pass
-    
+
     # 3. 读取现有 CSV 索引以实现增量同步
     csv_path = os.path.join(DATA_DIR, "jy_cached_audio.csv")
     existing_ids = set()
@@ -93,13 +109,13 @@ def sync_music_cache_robust():
         mid_hex = item.get('hex')
         file_name = item.get('path')
         src_path = os.path.join(JY_CACHE_MUSIC, file_name)
-        
+
         if not os.path.exists(src_path):
             continue
-            
+
         # 尝试匹配元数据
         meta = db_map.get(mid_hex)
-        
+
         # 命名策略
         if meta:
             display_name = meta['name']
@@ -117,16 +133,16 @@ def sync_music_cache_robust():
         # 复制到 Skill 目录
         safe_name = "".join([c for c in display_name if c.isalnum() or c in (' ', '_', '-')]).strip()
         if not safe_name: safe_name = f"Music_{mid_hex[:6]}"
-        
+
         dest_filename = f"{safe_name}.mp3"
         dest_path = os.path.join(DEST_DIR, dest_filename)
-        
+
         try:
             shutil.copy2(src_path, dest_path)
-            
+
             # 尝试获取真实时长
             duration = get_duration_ffprobe(dest_path)
-            
+
             existing_items.append({
                 "identifier": display_name,
                 "author": author,
@@ -149,7 +165,7 @@ def sync_music_cache_robust():
         writer = csv.DictWriter(f, fieldnames=["identifier", "author", "duration", "path", "category"])
         writer.writeheader()
         writer.writerows(existing_items)
-    
+
     print(f"\n🎉 Sync Complete! +{new_count} new, {len(existing_items)} total assets.")
     print(f"📂 Assets dir: {DEST_DIR}")
     print(f"📋 Index: {csv_path}")

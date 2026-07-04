@@ -43,7 +43,9 @@ class MockingOpsMixin:
     JyProject 的协议补丁与伪物料 Mixin。
     """
     def _force_activate_adjustments(self):
-        content_path = os.path.join(self.root, self.name, "draft_content.json")
+        content_path = os.path.join(self.root, self.name, "draft_info.json")
+        if not os.path.exists(content_path):
+            content_path = os.path.join(self.root, self.name, "draft_content.json")
         if not os.path.exists(content_path): return
 
         try:
@@ -87,7 +89,9 @@ class MockingOpsMixin:
 
     def _patch_cloud_material_ids(self):
         if not self._cloud_audio_patches and not self._cloud_text_patches: return
-        content_path = os.path.join(self.root, self.name, "draft_content.json")
+        content_path = os.path.join(self.root, self.name, "draft_info.json")
+        if not os.path.exists(content_path):
+            content_path = os.path.join(self.root, self.name, "draft_content.json")
         if not os.path.exists(content_path): return
 
         try:
@@ -105,7 +109,7 @@ class MockingOpsMixin:
                             mat["music_id"] = patch_info["id"]
                             mat["type"] = "music"
                             has_modified = True
-            
+
             if has_modified:
                 with open(content_path, "w", encoding="utf-8") as f:
                     json.dump(data, f, ensure_ascii=False)

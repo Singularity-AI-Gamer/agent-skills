@@ -87,12 +87,12 @@ class VideoMaterial:
         try:
             info: pymediainfo.MediaInfo = \
                 pymediainfo.MediaInfo.parse(path, mediainfo_options={"File_TestContinuousFileNames": "0"})  # type: ignore
-            
+
             # 有视频轨道的视为视频素材
             if len(info.video_tracks):
                 self.material_type = "video"
                 parsed_duration = info.video_tracks[0].duration
-                
+
                 if parsed_duration:
                     self.duration = int(parsed_duration * 1e3)
                 else:
@@ -102,9 +102,9 @@ class VideoMaterial:
                     else:
                         # 既无法解析又没传参数，只能给个默认值防止崩
                         self.duration = 10 * 1000 * 1000 # 10s default
-                        
-                self.width, self.height = info.video_tracks[0].width, info.video_tracks[0].height 
-            
+
+                self.width, self.height = info.video_tracks[0].width, info.video_tracks[0].height
+
             # gif文件使用imageio库获取长度
             elif postfix.lower() == ".gif":
                 import imageio
@@ -123,7 +123,7 @@ class VideoMaterial:
             elif len(info.image_tracks):
                 self.material_type = "photo"
                 self.duration = 10800000000  # 相当于3h
-                self.width, self.height = info.image_tracks[0].width, info.image_tracks[0].height 
+                self.width, self.height = info.image_tracks[0].width, info.image_tracks[0].height
             else:
                  # Fallback for WebM or other formats if pymediainfo detect no tracks but file exists
                 if duration is not None:
@@ -160,6 +160,19 @@ class VideoMaterial:
             "media_path": "",
             "path": self.path,
             "type": self.material_type,
+            "video_algorithm": {
+                "algorithms": [],
+                "complement_frame_config": None,
+                "deflicker": None,
+                "gameplay_configs": [],
+                "motion_blur_config": None,
+                "noise_reduction": None,
+                "path": "",
+                "quality_enhance": None,
+                "time_range": None
+            },
+            "source_platform": 0,
+            "team_id": "",
             "width": self.width
         }
         return video_material_json

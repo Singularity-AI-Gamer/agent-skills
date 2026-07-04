@@ -1,10 +1,10 @@
 # 按能力域索引
 
-共 60 个技能，按 7 个能力域 + projects（项目私有）分组。
+共 61 个技能，按 7 个能力域 + projects（项目私有）分组。
 
 ## 目录
 
-- [01 Agent 工程](#01-agent-工程)（5）
+- [01 Agent 工程](#01-agent-工程)（6）
 - [02 编程语言](#02-编程语言)（1）
 - [03 框架与技术栈](#03-框架与技术栈)（1）
 - [06 数据与检索](#06-数据与检索)（15）
@@ -13,7 +13,7 @@
 - [10 行业与业务](#10-行业与业务)（17）
 - [Projects 项目私有](#projects-项目私有)（9）
 
-## 01 Agent 工程（5）
+## 01 Agent 工程（6）
 
 | 技能名 | 路径 | 中文简介 |
 |---|---|---|
@@ -22,6 +22,7 @@
 | **project-cleanup-audit** | [skills/01-agent-engineering/project-cleanup-audit/](../skills/01-agent-engineering/project-cleanup-audit/) | 证据优先清理本地项目仓库：审计体积、分类无用文件、备份并安全删除生成物。 |
 | **santa-method** | [skills/01-agent-engineering/santa-method/](../skills/01-agent-engineering/santa-method/) | 多 Agent 对抗验证收敛循环，两个独立审查都通过后才出交付。 |
 | **skill-creator** | [skills/01-agent-engineering/skill-creator/](../skills/01-agent-engineering/skill-creator/) | 创建、修改和优化 skill，并可跑 eval 衡量触发准确率与性能。 |
+| **skill-hub-upgrade** | [skills/01-agent-engineering/skill-hub-upgrade/](../skills/01-agent-engineering/skill-hub-upgrade/) | 维护 Skill-hub 的上游来源索引，按证据比对开源 skill 并执行安全升级。 |
 
 ## 02 编程语言（1）
 
@@ -129,4 +130,3 @@
 | **controlled-lockcheck-autofix** | [projects/codex-invoice/controlled-lockcheck-autofix/](../projects/codex-invoice/controlled-lockcheck-autofix/) | QQ 受控前端 lockcheck 自动化：失败分类、受限自动修复、打包门的证据留存。 |
 | **email-batch-test** | [projects/codex-invoice/email-batch-test/](../projects/codex-invoice/email-batch-test/) | 跑批测试标准与双邮箱回归门禁：P0/P1/P2 标准与保护区改动的双邮箱验证。 |
 | **qq-email-ground-truth** | [projects/codex-invoice/qq-email-ground-truth/](../projects/codex-invoice/qq-email-ground-truth/) | 构建/重建/审计/比对 QQ 邮箱发票真值集，验证跑批输出。 |
-

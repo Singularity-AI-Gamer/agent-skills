@@ -1,0 +1,402 @@
+{
+  "version": "1.0",
+  "updated_at": "2026-07-04",
+  "purpose": "Track verified original upstream repositories for Skill-hub skills so future upgrades can compare evidence-backed sources instead of guessing by skill name.",
+  "rules": [
+    "Only entries with classification=open-source and updatePolicy=mirror or mapped are eligible for automated upgrade.",
+    "Entries marked candidate or unknown require more evidence before overwrite.",
+    "Self-made and project-private skills are manual unless the owner adds an explicit upstream."
+  ],
+  "sources": [
+    {
+      "name": "data-scraper-agent",
+      "path": "skills/06-data-search/data-scraper-agent/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/affaan-m/ECC",
+        "path": "skills/data-scraper-agent/",
+        "ref": "main"
+      },
+      "lastChecked": {
+        "date": "2026-07-04",
+        "commit": "49128b5763b7ac0b50acef35ac0bcca08d1576af"
+      },
+      "updatePolicy": "mirror",
+      "status": "upgraded",
+      "notes": "Exact upstream directory found; updated frontmatter metadata layout."
+    },
+    {
+      "name": "deep-research",
+      "path": "skills/01-agent-engineering/deep-research/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/affaan-m/ECC",
+        "path": "skills/deep-research/",
+        "ref": "main"
+      },
+      "lastChecked": {
+        "date": "2026-07-04",
+        "commit": "49128b5763b7ac0b50acef35ac0bcca08d1576af"
+      },
+      "updatePolicy": "mirror",
+      "status": "upgraded",
+      "notes": "Exact upstream directory found; local eval file removed to mirror upstream."
+    },
+    {
+      "name": "healthcare-cdss-patterns",
+      "path": "skills/10-business-industry/healthcare-cdss-patterns/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/affaan-m/ECC",
+        "path": "skills/healthcare-cdss-patterns/",
+        "ref": "main"
+      },
+      "lastChecked": {
+        "date": "2026-07-04",
+        "commit": "49128b5763b7ac0b50acef35ac0bcca08d1576af"
+      },
+      "updatePolicy": "mirror",
+      "status": "upgraded",
+      "notes": "Exact upstream directory found; updated frontmatter metadata layout."
+    },
+    {
+      "name": "healthcare-emr-patterns",
+      "path": "skills/10-business-industry/healthcare-emr-patterns/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/affaan-m/ECC",
+        "path": "skills/healthcare-emr-patterns/",
+        "ref": "main"
+      },
+      "lastChecked": {
+        "date": "2026-07-04",
+        "commit": "49128b5763b7ac0b50acef35ac0bcca08d1576af"
+      },
+      "updatePolicy": "mirror",
+      "status": "upgraded",
+      "notes": "Exact upstream directory found; updated frontmatter metadata layout."
+    },
+    {
+      "name": "healthcare-eval-harness",
+      "path": "skills/10-business-industry/healthcare-eval-harness/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/affaan-m/ECC",
+        "path": "skills/healthcare-eval-harness/",
+        "ref": "main"
+      },
+      "lastChecked": {
+        "date": "2026-07-04",
+        "commit": "49128b5763b7ac0b50acef35ac0bcca08d1576af"
+      },
+      "updatePolicy": "mirror",
+      "status": "upgraded",
+      "notes": "Exact upstream directory found; updated frontmatter metadata layout."
+    },
+    {
+      "name": "healthcare-phi-compliance",
+      "path": "skills/10-business-industry/healthcare-phi-compliance/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/affaan-m/ECC",
+        "path": "skills/healthcare-phi-compliance/",
+        "ref": "main"
+      },
+      "lastChecked": {
+        "date": "2026-07-04",
+        "commit": "49128b5763b7ac0b50acef35ac0bcca08d1576af"
+      },
+      "updatePolicy": "mirror",
+      "status": "upgraded",
+      "notes": "Exact upstream directory found; updated frontmatter metadata layout."
+    },
+    {
+      "name": "liquid-glass-design",
+      "path": "skills/02-coding-languages/swift/liquid-glass-design/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/affaan-m/ECC",
+        "path": "skills/liquid-glass-design/",
+        "ref": "main"
+      },
+      "lastChecked": {
+        "date": "2026-07-04",
+        "commit": "49128b5763b7ac0b50acef35ac0bcca08d1576af"
+      },
+      "updatePolicy": "mirror",
+      "status": "current",
+      "notes": "Normalized hashes matched upstream."
+    },
+    {
+      "name": "remotion-video-creation",
+      "path": "skills/07-media-content/remotion-video-creation/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/affaan-m/ECC",
+        "path": "skills/remotion-video-creation/",
+        "ref": "main"
+      },
+      "lastChecked": {
+        "date": "2026-07-04",
+        "commit": "49128b5763b7ac0b50acef35ac0bcca08d1576af"
+      },
+      "updatePolicy": "mirror",
+      "status": "current",
+      "notes": "Exact same 32 normalized files. remotion-dev/skills is a separate candidate with different skill name/path."
+    },
+    {
+      "name": "santa-method",
+      "path": "skills/01-agent-engineering/santa-method/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/affaan-m/ECC",
+        "path": "skills/santa-method/",
+        "ref": "main"
+      },
+      "lastChecked": {
+        "date": "2026-07-04",
+        "commit": "49128b5763b7ac0b50acef35ac0bcca08d1576af"
+      },
+      "updatePolicy": "mirror",
+      "status": "upgraded",
+      "notes": "Exact upstream directory found; updated frontmatter metadata layout."
+    },
+    {
+      "name": "docx",
+      "path": "skills/07-media-content/docx/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/anthropics/skills",
+        "path": "skills/docx/",
+        "ref": "main"
+      },
+      "lastChecked": {
+        "date": "2026-07-04",
+        "commit": "9d2f1ae187231d8199c64b5b762e1bdf2244733d"
+      },
+      "updatePolicy": "mirror",
+      "normalization": {
+        "trimTrailingWhitespace": true
+      },
+      "status": "upgraded",
+      "notes": "Mirrored current Anthropic document skill layout, then normalized trailing whitespace/final blank lines so git diff checks pass."
+    },
+    {
+      "name": "pptx",
+      "path": "skills/07-media-content/pptx/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/anthropics/skills",
+        "path": "skills/pptx/",
+        "ref": "main"
+      },
+      "lastChecked": {
+        "date": "2026-07-04",
+        "commit": "9d2f1ae187231d8199c64b5b762e1bdf2244733d"
+      },
+      "updatePolicy": "mirror",
+      "normalization": {
+        "trimTrailingWhitespace": true
+      },
+      "status": "upgraded",
+      "notes": "Mirrored current Anthropic presentation skill layout, then normalized trailing whitespace/final blank lines so git diff checks pass."
+    },
+    {
+      "name": "xlsx",
+      "path": "skills/07-media-content/xlsx/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/anthropics/skills",
+        "path": "skills/xlsx/",
+        "ref": "main"
+      },
+      "lastChecked": {
+        "date": "2026-07-04",
+        "commit": "9d2f1ae187231d8199c64b5b762e1bdf2244733d"
+      },
+      "updatePolicy": "mirror",
+      "normalization": {
+        "trimTrailingWhitespace": true
+      },
+      "status": "upgraded",
+      "notes": "Mirrored current Anthropic spreadsheet skill layout, then normalized trailing whitespace/final blank lines so git diff checks pass."
+    },
+    {
+      "name": "skill-creator",
+      "path": "skills/01-agent-engineering/skill-creator/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/anthropics/skills",
+        "path": "skills/skill-creator/",
+        "ref": "main"
+      },
+      "lastChecked": {
+        "date": "2026-07-04",
+        "commit": "9d2f1ae187231d8199c64b5b762e1bdf2244733d"
+      },
+      "updatePolicy": "mirror",
+      "status": "upgraded",
+      "notes": "Local content matched Anthropic skill-creator; only LICENSE.txt copyright placeholder differed and was updated."
+    },
+    {
+      "name": "imagegen",
+      "path": "skills/07-media-content/imagegen/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/openai/skills",
+        "path": "skills/.system/imagegen/",
+        "ref": "main"
+      },
+      "lastChecked": {
+        "date": "2026-07-04",
+        "commit": "49f948faa9258a0c61caceaf225e179651397431"
+      },
+      "updatePolicy": "mirror",
+      "status": "upgraded",
+      "notes": "Mirrored current OpenAI system image generation skill."
+    },
+    {
+      "name": "pdf",
+      "path": "skills/07-media-content/pdf/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/openai/skills",
+        "path": "skills/.curated/pdf/",
+        "ref": "main"
+      },
+      "lastChecked": {
+        "date": "2026-07-04",
+        "commit": "49f948faa9258a0c61caceaf225e179651397431"
+      },
+      "updatePolicy": "mirror",
+      "status": "current",
+      "notes": "Normalized hashes matched OpenAI current version."
+    },
+    {
+      "name": "pubmed-search",
+      "path": "skills/06-data-search/pubmed-search/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/yorkeccak/scientific-skills",
+        "path": "skills/pubmed-search/",
+        "ref": "main"
+      },
+      "lastChecked": {
+        "date": "2026-07-04",
+        "commit": "20b3d503700656f847e6de873753335bf90e63e3"
+      },
+      "updatePolicy": "mirror",
+      "status": "current",
+      "notes": "Normalized hashes matched upstream."
+    },
+    {
+      "name": "medical-research",
+      "path": "skills/06-data-search/medical-research/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/gexijin/vibe",
+        "path": ".claude/skills/medical-research/",
+        "ref": "main"
+      },
+      "lastChecked": {
+        "date": "2026-07-04",
+        "commit": "7ad9fd231d406376d2ee4d6021338c432f23094c"
+      },
+      "updatePolicy": "mirror",
+      "status": "upgraded",
+      "notes": "SKILL.md and pubmed_search.py already matched; upstream README.md and EXAMPLES.md were added."
+    },
+    {
+      "name": "jianying-editor",
+      "path": "skills/07-media-content/jianying-editor/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/luoluoluo22/jianying-editor-skill",
+        "path": "./",
+        "ref": "main"
+      },
+      "lastChecked": {
+        "date": "2026-07-04",
+        "commit": "f421c8a036f4fda888a83b38fc90bb9c00d6faa9"
+      },
+      "updatePolicy": "mirror",
+      "normalization": {
+        "trimTrailingWhitespace": true
+      },
+      "status": "upgraded-with-whitespace-normalization",
+      "notes": "Explicit GitHub clone URL existed in local README; mirrored current upstream excluding .git, then normalized trailing whitespace/final blank lines so git diff checks pass."
+    },
+    {
+      "name": "creating-financial-models",
+      "path": "skills/10-business-industry/creating-financial-models/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/anthropics/claude-cookbooks",
+        "path": "skills/custom_skills/creating-financial-models/",
+        "ref": "main"
+      },
+      "lastChecked": {
+        "date": "2026-07-04",
+        "commit": "3393bdaedde4fb26b4944a14710471f07c204fc1"
+      },
+      "updatePolicy": "mapped",
+      "status": "manual-current",
+      "notes": "Script contents match upstream but local repo keeps scripts under scripts/ and has Chinese trigger text; do not mirror without reviewing this local adaptation."
+    }
+  ],
+  "candidates": [
+    {
+      "name": "frontend-design",
+      "path": "skills/03-frameworks/frontend-design/",
+      "candidateSource": "https://github.com/affaan-m/ECC",
+      "evidence": "Public registries preserve the old frontend-design text, but the current repository no longer has an exact skills/frontend-design path; current ECC has frontend-design-direction instead.",
+      "status": "unverified-do-not-overwrite"
+    },
+    {
+      "name": "editorial-presentation-html",
+      "path": "skills/07-media-content/editorial-presentation-html/",
+      "candidateSource": "https://github.com/EthanYoQ/editorial-presentation-skill",
+      "evidence": "Local README references this repository, but GitHub API did not resolve it during this audit. Treat as self-made/manual until accessible.",
+      "status": "self-or-inaccessible"
+    },
+    {
+      "name": "remotion-video-creation",
+      "path": "skills/07-media-content/remotion-video-creation/",
+      "candidateSource": "https://github.com/remotion-dev/skills/tree/main/skills/remotion",
+      "evidence": "Remotion official repository has a newer/different remotion skill, but local content exactly matches ECC's remotion-video-creation name and directory.",
+      "status": "alternative-upstream-not-used"
+    }
+  ],
+  "needs_source_discovery": [
+    "find-skills",
+    "project-cleanup-audit",
+    "bioc-fulltext-fetch",
+    "clinical-trials-v2",
+    "cn-clinical-guidelines-fetch",
+    "europepmc-search",
+    "evidence-appendix-sync",
+    "market-research-reports",
+    "market-sizing-mece-foundation",
+    "medical-evidence-grading",
+    "nmpa-drug-registry-lookup",
+    "pubmed-eutils",
+    "pubtator-entity-search",
+    "report-bundle-builder",
+    "ppt-nano",
+    "wechat-article",
+    "decision-tree-with-lp-embedding",
+    "yq-article-style-imitation",
+    "citation-anchor-resolver",
+    "cite-bound-content-generator",
+    "content-verification-layer",
+    "contract-elicitor",
+    "contract-review",
+    "design-system-injector",
+    "disease-market-sizing-html-template",
+    "disease-market-sizing-orchestration",
+    "disease-stratifier",
+    "drug-citation-verifier",
+    "ifi-market-sizing-skill",
+    "session-resume"
+  ]
+}

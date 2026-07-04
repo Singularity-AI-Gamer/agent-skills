@@ -1,11 +1,15 @@
 ---
 name: deep-research
-description: Multi-source deep research using firecrawl and exa MCPs. Searches the web, synthesizes findings, and delivers cited reports with source attribution. Use this skill whenever the user asks to research, investigate, look into, or get a deep dive on any topic — even if they don't say 'research' explicitly. When in doubt, use this skill.
-origin: ECC
-compatibility: requires firecrawl MCP or exa MCP (at least one)
+description: Multi-source deep research using firecrawl and exa MCPs. Searches the web, synthesizes findings, and delivers cited reports with source attribution. Use when the user wants thorough research on any topic with evidence and citations.
+metadata:
+  origin: ECC
 ---
 
 # Deep Research
+
+> **Drift-prone skill.** Firecrawl/Exa MCP tool names, quotas, and result
+> shapes change. Verify the configured MCP tools and current API docs before
+> promising coverage or quoting live source counts.
 
 Produce thorough, cited research reports from multiple web sources using firecrawl and exa MCP tools.
 
@@ -29,7 +33,7 @@ Both together give the best coverage. Configure in `~/.claude.json` or `~/.codex
 
 ### Step 1: Understand the Goal
 
-If the topic is ambiguous or unusually broad, ask 1-2 quick clarifying questions. If the topic is clear, skip ahead with reasonable defaults.
+Ask 1-2 quick clarifying questions:
 - "What's your goal — learning, making a decision, or writing something?"
 - "Any specific angle or depth you want?"
 
@@ -88,7 +92,7 @@ Structure the report:
 
 ```markdown
 # [Topic]: Research Report
-*Generated: [date] | Sources: [N] | Confidence: High (3+ cross-verified sources) / Medium (2 sources) / Low (single or outdated source)*
+*Generated: [date] | Sources: [N] | Confidence: [High/Medium/Low]*
 
 ## Executive Summary
 [3-5 sentence overview of key findings]

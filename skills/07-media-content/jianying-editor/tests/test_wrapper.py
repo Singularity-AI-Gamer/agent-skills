@@ -10,17 +10,20 @@ from unittest.mock import patch
 current_dir = os.path.dirname(os.path.abspath(__file__))
 skill_root = os.path.dirname(current_dir)
 scripts_path = os.path.join(skill_root, "scripts")
+vendor_path = os.path.join(scripts_path, "vendor")
 if scripts_path not in sys.path:
     sys.path.insert(0, scripts_path)
+if vendor_path not in sys.path:
+    sys.path.insert(0, vendor_path)
 
 from cloud_manager import CloudManager
-from core.mocking_ops import MockAudioMaterial
+from core.mocking_ops import MockAudioMaterial, MockVideoMaterial
+from draft_inspector import cmd_summary
 from jy_wrapper import JyProject, draft
 from utils.formatters import safe_tim
 
 
 class TestJyWrapper(unittest.TestCase):
-
     @classmethod
     def setUpClass(cls):
         # 使用临时目录作为测试环境
@@ -165,6 +168,89 @@ class TestJyWrapper(unittest.TestCase):
         self.assertIn("AudioTrack_1", p.script.tracks)
         self.assertEqual(len(p.script.tracks["AudioTrack"].segments), 1)
         self.assertEqual(len(p.script.tracks["AudioTrack_1"].segments), 1)
+
+    def test_12_draft_inspector_reads_draft_info(self):
+        """测试 draft_inspector 兼容 v5.9+ 的 draft_info.json"""
+        p = JyProject("TestInspectorInfo", drafts_root=self.test_output, overwrite=True)
+        p.add_text_simple("Hello", "0s", "1s")
+        p.save()
+
+        res = cmd_summary(
+            root=self.test_output,
+            name=None,
+            path=os.path.join(self.test_output, "TestInspectorInfo"),
+        )
+
+        self.assertTrue(res["ok"], res.get("reason"))
+        self.assertEqual(res["data"]["name"], "TestInspectorInfo")
+        self.assertGreaterEqual(res["data"]["track_count"], 1)
+
+    def test_13_late_transition_material_registered(self):
+        """测试片段上轨后再添加转场时，保存前能补齐转场素材"""
+        p = JyProject("TestLateTransition", drafts_root=self.test_output, overwrite=True)
+        p._ensure_track(draft.TrackType.video, "V1")
+        mat = MockVideoMaterial("video_mat", 3000000, "Video", "video.mp4")
+        mat.width = 1920
+        mat.height = 1080
+        seg = draft.VideoSegment(mat, draft.trange(0, 3000000))
+
+        p.script.add_segment(seg, "V1")
+        self.assertEqual(len(p.script.materials.transitions), 0)
+
+        seg.add_transition(next(iter(draft.TransitionType)), duration="0.5s")
+        p.script.register_all_segment_extras()
+
+        self.assertEqual(len(p.script.materials.transitions), 1)
+        self.assertEqual(p.script.materials.transitions[0].global_id, seg.transition.global_id)
+
+    def test_14_cloud_find_asset_allows_missing_static_url(self):
+        """测试 CSV 中 URL 为空的云音乐仍可按 ID 命中，供运行时刷新 URL"""
+        cm = CloudManager()
+        asset = cm.find_asset("7176685873453500417")
+
+        self.assertIsNotNone(asset)
+        self.assertEqual(asset["id"], "7176685873453500417")
+        self.assertEqual(asset.get("source_db"), "cloud_music_library.csv")
+
+    def test_15_cloud_resolve_url_by_id_from_mget_item(self):
+        """测试可从 mget_item 响应里提取即时下载 URL"""
+        cm = CloudManager()
+        asset = {
+            "id": "7176685873453500417",
+            "name": "More of My Time (Lofi)",
+            "url": "",
+            "source_db": "cloud_music_library.csv",
+            "type": "VLOG",
+        }
+
+        class Resp:
+            def raise_for_status(self):
+                return None
+
+            def json(self):
+                return {
+                    "ret": "0",
+                    "data": {
+                        "effect_item_list": [
+                            {
+                                "common_attr": {
+                                    "item_urls": [
+                                        "https://v26-jianying.vlabvod.com/test/audio?mime_type=audio_mp4"
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                }
+
+        with patch("cloud_manager.requests.post", return_value=Resp()) as mocked_post:
+            url = cm._resolve_url_by_id(asset)
+
+        self.assertEqual(
+            url, "https://v26-jianying.vlabvod.com/test/audio?mime_type=audio_mp4"
+        )
+        self.assertEqual(asset["url"], url)
+        mocked_post.assert_called()
 
     @classmethod
     def tearDownClass(cls):
