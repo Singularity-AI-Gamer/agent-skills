@@ -8,9 +8,7 @@
 
 Skill-hub 是一个公开的中文 AI 提示词库、AI Agent 技能库和 `SKILL.md` 工作流仓库，面向需要沉淀 Codex、Claude Code、Antigravity 等 AI 编程工具用法的个人开发者。仓库当前包含 **61** 个可复用技能，其中 **52** 个共享技能按能力域组织，**9** 个项目私有技能按项目归档，便于检索、本地同步、来源追踪和持续维护。
 
-**搜索意图：** 适合正在查找 AI 提示词、提示词库、AI Agent 技能库、Codex 技能、Claude Code 技能、AI 编程工作流和 `SKILL.md` 工作流模板的人。
-
-**信任边界：** 这是个人展示与学习仓库，不是 OpenAI、Anthropic、Claude Code 或 Antigravity 官方技能库，也不是通用提示词市场。仓库公开，请只使用占位符填写凭据，不要提交真实密钥、客户数据、内部资料或个人隐私。
+**信任边界：** 这是公开开源的个人 Skill 仓库，不是 OpenAI、Anthropic、Claude Code 或 Antigravity 官方技能库，也不是通用提示词市场。仓库公开，请只使用占位符填写凭据，不要提交真实密钥、客户数据、内部资料或个人隐私。
 
 **快速入口：** [按名字查](./_meta/by-name.md) | [按能力域查](./_meta/by-domain.md) | [按技术栈查](./_meta/by-platform.md) | [机器可读索引](./_meta/skills-lock.json) | [来源索引](./_meta/skill-upstreams.json)
 
@@ -37,7 +35,7 @@ Skill-hub 不是单一提示词合集，而是面向 Agent 使用的技能仓库
 | <img src="assets/README/icons/package.svg" width="20" alt=""> 框架与技术栈 | 1 | `skills/03-frameworks/` | 前端设计、框架级实现模式和技术栈约束。 |
 | <img src="assets/README/icons/index.svg" width="20" alt=""> 数据与检索 | 15 | `skills/06-data-search/` | 数据抓取、搜索、深度研究、PubMed、临床试验和报告交付。 |
 | <img src="assets/README/icons/format.svg" width="20" alt=""> 媒体与内容制作 | 10 | `skills/07-media-content/` | PPT、PDF、DOCX、XLSX、图像、视频、公众号文章和演示内容。 |
-| <img src="assets/README/icons/seo.svg" width="20" alt=""> 写作与营销 | 2 | `skills/08-writing-marketing/` | 风格仿写、营销写作和面向传播的结构化内容。 |
+| <img src="assets/README/icons/writing.svg" width="20" alt=""> 写作与营销 | 2 | `skills/08-writing-marketing/` | 风格仿写、营销写作和面向传播的结构化内容。 |
 | <img src="assets/README/icons/source-index.svg" width="20" alt=""> 行业与业务 | 17 | `skills/10-business-industry/` | 医疗、法律、金融、市场规模、引用校验和行业报告流程。 |
 | <img src="assets/README/icons/directory.svg" width="20" alt=""> 项目私有 | 9 | `projects/` | 只对特定项目生效的技能，例如邮箱测试、飞书、阿里云或发票项目流程。 |
 
@@ -165,23 +163,6 @@ Windows 上常用 Directory Junction 让多个 Agent 共享同一份技能目录
 
 使用本仓库技能时，请在本地填入自己的凭据；不要把填入真实凭据的文件提交回公开仓库。
 
-## <img src="assets/README/icons/seo.svg" width="20" alt=""> GitHub SEO 与发现路径
-
-本 README 保留并强化 GitHub SEO 关键词与定位，但不把关键词堆成列表，也不声称已有排名或流量结果。
-
-| 关键词族 | README 中的自然表达 |
-|---|---|
-| <img src="assets/README/icons/seo.svg" width="20" alt=""> 核心品类 | AI 提示词库、AI Agent 技能库、`SKILL.md` 工作流仓库。 |
-| <img src="assets/README/icons/seo.svg" width="20" alt=""> 使用场景 | AI 编程工作流、可复用 Agent 技能、本地同步、技能维护、来源追踪。 |
-| <img src="assets/README/icons/seo.svg" width="20" alt=""> 平台关系 | Codex 技能、Claude Code 技能、Antigravity 工作流。 |
-| <img src="assets/README/icons/seo.svg" width="20" alt=""> 边界说明 | 非官方技能库、非通用提示词市场、公开仓库需要脱敏。 |
-
-当前可验证事实是：仓库提供 README、索引、来源索引、同步脚本和公开 GitHub 页面。真实搜索曝光、Baidu/Bing 收录、AI 搜索引用和 GitHub 排名仍需要后续基线测量，不能从 README 改写本身直接推出结论。
-
-## <img src="assets/README/icons/source-index.svg" width="20" alt=""> 图标来源
-
-README 图标统一来自 Lucide 图标集，通过 `better-icons` MCP 获取后保存到 [`assets/README/icons/`](./assets/README/icons/)。不使用 Emoji、Unicode 图形字符或手写 SVG path 作为 README 图标。
-
 ## <img src="assets/README/icons/overview.svg" width="20" alt=""> 许可
 
-仅用于个人展示与学习，默认不接受外部 PR。
+本仓库采用 [MIT License](./LICENSE) 完全开源。第三方开源 skill 如保留原始许可证或来源说明，以其上游许可证为准。

@@ -8,9 +8,7 @@
 
 Skill-hub is a public Chinese-first AI prompt library, AI Agent skill library, and `SKILL.md` workflow repository for individual developers who want to preserve reusable workflows for Codex, Claude Code, Antigravity, and other AI coding tools. The repository currently contains **61** reusable skills: **52** shared skills organized by capability domain and **9** project-specific skills archived by project for lookup, local sync, source tracking, and ongoing maintenance.
 
-**Search intent:** for people searching for AI 提示词, 提示词库, AI Agent 技能库, Codex 技能, Claude Code 技能, AI coding workflows, and reusable `SKILL.md` workflow templates.
-
-**Trust boundary:** this is a personal showcase and learning repository. It is not an official OpenAI, Anthropic, Claude Code, or Antigravity skill registry, and it is not a general-purpose prompt marketplace. Because the repository is public, use placeholders for credentials and do not commit real secrets, customer data, internal documents, or personal information.
+**Trust boundary:** this is a public open-source personal skill repository. It is not an official OpenAI, Anthropic, Claude Code, or Antigravity skill registry, and it is not a general-purpose prompt marketplace. Because the repository is public, use placeholders for credentials and do not commit real secrets, customer data, internal documents, or personal information.
 
 **Start here:** [By Name](./_meta/by-name.md) | [By Domain](./_meta/by-domain.md) | [By Tech Stack](./_meta/by-platform.md) | [Machine-Readable Index](./_meta/skills-lock.json) | [Source Index](./_meta/skill-upstreams.json)
 
@@ -37,7 +35,7 @@ Shared skills live under `skills/`; project-specific skills live under `projects
 | <img src="assets/README/icons/package.svg" width="20" alt=""> Frameworks and Stacks | 1 | `skills/03-frameworks/` | Frontend design, framework-level implementation patterns, and stack constraints. |
 | <img src="assets/README/icons/index.svg" width="20" alt=""> Data and Search | 15 | `skills/06-data-search/` | Data scraping, search, deep research, PubMed, clinical trials, and report delivery. |
 | <img src="assets/README/icons/format.svg" width="20" alt=""> Media and Content | 10 | `skills/07-media-content/` | PPT, PDF, DOCX, XLSX, images, video, WeChat articles, and presentation content. |
-| <img src="assets/README/icons/seo.svg" width="20" alt=""> Writing and Marketing | 2 | `skills/08-writing-marketing/` | Style imitation, marketing writing, and structured content for distribution. |
+| <img src="assets/README/icons/writing.svg" width="20" alt=""> Writing and Marketing | 2 | `skills/08-writing-marketing/` | Style imitation, marketing writing, and structured content for distribution. |
 | <img src="assets/README/icons/source-index.svg" width="20" alt=""> Business and Industry | 17 | `skills/10-business-industry/` | Healthcare, legal, finance, market sizing, citation verification, and industry report workflows. |
 | <img src="assets/README/icons/directory.svg" width="20" alt=""> Project-Specific | 9 | `projects/` | Skills scoped to specific projects, such as email testing, Feishu, Alibaba Cloud, or invoice workflows. |
 
@@ -165,23 +163,6 @@ This repository is public. Every skill should be anonymized before being committ
 
 When using skills from this repository, fill in your credentials locally. Do not commit files containing real credentials back to the public repository.
 
-## <img src="assets/README/icons/seo.svg" width="20" alt=""> GitHub SEO and Discovery
-
-This README keeps and strengthens the GitHub SEO keywords and positioning, but it does not turn them into a keyword dump or claim ranking or traffic results.
-
-| Keyword family | Natural README wording |
-|---|---|
-| <img src="assets/README/icons/seo.svg" width="20" alt=""> Core category | AI prompt library, AI Agent skill library, `SKILL.md` workflow repository. |
-| <img src="assets/README/icons/seo.svg" width="20" alt=""> Use cases | AI coding workflows, reusable Agent skills, local sync, skill maintenance, source tracking. |
-| <img src="assets/README/icons/seo.svg" width="20" alt=""> Platform relation | Codex skills, Claude Code skills, Antigravity workflows. |
-| <img src="assets/README/icons/seo.svg" width="20" alt=""> Boundary language | Not an official skill registry, not a general prompt marketplace, public repository requires anonymization. |
-
-The current verified facts are that this repository provides README files, indexes, a source index, sync scripts, and a public GitHub page. Real search exposure, Baidu/Bing indexing, AI-search citation, and GitHub ranking still require future baseline measurement; they cannot be concluded from a README rewrite alone.
-
-## <img src="assets/README/icons/source-index.svg" width="20" alt=""> Icon Source
-
-README icons come from the Lucide icon set, fetched through the `better-icons` MCP and saved under [`assets/README/icons/`](./assets/README/icons/). The README files do not use Emoji, Unicode graphic characters, or handwritten SVG paths as icons.
-
 ## <img src="assets/README/icons/overview.svg" width="20" alt=""> License
 
-For personal showcase and learning only. External PRs are not accepted by default.
+This repository is fully open source under the [MIT License](./LICENSE). Third-party open-source skills keep their original upstream license terms when a source license or notice is present.
