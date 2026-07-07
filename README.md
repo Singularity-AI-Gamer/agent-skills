@@ -4,9 +4,11 @@
 
 </div>
 
-# Skill-hub - AI Agent 技能库
+# Skill-hub - Codex / Claude Code 中文 Agent 技能库
 
-Skill-hub 是一个公开的中文 AI 提示词库、AI Agent 技能库和 `SKILL.md` 工作流仓库，面向需要沉淀 Codex、Claude Code、Antigravity 等 AI 编程工具用法的个人开发者。仓库当前包含 **61** 个可复用技能，其中 **52** 个共享技能按能力域组织，**9** 个项目私有技能按项目归档，便于检索、本地同步、来源追踪和持续维护。
+Skill-hub 是一个面向 Codex、Claude Code、Antigravity 等 AI 编程工具的中文 Agent 技能库，收集可复用的 `SKILL.md` 自动化实践、AI 编程工作流和提示词模板。仓库当前包含 **61** 个可复用技能，其中 **52** 个共享技能按能力域组织，**9** 个项目私有技能按项目归档，便于检索、本地同步、来源追踪和持续维护。
+
+**适合搜索：** Codex 技能与 Claude Code 技能、中文 Agent 技能库、AI 编程工作流与提示词模板。
 
 **信任边界：** 这是公开开源的个人 Skill 仓库，不是 OpenAI、Anthropic、Claude Code 或 Antigravity 官方技能库，也不是通用提示词市场。仓库公开，请只使用占位符填写凭据，不要提交真实密钥、客户数据、内部资料或个人隐私。
 
@@ -15,6 +17,8 @@ Skill-hub 是一个公开的中文 AI 提示词库、AI Agent 技能库和 `SKIL
 ## <img src="assets/README/icons/map.svg" width="20" alt=""> 仓库定位
 
 Skill-hub 不是单一提示词合集，而是面向 Agent 使用的技能仓库。每个技能通常包含触发条件、执行步骤、约束、参考资料或脚本，让 AI 编程助手能在相似任务中复用稳定流程。
+
+**典型场景：** 查找可复用的 Agent 技能，整理自己的 Codex / Claude Code 工作流，把项目经验沉淀成 `SKILL.md`，为 AI 编程任务建立可复用的提示词和自动化步骤。
 
 | 定位 | 说明 |
 |---|---|

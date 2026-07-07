@@ -4,9 +4,11 @@
 
 </div>
 
-# Skill-hub - AI Agent Skill Library
+# Skill-hub - Codex / Claude Code AI Agent Skill Library
 
-Skill-hub is a public Chinese-first AI prompt library, AI Agent skill library, and `SKILL.md` workflow repository for individual developers who want to preserve reusable workflows for Codex, Claude Code, Antigravity, and other AI coding tools. The repository currently contains **61** reusable skills: **52** shared skills organized by capability domain and **9** project-specific skills archived by project for lookup, local sync, source tracking, and ongoing maintenance.
+Skill-hub is a public Chinese-first AI Agent skill library for Codex, Claude Code, Antigravity, and related AI coding tools. It collects reusable `SKILL.md` automation practices, AI coding workflows, and prompt templates. The repository currently contains **61** reusable skills: **52** shared skills organized by capability domain and **9** project-specific skills archived by project for lookup, local sync, source tracking, and ongoing maintenance.
+
+**Search intent:** Codex skills and Claude Code skills, Chinese AI Agent skill library, AI coding workflows, and prompt templates.
 
 **Trust boundary:** this is a public open-source personal skill repository. It is not an official OpenAI, Anthropic, Claude Code, or Antigravity skill registry, and it is not a general-purpose prompt marketplace. Because the repository is public, use placeholders for credentials and do not commit real secrets, customer data, internal documents, or personal information.
 
@@ -15,6 +17,8 @@ Skill-hub is a public Chinese-first AI prompt library, AI Agent skill library, a
 ## <img src="assets/README/icons/map.svg" width="20" alt=""> Repository Positioning
 
 Skill-hub is not just a prompt collection. It is a skill repository designed for agents. A skill usually contains trigger conditions, execution steps, constraints, references, or scripts so an AI coding assistant can reuse a stable workflow on similar tasks.
+
+**Typical scenarios:** find reusable Agent skills, organize Codex / Claude Code workflows, turn project experience into `SKILL.md`, and maintain AI coding prompts and automation steps in one searchable repository.
 
 | Position | What it means |
 |---|---|
