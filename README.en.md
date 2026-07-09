@@ -6,7 +6,7 @@
 
 # Skill-hub - Codex / Claude Code AI Agent Skill Library
 
-Skill-hub is a public Chinese-first AI Agent skill library for Codex, Claude Code, Antigravity, and related AI coding tools. It collects reusable `SKILL.md` automation practices, AI coding workflows, and prompt templates. The repository currently contains **61** reusable skills: **52** shared skills organized by capability domain and **9** project-specific skills archived by project for lookup, local sync, source tracking, and ongoing maintenance.
+Skill-hub is a public Chinese-first AI Agent skill library for Codex, Claude Code, Antigravity, and related AI coding tools. It collects reusable `SKILL.md` automation practices, AI coding workflows, and prompt templates. The repository currently contains **62** reusable skills: **53** shared skills organized by capability domain and **9** project-specific skills archived by project for lookup, local sync, source tracking, and ongoing maintenance.
 
 **Search intent:** Codex skills and Claude Code skills, Chinese AI Agent skill library, AI coding workflows, and prompt templates.
 
@@ -34,7 +34,7 @@ Shared skills live under `skills/`; project-specific skills live under `projects
 
 | Category | Count | Directory | What to look for |
 |---|---:|---|---|
-| <img src="assets/README/icons/overview.svg" width="20" alt=""> Agent Engineering | 6 | `skills/01-agent-engineering/` | Agent building, debugging, autonomy loops, skill creation, adversarial verification, and skill upgrades. |
+| <img src="assets/README/icons/overview.svg" width="20" alt=""> Agent Engineering | 7 | `skills/01-agent-engineering/` | Agent building, debugging, autonomy loops, skill creation, adversarial verification, and skill lifecycle management. |
 | <img src="assets/README/icons/format.svg" width="20" alt=""> Coding Languages | 1 | `skills/02-coding-languages/` | Language-level coding standards, design patterns, and testing conventions. |
 | <img src="assets/README/icons/package.svg" width="20" alt=""> Frameworks and Stacks | 1 | `skills/03-frameworks/` | Frontend design, framework-level implementation patterns, and stack constraints. |
 | <img src="assets/README/icons/index.svg" width="20" alt=""> Data and Search | 15 | `skills/06-data-search/` | Data scraping, search, deep research, PubMed, clinical trials, and report delivery. |
@@ -46,7 +46,7 @@ Shared skills live under `skills/`; project-specific skills live under `projects
 ## <img src="assets/README/icons/directory.svg" width="20" alt=""> Directory Structure
 
 ```text
-skills/                        # 52 shared skills across 7 capability domains
+skills/                        # 53 shared skills across 7 capability domains
 |-- 01-agent-engineering/      # Agent building, debugging, autonomy loops, harnesses
 |-- 02-coding-languages/       # Programming languages
 |-- 03-frameworks/             # Frameworks and technology stacks
@@ -143,7 +143,7 @@ When maintaining Skill-hub, upgrade from evidence rather than name matching.
 4. After upgrading, run [`scripts/build-indexes.ps1`](./scripts/build-indexes.ps1) so `_meta/` reflects the latest counts, paths, and descriptions.
 5. Review skill content, index changes, and anonymization with `git diff` before committing.
 
-The repository includes [`skills/01-agent-engineering/skill-upgrade/`](./skills/01-agent-engineering/skill-upgrade/), an agent-facing upgrade workflow for maintaining Skill-hub source indexes and checking local skill installations.
+The repository includes [`skills/01-agent-engineering/skill-lifecycle-manager/`](./skills/01-agent-engineering/skill-lifecycle-manager/), an agent-facing workflow for skill search, installation, upgrades, sync, source verification, and quality audits across Skill-hub and local skill installations.
 
 ## <img src="assets/README/icons/maintenance.svg" width="20" alt=""> Maintenance Conventions
 

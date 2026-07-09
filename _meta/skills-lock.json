@@ -1,11 +1,11 @@
 {
     "version":  "2.0",
-    "generated_at":  "2026-07-04T17:13:50+08:00",
-    "note":  "Rebuilt indexes from repository SKILL.md files. Total: 52 shared + 9 projects = 61 total",
+    "generated_at":  "2026-07-10T00:43:07+08:00",
+    "note":  "Rebuilt indexes from repository SKILL.md files. Total: 53 shared + 9 projects = 62 total",
     "counts":  {
-                   "shared":  52,
+                   "shared":  53,
                    "projects":  9,
-                   "total":  61
+                   "total":  62
                },
     "shared":  [
                    {
@@ -37,6 +37,12 @@
                        "domain":  "01-agent-engineering",
                        "path":  "skills/01-agent-engineering/skill-creator/",
                        "descriptionZh":  "创建、修改和优化 skill，并可跑 eval 衡量触发准确率与性能。"
+                   },
+                   {
+                       "name":  "skill-lifecycle-manager",
+                       "domain":  "01-agent-engineering",
+                       "path":  "skills/01-agent-engineering/skill-lifecycle-manager/",
+                       "descriptionZh":  "管理本地/全局/项目级 skill 与 Skill-hub 生命周期：搜索、推荐、安装、升级、同步、合并、清理、来源校验、质量审计和发布。"
                    },
                    {
                        "name":  "skill-upgrade",

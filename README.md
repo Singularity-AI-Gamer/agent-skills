@@ -6,7 +6,7 @@
 
 # Skill-hub - Codex / Claude Code 中文 Agent 技能库
 
-Skill-hub 是一个面向 Codex、Claude Code、Antigravity 等 AI 编程工具的中文 Agent 技能库，收集可复用的 `SKILL.md` 自动化实践、AI 编程工作流和提示词模板。仓库当前包含 **61** 个可复用技能，其中 **52** 个共享技能按能力域组织，**9** 个项目私有技能按项目归档，便于检索、本地同步、来源追踪和持续维护。
+Skill-hub 是一个面向 Codex、Claude Code、Antigravity 等 AI 编程工具的中文 Agent 技能库，收集可复用的 `SKILL.md` 自动化实践、AI 编程工作流和提示词模板。仓库当前包含 **62** 个可复用技能，其中 **53** 个共享技能按能力域组织，**9** 个项目私有技能按项目归档，便于检索、本地同步、来源追踪和持续维护。
 
 **适合搜索：** Codex 技能与 Claude Code 技能、中文 Agent 技能库、AI 编程工作流与提示词模板。
 
@@ -34,7 +34,7 @@ Skill-hub 不是单一提示词合集，而是面向 Agent 使用的技能仓库
 
 | 类别 | 数量 | 目录 | 适合查什么 |
 |---|---:|---|---|
-| <img src="assets/README/icons/overview.svg" width="20" alt=""> Agent 工程 | 6 | `skills/01-agent-engineering/` | Agent 构建、调试、自治循环、技能创建、对抗验证、skill 升级。 |
+| <img src="assets/README/icons/overview.svg" width="20" alt=""> Agent 工程 | 7 | `skills/01-agent-engineering/` | Agent 构建、调试、自治循环、技能创建、对抗验证、skill 生命周期管理。 |
 | <img src="assets/README/icons/format.svg" width="20" alt=""> 编程语言 | 1 | `skills/02-coding-languages/` | 语言级编码标准、设计模式和测试规范。 |
 | <img src="assets/README/icons/package.svg" width="20" alt=""> 框架与技术栈 | 1 | `skills/03-frameworks/` | 前端设计、框架级实现模式和技术栈约束。 |
 | <img src="assets/README/icons/index.svg" width="20" alt=""> 数据与检索 | 15 | `skills/06-data-search/` | 数据抓取、搜索、深度研究、PubMed、临床试验和报告交付。 |
@@ -46,7 +46,7 @@ Skill-hub 不是单一提示词合集，而是面向 Agent 使用的技能仓库
 ## <img src="assets/README/icons/directory.svg" width="20" alt=""> 目录结构
 
 ```text
-skills/                        # 52 个共享技能，分 7 个能力域
+skills/                        # 53 个共享技能，分 7 个能力域
 |-- 01-agent-engineering/      # Agent 构建、调试、自治循环、harness
 |-- 02-coding-languages/       # 编程语言
 |-- 03-frameworks/             # 框架与技术栈
@@ -143,7 +143,7 @@ Windows 上常用 Directory Junction 让多个 Agent 共享同一份技能目录
 4. 升级后运行 [`scripts/build-indexes.ps1`](./scripts/build-indexes.ps1)，让 `_meta/` 索引反映最新技能数量、路径和描述。
 5. 用 `git diff` 审查技能内容、索引变化和脱敏情况，再提交。
 
-仓库内的 [`skills/01-agent-engineering/skill-upgrade/`](./skills/01-agent-engineering/skill-upgrade/) 记录了面向 Agent 的升级流程，可用于维护 Skill-hub 来源索引，也可用于检查本地 skill 安装目录。
+仓库内的 [`skills/01-agent-engineering/skill-lifecycle-manager/`](./skills/01-agent-engineering/skill-lifecycle-manager/) 记录了面向 Agent 的 skill 搜索、安装、升级、同步、来源校验和质量审计流程，可用于维护 Skill-hub 来源索引，也可用于检查本地 skill 安装目录。
 
 ## <img src="assets/README/icons/maintenance.svg" width="20" alt=""> 维护约定
 

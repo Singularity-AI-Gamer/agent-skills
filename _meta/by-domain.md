@@ -1,10 +1,10 @@
 # 按能力域索引
 
-共 61 个技能，按 7 个能力域 + projects（项目私有）分组。
+共 62 个技能，按 7 个能力域 + projects（项目私有）分组。
 
 ## 目录
 
-- [01 Agent 工程](#01-agent-工程)（6）
+- [01 Agent 工程](#01-agent-工程)（7）
 - [02 编程语言](#02-编程语言)（1）
 - [03 框架与技术栈](#03-框架与技术栈)（1）
 - [06 数据与检索](#06-数据与检索)（15）
@@ -13,7 +13,7 @@
 - [10 行业与业务](#10-行业与业务)（17）
 - [Projects 项目私有](#projects-项目私有)（9）
 
-## 01 Agent 工程（6）
+## 01 Agent 工程（7）
 
 | 技能名 | 路径 | 中文简介 |
 |---|---|---|
@@ -22,6 +22,7 @@
 | **project-cleanup-audit** | [skills/01-agent-engineering/project-cleanup-audit/](../skills/01-agent-engineering/project-cleanup-audit/) | 证据优先清理本地项目仓库：审计体积、分类无用文件、备份并安全删除生成物。 |
 | **santa-method** | [skills/01-agent-engineering/santa-method/](../skills/01-agent-engineering/santa-method/) | 多 Agent 对抗验证收敛循环，两个独立审查都通过后才出交付。 |
 | **skill-creator** | [skills/01-agent-engineering/skill-creator/](../skills/01-agent-engineering/skill-creator/) | 创建、修改和优化 skill，并可跑 eval 衡量触发准确率与性能。 |
+| **skill-lifecycle-manager** | [skills/01-agent-engineering/skill-lifecycle-manager/](../skills/01-agent-engineering/skill-lifecycle-manager/) | 管理本地/全局/项目级 skill 与 Skill-hub 生命周期：搜索、推荐、安装、升级、同步、合并、清理、来源校验、质量审计和发布。 |
 | **skill-upgrade** | [skills/01-agent-engineering/skill-upgrade/](../skills/01-agent-engineering/skill-upgrade/) | 通用 skill 升级流程：按证据比对 Skill Hub 来源索引或本地 skill 根目录，安全升级可验证上游。 |
 
 ## 02 编程语言（1）
