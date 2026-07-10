@@ -1,6 +1,6 @@
 {
     "version":  "2.0",
-    "generated_at":  "2026-07-10T00:43:07+08:00",
+    "generated_at":  "2026-07-10T15:37:30+08:00",
     "note":  "Rebuilt indexes from repository SKILL.md files. Total: 53 shared + 9 projects = 62 total",
     "counts":  {
                    "shared":  53,
@@ -8,6 +8,12 @@
                    "total":  62
                },
     "shared":  [
+                   {
+                       "name":  "adaptive-quality-gate",
+                       "domain":  "01-agent-engineering",
+                       "path":  "skills/01-agent-engineering/adaptive-quality-gate/",
+                       "descriptionZh":  "为任意重要任务自动判断并设置风险自适应质量门：从目标反推阈值、验证方法、证据和失败动作，证据不足时阻止无依据交付。"
+                   },
                    {
                        "name":  "deep-research",
                        "domain":  "01-agent-engineering",
@@ -43,12 +49,6 @@
                        "domain":  "01-agent-engineering",
                        "path":  "skills/01-agent-engineering/skill-lifecycle-manager/",
                        "descriptionZh":  "管理本地/全局/项目级 skill 与 Skill-hub 生命周期：搜索、推荐、安装、升级、同步、合并、清理、来源校验、质量审计和发布。"
-                   },
-                   {
-                       "name":  "skill-upgrade",
-                       "domain":  "01-agent-engineering",
-                       "path":  "skills/01-agent-engineering/skill-upgrade/",
-                       "descriptionZh":  "通用 skill 升级流程：按证据比对 Skill Hub 来源索引或本地 skill 根目录，安全升级可验证上游。"
                    },
                    {
                        "name":  "liquid-glass-design",

@@ -1,18 +1,18 @@
 {
   "version": "1.1",
-  "updated_at": "2026-07-04",
+  "updated_at": "2026-07-10",
   "purpose": "Track verified original upstream repositories for Skill-hub skills so future upgrades can compare evidence-backed sources instead of guessing by skill name.",
   "scope": {
     "startsFrom": [
       "_meta/skill-upstreams.json",
       "_meta/skills-lock.json"
     ],
-    "localSkillCount": 61,
-    "sharedSkillCount": 52,
+    "localSkillCount": 62,
+    "sharedSkillCount": 53,
     "projectSkillCount": 9
   },
   "rules": [
-    "Only entries with classification=open-source and updatePolicy=mirror or mapped are eligible for automated upgrade.",
+    "Only entries with classification=open-source and updatePolicy=mirror are eligible for automated replacement; mapped entries require review and a declared merge mapping.",
     "Entries marked candidate or unknown require more evidence before overwrite.",
     "Self-made and project-private/local skills are manual unless the owner adds an explicit upstream.",
     "No upstream is considered verified without repository URL, upstream path, ref, commit, and evidence of directory comparison or an explicit source link."
@@ -27,14 +27,30 @@
   "verificationSummary": {
     "countsByClassification": {
       "open-source": 21,
-      "self": 6,
+      "self": 7,
       "local": 33,
       "candidate": 1
     },
     "githubCodeSearch": "Blocked by GitHub API rate limit during broad exact-name search; unresolved entries keep verificationPath commands for later retry.",
-    "readOnlyAuditCommand": ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1"
+    "readOnlyAuditCommand": ".\\skills\\01-agent-engineering\\skill-lifecycle-manager\\scripts\\check_upstreams.ps1"
   },
   "sources": [
+    {
+      "name": "adaptive-quality-gate",
+      "path": "skills/01-agent-engineering/adaptive-quality-gate/",
+      "classification": "self",
+      "updatePolicy": "none",
+      "status": "self-maintained-adaptive-quality-gate",
+      "evidence": [
+        "Skill was created and evaluated in this Skill-hub repository as a domain-independent, risk-adaptive quality gate.",
+        "No external upstream package was used as its source."
+      ],
+      "verificationPath": [
+        "Use this repository history as the canonical source until an explicit upstream is published.",
+        "Validate SKILL.md and evals/evals.json with the repository skill-creator tooling before release."
+      ],
+      "notes": "Self-maintained shared skill; external automatic updates disabled."
+    },
     {
       "name": "deep-research",
       "path": "skills/01-agent-engineering/deep-research/",
@@ -56,7 +72,7 @@
         "Read-only normalized hash audit verified the recorded upstream directory/status."
       ],
       "verificationPath": [
-        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        ".\\skills\\01-agent-engineering\\skill-lifecycle-manager\\scripts\\check_upstreams.ps1",
         "Compare normalized file hashes before any mirror or mapped update."
       ],
       "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit."
@@ -82,7 +98,7 @@
         "Read-only normalized hash audit verified the recorded upstream directory/status."
       ],
       "verificationPath": [
-        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        ".\\skills\\01-agent-engineering\\skill-lifecycle-manager\\scripts\\check_upstreams.ps1",
         "Compare normalized file hashes before any mirror or mapped update."
       ],
       "notes": "Upstream directory verified. Local SKILL.md intentionally changes trigger language and install scope, so automatic mirror is disabled."
@@ -125,7 +141,7 @@
         "Read-only normalized hash audit verified the recorded upstream directory/status."
       ],
       "verificationPath": [
-        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        ".\\skills\\01-agent-engineering\\skill-lifecycle-manager\\scripts\\check_upstreams.ps1",
         "Compare normalized file hashes before any mirror or mapped update."
       ],
       "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit."
@@ -151,26 +167,26 @@
         "Read-only normalized hash audit verified the recorded upstream directory/status."
       ],
       "verificationPath": [
-        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        ".\\skills\\01-agent-engineering\\skill-lifecycle-manager\\scripts\\check_upstreams.ps1",
         "Compare normalized file hashes before any mirror or mapped update."
       ],
       "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit."
     },
     {
-      "name": "skill-upgrade",
-      "path": "skills/01-agent-engineering/skill-upgrade/",
+      "name": "skill-lifecycle-manager",
+      "path": "skills/01-agent-engineering/skill-lifecycle-manager/",
       "classification": "self",
       "updatePolicy": "none",
-      "status": "self-maintained-generic-upgrade-skill",
+      "status": "self-maintained-lifecycle-orchestrator",
       "evidence": [
-        "Skill is maintained in this Skill-hub repository and is now designed as a generic local and repository skill upgrade workflow.",
-        "The bundled check_upstreams.ps1 helper supports Skill Hub repository source indexes and local skill root inventory/fast-forward checks."
+        "Skill was created in this repository by merging the local skill lifecycle workflow with the predecessor skill-upgrade behavior.",
+        "The manager is now the canonical owner of check_upstreams.ps1, including strict path containment, automatic mirror backups, and a self-test."
       ],
       "verificationPath": [
-        "Use this repository commit as the canonical source until a separate upstream package exists.",
-        "Run .\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1 -Mode Repo and -Mode Local to verify both supported modes."
+        "Use this repository history as the canonical source until an explicit upstream is published.",
+        "Run .\\skills\\01-agent-engineering\\skill-lifecycle-manager\\scripts\\check_upstreams.ps1 in read-only mode before applying upstream changes."
       ],
-      "notes": "Self-maintained generic upgrade skill; external automatic updates disabled."
+      "notes": "Self-maintained shared skill; external automatic updates disabled."
     },
     {
       "name": "liquid-glass-design",
@@ -193,7 +209,7 @@
         "Read-only normalized hash audit verified the recorded upstream directory/status."
       ],
       "verificationPath": [
-        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        ".\\skills\\01-agent-engineering\\skill-lifecycle-manager\\scripts\\check_upstreams.ps1",
         "Compare normalized file hashes before any mirror or mapped update."
       ],
       "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit."
@@ -296,7 +312,7 @@
         "Read-only normalized hash audit verified the recorded upstream directory/status."
       ],
       "verificationPath": [
-        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        ".\\skills\\01-agent-engineering\\skill-lifecycle-manager\\scripts\\check_upstreams.ps1",
         "Compare normalized file hashes before any mirror or mapped update."
       ],
       "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit."
@@ -412,7 +428,7 @@
         "Read-only normalized hash audit verified the recorded upstream directory/status."
       ],
       "verificationPath": [
-        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        ".\\skills\\01-agent-engineering\\skill-lifecycle-manager\\scripts\\check_upstreams.ps1",
         "Compare normalized file hashes before any mirror or mapped update."
       ],
       "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit."
@@ -474,7 +490,7 @@
         "Read-only normalized hash audit verified the recorded upstream directory/status."
       ],
       "verificationPath": [
-        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        ".\\skills\\01-agent-engineering\\skill-lifecycle-manager\\scripts\\check_upstreams.ps1",
         "Compare normalized file hashes before any mirror or mapped update."
       ],
       "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit."
@@ -536,7 +552,7 @@
         "Read-only normalized hash audit verified the recorded upstream directory/status."
       ],
       "verificationPath": [
-        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        ".\\skills\\01-agent-engineering\\skill-lifecycle-manager\\scripts\\check_upstreams.ps1",
         "Compare normalized file hashes before any mirror or mapped update."
       ],
       "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit.",
@@ -583,7 +599,7 @@
         "Read-only normalized hash audit verified the recorded upstream directory/status."
       ],
       "verificationPath": [
-        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        ".\\skills\\01-agent-engineering\\skill-lifecycle-manager\\scripts\\check_upstreams.ps1",
         "Compare normalized file hashes before any mirror or mapped update."
       ],
       "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit."
@@ -609,7 +625,7 @@
         "Read-only normalized hash audit verified the recorded upstream directory/status."
       ],
       "verificationPath": [
-        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        ".\\skills\\01-agent-engineering\\skill-lifecycle-manager\\scripts\\check_upstreams.ps1",
         "Compare normalized file hashes before any mirror or mapped update."
       ],
       "notes": "Explicit GitHub clone URL exists in local README; exact upstream directory verified by read-only normalized hash audit.",
@@ -638,7 +654,7 @@
         "Read-only normalized hash audit verified the recorded upstream directory/status."
       ],
       "verificationPath": [
-        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        ".\\skills\\01-agent-engineering\\skill-lifecycle-manager\\scripts\\check_upstreams.ps1",
         "Compare normalized file hashes before any mirror or mapped update."
       ],
       "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit."
@@ -681,7 +697,7 @@
         "Read-only normalized hash audit verified the recorded upstream directory/status."
       ],
       "verificationPath": [
-        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        ".\\skills\\01-agent-engineering\\skill-lifecycle-manager\\scripts\\check_upstreams.ps1",
         "Compare normalized file hashes before any mirror or mapped update."
       ],
       "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit.",
@@ -710,7 +726,7 @@
         "Read-only normalized hash audit verified the recorded upstream directory/status."
       ],
       "verificationPath": [
-        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        ".\\skills\\01-agent-engineering\\skill-lifecycle-manager\\scripts\\check_upstreams.ps1",
         "Compare normalized file hashes before any mirror or mapped update."
       ],
       "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit. Remotion official skill is tracked only as an alternative candidate."
@@ -752,7 +768,7 @@
         "Read-only normalized hash audit verified the recorded upstream directory/status."
       ],
       "verificationPath": [
-        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        ".\\skills\\01-agent-engineering\\skill-lifecycle-manager\\scripts\\check_upstreams.ps1",
         "Compare normalized file hashes before any mirror or mapped update."
       ],
       "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit.",
@@ -887,7 +903,7 @@
         "Read-only normalized hash audit verified the recorded upstream directory/status."
       ],
       "verificationPath": [
-        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        ".\\skills\\01-agent-engineering\\skill-lifecycle-manager\\scripts\\check_upstreams.ps1",
         "Compare normalized file hashes before any mirror or mapped update."
       ],
       "notes": "Upstream directory verified through LobeHub source link and clone. Local SKILL.md localizes the frontmatter description; other files matched in normalized comparison."
@@ -913,7 +929,7 @@
         "Read-only normalized hash audit verified the recorded upstream directory/status."
       ],
       "verificationPath": [
-        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        ".\\skills\\01-agent-engineering\\skill-lifecycle-manager\\scripts\\check_upstreams.ps1",
         "Compare normalized file hashes before any mirror or mapped update."
       ],
       "notes": "Upstream verified, but local repo keeps scripts under scripts/ and has Chinese trigger text. Audit found mapped drift; do not mirror without reviewing local adaptations."
@@ -1029,7 +1045,7 @@
         "Read-only normalized hash audit verified the recorded upstream directory/status."
       ],
       "verificationPath": [
-        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        ".\\skills\\01-agent-engineering\\skill-lifecycle-manager\\scripts\\check_upstreams.ps1",
         "Compare normalized file hashes before any mirror or mapped update."
       ],
       "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit."
@@ -1055,7 +1071,7 @@
         "Read-only normalized hash audit verified the recorded upstream directory/status."
       ],
       "verificationPath": [
-        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        ".\\skills\\01-agent-engineering\\skill-lifecycle-manager\\scripts\\check_upstreams.ps1",
         "Compare normalized file hashes before any mirror or mapped update."
       ],
       "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit."
@@ -1081,7 +1097,7 @@
         "Read-only normalized hash audit verified the recorded upstream directory/status."
       ],
       "verificationPath": [
-        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        ".\\skills\\01-agent-engineering\\skill-lifecycle-manager\\scripts\\check_upstreams.ps1",
         "Compare normalized file hashes before any mirror or mapped update."
       ],
       "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit."
@@ -1107,7 +1123,7 @@
         "Read-only normalized hash audit verified the recorded upstream directory/status."
       ],
       "verificationPath": [
-        ".\\skills\\01-agent-engineering\\skill-upgrade\\scripts\\check_upstreams.ps1",
+        ".\\skills\\01-agent-engineering\\skill-lifecycle-manager\\scripts\\check_upstreams.ps1",
         "Compare normalized file hashes before any mirror or mapped update."
       ],
       "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit."

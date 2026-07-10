@@ -27,6 +27,8 @@ desktop.ini
 .vscode/
 
 # Local-only state
+.backups/
+.codegraph/
 .skills-cache/
 *.log
 node_modules/

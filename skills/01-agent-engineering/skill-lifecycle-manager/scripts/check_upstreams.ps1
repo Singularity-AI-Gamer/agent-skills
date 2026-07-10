@@ -7,6 +7,8 @@ param(
     [string]$IndexPath,
     [string[]]$SkillRoots,
     [string]$WorkDir,
+    [string]$BackupRoot,
+    [switch]$SelfTest,
     [switch]$Apply
 )
 
@@ -15,11 +17,18 @@ $ErrorActionPreference = "Stop"
 if (-not $RepoRoot) {
     $RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..\..\..\..")).Path
 }
+if (-not (Test-Path -LiteralPath $RepoRoot)) {
+    throw "Repository root does not exist: $RepoRoot"
+}
+$RepoRoot = (Resolve-Path -LiteralPath $RepoRoot).Path
 if (-not $IndexPath) {
     $IndexPath = Join-Path $RepoRoot "_meta\skill-upstreams.json"
 }
 if (-not $WorkDir) {
     $WorkDir = Join-Path $env:TEMP "skill-upstream-audit"
+}
+if (-not $BackupRoot) {
+    $BackupRoot = Join-Path $RepoRoot ".backups\skill-upstream-audit"
 }
 if ($Mode -eq "Auto") {
     if (Test-Path $IndexPath) { $Mode = "Repo" } else { $Mode = "Local" }
@@ -110,18 +119,65 @@ function Get-NormalizedHashes([string]$Dir, [bool]$TrimTrailingWhitespace = $fal
     return $map
 }
 
+function Get-CanonicalPath([string]$Path) {
+    return [IO.Path]::GetFullPath((Resolve-Path -LiteralPath $Path).Path).TrimEnd("\", "/")
+}
+
+function Test-PathStrictlyUnderRoot([string]$Path, [string]$Root) {
+    $resolvedPath = Get-CanonicalPath $Path
+    $resolvedRoot = Get-CanonicalPath $Root
+    $rootPrefix = $resolvedRoot + [IO.Path]::DirectorySeparatorChar
+    return ($resolvedPath -ne $resolvedRoot -and
+        $resolvedPath.StartsWith($rootPrefix, [StringComparison]::OrdinalIgnoreCase))
+}
+
 function Assert-PathUnderRoot([string]$Path, [string]$Root) {
-    $resolvedPath = (Resolve-Path -LiteralPath $Path).Path.TrimEnd("\", "/")
-    $resolvedRoot = (Resolve-Path -LiteralPath $Root).Path.TrimEnd("\", "/")
-    if (-not $resolvedPath.StartsWith($resolvedRoot, [StringComparison]::OrdinalIgnoreCase)) {
+    $resolvedPath = Get-CanonicalPath $Path
+    $resolvedRoot = Get-CanonicalPath $Root
+    if (-not (Test-PathStrictlyUnderRoot -Path $resolvedPath -Root $resolvedRoot)) {
         throw "Refusing to modify path outside allowed root. Path=$resolvedPath Root=$resolvedRoot"
     }
 }
 
-function Sync-DirectoryMirror([string]$SourceDir, [string]$TargetDir, [string]$AllowedRoot) {
+function New-DirectoryBackup([string]$SourceDir, [string]$DestinationRoot, [string]$Label) {
+    $resolvedSource = Get-CanonicalPath $SourceDir
+    if (-not (Test-Path -LiteralPath $DestinationRoot)) {
+        New-Item -ItemType Directory -Force -Path $DestinationRoot | Out-Null
+    }
+    $resolvedBackupRoot = Get-CanonicalPath $DestinationRoot
+    $sourcePrefix = $resolvedSource + [IO.Path]::DirectorySeparatorChar
+    if ($resolvedBackupRoot -eq $resolvedSource -or
+        $resolvedBackupRoot.StartsWith($sourcePrefix, [StringComparison]::OrdinalIgnoreCase)) {
+        throw "Backup root must not be inside the source directory. Source=$resolvedSource BackupRoot=$resolvedBackupRoot"
+    }
+
+    $safeLabel = ($Label -replace "[^A-Za-z0-9_.-]+", "-").Trim("-")
+    if (-not $safeLabel) { $safeLabel = "skill" }
+    $timestamp = Get-Date -Format "yyyyMMdd-HHmmss-fff"
+    $backupPath = Join-Path $resolvedBackupRoot "$safeLabel-before-mirror-$timestamp"
+    if (Test-Path -LiteralPath $backupPath) {
+        throw "Backup path already exists: $backupPath"
+    }
+
+    New-Item -ItemType Directory -Path $backupPath | Out-Null
+    Get-ChildItem -LiteralPath $resolvedSource -Force | ForEach-Object {
+        Copy-Item -LiteralPath $_.FullName -Destination $backupPath -Recurse -Force
+    }
+    return $backupPath
+}
+
+function Sync-DirectoryMirror(
+    [string]$SourceDir,
+    [string]$TargetDir,
+    [string]$AllowedRoot,
+    [string]$BackupRoot,
+    [string]$Label
+) {
     Assert-PathUnderRoot -Path $TargetDir -Root $AllowedRoot
     if (-not (Test-Path $SourceDir)) { throw "Missing source directory: $SourceDir" }
     if (-not (Test-Path $TargetDir)) { New-Item -ItemType Directory -Force -Path $TargetDir | Out-Null }
+
+    $backupPath = New-DirectoryBackup -SourceDir $TargetDir -DestinationRoot $BackupRoot -Label $Label
 
     Get-ChildItem -LiteralPath $TargetDir -Force | ForEach-Object {
         Remove-Item -LiteralPath $_.FullName -Recurse -Force
@@ -129,6 +185,7 @@ function Sync-DirectoryMirror([string]$SourceDir, [string]$TargetDir, [string]$A
     Get-ChildItem -LiteralPath $SourceDir -Force | Where-Object { $_.Name -ne ".git" } | ForEach-Object {
         Copy-Item -LiteralPath $_.FullName -Destination $TargetDir -Recurse -Force
     }
+    return $backupPath
 }
 
 function Invoke-RepoMode {
@@ -157,10 +214,19 @@ function Invoke-RepoMode {
             extraLocalFiles = 0
             changedFiles = 0
             applied = $false
+            backupPath = $null
         }
 
         if (-not (Test-Path $localPath)) {
             $result.status = "missing-local-path"
+            $results += [pscustomobject]$result
+            continue
+        }
+
+        try {
+            Assert-PathUnderRoot -Path $localPath -Root $RepoRoot
+        } catch {
+            $result.status = "unsafe-local-path: $($_.Exception.Message)"
             $results += [pscustomobject]$result
             continue
         }
@@ -214,7 +280,12 @@ function Invoke-RepoMode {
             }
 
             if ($Apply -and $result.status -eq "drift" -and $entry.updatePolicy -eq "mirror") {
-                Sync-DirectoryMirror -SourceDir $upPath -TargetDir $localPath -AllowedRoot $RepoRoot
+                $result.backupPath = Sync-DirectoryMirror `
+                    -SourceDir $upPath `
+                    -TargetDir $localPath `
+                    -AllowedRoot $RepoRoot `
+                    -BackupRoot $BackupRoot `
+                    -Label $entry.name
                 $result.status = "updated"
                 $result.applied = $true
             }
@@ -244,7 +315,52 @@ function Invoke-RepoMode {
         mode = "repo"
         apply = [bool]$Apply
         indexPath = $IndexPath
+        backupRoot = if ($Apply) { $BackupRoot } else { $null }
         results = $results
+    }
+}
+
+function Invoke-SelfTest {
+    $tempRoot = [IO.Path]::GetFullPath([IO.Path]::GetTempPath()).TrimEnd("\", "/")
+    $testBase = Join-Path $tempRoot ("skill-upstream-selftest-" + [guid]::NewGuid().ToString("N"))
+    $allowedRoot = Join-Path $testBase "root"
+    $child = Join-Path $allowedRoot "child"
+    $sibling = Join-Path $testBase "root-escape"
+    $backup = Join-Path $testBase "backups"
+
+    try {
+        New-Item -ItemType Directory -Path $child -Force | Out-Null
+        New-Item -ItemType Directory -Path $sibling -Force | Out-Null
+        Set-Content -LiteralPath (Join-Path $child "sentinel.txt") -Value "backup-test" -Encoding UTF8
+
+        Assert-PathUnderRoot -Path $child -Root $allowedRoot
+
+        $rootRejected = $false
+        try { Assert-PathUnderRoot -Path $allowedRoot -Root $allowedRoot } catch { $rootRejected = $true }
+        if (-not $rootRejected) { throw "Root path was not rejected." }
+
+        $siblingRejected = $false
+        try { Assert-PathUnderRoot -Path $sibling -Root $allowedRoot } catch { $siblingRejected = $true }
+        if (-not $siblingRejected) { throw "Sibling-prefix path was not rejected." }
+
+        $backupPath = New-DirectoryBackup -SourceDir $child -DestinationRoot $backup -Label "selftest"
+        if (-not (Test-Path -LiteralPath (Join-Path $backupPath "sentinel.txt"))) {
+            throw "Backup did not preserve the sentinel file."
+        }
+
+        return [pscustomobject]@{
+            passed = $true
+            childAccepted = $true
+            rootRejected = $rootRejected
+            siblingPrefixRejected = $siblingRejected
+            backupCreated = $true
+        }
+    } finally {
+        $resolvedBase = if (Test-Path -LiteralPath $testBase) { Get-CanonicalPath $testBase } else { $null }
+        $tempPrefix = $tempRoot + [IO.Path]::DirectorySeparatorChar
+        if ($resolvedBase -and $resolvedBase.StartsWith($tempPrefix, [StringComparison]::OrdinalIgnoreCase)) {
+            Remove-Item -LiteralPath $resolvedBase -Recurse -Force
+        }
     }
 }
 
@@ -392,7 +508,9 @@ function Invoke-LocalMode {
     }
 }
 
-if ($Mode -eq "Repo") {
+if ($SelfTest) {
+    Invoke-SelfTest | ConvertTo-Json -Depth 10
+} elseif ($Mode -eq "Repo") {
     Invoke-RepoMode | ConvertTo-Json -Depth 10
 } else {
     Invoke-LocalMode | ConvertTo-Json -Depth 10

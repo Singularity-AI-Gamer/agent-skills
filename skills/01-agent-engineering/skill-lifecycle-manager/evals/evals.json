@@ -4,50 +4,122 @@
     {
       "id": 1,
       "prompt": "帮我找一个可以做 PDF 转 Markdown 的高质量 Skill，全局安装。先检查本地有没有已经安装的同类 skill，优先高安装量或高星来源，不要装错同名项目。",
-      "expected_output": "The agent classifies the request as discovery plus install, checks existing skill roots, uses find-skills or skills.sh and GitHub evidence, verifies the candidate SKILL.md/source before install, chooses global scope because the user requested it, avoids duplicates, and reports source, install path, validation, and restart requirement.",
-      "files": []
+      "expected_output": "The agent treats this as discovery plus install, verifies existing roots and exact source before choosing a global install.",
+      "files": [],
+      "expectations": [
+        "The response checks active skill roots before recommending a new install.",
+        "The candidate source, exact skill path, and SKILL.md are verified rather than inferred by name.",
+        "Observed installs, stars, license, and source reputation are separated from unavailable evidence.",
+        "The final report states global scope, install path, validation, and restart requirement."
+      ]
     },
     {
       "id": 2,
       "prompt": "检查我本地近 30 天没有用过的 skill，把没用的 baoyu 相关 skill 清理掉。",
-      "expected_output": "The agent treats this as a usage audit plus cleanup, does not rely on LastAccessTime, searches explicit usage evidence in available logs or session records, labels uncertain skills as no observed usage rather than definitely unused, resolves paths under intended roots, backs up or quarantines before removal, and skips managed/plugin paths.",
-      "files": []
+      "expected_output": "The agent performs an evidence-based usage audit and quarantines uncertain cleanup candidates.",
+      "files": [],
+      "expectations": [
+        "The response does not use LastAccessTime as proof of usage or non-usage.",
+        "Skills are labeled by explicit usage evidence, likely usage, no observed usage, duplicate, or managed ownership.",
+        "Managed and plugin-owned paths are excluded from normal cleanup.",
+        "Removal targets are contained below intended roots and uncertain candidates are backed up or quarantined."
+      ]
     },
     {
       "id": 3,
       "prompt": "把我本地的 skill-creator 更新到上游最新版，但不要动 Codex 系统版，也不要改 Skill Hub repo 里的副本。",
-      "expected_output": "The agent separates source, installed copy, and managed copy; verifies upstream source; backs up the user-maintained installed skill; compares diffs; updates only the requested local copy; leaves system and Skill Hub copies unchanged; validates the result and reports changed files.",
-      "files": []
+      "expected_output": "The agent updates only the requested user-maintained install after source verification and backup.",
+      "files": [],
+      "expectations": [
+        "The response distinguishes upstream source, user install, system copy, and Skill Hub copy.",
+        "The upstream source and comparison ref are verified before any overwrite.",
+        "Only the user-maintained installed copy is backed up and updated.",
+        "System and Skill Hub copies are explicitly left unchanged and the final copy is validated."
+      ]
     },
     {
       "id": 4,
       "prompt": "Skill Hub 里的 SEO skill 和我全局 installed skill 都改过了，帮我合并，要求保留本地触发规则，但同步 GitHub 上新增的质量审计部分。",
-      "expected_output": "The agent treats this as a merge, distinguishes source repository from active installed skill, compares behavior-level diffs, preserves local trigger/description behavior, merges the upstream quality audit section if compatible, backs up before writing, validates frontmatter and references, and lists any unverified conflicts.",
-      "files": []
+      "expected_output": "The agent performs a behavior-level merge that preserves local trigger intent and adds compatible upstream audit behavior.",
+      "files": [],
+      "expectations": [
+        "The response compares trigger, tools, safety, output, and bundled-resource changes before merging.",
+        "The installed copy is backed up before edits.",
+        "Local trigger behavior is preserved while compatible quality-audit behavior is merged.",
+        "Material unresolved conflicts are reported for a user decision rather than guessed."
+      ]
     },
     {
       "id": 5,
       "prompt": "把 Skill-hub repo 里的共享 skills 同步到 C:\\Users\\EthanQ\\.agents\\skills。先 dry-run，确认不会把 projects/ 里的项目私有 skill 扁平化，也不要覆盖我本地改过的 skill。",
-      "expected_output": "The agent classifies this as repo-to-local sync, locates the Skill Hub repo, uses sync-pull.ps1 with -DryRun, states that the script scans only skills/ and not projects/, reviews conflicts and overwrite candidates, backs up or asks before overwriting locally edited skills, and only runs live mode after dry-run evidence supports it.",
-      "files": []
+      "expected_output": "The agent uses repository-to-local dry run, protects local edits, and excludes project-private skills.",
+      "files": [],
+      "expectations": [
+        "The response reads the Skill Hub operations reference and classifies repo-to-local mode.",
+        "sync-pull.ps1 is run with DryRun before any live action.",
+        "The response confirms the script scans skills/ and excludes projects/.",
+        "Locally edited overwrite candidates are compared and backed up instead of silently replaced."
+      ]
     },
     {
       "id": 6,
       "prompt": "我本地新建了 skill-lifecycle-manager，帮我同步进 Skill-hub，归到 agent-engineering，并更新索引。",
-      "expected_output": "The agent classifies this as local-to-repo sync for a new shared skill, checks _meta/skills-lock.json first, does not rely on sync-push while the skill is unmapped, adds or proposes a shared mapping under skills/01-agent-engineering/skill-lifecycle-manager/, copies only the intended skill, rebuilds indexes with the repo script when available, validates both copies, and reports unverified assumptions.",
-      "files": []
+      "expected_output": "The agent classifies a reusable skill under shared agent engineering, establishes or verifies source and lock metadata, rebuilds indexes only when needed, and validates or safely reports divergence between the copies.",
+      "files": [],
+      "expectations": [
+        "The response distinguishes the local installed copy from the Skill Hub source path.",
+        "The final shared mapping is established before any sync-push or equivalent copy; an already-correct mapping is treated as an idempotent no-op.",
+        "skills-lock and skill-upstreams metadata are both verified and changed only when their desired final state differs.",
+        "Index dry run, source validation, installed validation, and hash comparison are reported; a live rebuild is required only after source or metadata changes, and unsafe divergent copies are reported instead of overwritten."
+      ]
     },
     {
       "id": 7,
       "prompt": "我想让 .agents\\skills 和 .codex\\skills 共用同一个 Skill Hub 本地源，帮我设置 junction。",
-      "expected_output": "The agent classifies this as junction single-source setup, explains the ownership/blast-radius change, uses setup-junctions.ps1 with -DryRun first, includes .agents/skills explicitly because the local script defaults may not cover it, backs up existing real directories before live mode, verifies SKILL.md counts, and reports rollback paths.",
-      "files": []
+      "expected_output": "The agent treats junction setup as an ownership change, dry-runs, backs up real directories, and verifies targets.",
+      "files": [],
+      "expectations": [
+        "The response explains the ownership and blast-radius change.",
+        "setup-junctions.ps1 is run with DryRun before live mode.",
+        "Every intended runtime root is listed explicitly and existing directories are backed up.",
+        "The final verification checks junction targets and SKILL.md counts and reports rollback paths."
+      ]
     },
     {
       "id": 8,
       "prompt": "用 skill-upgrade 的方式检查 Skill-hub 和我本地全局 skills 是否有可升级项。能自动安全升级的升级，没证据的不要覆盖。",
-      "expected_output": "The agent recognizes skill-upgrade as the predecessor workflow, looks for _meta/skill-upstreams.json and check_upstreams.ps1, runs read-only Repo and Local audits first, applies only mirror/mapped repository updates or clean git fast-forwards allowed by evidence and updatePolicy, does not overwrite self/local/candidate/unknown standalone skills, updates lastChecked/source-index only when evidence supports it, validates the result, and reports upgraded, current, dirty/blocked, and unverified candidates separately.",
-      "files": []
+      "expected_output": "The manager handles the legacy skill-upgrade request through its canonical upstream audit helper and applies only evidence-backed operations.",
+      "files": [],
+      "expectations": [
+        "The response routes the legacy skill-upgrade request to skill-lifecycle-manager upstream auditing.",
+        "check_upstreams.ps1 SelfTest and read-only Repo and Local audits run before Apply; if temporary WorkDir effects are prohibited, the response reports the blocked prerequisite and does not Apply.",
+        "Repository mirrors require verified mirror policy and strict path containment; every applied mirror reports a non-empty backup path, while a no-op audit reports that no backup was created.",
+        "Mapped, manual, self, local, candidate, unknown, dirty, or standalone skills are not automatically overwritten without supporting policy."
+      ]
+    },
+    {
+      "id": 9,
+      "prompt": "把这个刚做完的合同审查 skill 整理成可以公开发布的包，放进 Skill-hub 并准备 GitHub 提交，但先不要 push。",
+      "expected_output": "The agent audits and packages the skill, updates repository metadata, prepares but does not push the Git change.",
+      "files": [],
+      "expectations": [
+        "The response runs a quality and secret/privacy audit before packaging.",
+        "Generated outputs, caches, credentials, and personal paths are excluded from the package.",
+        "Lock, source, name, domain, platform, and README metadata are updated as applicable.",
+        "The final report distinguishes prepared local Git changes from an unperformed push."
+      ]
+    },
+    {
+      "id": 10,
+      "prompt": "把这个 Node 项目的 npm 依赖全部升级到最新版，再清理 node_modules 和构建缓存。",
+      "expected_output": "The agent recognizes this as ordinary software dependency and project-file maintenance, not an agent-skill lifecycle task.",
+      "files": [],
+      "expectations": [
+        "The response states that skill-lifecycle-manager is not the governing workflow for npm dependency upgrades.",
+        "The response does not inspect Skill Hub, skills-lock.json, skill-upstreams.json, or agent skill roots.",
+        "Any proposed cleanup is scoped to the Node project and does not use skill usage evidence labels.",
+        "The task is routed to the repository's normal dependency and cleanup workflow."
+      ]
     }
   ]
 }

@@ -50,6 +50,7 @@ if (-not (Test-Path $RepoRoot)) {
     Say "ERROR: 仓库根目录不存在：$RepoRoot" "Red"
     exit 1
 }
+$RepoRoot = (Resolve-Path -LiteralPath $RepoRoot).Path
 
 $MetaDir    = Join-Path $RepoRoot "_meta"
 $LockPath   = Join-Path $MetaDir  "skills-lock.json"
@@ -464,13 +465,27 @@ function Build-ByDomain {
 
 # --- by-platform.md：保留手工内容，仅追加"新增待分类"小节 ----------------
 
+function Remove-ByPlatformAutoBlock {
+    param([string]$Content)
+
+    $beginTag = "<!-- AUTO-GENERATED: BEGIN by-platform.md 新增待分类 -->"
+    $endTag   = "<!-- AUTO-GENERATED: END by-platform.md 新增待分类 -->"
+    $startIdx = $Content.IndexOf($beginTag)
+    $endIdx   = $Content.IndexOf($endTag)
+    if ($startIdx -ge 0 -and $endIdx -gt $startIdx) {
+        $endIdxFull = $endIdx + $endTag.Length
+        return ($Content.Substring(0, $startIdx).TrimEnd() + "`r`n" + $Content.Substring($endIdxFull).TrimStart()).TrimEnd()
+    }
+    return $Content.TrimEnd()
+}
+
 function Build-ByPlatform-Addendum {
     param($Shared, $Projects, $ExistingPath)
 
     # 既有平台索引内容中能被识别的 skill 名集合（通过 `**name**` 出现）
     $knownNames = [System.Collections.Generic.HashSet[string]]::new()
     if (Test-Path $ExistingPath) {
-        $existing = Get-Content $ExistingPath -Raw -Encoding UTF8
+        $existing = Remove-ByPlatformAutoBlock (Get-Content $ExistingPath -Raw -Encoding UTF8)
         $regex = [regex]'\*\*([A-Za-z0-9_\-]+)\*\*'
         foreach ($m in $regex.Matches($existing)) {
             [void]$knownNames.Add($m.Groups[1].Value)
@@ -531,7 +546,8 @@ $ByPlatAddendum  = Build-ByPlatform-Addendum -Shared $Shared -Projects $Projects
 function Write-FileUtf8NoBom {
     param([string]$Path, [string]$Content)
     $enc = New-Object System.Text.UTF8Encoding($false)
-    [System.IO.File]::WriteAllText($Path, $Content, $enc)
+    $normalized = $Content.TrimEnd([char[]]"`r`n") + [Environment]::NewLine
+    [System.IO.File]::WriteAllText($Path, $normalized, $enc)
 }
 
 function Report-Write {
@@ -556,36 +572,26 @@ Report-Write -Path $ByNamePath -Content $ByNameContent -DryRun:$DryRun -Label "b
 # 3. by-domain.md
 Report-Write -Path $ByDomPath -Content $ByDomainContent -DryRun:$DryRun -Label "by-domain.md"
 
-# 4. by-platform.md：保留现有，仅在末尾处理 addendum
-if ($null -eq $ByPlatAddendum) {
-    Say "  [=]  by-platform.md 无新增待分类（跳过追加）" "DarkGray"
+# 4. by-platform.md：先移除旧 auto 区块，再按当前缺失项重新生成
+$existingPlatform = ""
+if (Test-Path $ByPlatPath) {
+    $existingPlatform = Get-Content $ByPlatPath -Raw -Encoding UTF8
+}
+$platformBase = Remove-ByPlatformAutoBlock $existingPlatform
+$combined = if ($null -eq $ByPlatAddendum) {
+    $platformBase
 } else {
-    # 先去掉旧的 AUTO-GENERATED 区块再追加，避免重复堆叠
-    $beginTag = "<!-- AUTO-GENERATED: BEGIN by-platform.md 新增待分类 -->"
-    $endTag   = "<!-- AUTO-GENERATED: END by-platform.md 新增待分类 -->"
+    $platformBase.TrimEnd() + "`r`n" + $ByPlatAddendum.TrimEnd()
+}
 
-    $existing = ""
-    if (Test-Path $ByPlatPath) {
-        $existing = Get-Content $ByPlatPath -Raw -Encoding UTF8
-    }
-
-    # 移除旧的 auto 区块
-    $startIdx = $existing.IndexOf($beginTag)
-    $endIdx   = $existing.IndexOf($endTag)
-    if ($startIdx -ge 0 -and $endIdx -gt $startIdx) {
-        $endIdxFull = $endIdx + $endTag.Length
-        $existing = $existing.Substring(0, $startIdx).TrimEnd() + "`r`n" + $existing.Substring($endIdxFull).TrimStart()
-    }
-
-    $combined = $existing.TrimEnd() + "`r`n" + $ByPlatAddendum.TrimEnd() + "`r`n"
-
-    if ($DryRun) {
-        $lines = ($combined -split "`n").Count
-        Say "  [DRY] 将追加/更新 by-platform.md 的 AUTO-GENERATED 区块（合计 $lines 行）" "Gray"
-    } else {
-        Write-FileUtf8NoBom -Path $ByPlatPath -Content $combined
-        Say "  [OK] 已更新 by-platform.md（保留手工内容，附加待分类区块）" "Green"
-    }
+if ($combined.TrimEnd() -eq $existingPlatform.TrimEnd()) {
+    Say "  [=]  by-platform.md 无新增待分类（跳过写入）" "DarkGray"
+} elseif ($DryRun) {
+    $lines = ($combined -split "`n").Count
+    Say "  [DRY] 将重建 by-platform.md 的 AUTO-GENERATED 区块（合计 $lines 行）" "Gray"
+} else {
+    Write-FileUtf8NoBom -Path $ByPlatPath -Content $combined
+    Say "  [OK] 已更新 by-platform.md（保留手工内容，重建待分类区块）" "Green"
 }
 
 Say ""

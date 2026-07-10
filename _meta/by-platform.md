@@ -141,15 +141,17 @@ LLM 文档、端侧模型与相关开发参考。
 
 ## Agent 工程与自治编排
 
-Agent 构建、调试、深度研究、技能创建与对抗验证编排。
+Agent 构建、调试、深度研究、技能创建、自适应质量门、对抗验证与 skill 生命周期编排。
 
 | 技能名 | 路径 | 中文简介 |
 |---|---|---|
+| **adaptive-quality-gate** | [skills/01-agent-engineering/adaptive-quality-gate/](../skills/01-agent-engineering/adaptive-quality-gate/) | 为任意重要任务自动判断并设置风险自适应质量门：从目标反推阈值、验证方法、证据和失败动作，证据不足时阻止无依据交付。 |
 | **deep-research** | [skills/01-agent-engineering/deep-research/](../skills/01-agent-engineering/deep-research/) | 多源深度研究，使用 firecrawl/exa 搜索并综合发现。 |
 | **find-skills** | [skills/01-agent-engineering/find-skills/](../skills/01-agent-engineering/find-skills/) | 自动发现与推荐可用 Agent 技能，回答"有没有能做 X 的技能"。 |
 | **project-cleanup-audit** | [skills/01-agent-engineering/project-cleanup-audit/](../skills/01-agent-engineering/project-cleanup-audit/) | 证据优先清理本地项目仓库：审计体积、分类无用文件、备份并安全删除生成物。 |
 | **santa-method** | [skills/01-agent-engineering/santa-method/](../skills/01-agent-engineering/santa-method/) | 多 Agent 对抗验证收敛循环，两个独立审查都通过后才出交付。 |
 | **skill-creator** | [skills/01-agent-engineering/skill-creator/](../skills/01-agent-engineering/skill-creator/) | 创建、修改和优化 skill，并可跑 eval 衡量触发准确率与性能。 |
+| **skill-lifecycle-manager** | [skills/01-agent-engineering/skill-lifecycle-manager/](../skills/01-agent-engineering/skill-lifecycle-manager/) | 管理本地/全局/项目级 skill 与 Skill-hub 生命周期：搜索、推荐、安装、升级、同步、合并、清理、来源校验、质量审计和发布。 |
 
 
 ## 行业与业务
@@ -219,16 +221,3 @@ Agent 构建、调试、深度研究、技能创建与对抗验证编排。
 | **controlled-lockcheck-autofix** | [projects/codex-invoice/controlled-lockcheck-autofix/](../projects/codex-invoice/controlled-lockcheck-autofix/) | QQ 受控前端 lockcheck 自动化：失败分类、受限自动修复、打包门的证据留存。 |
 | **email-batch-test** | [projects/codex-invoice/email-batch-test/](../projects/codex-invoice/email-batch-test/) | 跑批测试标准与双邮箱回归门禁：P0/P1/P2 标准与保护区改动的双邮箱验证。 |
 | **qq-email-ground-truth** | [projects/codex-invoice/qq-email-ground-truth/](../projects/codex-invoice/qq-email-ground-truth/) | 构建/重建/审计/比对 QQ 邮箱发票真值集，验证跑批输出。 |
-
-<!-- AUTO-GENERATED: BEGIN by-platform.md 新增待分类 -->
-## 新增待分类（TODO：由 build-indexes.ps1 自动追加，请手工并入上方对应章节）
-
-下列 skill 在现有 by-platform.md 中未被提及。build-indexes 不做自动归类，请手工合并。
-
-### 共享技能
-
-| 技能名 | 路径 | 中文简介 |
-|---|---|---|
-| **skill-upgrade** | [skills/01-agent-engineering/skill-upgrade/](../skills/01-agent-engineering/skill-upgrade/) | 通用 skill 升级流程：按证据比对 Skill Hub 来源索引或本地 skill 根目录，安全升级可验证上游。 |
-
-<!-- AUTO-GENERATED: END by-platform.md 新增待分类 -->
