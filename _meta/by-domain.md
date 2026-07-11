@@ -1,6 +1,6 @@
 # 按能力域索引
 
-共 62 个技能，按 7 个能力域 + projects（项目私有）分组。
+共 63 个技能，按 7 个能力域 + projects（项目私有）分组。
 
 ## 目录
 
@@ -8,7 +8,7 @@
 - [02 编程语言](#02-编程语言)（1）
 - [03 框架与技术栈](#03-框架与技术栈)（1）
 - [06 数据与检索](#06-数据与检索)（15）
-- [07 媒体与内容制作](#07-媒体与内容制作)（10）
+- [07 媒体与内容制作](#07-媒体与内容制作)（11）
 - [08 写作与营销](#08-写作与营销)（2）
 - [10 行业与业务](#10-行业与业务)（17）
 - [Projects 项目私有](#projects-项目私有)（9）
@@ -57,12 +57,13 @@
 | **pubtator-entity-search** | [skills/06-data-search/pubtator-entity-search/](../skills/06-data-search/pubtator-entity-search/) | NLM PubTator3 实体级关系挖掘：疾病-药物-基因-化学品关联。 |
 | **report-bundle-builder** | [skills/06-data-search/report-bundle-builder/](../skills/06-data-search/report-bundle-builder/) | 将多页 HTML 报告合并为单一独立 HTML/PDF/XLSX 交付物。 |
 
-## 07 媒体与内容制作（10）
+## 07 媒体与内容制作（11）
 
 | 技能名 | 路径 | 中文简介 |
 |---|---|---|
 | **docx** | [skills/07-media-content/docx/](../skills/07-media-content/docx/) | 全面处理 .docx：创建、编辑、修订跟踪、评论、格式保留与文本提取。 |
 | **editorial-presentation-html** | [skills/07-media-content/editorial-presentation-html/](../skills/07-media-content/editorial-presentation-html/) | Anthropic 暖色编辑设计语言，用于演示/case sharing/战略汇报。 |
+| **github-readme-visuals** | [skills/07-media-content/github-readme-visuals/](../skills/07-media-content/github-readme-visuals/) | 为 GitHub 仓库创建或更新产品主视觉、完整软件界面截图及中英文 README 图片区，并支持按参考图进行可验证的几何复刻。 |
 | **imagegen** | [skills/07-media-content/imagegen/](../skills/07-media-content/imagegen/) | 生成或编辑光栅图像（照片、插画、纹理、UI 模型等）。 |
 | **jianying-editor** | [skills/07-media-content/jianying-editor/](../skills/07-media-content/jianying-editor/) | 剪映 AI 自动剪辑高级封装 API（JyWrapper）：录屏、素材、字幕、Web 动效。 |
 | **pdf** | [skills/07-media-content/pdf/](../skills/07-media-content/pdf/) | "Use when tasks involve reading, creating, or reviewing PDF files where rendering and layout matter; prefer visual checks by rendering pages (Poppler) and use Python tools such as `reportlab`, `pdfplumber`, and `pypdf` for generation and extraction." |

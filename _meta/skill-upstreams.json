@@ -7,8 +7,8 @@
       "_meta/skill-upstreams.json",
       "_meta/skills-lock.json"
     ],
-    "localSkillCount": 62,
-    "sharedSkillCount": 53,
+    "localSkillCount": 63,
+    "sharedSkillCount": 54,
     "projectSkillCount": 9
   },
   "rules": [
@@ -27,7 +27,7 @@
   "verificationSummary": {
     "countsByClassification": {
       "open-source": 21,
-      "self": 7,
+      "self": 8,
       "local": 33,
       "candidate": 1
     },
@@ -1298,6 +1298,22 @@
         "If this project skill is later published, add its repository URL and compare the exact project subdirectory before changing classification."
       ],
       "notes": "Project-private or project-derived skill; do not auto-upgrade from external sources."
+    },
+    {
+      "name": "github-readme-visuals",
+      "path": "skills/07-media-content/github-readme-visuals/",
+      "classification": "self",
+      "updatePolicy": "none",
+      "status": "self-maintained-readme-visual-workflow",
+      "evidence": [
+        "Skill was created and iterated locally from an owner-directed GitHub README visual production workflow.",
+        "No external skill package was used as its source; reference repositories are visual inputs, not upstream skill code."
+      ],
+      "verificationPath": [
+        "Use this repository history as the canonical source until an explicit upstream is published.",
+        "Validate SKILL.md and references/visual-checklist.md with skill-creator before release."
+      ],
+      "notes": "Self-maintained shared skill; external automatic updates disabled."
     }
   ],
   "alternateCandidates": [

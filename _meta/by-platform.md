@@ -55,6 +55,7 @@ Swift 语言与 Apple 平台。
 | 技能名 | 路径 | 中文简介 |
 |---|---|---|
 | **frontend-design** | [skills/03-frameworks/frontend-design/](../skills/03-frameworks/frontend-design/) | 创建具有高设计质量的生产级前端界面。 |
+| **github-readme-visuals** | [skills/07-media-content/github-readme-visuals/](../skills/07-media-content/github-readme-visuals/) | 为 GitHub 仓库创建或更新产品主视觉、完整软件界面截图及中英文 README 图片区，并支持按参考图进行可验证的几何复刻。 |
 | **editorial-presentation-html** | [skills/07-media-content/editorial-presentation-html/](../skills/07-media-content/editorial-presentation-html/) | Anthropic 暖色编辑设计语言，用于演示/case sharing/战略汇报。 |
 | **disease-market-sizing-html-template** | [skills/10-business-industry/disease-market-sizing-html-template/](../skills/10-business-industry/disease-market-sizing-html-template/) | 多页 HTML 市场研究报告模板，含主页和 N 个子页。 |
 | **design-system-injector** | [skills/10-business-industry/design-system-injector/](../skills/10-business-industry/design-system-injector/) | 向报告 HTML 注入咨询公司配色（navy/gold/blue）+ 基础 CSS。 |
@@ -69,6 +70,7 @@ Swift 语言与 Apple 平台。
 | **jianying-editor** | [skills/07-media-content/jianying-editor/](../skills/07-media-content/jianying-editor/) | 剪映 AI 自动剪辑高级封装 API（JyWrapper）：录屏、素材、字幕、Web 动效。 |
 | **remotion-video-creation** | [skills/07-media-content/remotion-video-creation/](../skills/07-media-content/remotion-video-creation/) | Remotion 在 React 中做视频创作的 29 条领域规则（3D、动画、字幕、过渡）。 |
 | **imagegen** | [skills/07-media-content/imagegen/](../skills/07-media-content/imagegen/) | 生成或编辑光栅图像（照片、插画、纹理、UI 模型等）。 |
+| **github-readme-visuals** | [skills/07-media-content/github-readme-visuals/](../skills/07-media-content/github-readme-visuals/) | 为 GitHub 仓库创建或更新产品主视觉、完整软件界面截图及中英文 README 图片区，并支持按参考图进行可验证的几何复刻。 |
 | **ppt-nano** | [skills/07-media-content/ppt-nano/](../skills/07-media-content/ppt-nano/) | 白板板书风格 PPT 生成，适合教学、汇报、头脑风暴。 |
 
 
