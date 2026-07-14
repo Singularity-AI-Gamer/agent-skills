@@ -1,6 +1,6 @@
 # 按能力域索引
 
-共 66 个技能，按 7 个能力域 + projects（项目私有）分组。
+共 65 个技能，按 7 个能力域 + projects（项目私有）分组。
 
 ## 目录
 
@@ -11,7 +11,7 @@
 - [07 媒体与内容制作](#07-媒体与内容制作)（11）
 - [08 写作与营销](#08-写作与营销)（4）
 - [10 行业与业务](#10-行业与业务)（18）
-- [Projects 项目私有](#projects-项目私有)（9）
+- [Projects 项目私有](#projects-项目私有)（8）
 
 ## 01 Agent 工程（7）
 
@@ -105,7 +105,7 @@
 | **session-resume** | [skills/10-business-industry/session-resume/](../skills/10-business-industry/session-resume/) | disease-market-sizing 管线中断后恢复，无需从头开始。 |
 | **xhs-pharma-social-listening** | [skills/10-business-industry/xhs-pharma-social-listening/](../skills/10-business-industry/xhs-pharma-social-listening/) | 面向外资药企员工痛点的小红书证据化舆情研究：采集并分析药企、岗位、合规、医学事务与 AI 相关笔记和评论，按去重笔记加去重评论计算独立证据，并处理 MediaCrawler CAPTCHA/461 与 OpenCLI 回退。 |
 
-## Projects 项目私有（9）
+## Projects 项目私有（8）
 
 ### ai-seed-project（2）
 
@@ -120,12 +120,6 @@
 |---|---|---|
 | **aliyun-swas-manage** | [projects/ai-seed-project-phase-one-feishu/aliyun-swas-manage/](../projects/ai-seed-project-phase-one-feishu/aliyun-swas-manage/) | 端到端管理阿里云 SWAS：实例、命令、磁盘快照、防火墙、监控与轻量数据库。 |
 | **feishu-card-ws** | [projects/ai-seed-project-phase-one-feishu/feishu-card-ws/](../projects/ai-seed-project-phase-one-feishu/feishu-card-ws/) | 飞书交互式卡片在 WebSocket 长连接模式下的配置指南与回调处理。 |
-
-### alk-plus-tracker（1）
-
-| 技能名 | 路径 | 中文简介 |
-|---|---|---|
-| **hui-rui-lan** | [projects/alk-plus-tracker/hui-rui-lan/](../projects/alk-plus-tracker/hui-rui-lan/) | 重建或扩展 ALK+ Tracker UI 时保留原始品牌蓝视觉体系、区块顺序、玻璃卡片布局。 |
 
 ### codex-invoice（4）
 

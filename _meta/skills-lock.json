@@ -1,11 +1,11 @@
 {
   "version": "2.0",
-  "generated_at": "2026-07-14T11:30:00+08:00",
-  "note": "Rebuilt indexes from repository SKILL.md files. Total: 57 shared + 9 projects = 66 total",
+  "generated_at": "2026-07-14T12:12:25+08:00",
+  "note": "Rebuilt indexes from repository SKILL.md files. Total: 57 shared + 8 projects = 65 total",
   "counts": {
     "shared": 57,
-    "projects": 9,
-    "total": 66
+    "projects": 8,
+    "total": 65
   },
   "shared": [
     {
@@ -376,12 +376,6 @@
       "project": "ai-seed-project-phase-one-feishu",
       "path": "projects/ai-seed-project-phase-one-feishu/feishu-card-ws/",
       "descriptionZh": "飞书交互式卡片在 WebSocket 长连接模式下的配置指南与回调处理。"
-    },
-    {
-      "name": "hui-rui-lan",
-      "project": "alk-plus-tracker",
-      "path": "projects/alk-plus-tracker/hui-rui-lan/",
-      "descriptionZh": "重建或扩展 ALK+ Tracker UI 时保留原始品牌蓝视觉体系、区块顺序、玻璃卡片布局。"
     },
     {
       "name": "163-email-ground-truth",

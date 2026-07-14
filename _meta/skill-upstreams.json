@@ -1,15 +1,15 @@
 {
   "version": "1.1",
-  "updated_at": "2026-07-10",
+  "updated_at": "2026-07-14",
   "purpose": "Track verified original upstream repositories for Skill-hub skills so future upgrades can compare evidence-backed sources instead of guessing by skill name.",
   "scope": {
     "startsFrom": [
       "_meta/skill-upstreams.json",
       "_meta/skills-lock.json"
     ],
-    "localSkillCount": 66,
+    "localSkillCount": 65,
     "sharedSkillCount": 57,
-    "projectSkillCount": 9
+    "projectSkillCount": 8
   },
   "rules": [
     "Only entries with classification=open-source and updatePolicy=mirror are eligible for automated replacement; mapped entries require review and a declared merge mapping.",
@@ -28,7 +28,7 @@
     "countsByClassification": {
       "open-source": 21,
       "self": 11,
-      "local": 33,
+      "local": 32,
       "candidate": 1
     },
     "githubCodeSearch": "Blocked by GitHub API rate limit during broad exact-name search; unresolved entries keep verificationPath commands for later retry.",
@@ -1212,21 +1212,6 @@
     {
       "name": "feishu-card-ws",
       "path": "projects/ai-seed-project-phase-one-feishu/feishu-card-ws/",
-      "classification": "local",
-      "updatePolicy": "none",
-      "status": "project-local",
-      "evidence": [
-        "Path is under projects/, so it is scoped to a specific local project.",
-        "No evidence in skills-lock.json indicates this is an installable upstream skill package."
-      ],
-      "verificationPath": [
-        "If this project skill is later published, add its repository URL and compare the exact project subdirectory before changing classification."
-      ],
-      "notes": "Project-private or project-derived skill; do not auto-upgrade from external sources."
-    },
-    {
-      "name": "hui-rui-lan",
-      "path": "projects/alk-plus-tracker/hui-rui-lan/",
       "classification": "local",
       "updatePolicy": "none",
       "status": "project-local",

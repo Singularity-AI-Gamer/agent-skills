@@ -9,7 +9,7 @@
 | [by-platform.md](./by-platform.md) | 按技术栈/平台聚合 | 按“用什么”查找，如 Python、Kotlin、飞书 |
 | [skills-lock.json](./skills-lock.json) | 机器可读映射表 | 脚本同步、自动化使用 |
 
-当前共 66 个技能（57 个共享 + 9 个项目私有）。
+当前共 65 个技能（57 个共享 + 8 个项目私有）。
 
 ## 命名与分类约定
 

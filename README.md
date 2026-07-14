@@ -6,7 +6,7 @@
 
 # Skill-hub - Codex / Claude Code 中文 Agent 技能库
 
-Skill-hub 是一个面向 Codex、Claude Code、Antigravity 等 AI 编程工具的中文 Agent 技能库，收集可复用的 `SKILL.md` 自动化实践、AI 编程工作流和提示词模板。仓库当前包含 **66** 个可复用技能，其中 **57** 个共享技能按能力域组织，**9** 个项目私有技能按项目归档，便于检索、本地同步、来源追踪和持续维护。
+Skill-hub 是一个面向 Codex、Claude Code、Antigravity 等 AI 编程工具的中文 Agent 技能库，收集可复用的 `SKILL.md` 自动化实践、AI 编程工作流和提示词模板。仓库当前包含 **65** 个可复用技能，其中 **57** 个共享技能按能力域组织，**8** 个项目私有技能按项目归档，便于检索、本地同步、来源追踪和持续维护。
 
 **适合搜索：** Codex 技能与 Claude Code 技能、中文 Agent 技能库、AI 编程工作流与提示词模板。
 
@@ -41,7 +41,7 @@ Skill-hub 不是单一提示词合集，而是面向 Agent 使用的技能仓库
 | <img src="assets/README/icons/format.svg" width="20" alt=""> 媒体与内容制作 | 11 | `skills/07-media-content/` | PPT、PDF、DOCX、XLSX、图像、视频、GitHub README 视觉、公众号文章和演示内容。 |
 | <img src="assets/README/icons/writing.svg" width="20" alt=""> 写作与营销 | 4 | `skills/08-writing-marketing/` | 风格仿写、营销写作、GitHub SEO 标准与周期评估。 |
 | <img src="assets/README/icons/source-index.svg" width="20" alt=""> 行业与业务 | 18 | `skills/10-business-industry/` | 医疗、法律、金融、市场规模、引用校验、药企舆情研究和行业报告流程。 |
-| <img src="assets/README/icons/directory.svg" width="20" alt=""> 项目私有 | 9 | `projects/` | 只对特定项目生效的技能，例如邮箱测试、飞书、阿里云或发票项目流程。 |
+| <img src="assets/README/icons/directory.svg" width="20" alt=""> 项目私有 | 8 | `projects/` | 只对特定项目生效的技能，例如邮箱测试、飞书、阿里云或发票项目流程。 |
 
 ## <img src="assets/README/icons/directory.svg" width="20" alt=""> 目录结构
 
@@ -55,7 +55,7 @@ skills/                        # 57 个共享技能，分 7 个能力域
 |-- 08-writing-marketing/      # 写作、风格仿写、营销
 `-- 10-business-industry/      # 医疗、法律、金融、市场研究等行业技能
 
-projects/                      # 9 个项目私有技能
+projects/                      # 8 个项目私有技能
 _meta/                         # 中文索引、机器可读映射、来源索引
 docs/                          # 目录约定与隐私脱敏说明
 scripts/                       # Junction 建立、同步、索引重建脚本

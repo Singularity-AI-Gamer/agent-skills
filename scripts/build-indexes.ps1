@@ -179,6 +179,8 @@ $Shared = @()   # [{name, domain, subdomain, repoPath, description, descriptionZ
 if (Test-Path $SkillsRoot) {
     $mds = Get-ChildItem -Path $SkillsRoot -Recurse -File -Filter "SKILL.md" -ErrorAction SilentlyContinue
     foreach ($md in $mds) {
+        # Evaluation fixtures may include SKILL.md examples; they are not catalog entries.
+        if ($md.FullName -match '[\\/]evals[\\/]') { continue }
         $fm = Read-Frontmatter -Path $md.FullName
         $skillDir = $md.Directory
 
@@ -230,6 +232,8 @@ $Projects = @()
 if (Test-Path $ProjRoot) {
     $mds = Get-ChildItem -Path $ProjRoot -Recurse -File -Filter "SKILL.md" -ErrorAction SilentlyContinue
     foreach ($md in $mds) {
+        # Evaluation fixtures may include SKILL.md examples; they are not catalog entries.
+        if ($md.FullName -match '[\\/]evals[\\/]') { continue }
         $fm = Read-Frontmatter -Path $md.FullName
         $skillDir = $md.Directory
 

@@ -1,6 +1,6 @@
 # 按技能名 A-Z 索引
 
-共 66 个技能（57 个共享 + 9 个项目私有）。项目私有技能以 *(项目)* 标注。
+共 65 个技能（57 个共享 + 8 个项目私有）。项目私有技能以 *(项目)* 标注。
 
 | # | 技能名 | 路径 | 中文简介 |
 |---|---|---|---|
@@ -42,31 +42,30 @@
 | 36 | **healthcare-emr-patterns** | [skills/10-business-industry/healthcare-emr-patterns/](../skills/10-business-industry/healthcare-emr-patterns/) | 医疗 EMR/EHR 开发模式：临床安全、就诊流程、处方生成、CDSS 集成、无障碍 UI。 |
 | 37 | **healthcare-eval-harness** | [skills/10-business-industry/healthcare-eval-harness/](../skills/10-business-industry/healthcare-eval-harness/) | 医疗发布的病人安全评测 harness：CDSS、PHI、临床流程与集成合规，失败阻断上线。 |
 | 38 | **healthcare-phi-compliance** | [skills/10-business-industry/healthcare-phi-compliance/](../skills/10-business-industry/healthcare-phi-compliance/) | 医疗应用 PHI/PII 合规：数据分级、访问控制、审计、加密、常见泄漏路径。 |
-| 39 | **hui-rui-lan** *(项目)* | [projects/alk-plus-tracker/hui-rui-lan/](../projects/alk-plus-tracker/hui-rui-lan/) | 重建或扩展 ALK+ Tracker UI 时保留原始品牌蓝视觉体系、区块顺序、玻璃卡片布局。 |
-| 40 | **ifi-market-sizing-skill** | [skills/10-business-industry/ifi-market-sizing-skill/](../skills/10-business-industry/ifi-market-sizing-skill/) | 用于医学/制药市场规模的临床路径重建与患者流瀑布图。 |
-| 41 | **imagegen** | [skills/07-media-content/imagegen/](../skills/07-media-content/imagegen/) | 生成或编辑光栅图像（照片、插画、纹理、UI 模型等）。 |
-| 42 | **jianying-editor** | [skills/07-media-content/jianying-editor/](../skills/07-media-content/jianying-editor/) | 剪映 AI 自动剪辑高级封装 API（JyWrapper）：录屏、素材、字幕、Web 动效。 |
-| 43 | **liquid-glass-design** | [skills/02-coding-languages/swift/liquid-glass-design/](../skills/02-coding-languages/swift/liquid-glass-design/) | iOS 26 Liquid Glass 设计系统：SwiftUI/UIKit/WidgetKit 的玻璃材质与交互。 |
-| 44 | **market-research-reports** | [skills/06-data-search/market-research-reports/](../skills/06-data-search/market-research-reports/) | 生成 50+ 页专业市场研究报告，McKinsey/BCG/Gartner 质量。 |
-| 45 | **market-sizing-mece-foundation** | [skills/06-data-search/market-sizing-mece-foundation/](../skills/06-data-search/market-sizing-mece-foundation/) | 所有医学市场规模任务的 MECE 基础。 |
-| 46 | **medical-evidence-grading** | [skills/06-data-search/medical-evidence-grading/](../skills/06-data-search/medical-evidence-grading/) | 医学证据分级：按证据金字塔自动分级 A/B/C/D。 |
-| 47 | **medical-research** | [skills/06-data-search/medical-research/](../skills/06-data-search/medical-research/) | 从 PubMed 获取论文并生成通俗易懂的研究摘要，覆盖医学/临床/科研主题。 |
-| 48 | **nmpa-drug-registry-lookup** | [skills/06-data-search/nmpa-drug-registry-lookup/](../skills/06-data-search/nmpa-drug-registry-lookup/) | 中国药品权威数据库：NMPA + CDE + DrugBank + PubChem 融合查询。 |
-| 49 | **pdf** | [skills/07-media-content/pdf/](../skills/07-media-content/pdf/) | "Use when tasks involve reading, creating, or reviewing PDF files where rendering and layout matter; prefer visual checks by rendering pages (Poppler) and use Python tools such as `reportlab`, `pdfplumber`, and `pypdf` for generation and extraction." |
-| 50 | **ppt-nano** | [skills/07-media-content/ppt-nano/](../skills/07-media-content/ppt-nano/) | 白板板书风格 PPT 生成，适合教学、汇报、头脑风暴。 |
-| 51 | **pptx** | [skills/07-media-content/pptx/](../skills/07-media-content/pptx/) | 演示文稿 .pptx 的创建、编辑、布局、评论与演讲者备注。 |
-| 52 | **project-cleanup-audit** | [skills/01-agent-engineering/project-cleanup-audit/](../skills/01-agent-engineering/project-cleanup-audit/) | 证据优先清理本地项目仓库：审计体积、分类无用文件、备份并安全删除生成物。 |
-| 53 | **pubmed-eutils** | [skills/06-data-search/pubmed-eutils/](../skills/06-data-search/pubmed-eutils/) | 通过 NCBI E-utilities 搜索 PubMed 并获取结构化生物医学文献。 |
-| 54 | **pubmed-search** | [skills/06-data-search/pubmed-search/](../skills/06-data-search/pubmed-search/) | 通过 Valyu 语义搜索以自然语言检索 PubMed 生物医学文献，支持全文。 |
-| 55 | **pubtator-entity-search** | [skills/06-data-search/pubtator-entity-search/](../skills/06-data-search/pubtator-entity-search/) | NLM PubTator3 实体级关系挖掘：疾病-药物-基因-化学品关联。 |
-| 56 | **qq-email-ground-truth** *(项目)* | [projects/codex-invoice/qq-email-ground-truth/](../projects/codex-invoice/qq-email-ground-truth/) | 构建/重建/审计/比对 QQ 邮箱发票真值集，验证跑批输出。 |
-| 57 | **remotion-video-creation** | [skills/07-media-content/remotion-video-creation/](../skills/07-media-content/remotion-video-creation/) | Remotion 在 React 中做视频创作的 29 条领域规则（3D、动画、字幕、过渡）。 |
-| 58 | **report-bundle-builder** | [skills/06-data-search/report-bundle-builder/](../skills/06-data-search/report-bundle-builder/) | 将多页 HTML 报告合并为单一独立 HTML/PDF/XLSX 交付物。 |
-| 59 | **santa-method** | [skills/01-agent-engineering/santa-method/](../skills/01-agent-engineering/santa-method/) | 多 Agent 对抗验证收敛循环，两个独立审查都通过后才出交付。 |
-| 60 | **session-resume** | [skills/10-business-industry/session-resume/](../skills/10-business-industry/session-resume/) | disease-market-sizing 管线中断后恢复，无需从头开始。 |
-| 61 | **skill-creator** | [skills/01-agent-engineering/skill-creator/](../skills/01-agent-engineering/skill-creator/) | 创建、修改和优化 skill，并可跑 eval 衡量触发准确率与性能。 |
-| 62 | **skill-lifecycle-manager** | [skills/01-agent-engineering/skill-lifecycle-manager/](../skills/01-agent-engineering/skill-lifecycle-manager/) | 管理本地/全局/项目级 skill 与 Skill-hub 生命周期：搜索、推荐、安装、升级、同步、合并、清理、来源校验、质量审计和发布。 |
-| 63 | **wechat-article** | [skills/07-media-content/wechat-article/](../skills/07-media-content/wechat-article/) | 傅盛风格的公众号文章创作：对话式、故事驱动、有观点。 |
-| 64 | **xhs-pharma-social-listening** | [skills/10-business-industry/xhs-pharma-social-listening/](../skills/10-business-industry/xhs-pharma-social-listening/) | 面向外资药企员工痛点的小红书证据化舆情研究：采集并分析药企、岗位、合规、医学事务与 AI 相关笔记和评论，按去重笔记加去重评论计算独立证据，并处理 MediaCrawler CAPTCHA/461 与 OpenCLI 回退。 |
-| 65 | **xlsx** | [skills/07-media-content/xlsx/](../skills/07-media-content/xlsx/) | 电子表格 .xlsx/.csv 等创建、编辑、公式、格式、数据分析与可视化。 |
-| 66 | **yq-article-style-imitation** | [skills/08-writing-marketing/yq-article-style-imitation/](../skills/08-writing-marketing/yq-article-style-imitation/) | 任意作家文章风格仿写：验证作者原文、拆解表达 DNA、生成并修复公众号/小红书稿。 |
+| 39 | **ifi-market-sizing-skill** | [skills/10-business-industry/ifi-market-sizing-skill/](../skills/10-business-industry/ifi-market-sizing-skill/) | 用于医学/制药市场规模的临床路径重建与患者流瀑布图。 |
+| 40 | **imagegen** | [skills/07-media-content/imagegen/](../skills/07-media-content/imagegen/) | 生成或编辑光栅图像（照片、插画、纹理、UI 模型等）。 |
+| 41 | **jianying-editor** | [skills/07-media-content/jianying-editor/](../skills/07-media-content/jianying-editor/) | 剪映 AI 自动剪辑高级封装 API（JyWrapper）：录屏、素材、字幕、Web 动效。 |
+| 42 | **liquid-glass-design** | [skills/02-coding-languages/swift/liquid-glass-design/](../skills/02-coding-languages/swift/liquid-glass-design/) | iOS 26 Liquid Glass 设计系统：SwiftUI/UIKit/WidgetKit 的玻璃材质与交互。 |
+| 43 | **market-research-reports** | [skills/06-data-search/market-research-reports/](../skills/06-data-search/market-research-reports/) | 生成 50+ 页专业市场研究报告，McKinsey/BCG/Gartner 质量。 |
+| 44 | **market-sizing-mece-foundation** | [skills/06-data-search/market-sizing-mece-foundation/](../skills/06-data-search/market-sizing-mece-foundation/) | 所有医学市场规模任务的 MECE 基础。 |
+| 45 | **medical-evidence-grading** | [skills/06-data-search/medical-evidence-grading/](../skills/06-data-search/medical-evidence-grading/) | 医学证据分级：按证据金字塔自动分级 A/B/C/D。 |
+| 46 | **medical-research** | [skills/06-data-search/medical-research/](../skills/06-data-search/medical-research/) | 从 PubMed 获取论文并生成通俗易懂的研究摘要，覆盖医学/临床/科研主题。 |
+| 47 | **nmpa-drug-registry-lookup** | [skills/06-data-search/nmpa-drug-registry-lookup/](../skills/06-data-search/nmpa-drug-registry-lookup/) | 中国药品权威数据库：NMPA + CDE + DrugBank + PubChem 融合查询。 |
+| 48 | **pdf** | [skills/07-media-content/pdf/](../skills/07-media-content/pdf/) | "Use when tasks involve reading, creating, or reviewing PDF files where rendering and layout matter; prefer visual checks by rendering pages (Poppler) and use Python tools such as `reportlab`, `pdfplumber`, and `pypdf` for generation and extraction." |
+| 49 | **ppt-nano** | [skills/07-media-content/ppt-nano/](../skills/07-media-content/ppt-nano/) | 白板板书风格 PPT 生成，适合教学、汇报、头脑风暴。 |
+| 50 | **pptx** | [skills/07-media-content/pptx/](../skills/07-media-content/pptx/) | 演示文稿 .pptx 的创建、编辑、布局、评论与演讲者备注。 |
+| 51 | **project-cleanup-audit** | [skills/01-agent-engineering/project-cleanup-audit/](../skills/01-agent-engineering/project-cleanup-audit/) | 证据优先清理本地项目仓库：审计体积、分类无用文件、备份并安全删除生成物。 |
+| 52 | **pubmed-eutils** | [skills/06-data-search/pubmed-eutils/](../skills/06-data-search/pubmed-eutils/) | 通过 NCBI E-utilities 搜索 PubMed 并获取结构化生物医学文献。 |
+| 53 | **pubmed-search** | [skills/06-data-search/pubmed-search/](../skills/06-data-search/pubmed-search/) | 通过 Valyu 语义搜索以自然语言检索 PubMed 生物医学文献，支持全文。 |
+| 54 | **pubtator-entity-search** | [skills/06-data-search/pubtator-entity-search/](../skills/06-data-search/pubtator-entity-search/) | NLM PubTator3 实体级关系挖掘：疾病-药物-基因-化学品关联。 |
+| 55 | **qq-email-ground-truth** *(项目)* | [projects/codex-invoice/qq-email-ground-truth/](../projects/codex-invoice/qq-email-ground-truth/) | 构建/重建/审计/比对 QQ 邮箱发票真值集，验证跑批输出。 |
+| 56 | **remotion-video-creation** | [skills/07-media-content/remotion-video-creation/](../skills/07-media-content/remotion-video-creation/) | Remotion 在 React 中做视频创作的 29 条领域规则（3D、动画、字幕、过渡）。 |
+| 57 | **report-bundle-builder** | [skills/06-data-search/report-bundle-builder/](../skills/06-data-search/report-bundle-builder/) | 将多页 HTML 报告合并为单一独立 HTML/PDF/XLSX 交付物。 |
+| 58 | **santa-method** | [skills/01-agent-engineering/santa-method/](../skills/01-agent-engineering/santa-method/) | 多 Agent 对抗验证收敛循环，两个独立审查都通过后才出交付。 |
+| 59 | **session-resume** | [skills/10-business-industry/session-resume/](../skills/10-business-industry/session-resume/) | disease-market-sizing 管线中断后恢复，无需从头开始。 |
+| 60 | **skill-creator** | [skills/01-agent-engineering/skill-creator/](../skills/01-agent-engineering/skill-creator/) | 创建、修改和优化 skill，并可跑 eval 衡量触发准确率与性能。 |
+| 61 | **skill-lifecycle-manager** | [skills/01-agent-engineering/skill-lifecycle-manager/](../skills/01-agent-engineering/skill-lifecycle-manager/) | 管理本地/全局/项目级 skill 与 Skill-hub 生命周期：搜索、推荐、安装、升级、同步、合并、清理、来源校验、质量审计和发布。 |
+| 62 | **wechat-article** | [skills/07-media-content/wechat-article/](../skills/07-media-content/wechat-article/) | 傅盛风格的公众号文章创作：对话式、故事驱动、有观点。 |
+| 63 | **xhs-pharma-social-listening** | [skills/10-business-industry/xhs-pharma-social-listening/](../skills/10-business-industry/xhs-pharma-social-listening/) | 面向外资药企员工痛点的小红书证据化舆情研究：采集并分析药企、岗位、合规、医学事务与 AI 相关笔记和评论，按去重笔记加去重评论计算独立证据，并处理 MediaCrawler CAPTCHA/461 与 OpenCLI 回退。 |
+| 64 | **xlsx** | [skills/07-media-content/xlsx/](../skills/07-media-content/xlsx/) | 电子表格 .xlsx/.csv 等创建、编辑、公式、格式、数据分析与可视化。 |
+| 65 | **yq-article-style-imitation** | [skills/08-writing-marketing/yq-article-style-imitation/](../skills/08-writing-marketing/yq-article-style-imitation/) | 任意作家文章风格仿写：验证作者原文、拆解表达 DNA、生成并修复公众号/小红书稿。 |
