@@ -51,12 +51,16 @@
     },
     {
       "id": 5,
-      "prompt": "把 Skill-hub repo 里的共享 skills 同步到 C:\\Users\\EthanQ\\.agents\\skills。先 dry-run，确认不会把 projects/ 里的项目私有 skill 扁平化，也不要覆盖我本地改过的 skill。",
+      "prompt": "使用提供的 Skill-hub 与本地安装夹具做 repository-to-local dry-run，确认不会把 projects/ 私有 skill 扁平化，也不会覆盖本地已修改的 sample-skill。",
       "expected_output": "The agent uses repository-to-local dry run, protects local edits, and excludes project-private skills.",
-      "files": [],
+      "files": [
+        "evals/files/sync-hub/skills/01-agent-engineering/sample-skill/SKILL.md",
+        "evals/files/sync-hub/projects/example/private-skill/SKILL.md",
+        "evals/files/sync-local/sample-skill/SKILL.md"
+      ],
       "expectations": [
         "The response reads the Skill Hub operations reference and classifies repo-to-local mode.",
-        "sync-pull.ps1 is run with DryRun before any live action.",
+        "A no-write dry-run or equivalent fixture-backed simulation is executed before any live action.",
         "The response confirms the script scans skills/ and excludes projects/.",
         "Locally edited overwrite candidates are compared and backed up instead of silently replaced."
       ]

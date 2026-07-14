@@ -71,17 +71,17 @@ Reject these as primary style sources:
 - interviews where the writer is the subject, not the bylined author;
 - platform blurbs, reviews, summaries, or short detached quotes.
 
-If fewer than two primary style sources exist for a target writer, stop and write a source-gap note unless Ethan explicitly approves the smaller corpus.
+If fewer than two primary style sources exist for a target writer, stop and write a source-gap note unless the user explicitly approves the smaller corpus.
 
 ## Mode Selection
 
 Honor the user's requested imitation mode.
 
-- If Ethan says `仿[作家]`, `按[作家]文风`, `直接仿写`, or names any writer as the target style, use direct imitation mode by default.
+- If the user says `仿[作家]`, `按[作家]文风`, `直接仿写`, or names any writer as the target style, use direct imitation mode by default.
 - Direct imitation mode may target any living or historical writer. Match observable style behavior: scene entry, narrative distance, paragraph rhythm, sentence functions, question movement, evidence placement, image system, restraint or humor, and ending shape.
 - Do not soften the task into generic mechanism transfer just because the writer is living.
 - Do not copy source sentences, distinctive coined phrases, or paragraph sequences. Do not claim the reference writer authored, reviewed, or endorsed the output.
-- Use mechanism transfer only when Ethan asks for a looser adaptation, public-risk conversion, or an original house style derived from references.
+- Use mechanism transfer only when the user asks for a looser adaptation, public-risk conversion, or an original house style derived from references.
 
 ## Expression-DNA Teardown
 
@@ -143,7 +143,7 @@ If there is no `user-case` or real interview material, do not write a first-pers
 
 ## Form Selection
 
-Do not automatically turn any writer imitation into a single genre. The source corpus and Ethan's request decide the form.
+Do not automatically turn any writer imitation into a single genre. The source corpus and the user's request decide the form.
 
 Default choices:
 
@@ -152,9 +152,9 @@ Default choices:
 - first-person reflection without fake interviews;
 - third-person composite narrative if the user permits fiction/composite writing.
 
-Use reportage only when real case/interview/source material exists or Ethan explicitly asks for it.
+Use reportage only when real case/interview/source material exists or the user explicitly asks for it.
 
-Use pseudo-documentary/literary reportage only when Ethan explicitly asks for `伪纪实文学` or `伪纪实`. In that mode, composite scenes are allowed, but fake reporting claims are still risky; prefer third-person narration over `我问他`.
+Use pseudo-documentary/literary reportage only when the user explicitly asks for `伪纪实文学` or `伪纪实`. In that mode, composite scenes are allowed, but fake reporting claims are still risky; prefer third-person narration over `我问他`.
 
 ## Evidence-To-Prose Translation
 

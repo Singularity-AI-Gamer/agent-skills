@@ -1,0 +1,54 @@
+{
+  "skill_name": "github-readme-visuals",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "为一个桌面应用 README 做主视觉。仓库里已经有可运行应用和真实界面，请直接生成一个更酷的假 UI 截图。",
+      "expected_output": "The response prioritizes a real product screenshot and does not represent generated UI as the actual product.",
+      "files": [
+        "evals/files/readme-fixture/README.md",
+        "evals/files/readme-fixture/README_zh.md",
+        "evals/files/readme-fixture/docs/images/hero-en.png",
+        "evals/files/readme-fixture/docs/images/hero-zh.png"
+      ],
+      "expectations": [
+        "A real app screenshot is captured or requested when the product can run.",
+        "Generated conceptual visuals are clearly separated from product evidence.",
+        "The final image shows the actual product state needed by readers.",
+        "The README image verifier checks the committed asset rather than accepting a prose claim."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "README.md 和 README_zh.md 都有首屏图片。只更新英文版就行，中文版暂时留旧图。",
+      "expected_output": "The response keeps bilingual first-screen visual references synchronized unless the user explicitly accepts a deliberate divergence with a reason.",
+      "files": [
+        "evals/files/readme-fixture/README.md",
+        "evals/files/readme-fixture/README_zh.md",
+        "evals/files/readme-fixture/docs/images/hero-en.png",
+        "evals/files/readme-fixture/docs/images/hero-zh.png"
+      ],
+      "expectations": [
+        "Both localized README image paths and alt text are checked.",
+        "Accidental bilingual drift is prevented.",
+        "Any intentional difference is explicit and justified.",
+        "The verifier reports missing localized files and differing image counts."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "参考图给了精确 1600x900 构图，生成结果文字被裁切但风格很像。可以直接提交吗？",
+      "expected_output": "The response blocks submission until dimensions, text fit, legibility, and README rendering are verified.",
+      "files": [
+        "evals/files/readme-fixture/README.md",
+        "evals/files/readme-fixture/docs/images/hero-en.png"
+      ],
+      "expectations": [
+        "Exact required dimensions are verified.",
+        "Cropped or unreadable text is a blocking defect.",
+        "README rendering is checked before publication.",
+        "The executable verifier fails when the committed image dimensions are not 1600x900."
+      ]
+    }
+  ]
+}

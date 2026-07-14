@@ -11,7 +11,7 @@ Usage:
     deck = EditorialDeck(
         title="血液科 IFI · v5",
         industry="medical",
-        embed_fonts=False,  # True 嵌入 Fraunces+Inter+Mono;False 用 Cambria/Calibri/Consolas
+        embed_fonts=False,  # True 时通过本机 PowerPoint 嵌入可授权字体
     )
     deck.add_hero_slide(
         eyebrow="HEMATOLOGY · IFI · 2026",
@@ -31,8 +31,14 @@ Usage:
 要求:
     pip install python-pptx Pillow
 
-源页面参考:C:\\Users\\qiyon\\Desktop\\血液科市场调研_v5_desktop.html
+源页面参考由调用方提供，不依赖固定本机路径。
 """
+
+import json
+import os
+from pathlib import Path
+import subprocess
+import uuid
 
 from pptx import Presentation
 from pptx.util import Inches, Pt, Emu
@@ -109,10 +115,16 @@ class EditorialDeck:
         industry="medical",
         embed_fonts=False,
         aspect_ratio="16:9",
+        font_overrides=None,
     ):
         self.title = title
         self.industry = industry
-        self.fonts = FONTS_EMBED if embed_fonts else FONTS_FALLBACK
+        self.embed_fonts = bool(embed_fonts)
+        self.fonts = dict(font_overrides or (FONTS_EMBED if embed_fonts else FONTS_FALLBACK))
+        missing_font_roles = {"serif", "sans", "mono"} - set(self.fonts)
+        if missing_font_roles:
+            raise ValueError(f"font_overrides missing roles: {sorted(missing_font_roles)}")
+        self.last_font_embedding_report = None
         self.colors = dict(COLORS)
         self.colors["industry_vertical"] = INDUSTRY_VERTICAL.get(industry, INDUSTRY_VERTICAL["medical"])
 
@@ -330,10 +342,188 @@ class EditorialDeck:
 
         return slide
 
+    def add_workflow_slide(self, eyebrow, title, phases_detail=None, quality_gates=None, stats_footer=None):
+        """Slide WORKFLOW · 阶段细节 + 质量门 + 底部统计。"""
+        slide = self.prs.slides.add_slide(self._blank_layout)
+        self._fill_background(slide, "bg_0")
+        self._add_eyebrow_tag(slide, x=0.7, y=0.6, text=eyebrow, color="brand_purple")
+        self._add_text(
+            slide, x=0.7, y=1.2, w=12, h=0.8, text=title,
+            font=self.fonts["serif"], size=40, bold=True,
+            color=self.colors["text_0"], spacing_pt=-1.0,
+        )
+
+        phase_cards = []
+        for index, phase in enumerate(phases_detail or [], start=1):
+            if isinstance(phase, dict):
+                phase_cards.append({
+                    "tag": phase.get("tag") or phase.get("phase") or f"PHASE {index}",
+                    "title": phase.get("title") or phase.get("name") or f"阶段 {index}",
+                    "body": phase.get("desc") or phase.get("description") or phase.get("output") or "",
+                    "tone": phase.get("tone", "brand_purple"),
+                })
+            else:
+                phase_cards.append({"tag": f"PHASE {index}", "title": str(phase), "body": "", "tone": "brand_purple"})
+        if phase_cards:
+            self._draw_card_grid(slide, x=0.7, y=2.3, w=12, h=2.25, cards=phase_cards, max_columns=4)
+
+        gate_cards = []
+        for index, gate in enumerate(quality_gates or [], start=1):
+            if isinstance(gate, dict):
+                gate_cards.append({
+                    "tag": gate.get("tag") or f"GATE {index}",
+                    "title": gate.get("title") or gate.get("name") or f"质量门 {index}",
+                    "body": gate.get("desc") or gate.get("description") or gate.get("criterion") or "",
+                    "tone": gate.get("tone", "brand_green"),
+                })
+            else:
+                gate_cards.append({"tag": f"GATE {index}", "title": str(gate), "body": "", "tone": "brand_green"})
+        if gate_cards:
+            self._draw_card_grid(slide, x=0.7, y=4.75, w=12, h=1.35, cards=gate_cards, max_columns=4)
+        if stats_footer:
+            self._draw_stat_bar(slide, x=0.7, y=6.25, w=12, h=0.8, stats=stats_footer)
+        return slide
+
+    def add_coverage_slide(self, eyebrow, title, hub=None, subpages=None, aux_cards=None):
+        """Slide COVERAGE · 中心能力 + 子页面 + 辅助交付物。"""
+        slide = self.prs.slides.add_slide(self._blank_layout)
+        self._fill_background(slide, "bg_1")
+        self._add_radial_glow(slide, color=self.colors["brand_blue"], opacity=0.06)
+        self._add_eyebrow_tag(slide, x=0.7, y=0.6, text=eyebrow, color="brand_blue")
+        self._add_text(
+            slide, x=0.7, y=1.2, w=12, h=0.8, text=title,
+            font=self.fonts["serif"], size=40, bold=True,
+            color=self.colors["text_0"], spacing_pt=-1.0,
+        )
+
+        if hub:
+            hub_data = hub if isinstance(hub, dict) else {"title": str(hub)}
+            self._draw_card_grid(slide, x=0.7, y=2.25, w=3.1, h=3.7, cards=[{
+                "tag": hub_data.get("tag", "HUB"),
+                "title": hub_data.get("title", "核心交付"),
+                "body": hub_data.get("desc") or hub_data.get("description") or "",
+                "tone": hub_data.get("tone", "accent"),
+            }], max_columns=1)
+        child_cards = []
+        for index, item in enumerate(subpages or [], start=1):
+            data = item if isinstance(item, dict) else {"title": str(item)}
+            child_cards.append({
+                "tag": data.get("tag", f"PAGE {index}"),
+                "title": data.get("title") or data.get("name") or f"子页面 {index}",
+                "body": data.get("desc") or data.get("description") or "",
+                "tone": data.get("tone", "brand_blue"),
+            })
+        if child_cards:
+            self._draw_card_grid(slide, x=4.1, y=2.25, w=8.6, h=3.7, cards=child_cards, max_columns=3)
+        if aux_cards:
+            labels = [item.get("title", "") if isinstance(item, dict) else str(item) for item in aux_cards]
+            self._draw_tech_stack_row(slide, x=0.7, y=6.35, w=12, h=0.42, items=labels)
+        return slide
+
+    def add_limitations_slide(self, eyebrow, title, limits=None, roadmap=None):
+        """Slide LIMITATIONS · 已知边界 + 对应路线图。"""
+        slide = self.prs.slides.add_slide(self._blank_layout)
+        self._fill_background(slide, "bg_2")
+        self._add_eyebrow_tag(slide, x=0.7, y=0.6, text=eyebrow, color="brand_gold")
+        self._add_text(
+            slide, x=0.7, y=1.2, w=12, h=0.8, text=title,
+            font=self.fonts["serif"], size=40, bold=True,
+            color=self.colors["text_0"], spacing_pt=-1.0,
+        )
+        limit_cards = []
+        for index, item in enumerate(limits or [], start=1):
+            data = item if isinstance(item, dict) else {"title": str(item)}
+            limit_cards.append({
+                "tag": data.get("tag", f"LIMIT {index}"),
+                "title": data.get("title") or data.get("name") or f"限制 {index}",
+                "body": data.get("desc") or data.get("description") or data.get("impact") or "",
+                "tone": data.get("tone", "brand_red"),
+            })
+        if limit_cards:
+            self._draw_card_grid(slide, x=0.7, y=2.35, w=5.8, h=3.9, cards=limit_cards, max_columns=2)
+        roadmap_cards = []
+        for index, item in enumerate(roadmap or [], start=1):
+            data = item if isinstance(item, dict) else {"title": str(item)}
+            roadmap_cards.append({
+                "tag": data.get("tag", f"NEXT {index}"),
+                "title": data.get("title") or data.get("name") or f"下一步 {index}",
+                "body": data.get("desc") or data.get("description") or data.get("owner") or "",
+                "tone": data.get("tone", "brand_green"),
+            })
+        if roadmap_cards:
+            self._draw_card_grid(slide, x=7.0, y=2.35, w=5.7, h=3.9, cards=roadmap_cards, max_columns=2)
+        return slide
+
+    def add_bonus_slide(self, eyebrow, title, body, video_path=None, gh_link=None):
+        """Slide BONUS · 衍生洞察、演示素材和仓库链接。"""
+        slide = self.prs.slides.add_slide(self._blank_layout)
+        self._fill_background(slide, "bg_0")
+        self._add_radial_glow(slide, color=self.colors["brand_pink"], opacity=0.08, position="bottom")
+        self._add_eyebrow_tag(slide, x=0.7, y=0.6, text=eyebrow, color="brand_pink")
+        self._add_gradient_text(
+            slide, x=0.7, y=1.25, w=12, h=1.0, text=title,
+            font=self.fonts["serif"], size=44, bold=True,
+        )
+        self._add_text(
+            slide, x=0.7, y=2.55, w=7.6, h=2.8, text=body,
+            font=self.fonts["sans"], size=18,
+            color=self.colors["text_1"], line_spacing=1.4,
+        )
+        links = []
+        if video_path:
+            links.append({"tag": "MEDIA", "title": "演示素材", "body": str(video_path), "tone": "brand_pink"})
+        if gh_link:
+            links.append({"tag": "SOURCE", "title": "项目地址", "body": str(gh_link), "tone": "brand_blue"})
+        if links:
+            self._draw_card_grid(slide, x=8.7, y=2.55, w=4.0, h=2.8, cards=links, max_columns=1)
+        return slide
+
     def save(self, path):
-        """导出 .pptx"""
-        self.prs.save(path)
-        return path
+        """导出 .pptx；需要时调用桌面 PowerPoint 做真实字体嵌入。"""
+        output_path = Path(path).expanduser().resolve()
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        if not self.embed_fonts:
+            self.prs.save(str(output_path))
+            return str(output_path)
+
+        helper = Path(__file__).with_name("embed_pptx_fonts.ps1")
+        if os.name != "nt" or not helper.exists():
+            raise RuntimeError("TrueType font embedding requires Windows, desktop PowerPoint, and embed_pptx_fonts.ps1")
+
+        token = uuid.uuid4().hex
+        raw_path = output_path.with_name(f".{output_path.stem}.{token}.unembedded{output_path.suffix}")
+        embedded_path = output_path.with_name(f".{output_path.stem}.{token}.embedded{output_path.suffix}")
+        self.prs.save(str(raw_path))
+        try:
+            command = [
+                "powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass",
+                "-File", str(helper), "-InputPath", str(raw_path), "-OutputPath", str(embedded_path),
+            ]
+            result = subprocess.run(command, capture_output=True, text=True, encoding="utf-8", errors="replace")
+            if result.returncode != 0:
+                raise RuntimeError(f"PowerPoint font embedding failed: {result.stderr.strip() or result.stdout.strip()}")
+            report_line = next((line for line in reversed(result.stdout.splitlines()) if line.strip().startswith("{")), "")
+            if not report_line:
+                raise RuntimeError("PowerPoint font embedding failed: helper returned no JSON verification report")
+            try:
+                report = json.loads(report_line)
+            except json.JSONDecodeError as exc:
+                raise RuntimeError("PowerPoint font embedding failed: helper returned invalid JSON") from exc
+            requested_fonts = {str(name).casefold() for name in report.get("requested_fonts", [])}
+            embedded_fonts = {str(name).casefold() for name in report.get("embedded_fonts", [])}
+            if (
+                report.get("embedded") is not True
+                or not requested_fonts
+                or not requested_fonts.issubset(embedded_fonts)
+                or int(report.get("font_part_count", 0)) < 1
+            ):
+                raise RuntimeError("PowerPoint font embedding failed: verification report is incomplete or inconsistent")
+            self.last_font_embedding_report = report
+            embedded_path.replace(output_path)
+        finally:
+            raw_path.unlink(missing_ok=True)
+            embedded_path.unlink(missing_ok=True)
+        return str(output_path)
 
     # ====== 视觉组件绘制(私有方法)======
 
@@ -1279,6 +1469,48 @@ class EditorialDeck:
                 color=self.colors["accent_deep"],
             )
 
+    def _draw_card_grid(self, slide, x, y, w, h, cards, max_columns=3):
+        """绘制稳定尺寸的通用卡片网格，供 workflow/coverage/limitations/bonus 使用。"""
+        if not cards:
+            return
+        columns = max(1, min(max_columns, len(cards)))
+        rows = (len(cards) + columns - 1) // columns
+        gap_x = 0.18
+        gap_y = 0.18
+        card_w = (w - gap_x * (columns - 1)) / columns
+        card_h = (h - gap_y * (rows - 1)) / rows
+        for index, card in enumerate(cards):
+            row = index // columns
+            col = index % columns
+            card_x = x + col * (card_w + gap_x)
+            card_y = y + row * (card_h + gap_y)
+            shape = slide.shapes.add_shape(
+                MSO_SHAPE.ROUNDED_RECTANGLE,
+                Inches(card_x), Inches(card_y), Inches(card_w), Inches(card_h),
+            )
+            shape.fill.solid()
+            shape.fill.fore_color.rgb = self.colors["bg_surface"]
+            shape.line.color.rgb = self.colors["border_soft"]
+            shape.line.width = Pt(0.8)
+            self._add_card_shadow(shape)
+            tone = self._tone_color_key(card.get("tone", "accent"), fallback="accent")
+            self._add_text(
+                slide, card_x + 0.18, card_y + 0.12, card_w - 0.36, 0.22,
+                str(card.get("tag", "")), self.fonts["mono"], 7,
+                color=self.colors[tone], bold=True,
+            )
+            self._add_text(
+                slide, card_x + 0.18, card_y + 0.38, card_w - 0.36, min(0.5, card_h * 0.34),
+                str(card.get("title", "")), self.fonts["serif"], 16,
+                color=self.colors["text_0"], bold=True,
+            )
+            body_h = max(0.25, card_h - 1.0)
+            self._add_text(
+                slide, card_x + 0.18, card_y + 0.92, card_w - 0.36, body_h,
+                str(card.get("body", "")), self.fonts["sans"], 8,
+                color=self.colors["text_2"], line_spacing=1.15,
+            )
+
     def _add_horizontal_line(self, slide, x, y, w, color, weight=0.75):
         """水平细线"""
         line = slide.shapes.add_connector(1, Inches(x), Inches(y), Inches(x + w), Inches(y))
@@ -1444,7 +1676,7 @@ if __name__ == "__main__":
     deck.add_cta_slide(
         eyebrow="THE TEAM & CALL-TO-ACTION",
         team=["YongQi", "SimonSu", "VivienZhan", "RuiYu", "YingJi"],
-        tech_stack=["Claude Code", "22 Skills", "Codex GPT-5.5", "Mermaid ELK", "Puppeteer", "Cite-or-Block"],
+        tech_stack=["Claude Code", "22 Skills", "Codex", "Mermaid ELK", "Puppeteer", "Cite-or-Block"],
         ctas=[
             {"tag": "主钩 A · 轻量门票", "time": "1 周", "title": "一句话疾病名 → demo",
              "desc": "给我一句话,1 周内 demo 给你看。基于 Phase 2a 已验证的 5 phase 流水线。", "primary": True},

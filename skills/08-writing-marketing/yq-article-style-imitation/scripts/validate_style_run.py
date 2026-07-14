@@ -151,6 +151,8 @@ def main() -> int:
             "access_status",
             "text_available",
             "local_text_path",
+            "byline",
+            "authorship_evidence",
             "accepted_for",
         ]
         if rows:
@@ -171,6 +173,8 @@ def main() -> int:
             access_status = get_field(row, "access_status")
             text_available = get_field(row, "text_available").lower()
             local_text_path = get_field(row, "local_text_path")
+            byline = get_field(row, "byline") or get_field(row, "author")
+            authorship_evidence = get_field(row, "authorship_evidence")
 
             wants_style = "style" in accepted_for or "primary-style-source" in role
             if not wants_style:
@@ -185,6 +189,12 @@ def main() -> int:
                 row_findings.append(f"access_status is not usable: {access_status}")
             if text_available not in VALID_TEXT_YES:
                 row_findings.append("text_available is not yes")
+            if not byline:
+                row_findings.append("byline is blank")
+            elif writer and writer.lower() not in byline.lower():
+                row_findings.append(f"byline does not identify target writer: {byline}")
+            if not authorship_evidence:
+                row_findings.append("authorship_evidence is blank")
             if not local_text_path:
                 row_findings.append("local_text_path is blank")
             else:

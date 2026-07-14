@@ -11,8 +11,16 @@ $ErrorActionPreference = "Stop"
 
 function Invoke-GitLines {
   param([string[]]$GitArgs)
-  $output = & git @GitArgs 2>$null
-  if ($LASTEXITCODE -eq 0) {
+  $previousErrorActionPreference = $ErrorActionPreference
+  $ErrorActionPreference = "SilentlyContinue"
+  try {
+    $output = & git @GitArgs 2>$null
+    $gitExitCode = $LASTEXITCODE
+  }
+  finally {
+    $ErrorActionPreference = $previousErrorActionPreference
+  }
+  if ($gitExitCode -eq 0) {
     return @($output)
   }
   return @()
@@ -76,6 +84,10 @@ function Get-CandidateDirectories {
     "diagnostics", "output", "logs", "tmp", "temp", ".worktrees",
     ".pytest_cache", ".mypy_cache", ".tox", ".venv", "venv", "__pycache__"
   )
+  $highConfidenceCaches = @(
+    "node_modules", ".next", ".nuxt", ".svelte-kit", ".turbo", ".vite",
+    ".parcel-cache", ".pytest_cache", ".mypy_cache", ".tox", "__pycache__"
+  )
 
   $rows = @()
   $dirs = Get-ChildItem -LiteralPath $RootPath -Directory -Force -Recurse -Depth 4 -ErrorAction SilentlyContinue
@@ -89,10 +101,23 @@ function Get-CandidateDirectories {
       continue
     }
     $bytes = Get-PathSizeBytes $dir.FullName
+    $highConfidence = $highConfidenceCaches -contains $dir.Name
     $rows += [pscustomobject]@{
       path = $relative
       size_mb = Convert-ToMB $bytes
       last_write_time = $dir.LastWriteTime.ToString("s")
+      classification = if ($highConfidence) { "generated_cache" } else { "review_required_candidate" }
+      confidence = if ($highConfidence) { "high" } else { "medium" }
+      reason = if ($highConfidence) {
+        "Directory name is a conventional dependency or tool cache; still verify repository scope and dry-run evidence."
+      } else {
+        "Directory name is often generated but may contain user data, release artifacts, runtime dependencies, or tracked packaging files."
+      }
+      recommended_action = if ($highConfidence) {
+        "delete_after_scope_and_dry_run_verification"
+      } else {
+        "inspect_contents_and_ownership_before_delete"
+      }
     }
   }
   return @($rows | Sort-Object size_mb -Descending | Select-Object -First $Limit)
@@ -319,11 +344,20 @@ try {
     $workspaceProcesses = [object[]]@(Get-WorkspaceProcesses $rootPath)
   }
 
+  $gitBranch = $null
+  $gitHead = $null
+  if ($isGit) {
+    $branchLines = @(Invoke-GitLines @("branch", "--show-current"))
+    $headLines = @(Invoke-GitLines @("log", "--oneline", "--decorate", "-1"))
+    if ($branchLines.Count -gt 0) { $gitBranch = [string]$branchLines[0] }
+    if ($headLines.Count -gt 0) { $gitHead = [string]$headLines[0] }
+  }
+
   $git = [ordered]@{
     is_git = $isGit
     top_level = if ($isGit) { $gitTop[0] } else { $null }
-    branch = if ($isGit) { (Invoke-GitLines @("branch", "--show-current") | Select-Object -First 1) } else { $null }
-    head = if ($isGit) { (Invoke-GitLines @("log", "--oneline", "--decorate", "-1") | Select-Object -First 1) } else { $null }
+    branch = $gitBranch
+    head = $gitHead
     remotes = $gitRemotes
     status = $gitStatus
     worktrees = $gitWorktrees

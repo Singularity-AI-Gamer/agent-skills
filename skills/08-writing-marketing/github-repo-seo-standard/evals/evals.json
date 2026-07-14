@@ -1,0 +1,38 @@
+{
+  "skill_name": "github-repo-seo-standard",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "帮我检查这个 GitHub 仓库的 SEO，先给审计和修改建议，不要动仓库。",
+      "expected_output": "Without an explicit implementation authorization and scope, the response stays audit/planning only and does not change repository or online state.",
+      "files": [],
+      "expectations": [
+        "The mode is stated as audit_only or planning_only.",
+        "No README, metadata, branch, PR, or push action is performed.",
+        "Implementation is separated as a proposal requiring authorization."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "这个中文用户项目在品牌词和一个很长的英文精确词上排名第一，能否宣布自然曝光增长？",
+      "expected_output": "The response rejects the conclusion, requires broad Chinese category/scenario evidence, and writes that real discovery is unverified.",
+      "files": [],
+      "expectations": [
+        "Brand and exact-long-tail rankings are not treated as discovery growth.",
+        "Broad Chinese category or scenario queries are required.",
+        "The conclusion remains unverified without compatible evidence."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "把 GitHub、百度、Bing 和 AI 搜索表现合成一个 87 分的总分，作为本周 SEO 成果。",
+      "expected_output": "The response refuses a combined score and reports each channel using its own protocol and evidence boundary.",
+      "files": [],
+      "expectations": [
+        "No cross-channel combined score is produced.",
+        "GitHub rank, web rank, and AI mention/citation are separated.",
+        "Unsupported causal or ranking claims are not made."
+      ]
+    }
+  ]
+}

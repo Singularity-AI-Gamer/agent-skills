@@ -51,6 +51,7 @@ Create a fast, trustworthy visual explanation of the product without replacing i
 
 5. Verify before delivery.
    - Read [the visual checklist](references/visual-checklist.md) and complete every applicable item.
+   - Run `python "<resolved-skill-root>/scripts/verify_readme_visuals.py" --repo <repository>` after resolving the actual skill root. Add `--expected-size docs/images/hero.png=1600x900` for exact-size assets. Every expected-size path must match an image referenced by the inspected README files. Treat missing files, empty Markdown alt text, unreadable images, wrong required dimensions, and probable blank/uniform renders as blockers; review localization-count differences as warnings.
    - Inspect the final hero and screenshots at display size. Confirm that the hero conveys the product category and the screenshots remain readable.
    - Compare the final hero against the reference on five structural checks: left/right allocation, dominant screenshot position, screenshot count, overlap/rotation pattern, and text-block hierarchy.
    - Run a duplicate-and-intrusion review: confirm every screenshot is unique, the main screenshot is the intended first screen, and no decoration overlaps a screenshot or logo.

@@ -7,8 +7,8 @@
       "_meta/skill-upstreams.json",
       "_meta/skills-lock.json"
     ],
-    "localSkillCount": 63,
-    "sharedSkillCount": 54,
+    "localSkillCount": 66,
+    "sharedSkillCount": 57,
     "projectSkillCount": 9
   },
   "rules": [
@@ -27,7 +27,7 @@
   "verificationSummary": {
     "countsByClassification": {
       "open-source": 21,
-      "self": 8,
+      "self": 11,
       "local": 33,
       "candidate": 1
     },
@@ -569,8 +569,8 @@
       "evidence": [
         "README identifies YQ Editorial Presentation Skill.",
         "README installation block references https://github.com/EthanYoQ/editorial-presentation-skill.git.",
-        "git ls-remote for that repository returned Repository not found during this audit.",
-        "SKILL.md cites a local source version path under C:\\Vibe Coding Project\\AI Square."
+        "git ls-remote and authenticated gh repo view both returned Repository not found during the 2026-07-14 audit.",
+        "The local skill was independently validated with skill-creator and remains the available canonical copy."
       ],
       "verificationPath": [
         "Ask repository owner to make EthanYoQ/editorial-presentation-skill accessible or provide a replacement upstream URL.",
@@ -801,8 +801,8 @@
       "updatePolicy": "none",
       "status": "self-authored",
       "evidence": [
-        "Skill name has YQ prefix and body refers to Ethan-specific direct imitation mode.",
-        "No explicit upstream URL appears in the skill files inspected during this audit."
+        "Skill name has the owner's YQ prefix, while its instructions and command paths are now user-neutral and portable.",
+        "No external upstream URL appears in the skill files inspected during this audit."
       ],
       "verificationPath": [
         "Search exact unique body phrases in GitHub code search when rate limit resets.",
@@ -1312,6 +1312,54 @@
       "verificationPath": [
         "Use this repository history as the canonical source until an explicit upstream is published.",
         "Validate SKILL.md and references/visual-checklist.md with skill-creator before release."
+      ],
+      "notes": "Self-maintained shared skill; external automatic updates disabled."
+    },
+    {
+      "name": "github-repo-seo-standard",
+      "path": "skills/08-writing-marketing/github-repo-seo-standard/",
+      "classification": "self",
+      "updatePolicy": "none",
+      "status": "self-maintained-github-seo-standard",
+      "evidence": [
+        "Skill was developed locally as the policy and implementation gate for owner-directed GitHub discoverability work.",
+        "No external skill package or upstream repository is declared in the skill files."
+      ],
+      "verificationPath": [
+        "Use this repository history as the canonical source until an explicit upstream is published.",
+        "Validate mode-gate, evidence-boundary, and cross-channel evals with skill-creator before release."
+      ],
+      "notes": "Self-maintained shared skill; external automatic updates disabled."
+    },
+    {
+      "name": "github-seo-evaluation-loop",
+      "path": "skills/08-writing-marketing/github-seo-evaluation-loop/",
+      "classification": "self",
+      "updatePolicy": "none",
+      "status": "self-maintained-github-seo-evaluation-loop",
+      "evidence": [
+        "Skill was developed locally for recurring, read-only GitHub SEO measurement and evidence comparison.",
+        "No external skill package or upstream repository is declared in the skill files."
+      ],
+      "verificationPath": [
+        "Use this repository history as the canonical source until an explicit upstream is published.",
+        "Validate project-root resolution, completed-run gating, and confounder handling with skill-creator before release."
+      ],
+      "notes": "Self-maintained shared skill; external automatic updates disabled."
+    },
+    {
+      "name": "xhs-pharma-social-listening",
+      "path": "skills/10-business-industry/xhs-pharma-social-listening/",
+      "classification": "self",
+      "updatePolicy": "none",
+      "status": "self-maintained-xhs-pharma-listening",
+      "evidence": [
+        "Skill was developed locally from owner-directed Xiaohongshu pharma social-listening collection and analysis runs.",
+        "Referenced crawler repositories are collection backends, not upstream copies of this skill."
+      ],
+      "verificationPath": [
+        "Use this repository history as the canonical source until an explicit upstream is published.",
+        "Validate independent-evidence counting and CAPTCHA/frequency-block handling with skill-creator before release."
       ],
       "notes": "Self-maintained shared skill; external automatic updates disabled."
     }

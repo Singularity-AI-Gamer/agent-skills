@@ -1,6 +1,6 @@
 # 按能力域索引
 
-共 63 个技能，按 7 个能力域 + projects（项目私有）分组。
+共 66 个技能，按 7 个能力域 + projects（项目私有）分组。
 
 ## 目录
 
@@ -9,8 +9,8 @@
 - [03 框架与技术栈](#03-框架与技术栈)（1）
 - [06 数据与检索](#06-数据与检索)（15）
 - [07 媒体与内容制作](#07-媒体与内容制作)（11）
-- [08 写作与营销](#08-写作与营销)（2）
-- [10 行业与业务](#10-行业与业务)（17）
+- [08 写作与营销](#08-写作与营销)（4）
+- [10 行业与业务](#10-行业与业务)（18）
 - [Projects 项目私有](#projects-项目私有)（9）
 
 ## 01 Agent 工程（7）
@@ -73,14 +73,16 @@
 | **wechat-article** | [skills/07-media-content/wechat-article/](../skills/07-media-content/wechat-article/) | 傅盛风格的公众号文章创作：对话式、故事驱动、有观点。 |
 | **xlsx** | [skills/07-media-content/xlsx/](../skills/07-media-content/xlsx/) | 电子表格 .xlsx/.csv 等创建、编辑、公式、格式、数据分析与可视化。 |
 
-## 08 写作与营销（2）
+## 08 写作与营销（4）
 
 | 技能名 | 路径 | 中文简介 |
 |---|---|---|
 | **decision-tree-with-lp-embedding** | [skills/08-writing-marketing/decision-tree-with-lp-embedding/](../skills/08-writing-marketing/decision-tree-with-lp-embedding/) | 生成包含 LP 嵌入的 Mermaid 临床决策树。 |
+| **github-repo-seo-standard** | [skills/08-writing-marketing/github-repo-seo-standard/](../skills/08-writing-marketing/github-repo-seo-standard/) | 审计、规划、测量和实施 GitHub 仓库可发现性优化，覆盖中英文 README、Description、Topics、Release、搜索排名、竞品词、百度/Bing/AI 搜索与站点资产，并严格区分审计、规划和授权实施。 |
+| **github-seo-evaluation-loop** | [skills/08-writing-marketing/github-seo-evaluation-loop/](../skills/08-writing-marketing/github-seo-evaluation-loop/) | 运行可重复的 GitHub SEO 评估循环：比较中文宽泛词与场景词的可见性、生成指标证据和中文周报、安排百度/Bing/AI 搜索任务，并判断实验是否具备继续优化的证据。 |
 | **yq-article-style-imitation** | [skills/08-writing-marketing/yq-article-style-imitation/](../skills/08-writing-marketing/yq-article-style-imitation/) | 任意作家文章风格仿写：验证作者原文、拆解表达 DNA、生成并修复公众号/小红书稿。 |
 
-## 10 行业与业务（17）
+## 10 行业与业务（18）
 
 | 技能名 | 路径 | 中文简介 |
 |---|---|---|
@@ -101,6 +103,7 @@
 | **healthcare-phi-compliance** | [skills/10-business-industry/healthcare-phi-compliance/](../skills/10-business-industry/healthcare-phi-compliance/) | 医疗应用 PHI/PII 合规：数据分级、访问控制、审计、加密、常见泄漏路径。 |
 | **ifi-market-sizing-skill** | [skills/10-business-industry/ifi-market-sizing-skill/](../skills/10-business-industry/ifi-market-sizing-skill/) | 用于医学/制药市场规模的临床路径重建与患者流瀑布图。 |
 | **session-resume** | [skills/10-business-industry/session-resume/](../skills/10-business-industry/session-resume/) | disease-market-sizing 管线中断后恢复，无需从头开始。 |
+| **xhs-pharma-social-listening** | [skills/10-business-industry/xhs-pharma-social-listening/](../skills/10-business-industry/xhs-pharma-social-listening/) | 面向外资药企员工痛点的小红书证据化舆情研究：采集并分析药企、岗位、合规、医学事务与 AI 相关笔记和评论，按去重笔记加去重评论计算独立证据，并处理 MediaCrawler CAPTCHA/461 与 OpenCLI 回退。 |
 
 ## Projects 项目私有（9）
 

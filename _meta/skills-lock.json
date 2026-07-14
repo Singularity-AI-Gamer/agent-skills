@@ -1,11 +1,11 @@
 {
   "version": "2.0",
-  "generated_at": "2026-07-11T17:41:41+08:00",
-  "note": "Rebuilt indexes from repository SKILL.md files. Total: 54 shared + 9 projects = 63 total",
+  "generated_at": "2026-07-14T11:30:00+08:00",
+  "note": "Rebuilt indexes from repository SKILL.md files. Total: 57 shared + 9 projects = 66 total",
   "counts": {
-    "shared": 54,
+    "shared": 57,
     "projects": 9,
-    "total": 63
+    "total": 66
   },
   "shared": [
     {
@@ -226,6 +226,18 @@
       "descriptionZh": "生成包含 LP 嵌入的 Mermaid 临床决策树。"
     },
     {
+      "name": "github-repo-seo-standard",
+      "domain": "08-writing-marketing",
+      "path": "skills/08-writing-marketing/github-repo-seo-standard/",
+      "descriptionZh": "审计、规划、测量和实施 GitHub 仓库可发现性优化，覆盖中英文 README、Description、Topics、Release、搜索排名、竞品词、百度/Bing/AI 搜索与站点资产，并严格区分审计、规划和授权实施。"
+    },
+    {
+      "name": "github-seo-evaluation-loop",
+      "domain": "08-writing-marketing",
+      "path": "skills/08-writing-marketing/github-seo-evaluation-loop/",
+      "descriptionZh": "运行可重复的 GitHub SEO 评估循环：比较中文宽泛词与场景词的可见性、生成指标证据和中文周报、安排百度/Bing/AI 搜索任务，并判断实验是否具备继续优化的证据。"
+    },
+    {
       "name": "yq-article-style-imitation",
       "domain": "08-writing-marketing",
       "path": "skills/08-writing-marketing/yq-article-style-imitation/",
@@ -332,6 +344,12 @@
       "domain": "10-business-industry",
       "path": "skills/10-business-industry/session-resume/",
       "descriptionZh": "disease-market-sizing 管线中断后恢复，无需从头开始。"
+    },
+    {
+      "name": "xhs-pharma-social-listening",
+      "domain": "10-business-industry",
+      "path": "skills/10-business-industry/xhs-pharma-social-listening/",
+      "descriptionZh": "面向外资药企员工痛点的小红书证据化舆情研究：采集并分析药企、岗位、合规、医学事务与 AI 相关笔记和评论，按去重笔记加去重评论计算独立证据，并处理 MediaCrawler CAPTCHA/461 与 OpenCLI 回退。"
     }
   ],
   "projects": [

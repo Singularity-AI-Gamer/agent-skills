@@ -75,7 +75,7 @@ from generate_pptx import EditorialDeck
 deck = EditorialDeck(
     title="血液科 IFI · Case Sharing v5",
     industry="medical",          # "medical" | "tech" | "finance" | "education"
-    embed_fonts=True,            # True 嵌入 Fraunces+Inter+Mono;False 用 Cambria/Calibri/Consolas
+    embed_fonts=True,            # Windows + 桌面 PowerPoint 执行真实字体嵌入
     aspect_ratio="16:9",         # "16:9" 1920×1080(默认)| "4:3" 1024×768
 )
 
@@ -139,7 +139,7 @@ deck.add_architecture_slide(
 
 deck.add_cta_slide(
     team=["YongQi", "SimonSu", "VivienZhan", "RuiYu", "YingJi"],
-    tech_stack=["Claude Code", "22 Skills", "Codex GPT-5.5", "Mermaid ELK", "Puppeteer"],
+    tech_stack=["Claude Code", "22 Skills", "Codex", "Mermaid ELK", "Puppeteer"],
     ctas=[
         {"tag": "主钩 A", "time": "1 周", "title": "一句话疾病名 → demo", "desc": "..."},
         {"tag": "主钩 B", "time": "1 月", "title": "BU GPT 助手", "desc": "..."},
@@ -209,6 +209,8 @@ FONTS_FALLBACK = {
 }
 # Mac 等价:Cambria → Cochin · Calibri → Helvetica Neue · Consolas → Menlo
 ```
+
+`embed_fonts=True` 需要 Windows 桌面 Microsoft PowerPoint 的 `POWERPNT.EXE`。WPS Office 即使注册了 `PowerPoint.Application` COM，也不能作为成功条件；生成器必须核验每个请求字体都出现在 `embeddedFontLst` 且包内存在 `ppt/fonts/` 部件。
 
 ### 字号映射(HTML clamp → PPT 固定 pt)
 
@@ -346,6 +348,6 @@ class EditorialDeck:
 
 ## 源页面参考
 
-源 HTML:`C:\Users\qiyon\Desktop\血液科市场调研_v5_desktop.html`
+源 HTML:`<source-deck.html>`（由调用方提供）
 
 每个 HTML section 在 EditorialDeck 中对应一个 `add_*_slide()` 方法,**section 内容数据保持一致 → 生成的 PPT 与 HTML 视觉同源**。

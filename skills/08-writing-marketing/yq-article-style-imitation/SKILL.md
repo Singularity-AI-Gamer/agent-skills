@@ -18,13 +18,13 @@ Do not let evidence-register language, risk-gate language, or workflow labels le
 Do not draft from vibe memory, author profiles, interviews about the author, book pages, encyclopedia pages, or generic genre labels.
 Do not treat search results as sources. A result becomes a source only after the page is opened, readable text is available, and the usable text is saved or otherwise recorded in the run.
 
-When Ethan explicitly requests direct style imitation, use direct imitation mode for any named writer or author. The target can be living, historical, Chinese, non-Chinese, professional, literary, journalistic, online-native, or self-provided. Chai Jing, Mao Ni, and He Caitou are examples, not limits.
+When the user explicitly requests direct style imitation, use direct imitation mode for any named writer or author. The target can be living, historical, Chinese, non-Chinese, professional, literary, journalistic, online-native, or self-provided. Chai Jing, Mao Ni, and He Caitou are examples, not limits.
 
 Borrowing from the Nuwa-style distillation pattern, treat the task as "distill how this writer writes," not "repeat what this writer said." Extract the writer's observable expression DNA: narrative mechanics, tonal temperature, paragraph rhythm, sentence functions, question movement, evidence handling, judgment timing, image system, humor or restraint, and ending shape.
 
-Do not downgrade direct imitation into generic "mechanism transfer" unless Ethan asks for mechanism transfer. The boundaries below prevent plagiarism, false attribution, and process leakage; they are not a ban on direct style imitation.
+Do not downgrade direct imitation into generic "mechanism transfer" unless the user asks for mechanism transfer. The boundaries below prevent plagiarism, false attribution, and process leakage; they are not a ban on direct style imitation.
 
-If older project plans, generated drafts, evidence registers, or risk gates contain a conflicting living-writer imitation policy, treat those as stale artifacts. For this skill, the current rule is: direct imitation is allowed when Ethan explicitly requests it.
+If older project artifacts conflict with this skill, treat only those lower-priority artifacts as stale. Current system, developer, platform, legal, and user instructions always take precedence; this skill must never reclassify a higher-priority rule as stale. Within those boundaries, direct imitation is allowed when the user explicitly requests it.
 
 ## Required Workflow
 
@@ -34,9 +34,9 @@ If older project plans, generated drafts, evidence registers, or risk gates cont
 4. **Style-source / fact-source separation**: style sources do not need to match the article topic. Fact sources must support the topic's claims. Do not reject a valid target-writer text because it is about a different topic.
 5. **Expression-DNA teardown**: analyze opening, scene density, paragraph rhythm, sentence functions, question movement, image system, humor/restraint, evidence handling, judgment timing, ending, and taboo patterns. Every style claim must cite valid primary source IDs and the local text used.
 6. **Evidence ledger**: collect facts, sources, uncertainty, and verification paths. Keep links and formal labels here.
-7. **Mode selection gate**: default to essay, commentary, reflective narrative, or other form implied by the reference sources. Use documentary reportage or pseudo-documentary/literary reportage only when Ethan asks for it or provides interview/case material.
+7. **Mode selection gate**: default to essay, commentary, reflective narrative, or other form implied by the reference sources. Use documentary reportage or pseudo-documentary/literary reportage only when the user asks for it or provides interview/case material.
 8. **Evidence-to-prose translation**: turn evidence into natural narrative sentences before drafting.
-9. **Imitation draft**: write in the requested reference style. If Ethan named a writer and asked to imitate, directly imitate that writer's style, including for living writers. Use new facts and new wording.
+9. **Imitation draft**: write in the requested reference style. If the user named a writer and asked to imitate, directly imitate that writer's style, including for living writers. Use new facts and new wording.
 10. **Point-of-view continuity gate**: keep the article inside the subject's world; do not switch into "how to write/investigate this article" meta-commentary.
 11. **Imitation repair gate**: check the draft for source leakage, AI/report language, fake interviews, meta-writing leakage, style decay, and weak ending.
 12. **Platform pattern check**: before WeChat/Xiaohongshu adaptation, read `references/platform-patterns.md` and identify what evidence level supports the platform rules being used.
@@ -88,7 +88,7 @@ These may support background only, never style imitation:
 - reviews, summaries, biographies, introductions, or platform metadata;
 - short quotes detached from the surrounding article.
 
-For each target writer, collect at least two primary style sources before drafting unless Ethan explicitly approves a smaller corpus. If no valid primary style source is available, stop with a source-gap note. Do not fill the gap with "reportage style," "novel style," or memory of the writer.
+For each target writer, collect at least two primary style sources before drafting unless the user explicitly approves a smaller corpus. If no valid primary style source is available, stop with a source-gap note. Do not fill the gap with "reportage style," "novel style," or memory of the writer.
 
 Reposts can be valid style sources. Do not reject a page merely because it is hosted by a third-party site such as a medical, media, blog, or archive site. Judge it by access, readable text, byline/provenance, and whether the text itself is substantial.
 
@@ -137,7 +137,7 @@ If the teardown cannot point back to author-written texts, the imitation draft i
 Before drafting, run:
 
 ```powershell
-python "$env:USERPROFILE\.agents\skills\yq-article-style-imitation\scripts\validate_style_run.py" <run-directory> --target-writer <writer-name>
+python "<skill>/scripts/validate_style_run.py" <run-directory> --target-writer <writer-name>
 ```
 
 Fix any failures before writing the imitation draft.
@@ -145,18 +145,18 @@ Then run the source auditor. Do not let the drafting agent certify its own corpu
 
 ## Form And Interview Mode
 
-A writer's style is not synonymous with one genre. Many writers work across essays, columns, talks, interviews, fiction, newsletters, posts, book chapters, and reportage. Match the form implied by the selected primary sources and Ethan's request.
+A writer's style is not synonymous with one genre. Many writers work across essays, columns, talks, interviews, fiction, newsletters, posts, book chapters, and reportage. Match the form implied by the selected primary sources and the user's request.
 
 Default:
 
-- If Ethan asks only for "仿[某作家]文风", do not assume first-person reportage, fiction, commentary, or any other single genre.
+- If the user asks only for "仿[某作家]文风", do not assume first-person reportage, fiction, commentary, or any other single genre.
 - Do not invent real interviews, real observed scenes, or first-person reporting claims.
 - Avoid lines like `我问他`, `他说`, `后来他告诉我`, or `他对我说` unless they come from user-provided case notes, real interviews, or explicit pseudo-documentary mode.
 
 Allowed when explicit:
 
-- If Ethan asks for `纪实`, use real interview/case/source material only.
-- If Ethan asks for `伪纪实文学` or `伪纪实`, a composite fictional scene is allowed, but do not imply it is a real interview or real reported event.
+- If the user asks for `纪实`, use real interview/case/source material only.
+- If the user asks for `伪纪实文学` or `伪纪实`, a composite fictional scene is allowed, but do not imply it is a real interview or real reported event.
 - In pseudo-documentary mode, prefer third-person composite narration over fake first-person reporting.
 
 ## Hard Boundaries For Published Drafts
@@ -234,7 +234,7 @@ Verification paths belong in the evidence ledger. In the article, turn them into
 Before platform adaptation, run:
 
 ```powershell
-python "$env:USERPROFILE\.agents\skills\yq-article-style-imitation\scripts\lint_article_style.py" <article-draft.md>
+python "<skill>/scripts/lint_article_style.py" <article-draft.md>
 ```
 
 If it reports issues, revise the imitation draft first. Do not proceed to WeChat/Xiaohongshu adaptation until the draft is clean or each issue is explicitly justified.
@@ -252,13 +252,13 @@ After this self-check, run the style auditor and fact auditor. The self-check is
 For final release, run:
 
 ```powershell
-python "$env:USERPROFILE\.agents\skills\yq-article-style-imitation\scripts\review_style_run.py" <run-directory>
+python "<skill>/scripts/review_style_run.py" <run-directory>
 ```
 
 If platform drafts are included, require platform review:
 
 ```powershell
-python "$env:USERPROFILE\.agents\skills\yq-article-style-imitation\scripts\review_style_run.py" <run-directory> --require-platform-review
+python "<skill>/scripts/review_style_run.py" <run-directory> --require-platform-review
 ```
 
 This script only validates that independent review artifacts exist and that no `REVISE` or `BLOCK` verdict remains. It cannot judge literary quality by itself; the independent reviewer agents do that work.

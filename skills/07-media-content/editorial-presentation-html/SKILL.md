@@ -1,6 +1,6 @@
 ---
 name: editorial-presentation-html
-description: YQ warm editorial 设计语言 · 用于 presentation / case sharing / 项目汇报 / 战略叙事 / 产品发布 / 给老板/director 看的演示页面。**支持双输出模式**:① HTML(横向全屏 deck,完整复刻 90%+ 视觉)② PPTX(复刻 85-90% 视觉,通过 python-pptx 程序化生成)。提供完整 design tokens(米色底 + 赭石红 #CC785C + 6 品牌色 + Fraunces 衬线 + Inter + JetBrains Mono)、多族谱视觉组件(stat / timeline / matrix / funnel / pyramid / phase pill / market-bars / proof-bars 等)、guizang-scale 投影字号、全屏横向版面骨架。**只要用户提到要做 presentation / slides / PPT / 幻灯片 / case sharing / 项目展示 / 战略汇报 / 给老板看的页面 / Pfizer 风格 / Anthropic 风格 / 编辑设计风格 / 类似血液科那套,就一定要用这个 skill,即使没明确说"用 editorial 风格"或没指定 HTML/PPT 格式**。源版本:`C:\Vibe Coding Project\AI Square\血液科市场调研\output\血液科市场调研_v5_desktop.html`。
+description: Anthropic warm editorial 设计语言，用于 presentation、case sharing、项目汇报、战略叙事和产品发布。支持横向全屏 HTML deck 与程序化 PPTX，提供可复用 design tokens、组件、版面骨架、图表选择规则、PowerPoint 字体嵌入和验证流程。只要用户要求 Pfizer/Anthropic/warm editorial/编辑设计风格，提到类似血液科那套，或需要把内容做成高规格 HTML/PPT 演示，就使用本 Skill。
 ---
 
 # Editorial Presentation (HTML + PPTX 双模)
@@ -12,8 +12,8 @@ description: YQ warm editorial 设计语言 · 用于 presentation / case sharin
 **核心价值**:配色 + 字体 + 视觉表现形式 = 高识别度的"Anthropic warm editorial"风格,**不需要重新调色/选字/设计组件**,直接套用即可生成视觉一致的 presentation。
 
 **双输出模式**:
-- 🌐 **HTML 模式**(默认 · 100% 复刻):用于浏览器演示的**横向全屏 deck**。F11 下每页固定 100vw × 100vh,支持左右翻页、底部圆点、触屏/滚轮、ESC overview。视觉仍复刻血液科 v5 的 warm editorial,不是换主题。
-- 📊 **PPTX 模式**(85-90% 复刻):用于必须交 .pptx 文件的场景(高管会、客户演示、传统企业)。通过 python-pptx 程序化生成,共享同一套配色/字体/组件视觉。
+- **HTML 模式**(默认 · 100% 复刻):用于浏览器演示的**横向全屏 deck**。F11 下每页固定 100vw × 100vh,支持左右翻页、底部圆点、触屏/滚轮、ESC overview。视觉仍复刻血液科 v5 的 warm editorial,不是换主题。
+- **PPTX 模式**(85-90% 复刻):用于必须交 .pptx 文件的场景(高管会、客户演示、传统企业)。通过 python-pptx 程序化生成,共享同一套配色/字体/组件视觉。
 
 **两种模式共享的"设计 DNA"**:
 1. 配色:米色底 #FAF9F5 + 赭石主色 #CC785C + 6 品牌辅色按语义分配
@@ -59,9 +59,9 @@ description: YQ warm editorial 设计语言 · 用于 presentation / case sharin
 
 按需读:
 
-- **`references/design-tokens.md`** ⭐ 必读 — 完整 `:root` 变量(色板、字体、阴影)。**第一件事就是把这块原样塞进 `<style>`**。
-- **`references/typography.md`** ⭐ 必读 — Fraunces / Inter / JetBrains Mono 应用规则、projection scale。HTML deck 字号要接近 guizang fullscreen 演讲尺度,不是网页报告尺度。
-- **`references/chart-selection.md`** ⭐ 必读 — 图表选择规则。先判断数据关系,再选 stat / timeline / matrix / funnel / bar 等组件。**禁止把所有数字都画成条形图**。
+- **`references/design-tokens.md`** 必读 — 完整 `:root` 变量(色板、字体、阴影)。**第一件事就是把这块原样塞进 `<style>`**。
+- **`references/typography.md`** 必读 — Fraunces / Inter / JetBrains Mono 应用规则、projection scale。HTML deck 字号要接近 guizang fullscreen 演讲尺度,不是网页报告尺度。
+- **`references/chart-selection.md`** 必读 — 图表选择规则。先判断数据关系,再选 stat / timeline / matrix / funnel / bar 等组件。**禁止把所有数字都画成条形图**。
 - **`references/components.md`** — 视觉组件的 HTML+CSS 切片,包含每类组件的"何时用 / 不何时用"。
 - **`references/layouts.md`** — 横向全屏 deck 的 slide 节奏、grid 布局、navigation。
 - **`references/rewrite-existing-html.md`** — 改写已有 HTML deck 的专用流程。保留内容 section,只替换演示 shell / CSS / JS。
@@ -84,7 +84,7 @@ description: YQ warm editorial 设计语言 · 用于 presentation / case sharin
 
 ### Step 3 · 按需嵌组件
 
-`assets/component-snippets.html` 是组件粘贴库:
+`references/components.md` 是组件粘贴库和使用说明:
 
 - 数据展示:stat-card / stat-grid / market-bars / evidence-pyramid / literature-funnel / proof-bars
 - 时间与流程:timeline / clock-path / decision-window / phase-pill / wf-phase / ttet-step / arch-overview
@@ -172,8 +172,8 @@ description: YQ warm editorial 设计语言 · 用于 presentation / case sharin
 
 ### Step 1 · 读 references
 
-- **`references/pptx-mode.md`** ⭐ 必读 — PPT 输出模式的完整说明:design tokens 如何映射到 PPT 主题、组件如何用 shape 实现、哪些视觉特性降级、字体如何嵌入。
-- **`references/chart-selection.md`** ⭐ 必读 — PPTX 也必须先判断数据关系,不要默认 proof-bars。
+- **`references/pptx-mode.md`** 必读 — PPT 输出模式的完整说明:design tokens 如何映射到 PPT 主题、组件如何用 shape 实现、哪些视觉特性降级、字体如何嵌入。
+- **`references/chart-selection.md`** 必读 — PPTX 也必须先判断数据关系,不要默认 proof-bars。
 - **`references/design-tokens.md`** — 共享的色板/字号 scale(直接复用)
 - **`references/typography.md`** — 共享的字体规则(直接复用)
 
@@ -182,7 +182,7 @@ description: YQ warm editorial 设计语言 · 用于 presentation / case sharin
 `assets/generate_pptx.py` 是 python-pptx 程序化生成器,提供:
 
 - `EditorialDeck` 类:封装好的 deck builder,自动应用色板/字体/版面
-- 11 个 slide 模板函数:`add_why_slide()`, `add_hero_slide()`, `add_evidence_slide()`, ...,对应 HTML 11 节
+- 11 个 slide 模板函数:`add_why_slide()`, `add_hero_slide()`, `add_evidence_slide()`, `add_architecture_slide()`, `add_workflow_slide()`, `add_coverage_slide()`, `add_relationship_slide()`, `add_proof_slide()`, `add_limitations_slide()`, `add_bonus_slide()`, `add_cta_slide()`
 - 组件函数:`draw_stat_grid()`, `draw_decision_timeline()`, `draw_gene_drug_matrix()`, `draw_evidence_list()`, `draw_double_bar_chart()`, `draw_evidence_pyramid()`, `draw_phase_pill_row()`,...
 - 用法:
 
@@ -208,11 +208,13 @@ deck.save("output/blood_oncology_v5.pptx")
 
 PPT 不能像浏览器那样动态加载 web 字体。两条路:
 
-**A. 字体嵌入(推荐 · 离线场景):**
+**A. 字体嵌入(推荐 · Windows + 桌面 PowerPoint):**
 ```python
-deck = EditorialDeck(embed_fonts=True)  # 把 .ttf/.otf 嵌入 .pptx
+deck = EditorialDeck(embed_fonts=True)
 ```
-要求 `assets/fonts/` 目录含 Fraunces-VariableFont.ttf + Inter-VariableFont.ttf + JetBrainsMono.ttf,生成的 pptx 会带字体,任何机器打开都对。
+要求 Fraunces、Inter、JetBrains Mono 已安装，且字体自身允许文档嵌入。生成器先用 `python-pptx` 写文件，再调用 `assets/embed_pptx_fonts.ps1` 让桌面 Microsoft PowerPoint 以 `EmbedFonts=true` 重新保存，并逐一比对请求字体、`ppt/fonts/` 与 `embeddedFontLst`。仅注册了兼容 COM 的 WPS Office 不满足此要求。如果 PowerPoint 不可用、字体未安装或字体授权禁止嵌入，任务必须失败并列出请求字体或缺失字体，不能静默声称已嵌入。
+
+在非 Windows、没有桌面 PowerPoint或不需要嵌入时，使用 `embed_fonts=False` 和降级字体。
 
 **B. 字体降级(共享/在线场景):**
 - Fraunces → "Cambria"(Windows 自带) / "Times New Roman" 或客户机器装的衬线
@@ -247,7 +249,7 @@ deck = EditorialDeck(embed_fonts=True)  # 把 .ttf/.otf 嵌入 .pptx
 - [ ] 每张 slide 都有 eyebrow tag(顶部小字)+ 大标题 + 主组件
 - [ ] CTA slide 用赭石主色实心按钮形 shape
 - [ ] 16:9 1920×1080 分辨率
-- [ ] 字体已嵌入(检查 .pptx 解压后 ppt/embeddings/fonts/)
+- [ ] 请求字体嵌入时，`last_font_embedding_report.embedded == true`，且 .pptx 解压后存在 `ppt/fonts/` 和 `embeddedFontLst`
 
 ---
 
@@ -289,4 +291,4 @@ deck = EditorialDeck(embed_fonts=True)  # 把 .ttf/.otf 嵌入 .pptx
 - 跨项目沉淀视觉资产 — 同一作者的多份 deck 看起来像一个系列
 - 客户/老板第一眼会觉得"这是花了心思的",而不是"模板套出来的"
 
-源版本参考:`C:\Users\qiyon\Desktop\血液科市场调研_v5_desktop.html`
+源版本参考:血液科市场调研 v5 desktop deck。
