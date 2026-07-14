@@ -1,180 +1,121 @@
-<div align="center">
+# editorial-presentation-html
 
 [English](README.md) | **中文**
 
-</div>
+一套可变体的 warm editorial 演示设计系统，用于生成横向全屏 HTML deck 和程序化 PPTX。
 
-# YQ Editorial Presentation Skill
+该 Skill 在保留可识别的编辑设计 DNA 的同时，不会把所有主题都套进同一套米色配色、等宽卡片网格和固定 11 页叙事。它会先选择 style profile，规划语义化 slide manifest，通过确定性的新颖度惩罚减少重复，并在渲染前校验构图重复问题。
 
-> 一套用于浏览器全屏演示和 PPTX 交付的 warm editorial presentation skill。
+## 核心工作流
 
-这个 skill 会把 presentation 需求生成成横向全屏 HTML deck：保留 Pfizer 血液科 v5 的 warm editorial 配色，使用接近 guizang deck 的投影字号，并按数据关系选择图表表达，而不是默认把所有数字都画成条形图。
+1. 判断演示目的、受众、正式度、信息密度、输出格式和视觉发挥空间。
+2. 从 `references/style-index.json` 中选择一个兼容的 profile。
+3. 使用 `assets/plan_deck.py` 构建 HTML 与 PPTX 共用的 manifest。
+4. 按构图语法渲染，而不是按固定页面模板名称套版。
+5. 校验语义适配、相邻页面、连续几何、tone 节奏、卡片占比、视口行为和 PPTX 包边界。
 
----
+```bash
+python assets/plan_deck.py brief.json -o deck-manifest.json
+python assets/plan_deck.py deck-manifest.json --validate-only
+python assets/render_manifest.py deck-manifest.json --output-dir output/deck
+```
 
-## 效果预览
+相同的 brief、profile 和 seed 会生成相同的 manifest。变化由内容与 profile 选择控制，不依赖不可控的随机结果。
 
-### 投影尺度封面
-![投影尺度封面](screenshots/01_projection_hero.png)
+## 设计架构
 
-### 机制匹配矩阵
-![机制匹配矩阵](screenshots/02_mechanism_matrix.png)
-
-### 结论卡片页
-![结论卡片页](screenshots/03_conclusion_cards.png)
-
-### ESC 全局索引
-![ESC 全局索引](screenshots/04_esc_overview.png)
-
----
-
-## 这一版更新
-
-- skill 名称改为 **YQ Editorial Presentation Skill**。
-- HTML 模式改为真正的 `100vw x 100vh` 横向全屏 deck。
-- 字体尺度对齐 guizang 风格的演讲投影尺度：
-  - hero 标题目标 110px+
-  - 常规标题在 1920x1080 下目标 90-106px
-  - lead 正文目标 28-36px
-- 保留原 warm editorial 视觉 DNA：
-  - 米色底 `#FAF9F5`
-  - 赭石主色 `#CC785C`
-  - 医疗深红 `#8C2B3A`
-  - Pfizer 蓝 `#0095D5`
-  - Fraunces / Inter / JetBrains Mono
-- 图表生成改为先判断数据关系，再选择表达形式。
-- 改写已有 HTML 时增加 fullscreen、overview、页脚遮挡、内容沉底、投影字号的 QA 规则。
-
----
-
-## 设计 DNA
-
-| 层级 | 规则 |
+| 层级 | 职责 |
 |---|---|
-| 背景 | 暖米色、细噪声、编辑感径向光 |
-| 主色 | 赭石红 + 医疗深红、Pfizer 蓝、绿、金、紫 |
-| 标题 | Fraunces 衬线，建立演讲气场和编辑感 |
-| 正文 | Inter，适合医学 / 商业叙事的高密度阅读 |
-| 数据 | JetBrains Mono + tabular numerals |
-| 版式 | eyebrow tag -> 大标题 -> lead -> 关系组件 -> footer |
-| 演示壳 | 横向全屏 slide，支持键盘 / 滚轮 / 触屏 / 底部圆点 / ESC overview |
+| 不变 DNA | 编辑质感、证据可读性、角色化字体、固定舞台行为、无障碍对比度 |
+| Style profile | 配色角色、字体角色、明暗方案、材质处理、构图语法、背景节奏 |
+| 语义规划 | 叙事角色、数据关系、基数、系列数量、密度、不确定性、媒体条件 |
+| 新颖度规划器 | 惩罚近期使用过的构图、几何、tone 和注释结构 |
+| 质量门 | 拒绝语义误用、重复结构、视口失败和虚假的字体嵌入声明 |
 
----
+内置 profile 包括原始的 warm-paper/terracotta 方向，以及 cobalt、sage/oxblood、charcoal/citrus 和 teal/scarlet 等编辑设计方向。每个 profile 都会声明自己支持 HTML、PPTX 或两者：`charcoal-citrus-briefing` 仅支持 HTML，其余四个内置 profile 同时支持 HTML 和 PPTX。
 
-## 图表选择规则
+## 构图语法
 
-这一版不再把所有数字都转成条形图。
+规划器可以选择全幅陈述、主导指标、不对称图表、对比分栏、证据台账、流程轨道、带边注的矩阵、小多图、错位图文和编辑式马赛克等结构。
 
-| 数据关系 | 使用 |
-|---|---|
-| 一个重要数字 | `stat-card` / big number |
-| 多个独立 KPI | `stat-grid` / `stat-strip` |
-| 时间窗口或先后顺序 | `timeline` / `decision-window` |
-| 步骤到步骤 | `pipeline` / `phase-pill` |
-| 机制 / 基因型 / 产品匹配 | `matrix` / `gene-drug-map` |
-| 文献筛选数量递减 | `funnel` |
-| 证据强弱分层 | `pyramid` / `evidence-ladder` |
-| 同一指标跨对象比较 | `proof-bars` / ranked bars |
-| 患者旅程阶段覆盖 | `market-bars` |
-
-硬规则：独立 KPI、时间窗口、机制匹配、证据链、决策流程都不能强行画成 generic bar chart。
-
----
+对于 10-12 页的 deck，在内容允许时，默认质量门期望至少出现 5 个构图 ID 和 4 种主几何；未达到这两个多样性目标时会产生警告。相邻的非续页不能使用同一构图，任意连续 3 页不能使用同一主几何或 tone；这些重复会导致 manifest 校验失败。非标题页中的通用马赛克或卡片式结构占比超过 40% 时同样会校验失败。
 
 ## 输出模式
 
-| | HTML 模式 | PPTX 模式 |
+| | HTML | PPTX |
 |---|---|---|
-| 保真度 | 最高 | 85-90% |
-| 格式 | 单文件 `.html` | 由 python-pptx 生成 `.pptx` |
-| 导航 | 左右键、滚轮、触屏、圆点、ESC overview | PowerPoint 原生翻页 |
-| 画布 | `100vw x 100vh`，无页面纵向滚动 | 16:9 |
-| 适合 | 浏览器演示、教学、策略路径讲解 | 客户交付、高管会、传统 PPT 场景 |
+| Shell | `assets/deck-shell.html` | `assets/generate_pptx.py` |
+| 画布 | `100vw × 100vh` | 16:9 |
+| 导航 | 键盘、滚轮、触摸、圆点、ESC overview | PowerPoint 原生幻灯片导航 |
+| 规划 | 共用 manifest | 共用 manifest |
+| Profiles | 所有声明支持 HTML 的 profile | 仅声明支持 PPTX 的 profile |
+| 字体处理 | Web 字体或系统字体回退 | 经验证的 PowerPoint 字体嵌入，或明确回退 |
 
----
+`assets/starter-template.html` 仅保留为旧版 Pfizer 组件展示，不再是默认 shell，也不是 deck 蓝图。
+
+共享 renderer 会先验证 manifest，再生成 `deck.html`、`deck.pptx` 和 `render-report.json`。它会把同一份 manifest 的 SHA256 写入两种输出，并记录每页的 composition 与 major-region signature。只需要一种格式时，可以分别使用 `--html-only` 或 `--pptx-only`。
+
+## PPTX 示例
+
+```python
+import json
+from assets.generate_pptx import EditorialDeck
+
+manifest = json.load(open("deck-manifest.json", encoding="utf-8"))
+deck = EditorialDeck(
+    industry="tech",
+    style_profile=manifest["deck_profile"],
+    manifest=manifest,
+    embed_fonts=False,
+)
+# Add slides according to manifest composition and semantic decisions.
+deck.save("output/deck.pptx")
+```
+
+当请求嵌入字体时，辅助程序要求使用真正的桌面版 Microsoft PowerPoint，并会验证请求的字体、`ppt/fonts/` 和 `embeddedFontLst`。WPS 产生的虚假成功路径会被拒绝。
+
+## 预览
+
+![Hero 示例](screenshots/01_hero.png)
+
+![Evidence 示例](screenshots/03_evidence_pyramid.png)
+
+![Architecture 示例](screenshots/04_architecture.png)
 
 ## 仓库结构
 
 ```text
-editorial-presentation-skill/
+editorial-presentation-html/
 ├── SKILL.md
 ├── README.md
 ├── README_zh.md
 ├── assets/
+│   ├── deck-shell.html
 │   ├── starter-template.html
-│   └── generate_pptx.py
+│   ├── plan_deck.py
+│   ├── render_manifest.py
+│   ├── generate_pptx.py
+│   └── embed_pptx_fonts.ps1
 ├── references/
+│   ├── style-index.json
+│   ├── visual-grammar.md
 │   ├── design-tokens.md
 │   ├── typography.md
 │   ├── chart-selection.md
 │   ├── components.md
 │   ├── layouts.md
-│   ├── rewrite-existing-html.md
 │   ├── qa.md
 │   └── pptx-mode.md
-├── evals/
-│   └── evals.json
-└── screenshots/
+└── evals/
+    └── evals.json
 ```
-
----
 
 ## 安装
 
-克隆到你的 skills 目录：
-
 ```bash
 git clone https://github.com/EthanYoQ/editorial-presentation-skill.git \
-  ~/.claude/skills/yq-editorial-presentation-skill
+  ~/.claude/skills/editorial-presentation-html
+pip install python-pptx Pillow
 ```
 
-PPTX 模式需要：
-
-```bash
-pip install python-pptx
-```
-
----
-
-## 使用方式
-
-HTML 模式默认启用：
-
-```text
-帮我做一个关于 [主题] 的 presentation，给 [受众] 看。
-要求能浏览器全屏演示，适合现场讲课。
-```
-
-改写已有 HTML deck：
-
-```text
-使用 YQ Editorial Presentation Skill 改写这份 HTML deck。
-保留全部内容，只更新演示 shell、版式、字号和图表表达。
-```
-
-PPTX 模式：
-
-```text
-用同一套 warm editorial 设计语言生成一份 PPTX 版本。
-```
-
----
-
-## QA 标准
-
-生成的 HTML deck 应通过：
-
-- 改写任务中 slide 数量保持一致
-- `1920x1080` 和 `1440x900` 下无页面纵向滚动条
-- ESC overview 能显示所有 slide
-- 1920 下常规标题中位数接近 90-106px
-- lead 正文保持投影可读
-- 页脚不遮挡图表或证据文字
-- `dense-slide` 不能被当作 `compact`
-- 除非内容只有一种数据关系，否则至少使用 3 类图表表达家族
-
----
-
-## License
-
-可用于并改造到你自己的 presentation 工作流中。
+完整运行约束见 `SKILL.md`；规划与反重复规则见 `references/visual-grammar.md`。

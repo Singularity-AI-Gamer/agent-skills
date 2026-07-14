@@ -93,8 +93,20 @@ operations.
 
 ## Packaging And Publishing
 
-- Run the quality audit first.
-- Keep only SKILL.md and required scripts, references, assets, and evals.
+- Run the quality and secret/privacy audit first and persist its report before
+  creating or copying the package. The report timestamp must precede package
+  creation.
+- Inventory every source file and scan file names and contents. At minimum,
+  detect quoted or unquoted JSON/YAML credential keys (`password`, `secret`,
+  `token`, `api_key`, `client_secret`, and equivalents), environment-variable
+  assignments, bearer tokens, private-key blocks, personal absolute paths,
+  email addresses, and account identifiers.
+- Fail closed when a source file cannot be read, a finding is not classified,
+  or the audit pattern set cannot examine the file type. Correct the audit and
+  rerun it before packaging; a post-package scan cannot satisfy this gate.
+- Keep only an explicit allowlist of SKILL.md and required scripts, references,
+  assets, and evals. Filename exclusion is defense in depth, not a substitute
+  for the content scan.
 - Remove caches, generated outputs, logs, credentials, and personal paths.
 - Record provenance and version when derived from another source.
 - Update Skill Hub lock, source, name, domain, platform, and README counts.

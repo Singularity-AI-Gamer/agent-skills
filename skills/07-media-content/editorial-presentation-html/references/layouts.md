@@ -1,6 +1,6 @@
 # Layouts · Warm Editorial Fullscreen Deck
 
-这些布局保留血液科 v5 的 warm editorial 设计语言,但输出形态是横向全屏 deck。每页固定 `100vw × 100vh`,通过 `#deck` 横向翻页,不是纵向滚动网页。
+这些布局保留 warm editorial 的固定舞台、阅读尺度和证据纪律，但具体 palette、materiality 与 composition grammar 来自选定 profile。每页固定 `100vw × 100vh`，通过 `#deck` 横向翻页，不是纵向滚动网页。
 
 ## 基础结构
 
@@ -42,12 +42,31 @@
 
 | 类 | 用途 |
 |---|---|
-| `tone-paper` | 默认米色底,最接近 v5 主体页 |
-| `tone-warm` | 次级暖米底,用于章节切换和 evidence 页 |
-| `tone-hero` | hero / cover,保留 v5 径向光晕和网格噪声 |
-| `tone-soft` | 轻强调页,适合 timeline / matrix |
+| `tone-canvas` | profile 默认 canvas |
+| `tone-surface` | profile surface，用于高密度阅读区 |
+| `tone-contrast` | profile contrast surface，用于章节变化或证据强调 |
+| `tone-statement` | profile 的 statement/inversion 处理，用于少量强节拍 |
 
-不要新增整页深蓝、深红、appendix 主题。品牌色只做局部语义高亮。
+legacy 类 `tone-paper` / `tone-warm` / `tone-hero` / `tone-soft` 仅用于 `warm-paper-terracotta`。其他 profile 使用角色类。背景按 profile cadence 规划；不连续三页重复 tone，也不逐页随机换色。
+
+## Composition grammars
+
+先在 manifest 中选择构图，再写 DOM。组件不决定整页 anatomy。
+
+| composition_id | 区域结构 | 容量边界 |
+|---|---|---|
+| `statement-full-bleed` | 单命题 + 一个视觉锚点 | 1 claim，最多 2 annotations |
+| `dominant-metric-marginalia` | 5-8 栏主数字 + 边注 | 1 dominant metric + 1-3 notes |
+| `chart-notes-asymmetric` | 7-9 栏 chart + 3-5 栏 evidence notes | 1 chart，最多 5 notes |
+| `comparison-split` | 5/7 或 6/6 对比 | 2-3 comparable groups |
+| `ledger-takeaway-band` | reading ledger + takeaway band | 4-14 rows，按字号底线拆页 |
+| `process-rail` | 水平/折线 rail + stage annotations | 3-7 stages |
+| `matrix-marginalia` | matrix + rule/exception margin | 最大约 6×6，超出拆分 |
+| `small-multiple-field` | 2×2、2×3 或 1×4 shared-scale plots | 4-8 series |
+| `image-text-offset` | 7/5 或 8/4 media/text offset | 必须有真实相关 media |
+| `editorial-mosaic` | 不等 span 的 12-column regions | 3-7 heterogeneous items |
+
+每个 profile 可以改变 span、border、depth、caption 和 decoration 规则，但必须保持上述语义容量。不要把 `editorial-mosaic` 实现成等宽白卡阵列。
 
 ## 推荐页型
 

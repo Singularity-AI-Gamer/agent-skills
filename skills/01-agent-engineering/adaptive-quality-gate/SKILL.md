@@ -108,6 +108,19 @@ Select only dimensions that can change the release decision:
 Do not automatically use every dimension. A gate that cannot affect acceptance
 adds noise and weakens attention to the real risks.
 
+For filesystem deletion, overwrite, or move operations, make path containment
+a hard safety gate. Resolve the approved root and every target to canonical
+absolute paths, account for links or junctions, and prove each target is a
+strict descendant of the intended root. A target equal to the root, outside
+it, or merely sharing its text prefix must fail the gate. Keep evidence-based
+content classification as a separate criterion so a path can be contained but
+still protected as source, user data, or an unknown dependency. Before live
+execution, require a read-only preview of the exact operation set. Skip unknown
+candidates unless they have an explicit, verified backup or quarantine and a
+tested recovery path; user permission to delete does not substitute for that
+evidence. Verify the resulting filesystem and record executed, skipped, and
+unverified targets before claiming completion.
+
 ### Threshold Rules
 
 Prefer thresholds in this order:

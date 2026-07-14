@@ -35,6 +35,7 @@ Usage:
 """
 
 import json
+import importlib.util
 import os
 from pathlib import Path
 import subprocess
@@ -76,6 +77,78 @@ COLORS = {
     "white":         RGBColor(255, 255, 255),
 }
 
+STYLE_INDEX_PATH = Path(__file__).resolve().parents[1] / "references" / "style-index.json"
+
+
+def _hex_color(value):
+    value = value.lstrip("#")
+    if len(value) != 6:
+        raise ValueError(f"Expected six-digit hex color, got: {value!r}")
+    return RGBColor(*(int(value[index:index + 2], 16) for index in (0, 2, 4)))
+
+
+def _blend_color(left, right, right_weight):
+    weight = float(right_weight)
+    return RGBColor(*(round(a * (1 - weight) + b * weight) for a, b in zip(left, right)))
+
+
+def _load_style_profiles():
+    data = json.loads(STYLE_INDEX_PATH.read_text(encoding="utf-8"))
+    return {profile["id"]: profile for profile in data["profiles"]}
+
+
+def _validate_manifest_file_local(manifest):
+    planner_path = Path(__file__).with_name("plan_deck.py")
+    spec = importlib.util.spec_from_file_location("editorial_plan_deck", planner_path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError(f"Unable to load deck planner: {planner_path}")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module.validate_manifest(manifest)
+
+
+def _profile_colors(profile):
+    palette = {key: _hex_color(value) for key, value in profile["palette"].items()}
+    canvas = palette["canvas"]
+    surface = palette["surface"]
+    ink = palette["ink"]
+    primary = palette["primary"]
+    secondary = palette["secondary"]
+    return {
+        "canvas": canvas,
+        "surface": surface,
+        "contrast_surface": palette["contrast_surface"],
+        "ink": ink,
+        "muted": palette["muted"],
+        "primary": primary,
+        "secondary": secondary,
+        "signal": palette["signal"],
+        "positive": palette["positive"],
+        "negative": palette["negative"],
+        "bg_0": canvas,
+        # Legacy page methods assume dark text on bg_1/bg_2. Keep those aliases
+        # light-readable; new manifest renderers may use contrast_surface directly.
+        "bg_1": _blend_color(canvas, primary, 0.08),
+        "bg_2": _blend_color(canvas, primary, 0.14),
+        "bg_surface": surface,
+        "text_0": ink,
+        "text_1": _blend_color(ink, canvas, 0.12),
+        "text_2": palette["muted"],
+        "text_3": palette["muted"],
+        "accent": primary,
+        "accent_hot": _blend_color(primary, surface, 0.35),
+        "accent_deep": _blend_color(primary, ink, 0.25),
+        "brand_blue": secondary,
+        "brand_purple": _blend_color(secondary, primary, 0.35),
+        "brand_gold": palette["signal"],
+        "brand_green": palette["positive"],
+        "brand_red": palette["negative"],
+        "brand_pink": _blend_color(primary, secondary, 0.45),
+        "border_soft": _blend_color(canvas, ink, 0.10),
+        "border": _blend_color(canvas, ink, 0.18),
+        "white": RGBColor(255, 255, 255),
+    }
+
 INDUSTRY_VERTICAL = {
     "medical":   RGBColor(140, 43, 58),    # #8C2B3A 深红血色
     "tech":      RGBColor(26, 58, 110),    # #1A3A6E 深海军蓝
@@ -116,6 +189,8 @@ class EditorialDeck:
         embed_fonts=False,
         aspect_ratio="16:9",
         font_overrides=None,
+        style_profile="warm-paper-terracotta",
+        manifest=None,
     ):
         self.title = title
         self.industry = industry
@@ -125,7 +200,17 @@ class EditorialDeck:
         if missing_font_roles:
             raise ValueError(f"font_overrides missing roles: {sorted(missing_font_roles)}")
         self.last_font_embedding_report = None
-        self.colors = dict(COLORS)
+        profiles = _load_style_profiles()
+        if style_profile not in profiles:
+            raise ValueError(f"Unknown style_profile {style_profile!r}; choose from {sorted(profiles)}")
+        if "pptx" not in profiles[style_profile].get("formats", ["html", "pptx"]):
+            raise ValueError(f"style_profile {style_profile!r} is not PPTX-compatible")
+        self.style_profile = style_profile
+        self.style_profile_metadata = profiles[style_profile]
+        self.manifest = manifest
+        if manifest and manifest.get("deck_profile") not in {None, style_profile}:
+            raise ValueError("manifest deck_profile must match style_profile")
+        self.colors = _profile_colors(profiles[style_profile])
         self.colors["industry_vertical"] = INDUSTRY_VERTICAL.get(industry, INDUSTRY_VERTICAL["medical"])
 
         self.prs = Presentation()
@@ -480,6 +565,10 @@ class EditorialDeck:
 
     def save(self, path):
         """导出 .pptx；需要时调用桌面 PowerPoint 做真实字体嵌入。"""
+        if self.manifest:
+            validation = _validate_manifest_file_local(self.manifest)
+            if not validation["passed"]:
+                raise ValueError(f"Deck manifest failed anti-repetition validation: {validation['errors']}")
         output_path = Path(path).expanduser().resolve()
         output_path.parent.mkdir(parents=True, exist_ok=True)
         if not self.embed_fonts:
@@ -623,7 +712,7 @@ class EditorialDeck:
         return tb
 
     def _add_gradient_text(self, slide, x, y, w, h, text, font, size, bold=True, align="left"):
-        """渐变文字(深蓝→赭石→金 三色 stop)"""
+        """渐变文字(按所选 profile 的 secondary → primary → signal)。"""
         tb = self._add_text(slide, x, y, w, h, text, font, size, bold=bold, align=align)
         # 写入 XML 添加 gradient fill
         tf = tb.text_frame
@@ -637,13 +726,13 @@ class EditorialDeck:
         gsLst = etree.SubElement(gradFill, qn("a:gsLst"))
         # 深蓝 0%
         gs1 = etree.SubElement(gsLst, qn("a:gs"), {"pos": "0"})
-        clr1 = etree.SubElement(gs1, qn("a:srgbClr"), {"val": "1E3A5F"})
+        clr1 = etree.SubElement(gs1, qn("a:srgbClr"), {"val": str(self.colors["brand_blue"])})
         # 赭石 55%
         gs2 = etree.SubElement(gsLst, qn("a:gs"), {"pos": "55000"})
-        clr2 = etree.SubElement(gs2, qn("a:srgbClr"), {"val": "CC785C"})
+        clr2 = etree.SubElement(gs2, qn("a:srgbClr"), {"val": str(self.colors["accent"])})
         # 金 100%
         gs3 = etree.SubElement(gsLst, qn("a:gs"), {"pos": "100000"})
-        clr3 = etree.SubElement(gs3, qn("a:srgbClr"), {"val": "B8903C"})
+        clr3 = etree.SubElement(gs3, qn("a:srgbClr"), {"val": str(self.colors["brand_gold"])})
         # 线性方向 135 度
         lin = etree.SubElement(gradFill, qn("a:lin"), {"ang": "8100000", "scaled": "1"})
         return tb
@@ -1675,7 +1764,7 @@ if __name__ == "__main__":
     # Slide 7: CTA
     deck.add_cta_slide(
         eyebrow="THE TEAM & CALL-TO-ACTION",
-        team=["YongQi", "SimonSu", "VivienZhan", "RuiYu", "YingJi"],
+        team=["Strategy Lead", "Research Lead", "Design Lead", "Engineering Lead", "Quality Lead"],
         tech_stack=["Claude Code", "22 Skills", "Codex", "Mermaid ELK", "Puppeteer", "Cite-or-Block"],
         ctas=[
             {"tag": "主钩 A · 轻量门票", "time": "1 周", "title": "一句话疾病名 → demo",
@@ -1685,7 +1774,7 @@ if __name__ == "__main__":
             {"tag": "Q&A 加码", "time": "3 月", "title": "5 治疗领域同步",
              "desc": "肿瘤 / 心血管 / 内分泌 / 血液 / 罕见病 — 3 月 5 套报告同步出。", "primary": False},
         ],
-        contact="yong.qi.gpt@gmail.com",
+        contact="presenter@example.com",
     )
 
     out = deck.save("editorial_demo.pptx")

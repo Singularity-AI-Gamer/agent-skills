@@ -1,8 +1,42 @@
 # Design Tokens
 
-> 这是这套设计语言的"DNA"。生成任何 HTML presentation 的**第一件事**就是把下面这块 `:root` 完整粘到 `<style>` 里。不要简化,不要重命名,不要"优化"——每个变量都在某个组件里被用到,缺一个就会破坏视觉系统。
+颜色值不是设计 DNA。先从 `style-index.json` 选择一个 profile，再把 profile 的角色色映射到组件兼容别名。只有用户明确锁定原始 Pfizer look 时，才使用下方 legacy block。
 
-## 完整 :root 区块(直接复制使用)
+## 角色 token 合同（所有 profile 必须提供）
+
+```css
+:root {
+  --canvas: #F7F6F2;
+  --surface: #FFFFFF;
+  --contrast-surface: #17243A;
+  --ink: #152033;
+  --muted: #566174;
+  --primary: #2463A7;
+  --secondary: #D06F52;
+  --signal: #D6A53B;
+  --positive: #397A62;
+  --negative: #B94B55;
+
+  /* Compatibility aliases for existing components. */
+  --bg-0: var(--canvas);
+  --bg-1: color-mix(in srgb, var(--canvas) 92%, var(--ink));
+  --bg-2: color-mix(in srgb, var(--canvas) 84%, var(--ink));
+  --bg-surface: var(--surface);
+  --text-0: var(--ink);
+  --text-1: color-mix(in srgb, var(--ink) 88%, var(--canvas));
+  --text-2: var(--muted);
+  --text-3: var(--muted);
+  --accent: var(--primary);
+  --brand-blue: var(--secondary);
+  --brand-gold: var(--signal);
+  --brand-green: var(--positive);
+  --brand-red: var(--negative);
+}
+```
+
+Do not hard-code profile RGB values inside components. Semantic status colors remain stable within one deck. Use the selected profile's typography metadata for display/body/data roles and provide system fallbacks.
+
+## Legacy Pfizer profile block
 
 ```css
 :root {
@@ -69,8 +103,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 ```
 
-**关键参数解释**:
-- `Fraunces` 用 `opsz` 可变光学尺寸(9..144),让 60px 大标题和 14px 小标题都最优——不要换成 Playfair 或其他衬线,Fraunces 是这套设计辨识度的一半
+**原始 profile 的关键参数解释**:
+- `Fraunces` 用 `opsz` 可变光学尺寸(9..144),让 60px 大标题和 14px 小标题都最优。其他 profile 按 `style-index.json` 选择自己的 display 字体。
 - `Inter` 加载 5 个字重(400/500/600/700/800),覆盖正文到强调
 - `JetBrains Mono` 用于数据/代码/PMID/技术 metadata,不要换成 Courier
 
@@ -94,7 +128,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* 噪声纹理叠层 · 温暖感的一半来源 · 不要删 */
+/* 噪声纹理叠层；按 profile materiality 调整，不能压低可读性。 */
 body::before {
   content: '';
   position: fixed;
@@ -152,14 +186,6 @@ body::before {
 | 大容器 / 报告框 | 16-20px |
 | 胶囊形(eyebrow / phase-count) | 100px |
 
-## 应用此 token 系统到非医疗领域
+## 应用到不同领域
 
-如果要做的是科技/金融/教育/消费类:
-
-1. **保持** 米色底 + 6 品牌色 + 衬线/无衬线 + 噪声纹理 + 圆角阴影系统
-2. **替换** `--hema-crimson` 为对应行业垂直主色:
-   - 科技/SaaS:`#1A3A6E`(深海军蓝)
-   - 金融/财经:`#2D5A3A`(深森林绿)
-   - 教育/学术:`#4A2D5C`(深紫罗兰)
-   - 时尚/消费:`#7A2940`(深酒红)
-3. **保留** 主 accent `#CC785C` 赭石——这是 Anthropic 风格的灵魂,换了就不是这套设计了
+不要只替换一个行业色。用 purpose、audience、formality、density、mood 和 scheme 从 `style-index.json` 选择 profile；再保持该 profile 的 palette、type roles、materiality、composition grammar 和 cadence。用户锁定原始 Pfizer look 时才使用米色 + 赭石 legacy profile。

@@ -163,9 +163,14 @@ For usage cleanup, do not use filesystem `LastAccessTime` as proof. Prefer
 explicit invocation evidence, session/tool logs, loadability metadata, then
 filesystem presence. Quarantine uncertain candidates instead of deleting them.
 
-For publishing, keep only runtime-relevant skill files, remove generated
-outputs and private data, record provenance, update indexes, and deliberately
-synchronize source and installed copies.
+For publishing, complete and save the quality and secret/privacy audit before
+creating or copying the package. Scan file contents as well as names, including
+quoted JSON/YAML credential keys, environment assignments, tokens, private
+keys, personal paths, and identifiers. Treat an unreadable file or an
+unclassified finding as a failed gate; do not package first and repair the
+audit afterward. Then keep only allowlisted runtime-relevant skill files,
+remove generated outputs and private data, record provenance, update indexes,
+and deliberately synchronize source and installed copies.
 
 Read [references/governance-and-reporting.md](references/governance-and-reporting.md)
 for the full gates, evidence labels, and output templates.

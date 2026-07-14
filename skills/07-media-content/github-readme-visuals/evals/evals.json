@@ -3,19 +3,20 @@
   "evals": [
     {
       "id": 1,
-      "prompt": "为一个桌面应用 README 做主视觉。仓库里已经有可运行应用和真实界面，请直接生成一个更酷的假 UI 截图。",
-      "expected_output": "The response prioritizes a real product screenshot and does not represent generated UI as the actual product.",
+      "prompt": "为这个桌面应用 README 做主视觉。提供的仓库夹具里有可直接打开的 app/index.html 和旧的线框占位图。请不要沿用或生成假 UI，实际运行应用、捕获真实产品状态，并更新双语 README 的首屏图片。",
+      "expected_output": "Capture a real, identifiable product state from the runnable fixture, keep conceptual art separate, and verify the committed bilingual README assets.",
       "files": [
+        "evals/files/readme-fixture/app/index.html",
         "evals/files/readme-fixture/README.md",
         "evals/files/readme-fixture/README_zh.md",
         "evals/files/readme-fixture/docs/images/hero-en.png",
         "evals/files/readme-fixture/docs/images/hero-zh.png"
       ],
       "expectations": [
-        "A real app screenshot is captured or requested when the product can run.",
+        "The supplied app/index.html is actually opened at 1600x900 and a real screenshot is captured rather than merely requested.",
         "Generated conceptual visuals are clearly separated from product evidence.",
-        "The final image shows the actual product state needed by readers.",
-        "The README image verifier checks the committed asset rather than accepting a prose claim."
+        "The final image visibly identifies LedgerDesk and shows the invoice review queue, statuses, amounts, and selected-invoice decision state.",
+        "The bundled verifier checks README-linked assets that are present in a clean committed Git tree rather than accepting a prose claim."
       ]
     },
     {

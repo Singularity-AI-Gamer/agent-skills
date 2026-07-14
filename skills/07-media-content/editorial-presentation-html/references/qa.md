@@ -18,6 +18,23 @@
 - ESC overview 展示所有 slide 缩略图。
 - overview 不应需要纵向滚动,除非 slide 超过 24 页且用户接受多屏索引。
 
+## Manifest 与反重复检查
+
+生成前运行：
+
+```bash
+python assets/plan_deck.py deck-manifest.json --validate-only
+```
+
+必须同时检查：
+
+- 相邻非续页 `composition_id` 不重复。
+- 不存在连续三页相同 `dominant_geometry` 或 `tone_id`。
+- 10-12 页 deck 在内容允许时至少 5 个 composition、4 个 geometry。
+- generic card/mosaic anatomy 不超过非标题页的 40%。
+- 重复表达家族改变构图或 annotation anatomy。
+- 相同 brief + profile + seed 重跑得到相同 manifest hash。
+
 ## 静态检查
 
 必须 grep:
@@ -37,6 +54,9 @@
 - 内容最密的一页:确认文字可读、页脚不遮挡。
 - 结论/CTA 页:确认没有沉底。
 - ESC overview:确认缩略图数量和布局。
+- contact sheet:忽略文字后仍能辨认 statement、split、ledger、process、matrix、image/mosaic 等不同节拍。
+
+对非续页记录主要 region 的数量与 bounding boxes；DOM/PPTX region signature 相同或截图感知相似度过高时人工复核。检查 palette histogram 与背景 tone run。重复是内容驱动时，在 release note 中记录例外。
 
 ## Creator-style 结果记录
 
@@ -55,4 +75,4 @@
 }
 ```
 
-如果任何 P0 断言失败,不要只修产物。先判断是否需要更新 skill 的 `layouts.md` / `checklist.md` / starter template。
+如果任何 P0 断言失败,不要只修产物。先判断是否需要更新 skill 的 `visual-grammar.md` / `layouts.md` / `checklist.md` / `deck-shell.html`。

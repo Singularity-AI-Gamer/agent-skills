@@ -75,7 +75,8 @@
       "expectations": [
         "The four public methods exist and execute.",
         "The saved PPTX reopens with the correct slide count.",
-        "Method behavior matches the public API list in SKILL.md."
+        "Method behavior matches the public API list in SKILL.md.",
+        "The signatures documented in references/pptx-mode.md match the implemented required eyebrow/title parameters and optional method-specific parameters."
       ]
     },
     {
@@ -89,6 +90,42 @@
         "Embedding fails when font parts are absent.",
         "Embedding also fails when requested fonts and embeddedFontLst do not fully match.",
         "The failure identifies the Microsoft PowerPoint and font-license requirements."
+      ]
+    },
+    {
+      "id": 9,
+      "prompt": "同一份 AI 平台内容要做两套方向：一套给正式、reading-first 的董事会审阅，一套给 speaker-led 的产品发布。请实际运行 skill 的规划能力，证明视觉方向会随受众和密度改变，同时同一 brief + profile + seed 可复现。",
+      "expected_output": "Generate and compare deterministic manifests through the profile selector, with controlled cross-brief variance and same-input reproducibility.",
+      "files": [],
+      "expectations": [
+        "A machine-readable style index exposes at least four profiles with purpose/audience-relevant metadata, palette roles, typography roles, composition grammar, cadence, and output-format support.",
+        "The planning tool actually runs for both briefs and produces valid manifests whose selected profile or composition/tone sequence differs in response to formality and density rather than random per-slide colors.",
+        "Running an identical brief twice with the same locked profile and seed produces byte-equivalent normalized planning decisions.",
+        "Both generated manifests pass adjacency, three-slide geometry/tone-run, and card-share validation."
+      ]
+    },
+    {
+      "id": 10,
+      "prompt": "做一份 10 页运营复盘，素材故意很容易被做成 KPI 卡片：1 个核心数字、6 个独立 KPI、3 季度趋势、区域对比、5 步流程、产品匹配矩阵、证据与限制、案例和结论。请生成 HTML/PPTX 共用的 slide manifest，并证明不会退化成同色同构的卡片墙。",
+      "expected_output": "Plan a semantically valid ten-slide deck with measurable composition, geometry, tone, and card-share diversity gates.",
+      "files": [],
+      "expectations": [
+        "A ten-slide machine-readable manifest is produced from semantic inputs before rendering and is usable by both HTML and PPTX workflows.",
+        "The manifest contains at least five composition IDs and four dominant geometries, with zero adjacent non-continuation composition duplicates and no three-slide geometry or tone run.",
+        "Generic mosaic/card-like anatomy covers no more than 40 percent of non-title slides, and multiple KPIs are not all mapped to equal stat cards or proof bars.",
+        "The planner is deterministic for a stable seed and rejects an intentionally invalid repeated-composition manifest with actionable errors."
+      ]
+    },
+    {
+      "id": 11,
+      "prompt": "把一份 10 页、至少包含 statement、metric、trend、comparison、workflow、matrix、evidence 和 case 的 manifest 同时渲染成 HTML 与 PPTX。请实际打开 HTML、重开 PPTX，并证明两种格式消费的是同一规划，而不是各自退化成同一种卡片模板。",
+      "expected_output": "Render and inspect both formats from one manifest, including browser, package, region-signature, tone, and negative-boundary evidence.",
+      "files": [],
+      "expectations": [
+        "A shared renderer produces valid deck.html, deck.pptx, and render-report.json from one validated manifest, and the same normalized manifest SHA256 is embedded in both outputs.",
+        "Browser checks at 1920x1080 and 1440x900 confirm ten fullscreen slides, working navigation/overview, no viewport overflow, at least five distinct major-region signatures, and at least three rendered tone/background classes.",
+        "The PPTX reopens with ten slides, preserves slide/composition order, exposes at least five distinct shape-region signatures, and uses at least three background/tone mappings rather than one repeated card grid.",
+        "The renderer rejects an invalid repeated manifest and rejects a dual-format request for an HTML-only profile with actionable errors."
       ]
     }
   ]

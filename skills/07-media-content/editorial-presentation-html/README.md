@@ -1,180 +1,119 @@
-<div align="center">
+# editorial-presentation-html
 
 **English** | [中文](README_zh.md)
 
-</div>
+A variable warm-editorial presentation system for fullscreen HTML decks and programmatic PPTX output.
 
-# YQ Editorial Presentation Skill
+The skill preserves a recognizable editorial design DNA without forcing every subject into the same beige palette, equal-card grid, and eleven-slide story. It selects a style profile, plans a semantic slide manifest, applies deterministic novelty penalties, and validates repetition before rendering.
 
-> A warm editorial presentation skill for browser-first slide decks and PPTX handoff.
+## Core Workflow
 
-This skill turns presentation requests into full-screen horizontal HTML decks with the Pfizer hematology v5 warm editorial palette, guizang-scale projection typography, relationship-aware chart selection, and optional PPTX generation.
+1. Classify purpose, audience, formality, density, output format, and visual latitude.
+2. Select one compatible profile from `references/style-index.json`.
+3. Build a shared HTML/PPTX manifest with `assets/plan_deck.py`.
+4. Render from composition grammar rather than page-template names.
+5. Validate semantics, adjacency, geometry runs, tone cadence, card share, viewport behavior, and PPTX package boundaries.
 
----
+```bash
+python assets/plan_deck.py brief.json -o deck-manifest.json
+python assets/plan_deck.py deck-manifest.json --validate-only
+python assets/render_manifest.py deck-manifest.json --output-dir output/deck
+```
 
-## Preview
+The same brief, profile, and seed produce the same manifest. Variation is controlled by content and profile selection, not uncontrolled randomness.
 
-### Projection-Scale Hero
-![Projection-scale hero](screenshots/01_projection_hero.png)
+## Design Architecture
 
-### Mechanism Matrix
-![Mechanism matrix](screenshots/02_mechanism_matrix.png)
-
-### Conclusion Cards
-![Conclusion cards](screenshots/03_conclusion_cards.png)
-
-### ESC Overview
-![ESC overview](screenshots/04_esc_overview.png)
-
----
-
-## What Changed In This Version
-
-- Skill name changed to **YQ Editorial Presentation Skill**.
-- HTML mode is now a true `100vw x 100vh` horizontal deck.
-- Projection typography is aligned to guizang-style fullscreen decks:
-  - hero titles: 110px+ target
-  - regular titles: 90-106px target at 1920x1080
-  - lead text: 28-36px target
-- Warm editorial visual DNA is preserved:
-  - cream background `#FAF9F5`
-  - ochre accent `#CC785C`
-  - hematology crimson `#8C2B3A`
-  - Pfizer blue `#0095D5`
-  - Fraunces / Inter / JetBrains Mono
-- Chart generation now chooses by data relationship instead of defaulting to bars.
-- Existing HTML rewrite mode includes QA rules for fullscreen, overview, footer overlap, sunk slides, and typography scale.
-
----
-
-## Design DNA
-
-| Layer | Rule |
+| Layer | Responsibility |
 |---|---|
-| Background | Warm cream with subtle noise and radial editorial light |
-| Accent | Ochre red plus medical crimson, Pfizer blue, green, gold, purple |
-| Heading | Fraunces serif for authority and editorial contrast |
-| Body | Inter for dense but readable clinical / business narration |
-| Data | JetBrains Mono and tabular numerals |
-| Layout | Eyebrow tag -> large title -> lead -> relationship component -> footer |
-| Deck Shell | Horizontal fullscreen slides, keyboard / wheel / touch navigation, ESC overview |
+| Invariant DNA | Editorial materiality, evidence readability, role-based type, fixed-stage behavior, accessible contrast |
+| Style profile | Palette roles, typography roles, scheme, material treatment, composition grammar, background cadence |
+| Semantic plan | Narrative role, data relation, cardinality, series count, density, uncertainty, media |
+| Novelty planner | Penalizes recently used composition, geometry, tone, and annotation anatomy |
+| Quality gate | Rejects semantic misuse, repeated anatomy, viewport failures, and false font-embedding claims |
 
----
+The included profiles cover the original warm-paper/terracotta look plus cobalt, sage/oxblood, charcoal/citrus, and teal/scarlet editorial directions. Profiles declare whether they support HTML, PPTX, or both.
 
-## Chart Selection Rules
+## Composition Grammar
 
-The skill no longer turns every number into a bar chart.
+The planner can choose statement, dominant-metric, asymmetric chart, comparison split, evidence ledger, process rail, matrix with marginalia, small multiples, image/text offset, and editorial mosaic structures.
 
-| Data relationship | Use |
-|---|---|
-| One important number | `stat-card` / big number |
-| Multiple independent KPIs | `stat-grid` / `stat-strip` |
-| Time window or sequence | `timeline` / `decision-window` |
-| Step-by-step process | `pipeline` / `phase-pill` |
-| Mechanism / genotype / product matching | `matrix` / `gene-drug-map` |
-| Literature screening | `funnel` |
-| Evidence level | `pyramid` / `evidence-ladder` |
-| Same metric across objects | `proof-bars` / ranked bars |
-| Patient journey coverage | `market-bars` |
-
-Hard rule: independent KPIs, time windows, mechanism matching, evidence chains, and decision flows must not be forced into generic bar charts.
-
----
+For a 10-12 slide deck, the default gate expects at least five composition IDs and four dominant geometries when the content permits. Adjacent non-continuation slides cannot share a composition, and no three-slide run may share the same geometry or tone.
 
 ## Output Modes
 
-| | HTML Mode | PPTX Mode |
+| | HTML | PPTX |
 |---|---|---|
-| Fidelity | Highest | 85-90% |
-| Format | Single `.html` file | `.pptx` generated by python-pptx |
-| Navigation | Left/right, wheel, touch, dots, ESC overview | Native slide navigation |
-| Canvas | `100vw x 100vh`, no vertical page scroll | 16:9 |
-| Best for | Live browser presenting, teaching, strategy walkthroughs | Client handoff, executive decks |
+| Shell | `assets/deck-shell.html` | `assets/generate_pptx.py` |
+| Canvas | `100vw × 100vh` | 16:9 |
+| Navigation | Keyboard, wheel, touch, dots, ESC overview | Native slide navigation |
+| Planning | Shared manifest | Shared manifest |
+| Profiles | All declared HTML profiles | Profiles declaring PPTX support |
+| Font handling | Web/system fallback | Verified PowerPoint embedding or explicit fallback |
 
----
+`assets/starter-template.html` remains only as a legacy Pfizer component gallery. It is not the default shell or a deck blueprint.
+
+## PPTX Example
+
+```python
+import json
+from assets.generate_pptx import EditorialDeck
+
+manifest = json.load(open("deck-manifest.json", encoding="utf-8"))
+deck = EditorialDeck(
+    industry="tech",
+    style_profile=manifest["deck_profile"],
+    manifest=manifest,
+    embed_fonts=False,
+)
+# Add slides according to manifest composition and semantic decisions.
+deck.save("output/deck.pptx")
+```
+
+When font embedding is requested, the helper requires real desktop Microsoft PowerPoint, verifies requested fonts, `ppt/fonts/`, and `embeddedFontLst`, and rejects WPS false-success paths.
+
+## Preview
+
+![Hero example](screenshots/01_hero.png)
+
+![Evidence example](screenshots/03_evidence_pyramid.png)
+
+![Architecture example](screenshots/04_architecture.png)
 
 ## Repository Structure
 
 ```text
-editorial-presentation-skill/
+editorial-presentation-html/
 ├── SKILL.md
 ├── README.md
 ├── README_zh.md
 ├── assets/
+│   ├── deck-shell.html
 │   ├── starter-template.html
-│   └── generate_pptx.py
+│   ├── plan_deck.py
+│   ├── render_manifest.py
+│   ├── generate_pptx.py
+│   └── embed_pptx_fonts.ps1
 ├── references/
+│   ├── style-index.json
+│   ├── visual-grammar.md
 │   ├── design-tokens.md
 │   ├── typography.md
 │   ├── chart-selection.md
 │   ├── components.md
 │   ├── layouts.md
-│   ├── rewrite-existing-html.md
 │   ├── qa.md
 │   └── pptx-mode.md
-├── evals/
-│   └── evals.json
-└── screenshots/
+└── evals/
+    └── evals.json
 ```
-
----
 
 ## Installation
 
-Clone this repository into your skills directory:
-
 ```bash
 git clone https://github.com/EthanYoQ/editorial-presentation-skill.git \
-  ~/.claude/skills/yq-editorial-presentation-skill
+  ~/.claude/skills/editorial-presentation-html
+pip install python-pptx Pillow
 ```
 
-PPTX mode requires:
-
-```bash
-pip install python-pptx
-```
-
----
-
-## Usage
-
-HTML mode is the default:
-
-```text
-Create a presentation about [topic] for [audience].
-Use browser fullscreen delivery and keep it suitable for live teaching.
-```
-
-Rewrite an existing HTML deck:
-
-```text
-Use YQ Editorial Presentation Skill to rewrite this HTML deck.
-Preserve all content, but update the shell, layout, typography, and chart expression.
-```
-
-PPTX mode:
-
-```text
-Create a PPTX version of this presentation with the same warm editorial design language.
-```
-
----
-
-## QA Expectations
-
-Generated HTML decks should pass:
-
-- slide count preserved for rewrite jobs
-- no vertical page scrollbar at `1920x1080` and `1440x900`
-- ESC overview shows every slide
-- regular title median approaches 90-106px at `1920x1080`
-- lead text remains projection-readable
-- footer does not overlap chart or evidence text
-- `dense-slide` is not treated as `compact`
-- at least three chart expression families unless the content has only one relationship type
-
----
-
-## License
-
-Use and adapt for your own presentation workflows.
+See `SKILL.md` for the complete operating contract and `references/visual-grammar.md` for the planning and anti-repetition rules.

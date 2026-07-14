@@ -1,11 +1,11 @@
 # PPTX Mode · 把 Editorial 设计语言映射到 PowerPoint
 
-> 本文件指导如何把 HTML 模式的设计 DNA(配色 / 字体 / 视觉表现形式)程序化迁移到 .pptx。复刻保真度目标 85-90%(视觉部分)。
+> 本文件指导如何把 HTML 模式的 manifest、style profile 和设计 DNA 程序化迁移到 .pptx。先规划，后渲染；PPTX 不得把所有不支持的构图静默降级成卡片网格。
 
 ## 核心原则
 
 1. **用 python-pptx 程序化生成**——不要手动在 PowerPoint 里画。手动会丢一致性,程序化才能跨 deck 保持视觉统一。
-2. **共享 design-tokens.md 和 typography.md** 的 RGB 值和字号 scale——PPT 是 token 的另一种渲染目标,DNA 不变。
+2. **共享 manifest 与 profile role tokens**——PPT 是同一规划的另一种渲染目标，不是固定 legacy RGB 的复制。
 3. **先读 `chart-selection.md` 再选组件**——PPTX 模式同样禁止把 KPI、时间窗、机制匹配、证据链默认画成 proof bars。
 4. **降级清单要事先告诉用户**——不是所有 HTML 视觉都能 100% 复刻到 PPT,提前说明保真度。
 5. **配合 anthropic-skills:pptx** — 那个 skill 已封装好 python-pptx 的常用操作,本 skill 提供"设计语言层",二者搭配。
@@ -56,6 +56,8 @@ img.filter(ImageFilter.SMOOTH).save('assets/noise.png')
 
 生成前必须读取:
 
+- `references/visual-grammar.md`
+- `references/style-index.json`
 - `references/design-tokens.md`
 - `references/typography.md`
 - `references/chart-selection.md`
@@ -77,6 +79,8 @@ deck = EditorialDeck(
     industry="medical",          # "medical" | "tech" | "finance" | "education"
     embed_fonts=True,            # Windows + 桌面 PowerPoint 执行真实字体嵌入
     aspect_ratio="16:9",         # "16:9" 1920×1080(默认)| "4:3" 1024×768
+    style_profile=manifest["deck_profile"],
+    manifest=manifest,
 )
 
 # 添加 slides — 每个对应 HTML 模式的一个 section
@@ -138,14 +142,14 @@ deck.add_architecture_slide(
 # ... 其他 slides ...
 
 deck.add_cta_slide(
-    team=["YongQi", "SimonSu", "VivienZhan", "RuiYu", "YingJi"],
+    team=["Strategy Lead", "Research Lead", "Design Lead", "Engineering Lead", "Quality Lead"],
     tech_stack=["Claude Code", "22 Skills", "Codex", "Mermaid ELK", "Puppeteer"],
     ctas=[
         {"tag": "主钩 A", "time": "1 周", "title": "一句话疾病名 → demo", "desc": "..."},
         {"tag": "主钩 B", "time": "1 月", "title": "BU GPT 助手", "desc": "..."},
         {"tag": "Q&A 加码", "time": "3 月", "title": "5 治疗领域", "desc": "..."},
     ],
-    contact="yong.qi.gpt@gmail.com"
+    contact="presenter@example.com"
 )
 
 deck.save("output/blood_oncology_v5.pptx")
@@ -153,7 +157,9 @@ deck.save("output/blood_oncology_v5.pptx")
 
 ## Design Token → PPT 映射
 
-### 配色映射(直接 RGB 值)
+### 配色映射（profile role tokens）
+
+`EditorialDeck` 从 `style-index.json` 读取 profile，并把 canvas / surface / ink / primary / secondary / signal / positive / negative 映射到兼容的 shape tokens。下面的固定 RGB 仅是 `warm-paper-terracotta` legacy profile 示例，不是所有 deck 的默认值。
 
 ```python
 # 这些应该和 design-tokens.md 的 :root 完全对应
@@ -286,19 +292,19 @@ class EditorialDeck:
     def add_architecture_slide(self, phases, deliverables, iron_rule):
         """Slide 4 · phase pill 链 + delivery box"""
 
-    def add_workflow_slide(self, phases_detail, quality_gates, stats_footer):
+    def add_workflow_slide(self, eyebrow, title, phases_detail=None, quality_gates=None, stats_footer=None):
         """Slide 5 · 详细 workflow phases"""
 
-    def add_coverage_slide(self, hub, subpages, aux_cards):
+    def add_coverage_slide(self, eyebrow, title, hub=None, subpages=None, aux_cards=None):
         """Slide 6 · hub 矩阵"""
 
     def add_proof_slide(self, proof_bars, key_message):
         """Slide 7 · 同一指标横向比较专用 proof bars"""
 
-    def add_limitations_slide(self, limits, roadmap):
+    def add_limitations_slide(self, eyebrow, title, limits=None, roadmap=None):
         """Slide 8 · 局限 + roadmap"""
 
-    def add_bonus_slide(self, title, body, video_path=None, gh_link=None):
+    def add_bonus_slide(self, eyebrow, title, body, video_path=None, gh_link=None):
         """Slide 9 · 衍生洞察(可选)"""
 
     def add_cta_slide(self, team, tech_stack, ctas, contact):

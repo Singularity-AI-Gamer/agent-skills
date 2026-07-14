@@ -1,44 +1,48 @@
 # Checklist · Warm Editorial Deck QA
 
-## P0 · 必须通过
+## P0 · Planning and semantics
 
-- [ ] 仍使用血液科 v5 色板: `#FAF9F5`, `#F3EEE3`, `#EBE5D8`, `#CC785C`, `#8C2B3A`, `#0095D5`。
-- [ ] 没有引入靛蓝 / 冷纸白等其他主题 token。
-- [ ] HTML 是横向全屏 deck:`#deck` fixed flex,`.slide` 为 `100vw × 100vh`。
-- [ ] 页面没有纵向滚动条,F11 下当前 slide 不被裁底。
-- [ ] 主内容区不是缩在屏幕中间的小块:1920×1080 下 `.wrap/.frame` 可视宽度通常不低于视口 80%,常规投影页优先 `max-width:min(1690px,88vw)`,密集学术页优先 `max-width:min(1760px,93vw)`。
-- [ ] 字号达到投影尺度:常规页主标题不低于 78px,hero 标题不低于 110px,lead/subtitle 不低于 24px;只有 `.compact` 页例外。
-- [ ] 1920×1080 下常规页标题中位数接近 90-106px;如果只有 78-85px,说明普通页被 `.dense-slide` 错误降级。
-- [ ] 卡片标题不低于 22px,卡片正文不低于 16px;大量 11-15px 正文属于旧网页报告尺度残留。
-- [ ] 底部圆点、左右键、滚轮、触屏、ESC overview 都存在。
-- [ ] 页脚在 slide 文档流内,不使用 absolute bottom 压住正文。
-- [ ] `.wrap` 不使用 `margin:auto auto 0` / `margin:auto`;主体内容不能被 flex auto margin 推到底部。
-- [ ] 中文标题没有单字落行。
-- [ ] 没有把多个独立 KPI 画成 proof-bars。
-- [ ] 没有把时间窗口画成普通 bar chart。
-- [ ] 没有把机制匹配画成条形图。
-- [ ] 一个 deck 至少 3 类表达家族,除非素材只有一种数据关系。
+- [ ] Purpose, audience, formality, density mode, output format, and selected profile are explicit.
+- [ ] The profile supports the requested output format; a locked profile is never silently substituted.
+- [ ] A slide manifest exists and `assets/plan_deck.py --validate-only` passes.
+- [ ] Every expression matches its data relation, cardinality, series count, uncertainty, and annotation burden.
+- [ ] Independent KPIs are not proof bars; timelines are not generic bars; matching relations are not bars.
+- [ ] Adjacent non-continuation slides do not share `composition_id`.
+- [ ] No three-slide run shares dominant geometry or tone.
+- [ ] Repeated expression families change composition or annotation anatomy.
+- [ ] For 10-12 slides, content permits at least five composition IDs and four dominant geometries.
+- [ ] Generic repeated-card or mosaic anatomy is at most 40% of non-title slides.
 
-## P1 · 视觉一致性
+## P0 · HTML behavior and readability
 
-- [ ] 标题用 Fraunces / Source Han Serif SC 或同等衬线。
-- [ ] 正文用 Inter / Noto Sans SC。
-- [ ] 数据和页眉页脚用 JetBrains Mono。
-- [ ] 卡片圆角、软阴影、噪声纹理、径向光晕保持 v5 质感。
-- [ ] 品牌色按语义使用,不是随意换整页背景。
+- [ ] HTML is a horizontal fullscreen deck: fixed `#deck`; each `.slide` is `100vw × 100vh`.
+- [ ] No vertical page scroll; F11 does not crop the current slide.
+- [ ] Main content is normally at least 80% of viewport width at 1920×1080.
+- [ ] Regular titles are at least 78px, hero titles at least 110px, and lead/subtitle at least 24px, except declared compact pages.
+- [ ] Navigation dots, arrows, wheel, touch, and ESC overview work.
+- [ ] Footers stay in flow and do not cover content; `.wrap` does not use flex auto margins that sink content.
+- [ ] Chinese titles do not leave a single character on a line.
 
-## P2 · 图表多样性
+## P1 · Profile coherence
 
-- [ ] KPI 用 stat-grid / stat-strip。
-- [ ] 时间关系用 timeline / decision-window。
-- [ ] 机制/产品匹配用 matrix。
-- [ ] 文献筛选用 funnel。
-- [ ] 证据等级用 pyramid / evidence-ladder。
-- [ ] 只有同一指标跨对象比较时才用 proof-bars。
+- [ ] All colors resolve through selected profile role tokens.
+- [ ] Display/body/data typography follows the selected profile with usable fallbacks.
+- [ ] Status colors remain semantically consistent; categorical colors do not imply status accidentally.
+- [ ] Palette cadence creates deliberate contrast beats without random per-slide color changes.
+- [ ] Corner, border, depth, decorative vocabulary, and annotation style remain coherent inside the profile.
+
+## P2 · Rendered diversity
+
+- [ ] An overview/contact sheet still shows different beats when text is ignored or blurred.
+- [ ] No three consecutive slides share the same header/body/footer anatomy.
+- [ ] Major-region bounds and counts do not repeat mechanically across unrelated slides.
+- [ ] High screenshot similarity between non-continuation slides is reviewed and justified.
+- [ ] Visual variety comes from semantic composition, not decorative noise or random colors.
 
 ## P3 · PPTX
 
-- [ ] PPTX 仍为 16:9。
-- [ ] PPTX 使用同一套 v5 RGB token。
-- [ ] PPTX 示例不只包含 bar / proof-bars。
-- [ ] 字体嵌入或降级路径可用。
+- [ ] PPTX is 16:9 and reopens successfully.
+- [ ] `style_profile` and manifest profile match; the profile declares PPTX support.
+- [ ] Unsupported HTML compositions have explicit PPTX substitutions, not a universal card-grid fallback.
+- [ ] Font embedding or fallback path is verified; WPS is not reported as Microsoft PowerPoint.
+- [ ] Package checks cover requested fonts, `ppt/fonts/`, and `embeddedFontLst` when embedding is requested.

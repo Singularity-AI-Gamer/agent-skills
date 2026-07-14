@@ -6,7 +6,7 @@
 
 - 保留原始 slide 内容。默认不改医学声明、引用、证据边界、产品描述和页内正文。
 - 只替换演示外壳、CSS token、布局 shell、导航和 JS。
-- starter-template.html 是 shell 的结构来源。先对齐 shell,再迁移旧内容。
+- `deck-shell.html` 是行为 shell 的结构来源。先对齐 shell，再迁移旧内容；视觉构图由 manifest 和 profile 决定。
 - 如果发现某页显示异常,先判断是通用 skill 规则缺陷还是该页特殊内容密度。通用缺陷要写回 skill。
 
 ## 推荐流程
@@ -17,15 +17,15 @@
    - 原 `<section class="slide"...>` 数量
    - 原 `<script>` 导航逻辑
 2. 抽取所有原始 slide section,作为不可改写内容块。
-3. 用 starter shell 重建页面:
+3. 用 behavior-only deck shell 重建页面:
    - `html, body { width:100%; height:100%; overflow:hidden; }`
    - `#deck { position:fixed; inset:0; display:flex; height:100vh; }`
    - `.slide { flex:0 0 100vw; width:100vw; height:100vh; overflow:hidden; }`
    - 底部 dots、左右键、滚轮、触屏、ESC overview
-4. 追加 v5 warm editorial 覆盖 CSS:
-   - 保留米色底、赭石红、深红医疗色、Pfizer 蓝
-   - 不引入新的冷色主题
-   - 旧深色整页背景改成暖米色底上的局部色彩
+4. 追加选定 style profile 的角色 token:
+   - 从 `style-index.json` 读取 palette、typography、composition grammar 和 cadence
+   - 状态色保留语义，分类色不冒充状态
+   - 原内容的深浅节拍映射到 profile tone，不强制改回米色
 5. 控制内容区:
    - 常规页: `.wrap, .frame { max-width:min(1690px,88vw); }`
    - 医学密集页/产品页/证据表页: `.wrap.wide, .frame.wide { max-width:min(1760px,93vw); }`
