@@ -1,4 +1,4 @@
-# editorial-presentation-html
+# yq-editorial-presentation-html
 
 [English](README.md) | **中文**
 
@@ -85,7 +85,7 @@ deck.save("output/deck.pptx")
 ## 仓库结构
 
 ```text
-editorial-presentation-html/
+yq-editorial-presentation-html/
 ├── SKILL.md
 ├── README.md
 ├── README_zh.md
@@ -114,7 +114,7 @@ editorial-presentation-html/
 
 ```bash
 git clone https://github.com/EthanYoQ/editorial-presentation-skill.git \
-  ~/.claude/skills/editorial-presentation-html
+  ~/.claude/skills/yq-editorial-presentation-html
 pip install python-pptx Pillow
 ```
 

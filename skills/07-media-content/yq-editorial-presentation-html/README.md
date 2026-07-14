@@ -1,4 +1,4 @@
-# editorial-presentation-html
+# yq-editorial-presentation-html
 
 **English** | [中文](README_zh.md)
 
@@ -83,7 +83,7 @@ When font embedding is requested, the helper requires real desktop Microsoft Pow
 ## Repository Structure
 
 ```text
-editorial-presentation-html/
+yq-editorial-presentation-html/
 ├── SKILL.md
 ├── README.md
 ├── README_zh.md
@@ -112,7 +112,7 @@ editorial-presentation-html/
 
 ```bash
 git clone https://github.com/EthanYoQ/editorial-presentation-skill.git \
-  ~/.claude/skills/editorial-presentation-html
+  ~/.claude/skills/yq-editorial-presentation-html
 pip install python-pptx Pillow
 ```
 

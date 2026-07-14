@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "generated_at": "2026-07-15T00:28:20+08:00",
+  "generated_at": "2026-07-15T00:40:40+08:00",
   "note": "Rebuilt indexes from repository SKILL.md files. Total: 57 shared + 8 projects = 65 total",
   "counts": {
     "shared": 57,
@@ -160,12 +160,6 @@
       "descriptionZh": "全面处理 .docx：创建、编辑、修订跟踪、评论、格式保留与文本提取。"
     },
     {
-      "name": "editorial-presentation-html",
-      "domain": "07-media-content",
-      "path": "skills/07-media-content/editorial-presentation-html/",
-      "descriptionZh": "Anthropic 暖色编辑设计语言，用于演示/case sharing/战略汇报。"
-    },
-    {
       "name": "github-readme-visuals",
       "domain": "07-media-content",
       "path": "skills/07-media-content/github-readme-visuals/",
@@ -218,6 +212,12 @@
       "domain": "07-media-content",
       "path": "skills/07-media-content/xlsx/",
       "descriptionZh": "电子表格 .xlsx/.csv 等创建、编辑、公式、格式、数据分析与可视化。"
+    },
+    {
+      "name": "yq-editorial-presentation-html",
+      "domain": "07-media-content",
+      "path": "skills/07-media-content/yq-editorial-presentation-html/",
+      "descriptionZh": "Anthropic 暖色编辑设计语言，用于演示/case sharing/战略汇报。"
     },
     {
       "name": "decision-tree-with-lp-embedding",

@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "updated_at": "2026-07-14",
+  "updated_at": "2026-07-15",
   "purpose": "Track verified original upstream repositories for Skill-hub skills so future upgrades can compare evidence-backed sources instead of guessing by skill name.",
   "scope": {
     "startsFrom": [
@@ -561,13 +561,13 @@
       }
     },
     {
-      "name": "editorial-presentation-html",
-      "path": "skills/07-media-content/editorial-presentation-html/",
+      "name": "yq-editorial-presentation-html",
+      "path": "skills/07-media-content/yq-editorial-presentation-html/",
       "classification": "self",
       "updatePolicy": "none",
       "status": "self-inaccessible-upstream",
       "evidence": [
-        "README identifies YQ Editorial Presentation Skill.",
+        "README identifies yq-editorial-presentation-html.",
         "README installation block references https://github.com/EthanYoQ/editorial-presentation-skill.git.",
         "git ls-remote and authenticated gh repo view both returned Repository not found during the 2026-07-14 audit.",
         "The local skill was independently validated with skill-creator and remains the available canonical copy."

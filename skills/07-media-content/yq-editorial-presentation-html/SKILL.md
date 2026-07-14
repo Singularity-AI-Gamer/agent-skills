@@ -1,5 +1,5 @@
 ---
-name: editorial-presentation-html
+name: yq-editorial-presentation-html
 description: 可变体的 warm editorial 演示设计系统，用于 presentation、case sharing、项目汇报、战略叙事和产品发布。支持横向全屏 HTML deck 与程序化 PPTX，通过 style profile、语义 slide manifest、构图新颖度规划和反重复验证，在保持编辑设计 DNA 的同时避免固定配色、固定卡片和固定 11 页模板。用户要求 Pfizer/Anthropic/warm editorial/编辑设计风格、类似血液科那套，或需要高规格且非模板化的 HTML/PPT 演示时使用。
 ---
 
