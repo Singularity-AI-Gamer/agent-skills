@@ -6,7 +6,7 @@
 
 # Skill-hub - Codex / Claude Code 中文 Agent 技能库
 
-Skill-hub 是一个面向 Codex、Claude Code、Antigravity 等 AI 编程工具的中文 Agent 技能库，收集可复用的 `SKILL.md` 自动化实践、AI 编程工作流和提示词模板。仓库当前包含 **65** 个可复用技能，其中 **57** 个共享技能按能力域组织，**8** 个项目私有技能按项目归档，便于检索、本地同步、来源追踪和持续维护。
+Skill-hub 是一个面向 Codex、Claude Code、Antigravity 等 AI 编程工具的中文 Agent 技能库，收集可复用的 `SKILL.md` 自动化实践、AI 编程工作流和提示词模板。仓库当前包含 **67** 个可复用技能，其中 **59** 个共享技能按能力域组织，**8** 个项目私有技能按项目归档，便于检索、本地同步、来源追踪和持续维护。
 
 **适合搜索：** Codex 技能与 Claude Code 技能、中文 Agent 技能库、AI 编程工作流与提示词模板。
 
@@ -36,9 +36,9 @@ Skill-hub 不是单一提示词合集，而是面向 Agent 使用的技能仓库
 |---|---:|---|---|
 | <img src="assets/README/icons/overview.svg" width="20" alt=""> Agent 工程 | 7 | `skills/01-agent-engineering/` | Agent 构建、调试、自治循环、技能创建、自适应质量门、对抗验证、skill 生命周期管理。 |
 | <img src="assets/README/icons/format.svg" width="20" alt=""> 编程语言 | 1 | `skills/02-coding-languages/` | 语言级编码标准、设计模式和测试规范。 |
-| <img src="assets/README/icons/package.svg" width="20" alt=""> 框架与技术栈 | 1 | `skills/03-frameworks/` | 前端设计、框架级实现模式和技术栈约束。 |
+| <img src="assets/README/icons/package.svg" width="20" alt=""> 框架与技术栈 | 2 | `skills/03-frameworks/` | 前端设计、框架级实现模式和技术栈约束。 |
 | <img src="assets/README/icons/index.svg" width="20" alt=""> 数据与检索 | 15 | `skills/06-data-search/` | 数据抓取、搜索、深度研究、PubMed、临床试验和报告交付。 |
-| <img src="assets/README/icons/format.svg" width="20" alt=""> 媒体与内容制作 | 11 | `skills/07-media-content/` | PPT、PDF、DOCX、XLSX、图像、视频、GitHub README 视觉、公众号文章和演示内容。 |
+| <img src="assets/README/icons/format.svg" width="20" alt=""> 媒体与内容制作 | 12 | `skills/07-media-content/` | PPT、PDF、DOCX、XLSX、图像、视频、GitHub README 视觉、公众号文章和演示内容。 |
 | <img src="assets/README/icons/writing.svg" width="20" alt=""> 写作与营销 | 4 | `skills/08-writing-marketing/` | 风格仿写、营销写作、GitHub SEO 标准与周期评估。 |
 | <img src="assets/README/icons/source-index.svg" width="20" alt=""> 行业与业务 | 18 | `skills/10-business-industry/` | 医疗、法律、金融、市场规模、引用校验、药企舆情研究和行业报告流程。 |
 | <img src="assets/README/icons/directory.svg" width="20" alt=""> 项目私有 | 8 | `projects/` | 只对特定项目生效的技能，例如邮箱测试、飞书、阿里云或发票项目流程。 |
@@ -46,7 +46,7 @@ Skill-hub 不是单一提示词合集，而是面向 Agent 使用的技能仓库
 ## <img src="assets/README/icons/directory.svg" width="20" alt=""> 目录结构
 
 ```text
-skills/                        # 57 个共享技能，分 7 个能力域
+skills/                        # 59 个共享技能，分 7 个能力域
 |-- 01-agent-engineering/      # Agent 构建、调试、自治循环、harness
 |-- 02-coding-languages/       # 编程语言
 |-- 03-frameworks/             # 框架与技术栈

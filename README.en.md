@@ -6,7 +6,7 @@
 
 # Skill-hub - Codex / Claude Code AI Agent Skill Library
 
-Skill-hub is a public Chinese-first AI Agent skill library for Codex, Claude Code, Antigravity, and related AI coding tools. It collects reusable `SKILL.md` automation practices, AI coding workflows, and prompt templates. The repository currently contains **65** reusable skills: **57** shared skills organized by capability domain and **8** project-specific skills archived by project for lookup, local sync, source tracking, and ongoing maintenance.
+Skill-hub is a public Chinese-first AI Agent skill library for Codex, Claude Code, Antigravity, and related AI coding tools. It collects reusable `SKILL.md` automation practices, AI coding workflows, and prompt templates. The repository currently contains **67** reusable skills: **59** shared skills organized by capability domain and **8** project-specific skills archived by project for lookup, local sync, source tracking, and ongoing maintenance.
 
 **Search intent:** Codex skills and Claude Code skills, Chinese AI Agent skill library, AI coding workflows, and prompt templates.
 
@@ -36,9 +36,9 @@ Shared skills live under `skills/`; project-specific skills live under `projects
 |---|---:|---|---|
 | <img src="assets/README/icons/overview.svg" width="20" alt=""> Agent Engineering | 7 | `skills/01-agent-engineering/` | Agent building, debugging, autonomy loops, skill creation, adaptive quality gates, adversarial verification, and skill lifecycle management. |
 | <img src="assets/README/icons/format.svg" width="20" alt=""> Coding Languages | 1 | `skills/02-coding-languages/` | Language-level coding standards, design patterns, and testing conventions. |
-| <img src="assets/README/icons/package.svg" width="20" alt=""> Frameworks and Stacks | 1 | `skills/03-frameworks/` | Frontend design, framework-level implementation patterns, and stack constraints. |
+| <img src="assets/README/icons/package.svg" width="20" alt=""> Frameworks and Stacks | 2 | `skills/03-frameworks/` | Frontend design, framework-level implementation patterns, and stack constraints. |
 | <img src="assets/README/icons/index.svg" width="20" alt=""> Data and Search | 15 | `skills/06-data-search/` | Data scraping, search, deep research, PubMed, clinical trials, and report delivery. |
-| <img src="assets/README/icons/format.svg" width="20" alt=""> Media and Content | 11 | `skills/07-media-content/` | PPT, PDF, DOCX, XLSX, images, video, GitHub README visuals, WeChat articles, and presentation content. |
+| <img src="assets/README/icons/format.svg" width="20" alt=""> Media and Content | 12 | `skills/07-media-content/` | PPT, PDF, DOCX, XLSX, images, video, GitHub README visuals, WeChat articles, and presentation content. |
 | <img src="assets/README/icons/writing.svg" width="20" alt=""> Writing and Marketing | 4 | `skills/08-writing-marketing/` | Style imitation, marketing writing, GitHub SEO standards, and recurring evaluation. |
 | <img src="assets/README/icons/source-index.svg" width="20" alt=""> Business and Industry | 18 | `skills/10-business-industry/` | Healthcare, legal, finance, market sizing, citation verification, pharma social listening, and industry report workflows. |
 | <img src="assets/README/icons/directory.svg" width="20" alt=""> Project-Specific | 8 | `projects/` | Skills scoped to specific projects, such as email testing, Feishu, Alibaba Cloud, or invoice workflows. |

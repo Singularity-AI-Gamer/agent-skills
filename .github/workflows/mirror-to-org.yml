@@ -1,0 +1,48 @@
+name: Mirror to org repo
+
+# 将个人仓库 mine 分支镜像到组织仓库 Singularity-AI-Gamer/agent-skills。
+# 日常只在个人仓库编辑，push 到 mine 后自动同步，组织仓库零维护。
+#
+# 配置说明（只需做一次）：
+#   1. 创建 fine-grained PAT（GitHub Settings → Developer settings → Personal access tokens → Fine-grained）
+#      - Repository access：选 Singularity-AI-Gamer/agent-skills
+#      - Permissions：Repository permissions → Contents = Read and write
+#   2. 在个人仓库 Settings → Secrets and variables → Actions → New repository secret
+#      - Name: ORG_PUSH_TOKEN
+#      - Value: 上一步的 PAT
+#   3. 之后每次 push 到 mine，组织仓库自动同步
+
+on:
+  push:
+    branches: [mine]
+
+jobs:
+  mirror:
+    # 防止组织仓库被镜像后收到 push 又重复触发（死循环防护）
+    if: github.repository == 'EthanYoQ/Skill-hub'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout personal repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure git
+        run: |
+          git config user.name "skill-hub-mirror"
+          git config user.email "actions@github.com"
+
+      - name: Mirror to org repo
+        run: |
+          git remote add org "https://x-access-token:${{ secrets.ORG_PUSH_TOKEN }}@github.com/Singularity-AI-Gamer/agent-skills.git"
+          git push org HEAD:main --force
+          echo "=== Mirror complete ==="
+          echo "Mirrored $(git rev-parse --short HEAD) → Singularity-AI-Gamer/agent-skills:main"
+          echo "Shared skills: $(find skills -name SKILL.md | wc -l)"
+          echo "Project skills: $(find projects -name SKILL.md | wc -l)"
+
+      - name: Report failure
+        if: failure()
+        run: |
+          echo "::error::镜像到组织仓库失败。请检查 ORG_PUSH_TOKEN 是否已配置、是否过期、是否有组织仓库写入权限。"
+          echo "配置步骤见 .github/workflows/mirror-to-org.yml 文件头部注释。"

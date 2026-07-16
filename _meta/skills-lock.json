@@ -1,11 +1,11 @@
 {
   "version": "2.0",
-  "generated_at": "2026-07-15T00:40:40+08:00",
-  "note": "Rebuilt indexes from repository SKILL.md files. Total: 57 shared + 8 projects = 65 total",
+  "generated_at": "2026-07-16T12:06:52+08:00",
+  "note": "Rebuilt indexes from repository SKILL.md files. Total: 59 shared + 8 projects = 67 total",
   "counts": {
-    "shared": 57,
+    "shared": 59,
     "projects": 8,
-    "total": 65
+    "total": 67
   },
   "shared": [
     {
@@ -62,6 +62,12 @@
       "domain": "03-frameworks",
       "path": "skills/03-frameworks/frontend-design/",
       "descriptionZh": "创建具有高设计质量的生产级前端界面。"
+    },
+    {
+      "name": "netlify-cli",
+      "domain": "03-frameworks",
+      "path": "skills/03-frameworks/netlify-cli/",
+      "descriptionZh": "使用 Netlify CLI 完成安装、认证、站点关联、本地开发、环境变量管理与部署。"
     },
     {
       "name": "bioc-fulltext-fetch",
@@ -164,6 +170,12 @@
       "domain": "07-media-content",
       "path": "skills/07-media-content/github-readme-visuals/",
       "descriptionZh": "为 GitHub 仓库创建或更新产品主视觉、完整软件界面截图及中英文 README 图片区，并支持按参考图进行可验证的几何复刻。"
+    },
+    {
+      "name": "html-design-polish",
+      "domain": "07-media-content",
+      "path": "skills/07-media-content/html-design-polish/",
+      "descriptionZh": "网页需要产品清晰度、信息层级、响应式或视觉系统美化、重设计或设计审计时使用。"
     },
     {
       "name": "imagegen",

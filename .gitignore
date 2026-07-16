@@ -30,6 +30,7 @@ desktop.ini
 .backups/
 .codegraph/
 .skills-cache/
+.workbuddy/
 *.log
 node_modules/
 __pycache__/
