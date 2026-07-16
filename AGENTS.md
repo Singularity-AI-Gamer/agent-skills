@@ -10,14 +10,14 @@
 
 Skill-hub 是面向 Codex、Claude Code、Antigravity 等 Agent 的中文技能仓库。每个 skill 是一个目录，核心文件是 `SKILL.md`，让 AI 编程助手在相似任务中复用稳定流程。
 
-本仓库有两个远程，**只在本仓库（个人仓库）编辑**，组织仓库是自动镜像：
+本仓库（个人仓库）与组织仓库**独立运作**，各自维护 skill 列表和索引：
 
-| 仓库 | 地址 | 角色 | 可见性 | 是否直接编辑 |
+| 仓库 | 地址 | 角色 | 可见性 | 贡献方式 |
 |---|---|---|---|---|
-| 个人仓库 | `EthanYoQ/Skill-hub` | 单一事实源 | public | 是，所有改动在这里 |
-| 组织仓库 | `Singularity-AI-Gamer/agent-skills` | 自动镜像 | private | 否，由 GitHub Actions 同步 |
+| 个人仓库 | `EthanYoQ/Skill-hub` | 个人 skill 超集（含未分享的 skill） | public | 直接编辑 |
+| 组织仓库 | `Singularity-AI-Gamer/agent-skills` | 团队共享 skill | private | PR 提交，组织管理员批准 |
 
-**镜像机制**：个人仓库 `push to main` 时，GitHub Actions 自动把 `skills/`、`projects/`、`_meta/`、`docs/`、`scripts/`、`assets/`、`README*.md`、`AGENTS.md`、`LICENSE` 推送到组织仓库。**不要直接在组织仓库编辑**，那样改动会被下次镜像覆盖。
+**两仓库独立，不自动同步**。需要跨仓库分享 skill 时手动创建 PR。朋友/团队成员直接向组织仓库提 PR，由组织管理员在组织仓库批准合并。组织仓库有自己的 `AGENTS.md` + `build-indexes.ps1` + `_meta/` 索引，合并 PR 后跑索引重建即可。
 
 ---
 
@@ -143,7 +143,7 @@ Agent 上传一个新 skill 时，按顺序执行：
 6. **重建索引** — 运行 `.\scripts\build-indexes.ps1`（先 `-DryRun` 预览）
 7. **检查 lock** — 确认 `_meta/skills-lock.json` 已包含新 skill，`descriptionZh` 已填
 8. **git diff 审查** — 确认无敏感信息、无临时输出、分类正确
-9. **提交** — 提交到个人仓库 mine 分支，组织仓库会自动镜像
+9. **提交** — 提交到个人仓库 mine 分支。需要分享到组织仓库时，手动创建 PR
 
 ---
 
