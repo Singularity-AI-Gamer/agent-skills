@@ -118,14 +118,13 @@ description: 一句话触发条件：什么场景下 Agent 应该使用这个技
 
 ## 7. 索引机制
 
-`_meta/` 下五个文件构成索引层，`build-indexes.ps1` 会自动重建其中四个：
+`_meta/` 下四个文件构成索引层，`build-indexes.ps1` 会自动重建其中三个：
 
 | 文件 | 用途 | 重建方式 |
 |---|---|---|
 | `skills-lock.json` | 机器可读映射（name/domain/path/descriptionZh） | 脚本自动重建，保留手工 `descriptionZh` |
 | `by-name.md` | A-Z 全量索引 | 脚本自动重建 |
 | `by-domain.md` | 按能力域分组 | 脚本自动重建 |
-| `by-platform.md` | 按技术栈交叉分类 | **半手工**：脚本只追加"新增待分类"区块，需人工并入上方章节 |
 | `skill-upstreams.json` | 来源追踪（自制/开源镜像/项目私有） | 人工维护 |
 
 **新增 skill 后，必须运行索引重建脚本**，否则 `by-name` / `by-domain` / `skills-lock.json` 不会包含新 skill。
@@ -143,9 +142,8 @@ Agent 上传一个新 skill 时，按顺序执行：
 5. **脱敏扫描** — 按第 9 节规则，把凭据、邮箱、手机号、用户目录替换为占位符
 6. **重建索引** — 运行 `.\scripts\build-indexes.ps1`（先 `-DryRun` 预览）
 7. **检查 lock** — 确认 `_meta/skills-lock.json` 已包含新 skill，`descriptionZh` 已填
-8. **检查 by-platform** — 若新 skill 涉及技术栈，手工并入 `by-platform.md` 对应章节
-9. **git diff 审查** — 确认无敏感信息、无临时输出、分类正确
-10. **提交** — 提交到个人仓库 main 分支，组织仓库会自动镜像
+8. **git diff 审查** — 确认无敏感信息、无临时输出、分类正确
+9. **提交** — 提交到个人仓库 mine 分支，组织仓库会自动镜像
 
 ---
 
@@ -204,7 +202,7 @@ Agent 上传一个新 skill 时，按顺序执行：
 
 - 新增共享 skill → 放入 `skills/<domain>/`，目录名 kebab-case
 - 新增项目私有 skill → 放入 `projects/<project-name>/`，不混入通用技能目录
-- 修改 skill 描述后 → 运行索引重建脚本，确保 `by-name`、`by-domain`、`by-platform`、`skills-lock.json` 一致
+- 修改 skill 描述后 → 运行索引重建脚本，确保 `by-name`、`by-domain`、`skills-lock.json` 一致
 - 修改上游来源判断 → 必须有证据，不要把未证实的相似仓库写成确定来源
 - 提交前 → 只整理自己本次触碰的文件，`git diff` 审查脱敏情况
 

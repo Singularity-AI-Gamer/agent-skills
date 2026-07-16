@@ -12,7 +12,7 @@ Skill-hub is a public Chinese-first AI Agent skill library for Codex, Claude Cod
 
 **Trust boundary:** this is a public open-source personal skill repository. It is not an official OpenAI, Anthropic, Claude Code, or Antigravity skill registry, and it is not a general-purpose prompt marketplace. Because the repository is public, use placeholders for credentials and do not commit real secrets, customer data, internal documents, or personal information.
 
-**Start here:** [By Name](./_meta/by-name.md) | [By Domain](./_meta/by-domain.md) | [By Tech Stack](./_meta/by-platform.md) | [Machine-Readable Index](./_meta/skills-lock.json) | [Source Index](./_meta/skill-upstreams.json)
+**Start here:** [By Name](./_meta/by-name.md) | [By Domain](./_meta/by-domain.md) | [Machine-Readable Index](./_meta/skills-lock.json) | [Source Index](./_meta/skill-upstreams.json)
 
 ## <img src="assets/README/icons/map.svg" width="20" alt=""> Repository Positioning
 
@@ -70,7 +70,6 @@ If this is your first time reading the repository, start from the indexes instea
 |---|---|---|
 | <img src="assets/README/icons/index.svg" width="20" alt=""> By Name | [`_meta/by-name.md`](./_meta/by-name.md) | You already know the skill name, such as `deep-research` or `skill-creator`. |
 | <img src="assets/README/icons/categories.svg" width="20" alt=""> By Domain | [`_meta/by-domain.md`](./_meta/by-domain.md) | You want to browse major categories such as agent engineering, data search, media content, or business workflows. |
-| <img src="assets/README/icons/package.svg" width="20" alt=""> By Tech Stack | [`_meta/by-platform.md`](./_meta/by-platform.md) | You want skills related to Python, browser automation, Office documents, biomedical databases, and similar platforms. |
 | <img src="assets/README/icons/source-index.svg" width="20" alt=""> Machine-Readable Index | [`_meta/skills-lock.json`](./_meta/skills-lock.json) | Scripts, automation, and external tools that need skill names, paths, categories, and counts. |
 
 ## <img src="assets/README/icons/source-index.svg" width="20" alt=""> Source Index
@@ -149,7 +148,7 @@ The repository includes [`skills/01-agent-engineering/skill-lifecycle-manager/`]
 
 - Add shared skills under the right `skills/<domain>/` directory and keep directory names in kebab-case.
 - Add project-specific skills under `projects/<project-name>/`, not under shared skill domains.
-- After editing skill descriptions, rebuild indexes so `by-name`, `by-domain`, `by-platform`, and the machine-readable index stay aligned.
+- After editing skill descriptions, rebuild indexes so `by-name`, `by-domain`, and the machine-readable index stay aligned.
 - When changing upstream source judgments, require evidence; do not write an unverified similar repository as a confirmed source.
 - Do not revert other people's worktree changes; before committing, keep the scope to README files, icons, or explicitly authorized files.
 

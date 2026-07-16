@@ -5,7 +5,6 @@ build-indexes.ps1
     _meta/skills-lock.json
     _meta/by-name.md
     _meta/by-domain.md
-    _meta/by-platform.md
 
 数据来源
   - 扫 `RepoRoot\skills\` 下所有 SKILL.md（shared 共享技能）
@@ -17,8 +16,6 @@ build-indexes.ps1
     **必须优先保留**。仅当某技能在 lock 中不存在时才用英文 description 占位，
     并在 JSON 中标注 `"_todo": "需要翻译 descriptionZh"`。
   - `by-name.md` / `by-domain.md` 由 lock 派生，因此"保留中文"在 lock 层实现。
-  - `by-platform.md` 是按技术栈人工交叉分类的，**不完全重建**：
-    仅在末尾追加一段"新增技能待分类"小节，让用户手工并入。
 
 参数
     -RepoRoot  仓库根目录（默认：脚本所在目录的父目录）
@@ -56,7 +53,6 @@ $MetaDir    = Join-Path $RepoRoot "_meta"
 $LockPath   = Join-Path $MetaDir  "skills-lock.json"
 $ByNamePath = Join-Path $MetaDir  "by-name.md"
 $ByDomPath  = Join-Path $MetaDir  "by-domain.md"
-$ByPlatPath = Join-Path $MetaDir  "by-platform.md"
 $SkillsRoot = Join-Path $RepoRoot "skills"
 $ProjRoot   = Join-Path $RepoRoot "projects"
 
@@ -467,83 +463,11 @@ function Build-ByDomain {
     return $sb.ToString()
 }
 
-# --- by-platform.md：保留手工内容，仅追加"新增待分类"小节 ----------------
-
-function Remove-ByPlatformAutoBlock {
-    param([string]$Content)
-
-    $beginTag = "<!-- AUTO-GENERATED: BEGIN by-platform.md 新增待分类 -->"
-    $endTag   = "<!-- AUTO-GENERATED: END by-platform.md 新增待分类 -->"
-    $startIdx = $Content.IndexOf($beginTag)
-    $endIdx   = $Content.IndexOf($endTag)
-    if ($startIdx -ge 0 -and $endIdx -gt $startIdx) {
-        $endIdxFull = $endIdx + $endTag.Length
-        return ($Content.Substring(0, $startIdx).TrimEnd() + "`r`n" + $Content.Substring($endIdxFull).TrimStart()).TrimEnd()
-    }
-    return $Content.TrimEnd()
-}
-
-function Build-ByPlatform-Addendum {
-    param($Shared, $Projects, $ExistingPath)
-
-    # 既有平台索引内容中能被识别的 skill 名集合（通过 `**name**` 出现）
-    $knownNames = [System.Collections.Generic.HashSet[string]]::new()
-    if (Test-Path $ExistingPath) {
-        $existing = Remove-ByPlatformAutoBlock (Get-Content $ExistingPath -Raw -Encoding UTF8)
-        $regex = [regex]'\*\*([A-Za-z0-9_\-]+)\*\*'
-        foreach ($m in $regex.Matches($existing)) {
-            [void]$knownNames.Add($m.Groups[1].Value)
-        }
-    }
-
-    $missing = @()
-    foreach ($s in $Shared)   { if (-not $knownNames.Contains($s.Name)) { $missing += $s } }
-    $missingProjects = @()
-    foreach ($p in $Projects) { if (-not $knownNames.Contains($p.Name)) { $missingProjects += $p } }
-
-    if (($missing.Count + $missingProjects.Count) -eq 0) {
-        return $null
-    }
-
-    $sb = [System.Text.StringBuilder]::new()
-    [void]$sb.AppendLine()
-    [void]$sb.AppendLine("<!-- AUTO-GENERATED: BEGIN by-platform.md 新增待分类 -->")
-    [void]$sb.AppendLine("## 新增待分类（TODO：由 build-indexes.ps1 自动追加，请手工并入上方对应章节）")
-    [void]$sb.AppendLine()
-    [void]$sb.AppendLine("下列 skill 在现有 by-platform.md 中未被提及。build-indexes 不做自动归类，请手工合并。")
-    [void]$sb.AppendLine()
-    if ($missing.Count -gt 0) {
-        [void]$sb.AppendLine("### 共享技能")
-        [void]$sb.AppendLine()
-        [void]$sb.AppendLine("| 技能名 | 路径 | 中文简介 |")
-        [void]$sb.AppendLine("|---|---|---|")
-        foreach ($s in ($missing | Sort-Object Name)) {
-            $desc = if ($s.DescriptionZh) { $s.DescriptionZh } else { "(待补中文简介)" }
-            [void]$sb.AppendLine("| **$($s.Name)** | [$($s.RepoPath)](../$($s.RepoPath)) | $desc |")
-        }
-        [void]$sb.AppendLine()
-    }
-    if ($missingProjects.Count -gt 0) {
-        [void]$sb.AppendLine("### 项目私有技能")
-        [void]$sb.AppendLine()
-        [void]$sb.AppendLine("| 技能名 | 项目 | 路径 | 中文简介 |")
-        [void]$sb.AppendLine("|---|---|---|---|")
-        foreach ($p in ($missingProjects | Sort-Object Name)) {
-            $desc = if ($p.DescriptionZh) { $p.DescriptionZh } else { "(待补中文简介)" }
-            [void]$sb.AppendLine("| **$($p.Name)** | $($p.Project) | [$($p.RepoPath)](../$($p.RepoPath)) | $desc |")
-        }
-        [void]$sb.AppendLine()
-    }
-    [void]$sb.AppendLine("<!-- AUTO-GENERATED: END by-platform.md 新增待分类 -->")
-    return $sb.ToString()
-}
-
 # --- 生成内容 ---------------------------------------------------------------
 
 $ByNameContent   = Build-ByName   -Shared $Shared -Projects $Projects
 $ByDomainContent = Build-ByDomain -Shared $Shared -Projects $Projects `
                                   -DomainLabels $DomainLabels -DomainAnchors $DomainAnchors
-$ByPlatAddendum  = Build-ByPlatform-Addendum -Shared $Shared -Projects $Projects -ExistingPath $ByPlatPath
 
 # --- 写出 -------------------------------------------------------------------
 
@@ -575,28 +499,6 @@ Report-Write -Path $ByNamePath -Content $ByNameContent -DryRun:$DryRun -Label "b
 
 # 3. by-domain.md
 Report-Write -Path $ByDomPath -Content $ByDomainContent -DryRun:$DryRun -Label "by-domain.md"
-
-# 4. by-platform.md：先移除旧 auto 区块，再按当前缺失项重新生成
-$existingPlatform = ""
-if (Test-Path $ByPlatPath) {
-    $existingPlatform = Get-Content $ByPlatPath -Raw -Encoding UTF8
-}
-$platformBase = Remove-ByPlatformAutoBlock $existingPlatform
-$combined = if ($null -eq $ByPlatAddendum) {
-    $platformBase
-} else {
-    $platformBase.TrimEnd() + "`r`n" + $ByPlatAddendum.TrimEnd()
-}
-
-if ($combined.TrimEnd() -eq $existingPlatform.TrimEnd()) {
-    Say "  [=]  by-platform.md 无新增待分类（跳过写入）" "DarkGray"
-} elseif ($DryRun) {
-    $lines = ($combined -split "`n").Count
-    Say "  [DRY] 将重建 by-platform.md 的 AUTO-GENERATED 区块（合计 $lines 行）" "Gray"
-} else {
-    Write-FileUtf8NoBom -Path $ByPlatPath -Content $combined
-    Say "  [OK] 已更新 by-platform.md（保留手工内容，重建待分类区块）" "Green"
-}
 
 Say ""
 if ($DryRun) {
