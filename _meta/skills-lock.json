@@ -1,11 +1,11 @@
 {
   "version": "2.0",
-  "generated_at": "2026-07-16T12:06:52+08:00",
-  "note": "Rebuilt indexes from repository SKILL.md files. Total: 59 shared + 8 projects = 67 total",
+  "generated_at": "2026-07-16T19:48:09+08:00",
+  "note": "Rebuilt indexes from repository SKILL.md files. Total: 62 shared + 8 projects = 70 total",
   "counts": {
-    "shared": 59,
+    "shared": 62,
     "projects": 8,
-    "total": 67
+    "total": 70
   },
   "shared": [
     {
@@ -184,10 +184,22 @@
       "descriptionZh": "生成或编辑光栅图像（照片、插画、纹理、UI 模型等）。"
     },
     {
+      "name": "impeccable",
+      "domain": "07-media-content",
+      "path": "skills/07-media-content/impeccable/",
+      "descriptionZh": "设计、重设计、审计或精修生产级前端界面，涵盖信息架构、视觉层级、响应式、无障碍、动效与设计系统时使用。"
+    },
+    {
       "name": "jianying-editor",
       "domain": "07-media-content",
       "path": "skills/07-media-content/jianying-editor/",
       "descriptionZh": "剪映 AI 自动剪辑高级封装 API（JyWrapper）：录屏、素材、字幕、Web 动效。"
+    },
+    {
+      "name": "make-interfaces-feel-better",
+      "domain": "07-media-content",
+      "path": "skills/07-media-content/make-interfaces-feel-better/",
+      "descriptionZh": "构建或审查 UI 细节、动画、排版、阴影、圆角、光学对齐和微交互，让界面更精致自然时使用。"
     },
     {
       "name": "pdf",
@@ -212,6 +224,12 @@
       "domain": "07-media-content",
       "path": "skills/07-media-content/remotion-video-creation/",
       "descriptionZh": "Remotion 在 React 中做视频创作的 29 条领域规则（3D、动画、字幕、过渡）。"
+    },
+    {
+      "name": "ui-ux-pro-max",
+      "domain": "07-media-content",
+      "path": "skills/07-media-content/ui-ux-pro-max/",
+      "descriptionZh": "设计、构建或审查 Web/移动端 UI 时，检索风格、配色、字体、布局、UX、动效、图表及多技术栈实现建议。"
     },
     {
       "name": "wechat-article",

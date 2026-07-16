@@ -94,7 +94,7 @@ def main():
 
         # --- 3b. 英文目录结构注释 ---
         content = re.sub(
-            r'# \d+ shared skills?(?:,?\s*\d+\s*(?:capability\s*)?domains?)?',
+            r'# \d+ shared skills?(?:(?:,\s*|\s+across\s+|\s+)\d+\s*(?:capability\s*)?domains?)*',
             f'# {shared_count} shared skills, {non_empty_domains} capability domains',
             content,
         )

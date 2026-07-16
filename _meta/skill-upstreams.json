@@ -1,14 +1,14 @@
 {
   "version": "1.1",
-  "updated_at": "2026-07-15",
+  "updated_at": "2026-07-16",
   "purpose": "Track verified original upstream repositories for Skill-hub skills so future upgrades can compare evidence-backed sources instead of guessing by skill name.",
   "scope": {
     "startsFrom": [
       "_meta/skill-upstreams.json",
       "_meta/skills-lock.json"
     ],
-    "localSkillCount": 65,
-    "sharedSkillCount": 57,
+    "localSkillCount": 68,
+    "sharedSkillCount": 60,
     "projectSkillCount": 8
   },
   "rules": [
@@ -26,7 +26,7 @@
   },
   "verificationSummary": {
     "countsByClassification": {
-      "open-source": 21,
+      "open-source": 24,
       "self": 11,
       "local": 32,
       "candidate": 1
@@ -577,6 +577,89 @@
         "After access is available, compare normalized tree and record commit before enabling mapped or mirror updates."
       ],
       "notes": "Manual maintenance only unless owner provides an explicit upstream and comparison commit."
+    },
+    {
+      "name": "ui-ux-pro-max",
+      "path": "skills/07-media-content/ui-ux-pro-max/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+        "path": ".claude/skills/ui-ux-pro-max/",
+        "ref": "main"
+      },
+      "lastChecked": {
+        "date": "2026-07-16",
+        "commit": "f8ac5e1266dba8354ea96e19994d9f4345e7ec31"
+      },
+      "license": "MIT",
+      "updatePolicy": "mapped",
+      "status": "mapped-current",
+      "evidence": [
+        "Repository metadata and MIT license were verified with GitHub CLI.",
+        "41 files in .claude/skills/ui-ux-pro-max matched the vendored copies by SHA-256; two CSV files contain only declared local-path sanitization mappings.",
+        "data/stacks/avalonia.csv maps a Windows user-directory example to %USERPROFILE%; data/stacks/javafx.csv maps a macOS user-directory example to ~.",
+        "The upstream root LICENSE was copied into the vendored directory as LICENSE.txt."
+      ],
+      "verificationPath": [
+        "Compare the pinned upstream directory file-by-file with SHA-256.",
+        "Run quick_validate.py, scripts/tests, and scripts/validate_data.py before accepting an update."
+      ],
+      "notes": "Mapped import preserves the complete upstream directory, repository-level MIT license, and two privacy-required local-path sanitizations."
+    },
+    {
+      "name": "impeccable",
+      "path": "skills/07-media-content/impeccable/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/pbakaus/impeccable",
+        "path": ".agents/skills/impeccable/",
+        "ref": "main"
+      },
+      "lastChecked": {
+        "date": "2026-07-16",
+        "commit": "8259c28209b92792005cec14dad573df39f68eaf"
+      },
+      "license": "Apache-2.0",
+      "updatePolicy": "mapped",
+      "status": "mapped-current",
+      "evidence": [
+        "Repository metadata and Apache-2.0 license were verified with GitHub CLI.",
+        "104 upstream files matched the vendored copies by SHA-256.",
+        "SKILL.md only maps the upstream top-level version field into metadata.version for repository validator compatibility.",
+        "The upstream root LICENSE was copied into the vendored directory as LICENSE.txt."
+      ],
+      "verificationPath": [
+        "Compare every upstream file except the declared SKILL.md frontmatter mapping by SHA-256.",
+        "Run quick_validate.py, syntax-check all scripts, and run scripts/context.mjs before accepting an update."
+      ],
+      "notes": "Mapped import preserves the Codex-oriented .agents skill; keep metadata.version mapping and the local LICENSE.txt during updates."
+    },
+    {
+      "name": "make-interfaces-feel-better",
+      "path": "skills/07-media-content/make-interfaces-feel-better/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/jakubkrehel/make-interfaces-feel-better",
+        "path": "skills/make-interfaces-feel-better/",
+        "ref": "main"
+      },
+      "lastChecked": {
+        "date": "2026-07-16",
+        "commit": "366f0f86efcb2811c26e2cf386d09cf2ddc35fcb"
+      },
+      "license": "MIT",
+      "updatePolicy": "mapped",
+      "status": "mapped-current",
+      "evidence": [
+        "Repository metadata and MIT license were verified with GitHub CLI.",
+        "All 5 upstream skill files matched the vendored copies by SHA-256.",
+        "The upstream root LICENSE was copied into the vendored directory as LICENSE.txt."
+      ],
+      "verificationPath": [
+        "Compare the pinned upstream directory file-by-file with SHA-256.",
+        "Run quick_validate.py and verify all local Markdown references resolve before accepting an update."
+      ],
+      "notes": "Complete upstream skill directory is preserved; mapped review retains the repository-level MIT license inside the vendored skill."
     },
     {
       "name": "imagegen",
