@@ -4,12 +4,14 @@ name: Mirror to org repo
 # 日常只在个人仓库编辑，push 到 mine 后自动同步，组织仓库零维护。
 #
 # 配置说明（只需做一次）：
-#   1. 创建 fine-grained PAT（GitHub Settings → Developer settings → Personal access tokens → Fine-grained）
-#      - Repository access：选 Singularity-AI-Gamer/agent-skills
-#      - Permissions：Repository permissions → Contents = Read and write
-#   2. 在个人仓库 Settings → Secrets and variables → Actions → New repository secret
-#      - Name: ORG_PUSH_TOKEN
-#      - Value: 上一步的 PAT
+#   1. 创建 PAT（classic 更简单，fine-grained 需组织授权）：
+#      方式 A（classic，推荐）：Settings → Developer settings → Personal access tokens → Tokens (classic)
+#        - Scopes 勾选 repo
+#      方式 B（fine-grained）：Settings → Developer settings → Personal access tokens → Fine-grained
+#        - Repository access 必须选 Singularity-AI-Gamer/agent-skills
+#        - Permissions → Contents = Read and write
+#   2. 个人仓库 Settings → Secrets and variables → Actions → New repository secret
+#      - Name: ORG_PUSH_TOKEN  Value: 上一步的 PAT
 #   3. 之后每次 push 到 mine，组织仓库自动同步
 
 on:
@@ -33,8 +35,15 @@ jobs:
           git config user.email "actions@github.com"
 
       - name: Mirror to org repo
+        env:
+          ORG_TOKEN: ${{ secrets.ORG_PUSH_TOKEN }}
         run: |
-          git remote add org "https://x-access-token:${{ secrets.ORG_PUSH_TOKEN }}@github.com/Singularity-AI-Gamer/agent-skills.git"
+          if [ -z "$ORG_TOKEN" ]; then
+            echo "::error::ORG_PUSH_TOKEN secret is empty or not set"
+            exit 1
+          fi
+          echo "Token length: ${#ORG_TOKEN} (prefix: ${ORG_TOKEN:0:4}***)"
+          git remote add org "https://x-access-token:${ORG_TOKEN}@github.com/Singularity-AI-Gamer/agent-skills.git"
           git push org HEAD:main --force
           echo "=== Mirror complete ==="
           echo "Mirrored $(git rev-parse --short HEAD) → Singularity-AI-Gamer/agent-skills:main"
