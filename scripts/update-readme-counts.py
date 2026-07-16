@@ -99,6 +99,18 @@ def main():
             content,
         )
 
+        # --- 3c. projects/ 目录结构注释数字 ---
+        content = re.sub(
+            r'# \d+ 个项目私有技能',
+            f'# {projects_count} 个项目私有技能',
+            content,
+        )
+        content = re.sub(
+            r'# \d+ project-specific skills',
+            f'# {projects_count} project-specific skills',
+            content,
+        )
+
         # --- 4. 维护约定：确保 by-name、by-domain 和机器索引一致（已无 by-platform）---
         # 这个不需要数字更新，跳过
 
