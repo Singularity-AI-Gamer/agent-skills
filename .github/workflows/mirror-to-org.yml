@@ -1,7 +1,16 @@
 name: Mirror to org repo
 
-# 将个人仓库 mine 分支镜像到组织仓库 Singularity-AI-Gamer/agent-skills。
+# 将个人仓库 mine 分支选择性镜像到组织仓库 Singularity-AI-Gamer/agent-skills。
+# 个人仓库保留全部 skill；组织仓库只镜像 .github/org-exclude.txt 列表之外的 skill。
 # 日常只在个人仓库编辑，push 到 mine 后自动同步，组织仓库零维护。
+#
+# 选择性镜像流程：
+#   1. checkout 个人仓库
+#   2. 删除 org-exclude.txt 列出的 skill 目录 + projects/
+#   3. 跑 build-indexes.ps1 重建索引（只包含剩余 skill）
+#   4. 跑 update-readme-counts.py 更新 README 数字
+#   5. 临时 commit（不推回个人仓库，只推组织仓库）
+#   6. force push 到组织仓库 main
 #
 # 配置说明（只需做一次）：
 #   1. 创建 PAT（classic 更简单，fine-grained 需组织授权）：
@@ -36,6 +45,41 @@ jobs:
           git config user.email "actions@github.com"
           git config --global credential.helper ""
 
+      - name: Remove excluded skills for org repo
+        run: |
+          echo "=== Removing skills listed in .github/org-exclude.txt ==="
+          removed=0
+          while IFS= read -r line; do
+            # 跳过注释和空行
+            [[ -z "$line" || "$line" =~ ^[[:space:]]*# ]] && continue
+            # 去掉首尾空白
+            line=$(echo "$line" | xargs)
+            if [ -d "$line" ]; then
+              rm -rf "$line"
+              echo "  removed: $line"
+              removed=$((removed + 1))
+            else
+              echo "  skip (not found): $line"
+            fi
+          done < .github/org-exclude.txt
+          echo "=== Removed $removed paths ==="
+          echo "Remaining shared skills: $(find skills -name SKILL.md 2>/dev/null | wc -l)"
+          echo "Remaining project skills: $(find projects -name SKILL.md 2>/dev/null | wc -l)"
+
+      - name: Rebuild indexes for org repo
+        run: |
+          pwsh -File scripts/build-indexes.ps1
+
+      - name: Update README counts
+        run: |
+          python3 scripts/update-readme-counts.py
+
+      - name: Commit org-only changes
+        run: |
+          git add -A
+          git commit -m "org mirror: remove excluded skills + rebuild indexes + update README" --allow-empty
+          echo "=== Org mirror commit ready: $(git rev-parse --short HEAD) ==="
+
       - name: Mirror to org repo
         env:
           ORG_TOKEN: ${{ secrets.ORG_PUSH_TOKEN }}
@@ -50,7 +94,7 @@ jobs:
           echo "=== Mirror complete ==="
           echo "Mirrored $(git rev-parse --short HEAD) → Singularity-AI-Gamer/agent-skills:main"
           echo "Shared skills: $(find skills -name SKILL.md | wc -l)"
-          echo "Project skills: $(find projects -name SKILL.md | wc -l)"
+          echo "Project skills: $(find projects -name SKILL.md 2>/dev/null | wc -l)"
 
       - name: Report failure
         if: failure()

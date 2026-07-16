@@ -181,7 +181,7 @@ if (Test-Path $SkillsRoot) {
         $skillDir = $md.Directory
 
         # 仓库内相对路径：skills/<domain>/[<subdomain>/]<skill>/
-        $rel = $skillDir.FullName.Substring($RepoRoot.Length).TrimStart('\').Replace('\', '/')
+        $rel = $skillDir.FullName.Substring($RepoRoot.Length).Trim('\','/').Replace('\', '/')
         $parts = $rel.Split('/')
 
         # 期望：skills / domain / (subdomain /)? skill
@@ -233,7 +233,7 @@ if (Test-Path $ProjRoot) {
         $fm = Read-Frontmatter -Path $md.FullName
         $skillDir = $md.Directory
 
-        $rel = $skillDir.FullName.Substring($RepoRoot.Length).TrimStart('\').Replace('\', '/')
+        $rel = $skillDir.FullName.Substring($RepoRoot.Length).Trim('\','/').Replace('\', '/')
         $parts = $rel.Split('/')
         # 期望：projects / <project> / <skill>
         if ($parts.Length -lt 3 -or $parts[0] -ne 'projects') {
