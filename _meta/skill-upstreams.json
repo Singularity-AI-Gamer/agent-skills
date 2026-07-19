@@ -181,14 +181,16 @@
       "evidence": [
         "Skill was created in this repository by merging the local skill lifecycle workflow with the predecessor skill-upgrade behavior.",
         "The manager is now the canonical owner of check_upstreams.ps1, including strict path containment, automatic mirror backups, and a self-test.",
-        "Local mode can bootstrap an exact-install-path source index, preserve unresolved candidates for evidence-backed discovery, and reuse verified mappings to compare or safely mirror standalone installed skills."
+        "Local mode can bootstrap an exact-install-path source index, preserve unresolved candidates for evidence-backed discovery, and reuse verified mappings to compare or safely mirror standalone installed skills.",
+        "Claude Code support covers CLAUDE_CONFIG_DIR personal roots, project .claude/skills roots, runtime-neutral upstream indexes, exact-path duplicate handling, and read-only treatment of managed plugin caches."
       ],
       "verificationPath": [
         "Use this repository history as the canonical source until an explicit upstream is published.",
         "Run .\\skills\\01-agent-engineering\\skill-lifecycle-manager\\scripts\\check_upstreams.ps1 in read-only mode before applying upstream changes.",
-        "For a first-time local user, create a local index with -Mode Local -BootstrapIndex, verify every candidate repository/path, then rerun with the same -IndexPath."
+        "For a first-time local user, create a local index with -Mode Local -BootstrapIndex, verify every candidate repository/path, then rerun with the same -IndexPath.",
+        "For Claude Code, validate root discovery with -Mode Local -Runtime ClaudeCode and explicit -ProjectRoots; use claude plugin commands instead of editing plugin-cache paths."
       ],
-      "notes": "Self-maintained shared skill; external automatic updates disabled."
+      "notes": "Self-maintained cross-runtime skill for Codex, Claude Code, and host-neutral Agent Skills roots; external automatic updates disabled."
     },
     {
       "name": "liquid-glass-design",

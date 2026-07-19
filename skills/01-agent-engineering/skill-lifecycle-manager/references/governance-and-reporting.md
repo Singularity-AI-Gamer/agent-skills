@@ -37,12 +37,22 @@ Choose project scope when the skill contains private conventions, local
 architecture, experiments, or trigger behavior that should not affect other
 projects.
 
+Resolve scope through the target runtime. For Claude Code, personal skills live
+under `${CLAUDE_CONFIG_DIR:-~/.claude}/skills`, project skills under relevant
+`.claude/skills` roots, and shared/versioned plugins are managed by
+`claude plugin`. For Codex, use its configured user/project roots. Do not
+install into every detected runtime unless the user asked for multi-runtime
+availability.
+
 Before install:
 
 - Check every active root for the same name.
 - Compare existing and candidate versions.
 - Prefer merging a user-maintained copy over adding a duplicate.
-- Report whether a restart is required.
+- Report runtime-specific refresh behavior. Claude Code detects existing
+  standalone SKILL.md edits live, may need a restart for a newly created
+  top-level skills directory, and uses `/reload-plugins` for non-skill plugin
+  components.
 
 ## Quality Audit Gate
 
@@ -85,7 +95,8 @@ Classify candidates:
 - **Likely active**: strong task mapping with partial logs
 - **Installed but no observed usage**: present/loadable without use evidence
 - **Duplicate candidate**: same or near-same skill in several roots
-- **Managed**: system/plugin-owned; skip normal cleanup
+- **Managed**: system/plugin-owned; skip normal cleanup and use the runtime's
+  manager, such as `claude plugin`, when an update or uninstall is requested
 
 Resolve and contain every target path. Reject the root itself. Quarantine or
 back up uncertain candidates and use one shell end-to-end for Windows file

@@ -3,9 +3,13 @@ param(
     [ValidateSet("Auto", "Repo", "Local")]
     [string]$Mode = "Auto",
 
+    [ValidateSet("Auto", "Codex", "ClaudeCode", "All")]
+    [string]$Runtime = "Auto",
+
     [string]$RepoRoot,
     [string]$IndexPath,
     [string[]]$SkillRoots,
+    [string[]]$ProjectRoots,
     [string]$WorkDir,
     [string]$BackupRoot,
     [switch]$SelfTest,
@@ -37,10 +41,19 @@ if ($Mode -eq "Auto") {
     if (Test-Path $IndexPath) { $Mode = "Repo" } else { $Mode = "Local" }
 }
 if ($Mode -eq "Local" -and -not $indexPathWasExplicit) {
-    $IndexPath = Join-Path ([Environment]::GetFolderPath("UserProfile")) ".agents\skill-upstreams.json"
+    $homeDir = [Environment]::GetFolderPath("UserProfile")
+    $portableIndex = Join-Path $homeDir ".skill-lifecycle\skill-upstreams.json"
+    $legacyIndex = Join-Path $homeDir ".agents\skill-upstreams.json"
+    $IndexPath = if (Test-Path -LiteralPath $portableIndex) {
+        $portableIndex
+    } elseif (Test-Path -LiteralPath $legacyIndex) {
+        $legacyIndex
+    } else {
+        $portableIndex
+    }
 }
 if ($Mode -eq "Local" -and -not $backupRootWasExplicit) {
-    $BackupRoot = Join-Path ([Environment]::GetFolderPath("UserProfile")) ".codex\skill-audit\skill-upstream-audit"
+    $BackupRoot = Join-Path ([Environment]::GetFolderPath("UserProfile")) ".skill-lifecycle\backups\skill-upstream-audit"
 }
 
 New-Item -ItemType Directory -Force -Path $WorkDir | Out-Null
@@ -336,11 +349,18 @@ function Invoke-SelfTest {
     $child = Join-Path $allowedRoot "child"
     $sibling = Join-Path $testBase "root-escape"
     $backup = Join-Path $testBase "backups"
+    $claudeConfig = Join-Path $testBase "claude-profile"
+    $claudePersonalSkill = Join-Path $claudeConfig "skills\sample"
+    $claudePluginSkill = Join-Path $claudeConfig "plugins\cache\market\1.0.0\skills\sample"
+    $claudeProjectSkill = Join-Path $testBase "project\.claude\skills\sample"
+    $oldClaudeConfigDir = $env:CLAUDE_CONFIG_DIR
 
     try {
         New-Item -ItemType Directory -Path $child -Force | Out-Null
         New-Item -ItemType Directory -Path $sibling -Force | Out-Null
         Set-Content -LiteralPath (Join-Path $child "sentinel.txt") -Value "backup-test" -Encoding UTF8
+        New-Item -ItemType Directory -Path $claudePersonalSkill,$claudePluginSkill,$claudeProjectSkill -Force | Out-Null
+        $env:CLAUDE_CONFIG_DIR = $claudeConfig
 
         Assert-PathUnderRoot -Path $child -Root $allowedRoot
 
@@ -357,14 +377,31 @@ function Invoke-SelfTest {
             throw "Backup did not preserve the sentinel file."
         }
 
+        $personalInfo = Get-SkillRuntimeInfo $claudePersonalSkill
+        $pluginInfo = Get-SkillRuntimeInfo $claudePluginSkill
+        $projectInfo = Get-SkillRuntimeInfo $claudeProjectSkill
+        if ($personalInfo.runtime -ne "claude-code" -or $personalInfo.scope -ne "personal") {
+            throw "Claude Code personal skill classification failed."
+        }
+        if ($pluginInfo.scope -ne "plugin-cache-managed") {
+            throw "Claude Code plugin cache classification failed."
+        }
+        if ($projectInfo.runtime -ne "claude-code" -or $projectInfo.scope -ne "project") {
+            throw "Claude Code project skill classification failed."
+        }
+
         return [pscustomobject]@{
             passed = $true
             childAccepted = $true
             rootRejected = $rootRejected
             siblingPrefixRejected = $siblingRejected
             backupCreated = $true
+            claudePersonalClassified = $true
+            claudeProjectClassified = $true
+            claudePluginCacheExcluded = $true
         }
     } finally {
+        $env:CLAUDE_CONFIG_DIR = $oldClaudeConfigDir
         $resolvedBase = if (Test-Path -LiteralPath $testBase) { Get-CanonicalPath $testBase } else { $null }
         $tempPrefix = $tempRoot + [IO.Path]::DirectorySeparatorChar
         if ($resolvedBase -and $resolvedBase.StartsWith($tempPrefix, [StringComparison]::OrdinalIgnoreCase)) {
@@ -398,13 +435,99 @@ function Get-GitHubUrls([string]$SkillFile) {
     return @($matches | ForEach-Object { $_.Value.TrimEnd(".", ")", "]") } | Select-Object -Unique)
 }
 
-function Get-DefaultSkillRoots {
+function Get-ClaudeConfigRoot {
     $homeDir = [Environment]::GetFolderPath("UserProfile")
-    $candidates = @(
-        (Join-Path $homeDir ".codex\skills"),
-        (Join-Path $homeDir ".agents\skills")
-    )
-    return @($candidates | Where-Object { Test-Path $_ })
+    if ($env:CLAUDE_CONFIG_DIR) {
+        return [IO.Path]::GetFullPath([Environment]::ExpandEnvironmentVariables($env:CLAUDE_CONFIG_DIR))
+    }
+    return (Join-Path $homeDir ".claude")
+}
+
+function Get-DefaultSkillRoots([string]$TargetRuntime, [string[]]$Projects) {
+    $homeDir = [Environment]::GetFolderPath("UserProfile")
+    $candidates = @()
+
+    if ($TargetRuntime -in @("Auto", "Codex", "All")) {
+        $candidates += Join-Path $homeDir ".codex\skills"
+        $candidates += Join-Path $homeDir ".agents\skills"
+    }
+    if ($TargetRuntime -in @("Auto", "ClaudeCode", "All")) {
+        $candidates += Join-Path (Get-ClaudeConfigRoot) "skills"
+        foreach ($project in @($Projects)) {
+            if (-not $project) { continue }
+            $expanded = [Environment]::ExpandEnvironmentVariables($project)
+            if (Test-Path -LiteralPath $expanded) {
+                $candidates += Join-Path (Resolve-Path -LiteralPath $expanded).Path ".claude\skills"
+            }
+        }
+        if (-not $Projects -or $Projects.Count -eq 0) {
+            $gitRoot = (Invoke-Git -GitArgs @("-C", (Get-Location).Path, "rev-parse", "--show-toplevel") -AllowFailure).Text
+            if ($gitRoot) { $candidates += Join-Path $gitRoot ".claude\skills" }
+        }
+    }
+
+    return @($candidates | Where-Object { Test-Path -LiteralPath $_ } | ForEach-Object {
+        (Resolve-Path -LiteralPath $_).Path
+    } | Sort-Object -Unique)
+}
+
+function Get-SkillRuntimeInfo([string]$InstallPath) {
+    $canonical = (Get-CanonicalPath $InstallPath).Replace("\", "/")
+    $homeDir = [Environment]::GetFolderPath("UserProfile").Replace("\", "/").TrimEnd("/")
+    $claudeConfig = ([IO.Path]::GetFullPath((Get-ClaudeConfigRoot))).Replace("\", "/").TrimEnd("/")
+
+    if ($canonical.StartsWith("$claudeConfig/plugins/cache/", [StringComparison]::OrdinalIgnoreCase)) {
+        return [pscustomobject]@{ runtime = "claude-code"; scope = "plugin-cache-managed" }
+    }
+    if ($canonical.StartsWith("$claudeConfig/skills/", [StringComparison]::OrdinalIgnoreCase)) {
+        return [pscustomobject]@{ runtime = "claude-code"; scope = "personal" }
+    }
+    if ($canonical -match '/\.claude/skills/') {
+        return [pscustomobject]@{ runtime = "claude-code"; scope = "project" }
+    }
+    if ($canonical.StartsWith("$homeDir/.codex/skills/", [StringComparison]::OrdinalIgnoreCase)) {
+        return [pscustomobject]@{ runtime = "codex"; scope = "user" }
+    }
+    if ($canonical.StartsWith("$homeDir/.agents/skills/", [StringComparison]::OrdinalIgnoreCase)) {
+        return [pscustomobject]@{ runtime = "agent-skills"; scope = "user-shared" }
+    }
+    if ($canonical -match '/\.codex/skills/') {
+        return [pscustomobject]@{ runtime = "codex"; scope = "project" }
+    }
+    return [pscustomobject]@{ runtime = "unknown"; scope = "custom-root" }
+}
+
+function Get-ClaudePluginInventory([string]$TargetRuntime) {
+    if ($TargetRuntime -notin @("Auto", "ClaudeCode", "All")) {
+        return [pscustomobject]@{ status = "not-requested"; plugins = @(); cacheManaged = $true }
+    }
+    $claudeCommand = Get-Command claude -ErrorAction SilentlyContinue
+    if (-not $claudeCommand) {
+        return [pscustomobject]@{ status = "claude-cli-unavailable"; plugins = @(); cacheManaged = $true }
+    }
+
+    $oldErrorActionPreference = $ErrorActionPreference
+    $ErrorActionPreference = "Continue"
+    try {
+        $output = & claude plugin list --json 2>&1
+        $code = $LASTEXITCODE
+    } finally {
+        $ErrorActionPreference = $oldErrorActionPreference
+    }
+    if ($code -ne 0) {
+        return [pscustomobject]@{
+            status = "plugin-list-error"
+            plugins = @()
+            cacheManaged = $true
+            error = (($output | ForEach-Object { "$_" }) -join "`n").Trim()
+        }
+    }
+    try {
+        $plugins = @(($output -join "`n") | ConvertFrom-Json)
+        return [pscustomobject]@{ status = "inventoried"; plugins = $plugins; cacheManaged = $true }
+    } catch {
+        return [pscustomobject]@{ status = "plugin-list-invalid-json"; plugins = @(); cacheManaged = $true; error = $_.Exception.Message }
+    }
 }
 
 function Get-InstalledSkillFiles([string[]]$Roots) {
@@ -518,7 +641,11 @@ function New-LocalIndexEntry([object]$Skill) {
 
     return [pscustomobject]@{
         name = $Skill.name
-        install = [pscustomobject]@{ path = (Get-CanonicalPath $Skill.path).Replace("\", "/") }
+        install = [pscustomobject]@{
+            path = (Get-CanonicalPath $Skill.path).Replace("\", "/")
+            runtime = $Skill.runtime
+            scope = $Skill.scope
+        }
         classification = if ($candidates.Count -gt 0) { "candidate" } else { "unknown" }
         updatePolicy = "none"
         status = if ($candidates.Count -gt 0) { "source-discovery-required" } else { "source-unresolved" }
@@ -553,6 +680,8 @@ function Compare-MappedStandalone([object]$Skill, [object]$Entry, [string[]]$Roo
     $result = [ordered]@{
         name = $Skill.name
         path = $Skill.path
+        runtime = $Skill.runtime
+        scope = $Skill.scope
         indexClassification = $Entry.classification
         updatePolicy = $Entry.updatePolicy
         upstream = $null
@@ -642,10 +771,14 @@ function Compare-MappedStandalone([object]$Skill, [object]$Entry, [string[]]$Roo
 
 function Invoke-LocalMode {
     if (-not $SkillRoots -or $SkillRoots.Count -eq 0) {
-        $SkillRoots = Get-DefaultSkillRoots
+        $SkillRoots = Get-DefaultSkillRoots -TargetRuntime $Runtime -Projects $ProjectRoots
     }
     if (-not $SkillRoots -or $SkillRoots.Count -eq 0) {
-        throw "No skill roots found. Pass -SkillRoots explicitly."
+        if ($Runtime -in @("Auto", "ClaudeCode", "All")) {
+            $SkillRoots = @()
+        } else {
+            throw "No skill roots found. Pass -SkillRoots explicitly."
+        }
     }
 
     $skillFiles = Get-InstalledSkillFiles $SkillRoots
@@ -654,14 +787,20 @@ function Invoke-LocalMode {
     foreach ($file in $skillFiles) {
         $dir = Split-Path -Parent $file.FullName
         $gitRoot = Find-GitRoot $dir
+        $runtimeInfo = Get-SkillRuntimeInfo $dir
         $skills += [pscustomobject]@{
             name = Read-SkillName $file.FullName
             path = $dir
             skillFile = $file.FullName
             gitRoot = $gitRoot
             embeddedGitHubUrls = Get-GitHubUrls $file.FullName
+            runtime = $runtimeInfo.runtime
+            scope = $runtimeInfo.scope
         }
     }
+
+    $managedInstallExclusions = @($skills | Where-Object { $_.scope -eq "plugin-cache-managed" })
+    $skills = @($skills | Where-Object { $_.scope -ne "plugin-cache-managed" })
 
     $sourceIndex = Read-SourceIndex $IndexPath
     $sourceIndexInitiallyPresent = $null -ne $sourceIndex
@@ -743,6 +882,8 @@ function Invoke-LocalMode {
                 $discoveryQueue += [pscustomobject]@{
                     name = $skill.name
                     path = $skill.path
+                    runtime = $skill.runtime
+                    scope = $skill.scope
                     classification = $entry.classification
                     candidates = if ($entry.PSObject.Properties["candidates"]) { $entry.candidates } else { @() }
                     verificationPath = if ($entry.PSObject.Properties["verificationPath"]) { $entry.verificationPath } else { @() }
@@ -755,6 +896,8 @@ function Invoke-LocalMode {
         $standalone += [pscustomobject]@{
             name = $skill.name
             path = $skill.path
+            runtime = $skill.runtime
+            scope = $skill.scope
             status = $status
             embeddedGitHubUrls = $skill.embeddedGitHubUrls
             verificationPath = if ($skill.embeddedGitHubUrls.Count -gt 0) {
@@ -766,6 +909,8 @@ function Invoke-LocalMode {
         $discoveryQueue += [pscustomobject]@{
             name = $skill.name
             path = $skill.path
+            runtime = $skill.runtime
+            scope = $skill.scope
             classification = "unmapped"
             candidates = @($skill.embeddedGitHubUrls)
             verificationPath = $standalone[-1].verificationPath
@@ -779,21 +924,27 @@ function Invoke-LocalMode {
 
     $mappedCount = @($mappedStandalone).Count
     $verifiedMappedCount = @($mappedStandalone | Where-Object { $_.upstreamCommit }).Count
+    $claudePlugins = Get-ClaudePluginInventory $Runtime
 
     return [pscustomobject]@{
         mode = "local"
+        runtime = $Runtime
         apply = [bool]$Apply
         bootstrapIndex = [bool]$BootstrapIndex
         sourceIndexPath = $IndexPath
         sourceIndexInitiallyPresent = $sourceIndexInitiallyPresent
         sourceIndexPresent = $null -ne $sourceIndex
         skillRoots = $SkillRoots
+        projectRoots = @($ProjectRoots)
         skillCount = @($skills).Count
         gitRepositoryCount = @($repoResults).Count
         standaloneCount = @($standaloneInventory).Count
         gitRepositories = $repoResults
         mappedStandaloneSkills = $mappedStandalone
         standaloneSkills = $standalone
+        claudePlugins = $claudePlugins
+        managedPluginCachePolicy = "excluded-from-standalone-mirror"
+        managedPluginCacheSkillsExcluded = $managedInstallExclusions
         sourceIndexCoverage = [pscustomobject]@{
             exactPathMappings = $mappedCount
             verifiedMappingsCompared = $verifiedMappedCount

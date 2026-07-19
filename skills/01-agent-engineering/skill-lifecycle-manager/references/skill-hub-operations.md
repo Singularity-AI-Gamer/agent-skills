@@ -74,9 +74,10 @@ Observed script behavior:
 For an unmapped skill, first decide shared versus project-private. Add the lock
 mapping and rebuild indexes before relying on sync-push.
 
-## Junction Single Source
+## Link-Based Single Source
 
-Use junctions only when the user explicitly wants one physical root.
+Use links only when the user explicitly wants one physical root. Confirm that
+every target runtime follows the proposed link type before changing ownership.
 
 ```powershell
 .\scripts\setup-junctions.ps1 -Source "<single-source-root>" -Targets "<target1>;<target2>" -DryRun
@@ -88,9 +89,15 @@ Observed script behavior:
 - Creates Windows junctions with `mklink /J`.
 - Verifies by comparing SKILL.md counts.
 
-Include every intended runtime root explicitly. Do not choose junctions as the
-default update mechanism because they change ownership and failure blast
-radius.
+The bundled helper is Windows-specific. On macOS/Linux, use a symbolic link
+only after the same dry-run, backup, strict containment, and target verification
+steps. Claude Code supports personal and project skill-directory symlinks in
+current releases, but marketplace plugin symlinks follow separate cache rules;
+do not link into or mutate the installed plugin cache.
+
+Include every intended runtime root explicitly. Do not choose junctions or
+symlinks as the default update mechanism because they change ownership and
+failure blast radius.
 
 ## New Skill Synchronization
 

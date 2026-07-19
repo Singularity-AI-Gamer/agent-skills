@@ -1,6 +1,6 @@
 ---
 name: skill-lifecycle-manager
-description: Manage agent-skill lifecycles across local, global, project, Skill Hub, skills.sh, GitHub, plugin-cache, and system roots. Use when searching, recommending, installing, updating, upgrading, syncing, merging, auditing, deduplicating, cleaning, packaging, publishing, or validating skills; choosing project versus global scope; verifying upstream source, stars, or installs; or working with skill-upgrade, check_upstreams.ps1, sync-pull/push, junctions, skills-lock.json, or skill-upstreams.json. Do not use for ordinary software-package upgrades or non-skill file cleanup.
+description: Manage Agent Skills across Codex, Claude Code, local/global/project roots, Skill Hubs, GitHub, skills.sh, and managed plugin caches. Use when searching, installing, updating, upgrading, syncing, merging, auditing, deduplicating, cleaning, packaging, publishing, validating, resolving upstream sources, choosing runtime or scope, or working with skill-upgrade, check_upstreams.ps1, Claude Code plugins, skills-lock.json, or skill-upstreams.json. Do not use for ordinary software-package upgrades or non-skill file cleanup.
 ---
 
 # Skill Lifecycle Manager
@@ -19,6 +19,8 @@ Maintain three boundaries throughout the task:
   root or project root.
 - **Ownership**: whether the path is user-maintained, project-maintained, or
   system/plugin-managed.
+- **Runtime**: which loader owns the active copy, such as Codex, Claude Code,
+  an Agent Skills-compatible host, or more than one runtime.
 
 Do not treat a Skill Hub checkout, `_repos` source, plugin cache, and global
 install as interchangeable even when their skill names match.
@@ -35,6 +37,9 @@ Create a compact internal task card before acting:
   package, publish, validate, or create/edit.
 - **Target**: skill name, source URL, repository path, installed path, or topic.
 - **Scope**: project, global/user, source repository, managed root, or unknown.
+- **Runtime**: Codex, Claude Code, multiple runtimes, or unknown. Do not assume
+  the runtime executing this skill is the runtime whose skills are being
+  managed.
 - **Destructive risk**: none, overwrite, move, delete, cleanup, or ownership
   change.
 - **Evidence needed**: source, version, usage, quality, or scope proof.
@@ -53,6 +58,7 @@ Read the complete relevant reference before performing that operation:
 | --- | --- |
 | Skill Hub pull, push, new-skill sync, junction, or index rebuild | [references/skill-hub-operations.md](references/skill-hub-operations.md) |
 | Upstream comparison, `skill-upgrade`, `check_upstreams.ps1`, mirror, or local fast-forward | [references/upstream-audit.md](references/upstream-audit.md) |
+| Runtime roots, Claude Code skills/plugins, scope precedence, cache ownership, or reload behavior | [references/runtime-adapters.md](references/runtime-adapters.md) |
 | Discovery, recommendation, install scope, quality audit, usage cleanup, package, publish, or report format | [references/governance-and-reporting.md](references/governance-and-reporting.md) |
 
 Read more than one reference when the task crosses those boundaries. Do not
@@ -63,13 +69,26 @@ load unrelated operational detail for a simple task.
 Discover actual roots before editing. Common roots include:
 
 - User/global roots: `~/.agents/skills`, `~/.codex/skills`, or configured
-  `$CODEX_HOME/skills`.
-- Project roots: project-local skill directories.
+  `$CODEX_HOME/skills`; Claude Code personal skills live under
+  `${CLAUDE_CONFIG_DIR:-~/.claude}/skills`.
+- Project roots: project-local skill directories, including `.codex/skills`
+  and Claude Code `.claude/skills` roots. Claude Code can also discover nested
+  `.claude/skills` directories in a monorepo.
 - Source checkouts: `_repos`, Skill Hub clones, submodules, or manual clones.
-- Managed roots: `.system` skills and plugin caches.
+- Managed roots: `.system` skills and plugin caches. Claude Code marketplace
+  plugins are managed through `claude plugin`, not by editing
+  `~/.claude/plugins/cache`.
 - Evidence indexes: a repository `_meta/skill-upstreams.json` or a local
-  source index such as `~/.agents/skill-upstreams.json`; `skills-lock.json`
-  is an inventory, not proof of upstream identity.
+  source index such as `~/.skill-lifecycle/skill-upstreams.json`; legacy
+  `~/.agents/skill-upstreams.json` remains supported. `skills-lock.json` is an
+  inventory, not proof of upstream identity.
+
+`CLAUDE_CONFIG_DIR` relocates Claude Code's configuration and personal skills;
+it does not relocate the runtime-neutral source index. Keep the default index
+under the operating-system user home unless `-IndexPath` is explicit. Likewise,
+`~/.agents/skills` is a shared Agent Skills root, not proof that Codex owns or
+loads every contained skill. Never label an `.agents` install as Codex-owned
+without loader or configuration evidence.
 
 Treat managed roots as read-only unless the user explicitly authorizes an
 override. Treat source checkouts as source evidence, not automatically as the
@@ -77,8 +96,8 @@ active install target.
 
 Keep an internal inventory:
 
-| Skill | Source | Active install | Owner | Intended action |
-| --- | --- | --- | --- | --- |
+| Skill | Runtime/scope | Source | Active install | Owner | Intended action |
+| --- | --- | --- | --- | --- | --- |
 
 ## Lifecycle Safety Sequence
 
@@ -111,6 +130,9 @@ references, and evals. This manager owns placement and lifecycle decisions:
   wants scope-specific variants.
 - Validate the source copy before installing it, then compare source and
   installed hashes.
+- For Claude Code, use personal or project `.claude/skills` for standalone
+  skills and a plugin only when namespaced distribution, versioned updates, or
+  bundled agents/hooks/MCP are actually needed.
 
 ## Discovery And Installation
 
@@ -153,6 +175,19 @@ inherit each other's upstream. On each later audit, refresh the verified ref,
 record the observed commit, and compare the complete skill directory. Read
 [references/upstream-audit.md](references/upstream-audit.md) for the bootstrap,
 verification, index, and repeat-audit workflow.
+
+For Claude Code marketplace plugins, the plugin manager is the lifecycle
+authority. Inventory with `claude plugin list --json`, compare the declared
+marketplace/version/source, preserve the installed scope in
+`claude plugin update <plugin> --scope <scope>`, and follow the CLI's restart
+instruction; never mirror files into the versioned plugin cache. Read
+[references/runtime-adapters.md](references/runtime-adapters.md) before acting.
+
+Do not invent lifecycle metadata or policy. `source`, `repository`, `version`,
+or similar frontmatter fields are useful only when actually present and remain
+candidate evidence until verified. Do not assume semantic versions, automatic
+polling, retry-count downgrades, a `stale` classification, or time-based
+thresholds unless the source index or user policy defines them.
 
 When both versions changed, summarize behavior-level differences before
 merging:
@@ -209,6 +244,7 @@ Use a concise report proportional to the operation:
 
 ```text
 Intent:
+Runtime and scope:
 Source:
 Target and scope:
 Ownership:

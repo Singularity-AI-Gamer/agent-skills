@@ -142,7 +142,7 @@ When maintaining Skill-hub, upgrade from evidence rather than name matching.
 4. After upgrading, run [`scripts/build-indexes.ps1`](./scripts/build-indexes.ps1) so `_meta/` reflects the latest counts, paths, and descriptions.
 5. Review skill content, index changes, and anonymization with `git diff` before committing.
 
-The repository includes [`skills/01-agent-engineering/skill-lifecycle-manager/`](./skills/01-agent-engineering/skill-lifecycle-manager/), an agent-facing workflow for skill search, installation, upgrades, sync, source verification, and quality audits across Skill-hub and local skill installations.
+The repository includes [`skills/01-agent-engineering/skill-lifecycle-manager/`](./skills/01-agent-engineering/skill-lifecycle-manager/), a cross-runtime workflow for skill search, installation, upgrades, sync, source verification, and quality audits across Codex, Claude Code, Skill Hub, personal/project installs, and managed Claude Code plugin caches.
 
 ## <img src="assets/README/icons/maintenance.svg" width="20" alt=""> Maintenance Conventions
 

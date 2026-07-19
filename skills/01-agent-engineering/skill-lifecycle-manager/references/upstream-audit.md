@@ -6,11 +6,13 @@ Read this reference before comparing skill upstreams, responding to a legacy
 ## Evidence Index
 
 Use `_meta/skill-upstreams.json` for a Skill Hub and a local source index such
-as `~/.agents/skill-upstreams.json` for standalone installed copies. The index
+as `~/.skill-lifecycle/skill-upstreams.json` for standalone installed copies.
+Existing `~/.agents/skill-upstreams.json` indexes remain supported. The index
 is JSON, not a database service. Each verified source entry records:
 
 - `name` and repository-local `path`
-- for a local index, the canonical `install.path`; this is the identity key
+- for a local index, canonical `install.path`, `install.runtime`, and
+  `install.scope`; the path is the identity key
 - `classification`: `open-source`, `self`, `local`, `candidate`, or `unknown`
 - Verified `upstream.url`, `upstream.path`, and `upstream.ref`
 - Checked commit in `lastChecked.commit`
@@ -38,8 +40,9 @@ installed path has no verified entry. Create an inventory/index scaffold first:
 ```powershell
 .\scripts\check_upstreams.ps1 `
   -Mode Local `
-  -SkillRoots "$HOME\.agents\skills","$HOME\.codex\skills" `
-  -IndexPath "$HOME\.agents\skill-upstreams.json" `
+  -Runtime All `
+  -SkillRoots "$HOME\.agents\skills","$HOME\.codex\skills","$HOME\.claude\skills" `
+  -IndexPath "$HOME\.skill-lifecycle\skill-upstreams.json" `
   -BootstrapIndex
 ```
 
@@ -70,6 +73,12 @@ For each `candidate` or `unknown` entry, resolve the source in this order:
    project/private skills become `local`; unresolved options remain `candidate`
    or `unknown` with verification steps.
 
+Agent Skills do not require standard `source`, `repository`, or semantic
+`version` frontmatter. Inspect such fields only when they actually exist, and
+treat them as candidate evidence until repository/path verification succeeds.
+Do not invent freshness intervals or mark an index stale by age unless the
+user's policy or index schema defines that rule.
+
 Use these evidence levels:
 
 | Level | Minimum evidence | Index/action |
@@ -88,7 +97,9 @@ Example verified local entry:
 {
   "name": "example-skill",
   "install": {
-    "path": "C:/Users/me/.agents/skills/example-skill"
+    "path": "C:/Users/me/.claude/skills/example-skill",
+    "runtime": "claude-code",
+    "scope": "personal"
   },
   "classification": "open-source",
   "upstream": {
@@ -146,6 +157,11 @@ Run read-only local audit:
 ```powershell
 .\skills\01-agent-engineering\skill-lifecycle-manager\scripts\check_upstreams.ps1 -Mode Local -SkillRoots "<root1>","<root2>"
 ```
+
+Use `-Runtime Codex`, `-Runtime ClaudeCode`, or `-Runtime All` to select
+default roots. For Claude Code project skills, pass `-ProjectRoots` or explicit
+`.claude/skills` roots. Plugin caches are not standalone roots; inventory and
+update them through `claude plugin` as defined in `runtime-adapters.md`.
 
 Pass `-IndexPath` to make Local mode compare verified standalone mappings. If
 the index is absent, bootstrap it and complete source discovery before claiming
@@ -210,6 +226,8 @@ Local mode:
   containment, and a timestamped backup.
 - Labels unmapped copies as source candidates or local/unknown and returns a
   discovery queue.
+- Reports runtime and scope for indexed installs and keeps Claude Code plugin
+  cache paths outside standalone mirror operations.
 
 Before local apply, review every discovered Git root. Backups and source
 checkouts nested under skill roots can appear in inventory, so exclude or

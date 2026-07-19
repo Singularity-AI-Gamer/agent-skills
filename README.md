@@ -142,7 +142,7 @@ Windows 上常用 Directory Junction 让多个 Agent 共享同一份技能目录
 4. 升级后运行 [`scripts/build-indexes.ps1`](./scripts/build-indexes.ps1)，让 `_meta/` 索引反映最新技能数量、路径和描述。
 5. 用 `git diff` 审查技能内容、索引变化和脱敏情况，再提交。
 
-仓库内的 [`skills/01-agent-engineering/skill-lifecycle-manager/`](./skills/01-agent-engineering/skill-lifecycle-manager/) 记录了面向 Agent 的 skill 搜索、安装、升级、同步、来源校验和质量审计流程，可用于维护 Skill-hub 来源索引，也可用于检查本地 skill 安装目录。
+仓库内的 [`skills/01-agent-engineering/skill-lifecycle-manager/`](./skills/01-agent-engineering/skill-lifecycle-manager/) 提供跨 Codex 与 Claude Code 的 skill 搜索、安装、升级、同步、来源校验和质量审计流程，可维护 Skill-hub 来源索引，识别个人/项目级安装，并安全处理 Claude Code 插件缓存。
 
 ## <img src="assets/README/icons/maintenance.svg" width="20" alt=""> 维护约定
 
