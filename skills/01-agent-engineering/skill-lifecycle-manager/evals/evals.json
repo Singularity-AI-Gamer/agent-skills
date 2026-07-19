@@ -124,6 +124,30 @@
         "Any proposed cleanup is scoped to the Node project and does not use skill usage evidence labels.",
         "The task is routed to the repository's normal dependency and cleanup workflow."
       ]
+    },
+    {
+      "id": 11,
+      "prompt": "我第一次使用这个 skill。请检查我全局安装的 skills 是否有 GitHub 新版本；这台机器没有 skill-upstreams.json，也没有保存过来源对应关系。",
+      "expected_output": "The agent bootstraps an exact-path local source index, completes evidence-backed source discovery before version claims, and leaves unresolved candidates untouched.",
+      "files": [],
+      "expectations": [
+        "The response detects the missing source index and does not claim full upgrade coverage from skill names alone.",
+        "Local provenance is inventoried before current GitHub or registry searches use exact frontmatter names and distinctive body phrases.",
+        "Verified mappings record canonical install path, repository URL, exact upstream skill path, ref, immutable commit, evidence, and update policy.",
+        "Candidate or conflicting matches remain in a discovery queue and are not automatically overwritten."
+      ]
+    },
+    {
+      "id": 12,
+      "prompt": "我的 ~/.agents/skill-upstreams.json 已经记录了一个独立复制安装的 report-writer，它对应 owner/tools 仓库的 skills/report-writer。请复查有没有落后，安全的话升级。",
+      "expected_output": "The agent resolves the standalone skill by canonical installed path, refreshes the recorded ref, compares complete trees, and only applies verified mirror drift after backup.",
+      "files": [],
+      "expectations": [
+        "The mapping is selected by canonical install path rather than name alone.",
+        "The recorded ref is fetched and resolved to an immutable commit before the full skill directory is compared.",
+        "Only verified mirror drift is eligible for automatic replacement; mapped or manual drift is reported for review.",
+        "An applied replacement has strict root containment, a timestamped backup, validation, and persisted lastChecked status."
+      ]
     }
   ]
 }

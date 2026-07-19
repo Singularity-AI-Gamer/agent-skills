@@ -9,10 +9,13 @@ param(
     [string]$WorkDir,
     [string]$BackupRoot,
     [switch]$SelfTest,
+    [switch]$BootstrapIndex,
     [switch]$Apply
 )
 
 $ErrorActionPreference = "Stop"
+$indexPathWasExplicit = -not [string]::IsNullOrWhiteSpace($IndexPath)
+$backupRootWasExplicit = -not [string]::IsNullOrWhiteSpace($BackupRoot)
 
 if (-not $RepoRoot) {
     $RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..\..\..\..")).Path
@@ -32,6 +35,12 @@ if (-not $BackupRoot) {
 }
 if ($Mode -eq "Auto") {
     if (Test-Path $IndexPath) { $Mode = "Repo" } else { $Mode = "Local" }
+}
+if ($Mode -eq "Local" -and -not $indexPathWasExplicit) {
+    $IndexPath = Join-Path ([Environment]::GetFolderPath("UserProfile")) ".agents\skill-upstreams.json"
+}
+if ($Mode -eq "Local" -and -not $backupRootWasExplicit) {
+    $BackupRoot = Join-Path ([Environment]::GetFolderPath("UserProfile")) ".codex\skill-audit\skill-upstream-audit"
 }
 
 New-Item -ItemType Directory -Force -Path $WorkDir | Out-Null
@@ -398,6 +407,239 @@ function Get-DefaultSkillRoots {
     return @($candidates | Where-Object { Test-Path $_ })
 }
 
+function Get-InstalledSkillFiles([string[]]$Roots) {
+    $files = @()
+    foreach ($root in $Roots) {
+        if (-not (Test-Path -LiteralPath $root)) { continue }
+        $resolvedRoot = (Resolve-Path -LiteralPath $root).Path
+        $rootSkill = Join-Path $resolvedRoot "SKILL.md"
+        if (Test-Path -LiteralPath $rootSkill) {
+            $files += Get-Item -LiteralPath $rootSkill
+        }
+        Get-ChildItem -LiteralPath $resolvedRoot -Directory -Force | ForEach-Object {
+            $skillFile = Join-Path $_.FullName "SKILL.md"
+            if (Test-Path -LiteralPath $skillFile) {
+                $files += Get-Item -LiteralPath $skillFile
+            }
+        }
+    }
+    return @($files | Sort-Object FullName -Unique)
+}
+
+function Read-SourceIndex([string]$Path) {
+    if (-not (Test-Path -LiteralPath $Path)) { return $null }
+    $index = Get-Content -LiteralPath $Path -Raw -Encoding UTF8 | ConvertFrom-Json
+    if (-not $index.PSObject.Properties["sources"]) {
+        throw "Source index has no sources array: $Path"
+    }
+    return $index
+}
+
+function Write-SourceIndex([object]$Index, [string]$Path) {
+    $parent = Split-Path -Parent $Path
+    if ($parent) { New-Item -ItemType Directory -Force -Path $parent | Out-Null }
+    $json = $Index | ConvertTo-Json -Depth 12
+    $enc = New-Object System.Text.UTF8Encoding($false)
+    [IO.File]::WriteAllText($Path, $json, $enc)
+}
+
+function Get-GitHubRepositoryUrl([string]$Url) {
+    if (-not $Url) { return $null }
+    $match = [regex]::Match($Url, '^https://github\.com/([A-Za-z0-9_.-]+)/([A-Za-z0-9_.-]+)')
+    if (-not $match.Success) { return $null }
+    $repo = $match.Groups[2].Value -replace '\.git$', ''
+    return "https://github.com/$($match.Groups[1].Value)/$repo"
+}
+
+function Find-LocalSourceEntry([object]$Index, [string]$InstallPath) {
+    if (-not $Index) { return $null }
+    $canonicalInstall = Get-CanonicalPath $InstallPath
+    foreach ($entry in @($Index.sources)) {
+        if (-not $entry.PSObject.Properties["install"] -or
+            -not $entry.install.PSObject.Properties["path"] -or
+            -not $entry.install.path) { continue }
+        try {
+            $candidate = [IO.Path]::GetFullPath([Environment]::ExpandEnvironmentVariables($entry.install.path)).TrimEnd("\", "/")
+            if ($candidate -eq $canonicalInstall) { return $entry }
+        } catch {
+            continue
+        }
+    }
+    return $null
+}
+
+function Find-ContainingSkillRoot([string]$InstallPath, [string[]]$Roots) {
+    foreach ($root in $Roots) {
+        if (-not (Test-Path -LiteralPath $root)) { continue }
+        if (Test-PathStrictlyUnderRoot -Path $InstallPath -Root $root) {
+            return (Get-CanonicalPath $root)
+        }
+    }
+    return $null
+}
+
+function New-LocalIndexEntry([object]$Skill) {
+    $candidates = @()
+    $evidence = @("Canonical installed path inventoried by skill-lifecycle-manager.")
+    $verification = @()
+
+    if ($Skill.gitRoot) {
+        $remote = (Invoke-Git -GitArgs @("-C", $Skill.gitRoot, "remote", "get-url", "origin") -AllowFailure).Text
+        $branch = (Invoke-Git -GitArgs @("-C", $Skill.gitRoot, "rev-parse", "--abbrev-ref", "HEAD") -AllowFailure).Text
+        if ($remote) {
+            $candidates += [pscustomobject]@{
+                url = $remote
+                path = $Skill.path.Substring($Skill.gitRoot.Length).TrimStart("\", "/").Replace("\", "/") + "/"
+                ref = $branch
+                signal = "containing-git-origin"
+            }
+            $evidence += "Containing Git repository origin observed; public/open-source status was not inferred."
+        }
+    }
+
+    foreach ($url in @($Skill.embeddedGitHubUrls)) {
+        $repoUrl = Get-GitHubRepositoryUrl $url
+        if ($repoUrl -and -not (@($candidates | Where-Object { $_.url -eq $repoUrl }).Count)) {
+            $candidates += [pscustomobject]@{
+                url = $repoUrl
+                path = $null
+                ref = $null
+                signal = "embedded-url"
+            }
+        }
+    }
+    if ($Skill.embeddedGitHubUrls.Count -gt 0) {
+        $evidence += "GitHub URL found in SKILL.md; it may be a dependency or example, so it remains unverified."
+    }
+
+    $verification += "Inspect git origin, install receipts, junction targets, source metadata, README attribution, and adjacent source checkouts."
+    $verification += "Search GitHub for the exact frontmatter name and distinctive SKILL.md phrases."
+    $verification += "Verify the exact repository path and full directory before assigning open-source and an update policy."
+
+    return [pscustomobject]@{
+        name = $Skill.name
+        install = [pscustomobject]@{ path = (Get-CanonicalPath $Skill.path).Replace("\", "/") }
+        classification = if ($candidates.Count -gt 0) { "candidate" } else { "unknown" }
+        updatePolicy = "none"
+        status = if ($candidates.Count -gt 0) { "source-discovery-required" } else { "source-unresolved" }
+        candidates = $candidates
+        evidence = $evidence
+        verificationPath = $verification
+        notes = "Bootstrap entry only; no automatic overwrite is permitted until provenance is verified."
+    }
+}
+
+function Add-MissingLocalIndexEntries([object]$Index, [object[]]$Skills) {
+    if (-not $Index) {
+        $Index = [pscustomobject]@{
+            schema_version = 1
+            index_kind = "local-skill-upstreams"
+            updated_at = (Get-Date -Format "yyyy-MM-dd")
+            sources = @()
+        }
+    }
+    $sources = @($Index.sources)
+    foreach ($skill in $Skills) {
+        if (-not (Find-LocalSourceEntry -Index $Index -InstallPath $skill.path)) {
+            $sources += New-LocalIndexEntry $skill
+            $Index.sources = $sources
+        }
+    }
+    $Index | Add-Member -Force -NotePropertyName updated_at -NotePropertyValue (Get-Date -Format "yyyy-MM-dd")
+    return $Index
+}
+
+function Compare-MappedStandalone([object]$Skill, [object]$Entry, [string[]]$Roots) {
+    $result = [ordered]@{
+        name = $Skill.name
+        path = $Skill.path
+        indexClassification = $Entry.classification
+        updatePolicy = $Entry.updatePolicy
+        upstream = $null
+        upstreamPath = $null
+        upstreamCommit = $null
+        status = "unverified-mapping"
+        missingLocalFiles = 0
+        extraLocalFiles = 0
+        changedFiles = 0
+        applied = $false
+        backupPath = $null
+    }
+
+    if ($Entry.classification -ne "open-source" -or
+        -not $Entry.PSObject.Properties["upstream"] -or
+        -not $Entry.upstream.url -or
+        -not $Entry.upstream.path -or
+        -not $Entry.upstream.ref) {
+        if ($Entry.classification -eq "self") { $result.status = "self-maintained" }
+        elseif ($Entry.classification -eq "local") { $result.status = "local-no-external-upstream" }
+        return [pscustomobject]$result
+    }
+
+    $result.upstream = $Entry.upstream.url
+    $result.upstreamPath = $Entry.upstream.path
+    try {
+        $repoPath = Update-UpstreamRepo $Entry
+        $commit = (Invoke-Git -GitArgs @("-C", $repoPath, "rev-parse", "HEAD")).Text
+        $result.upstreamCommit = $commit
+        $upPath = Join-Path $repoPath ($Entry.upstream.path -replace "/", "\")
+        if (-not (Test-Path -LiteralPath $upPath)) {
+            $result.status = "missing-upstream-path"
+            return [pscustomobject]$result
+        }
+
+        $trimTrailingWhitespace = $false
+        if ($Entry.PSObject.Properties["normalization"] -and
+            $Entry.normalization.PSObject.Properties["trimTrailingWhitespace"]) {
+            $trimTrailingWhitespace = [bool]$Entry.normalization.trimTrailingWhitespace
+        }
+        $local = Get-NormalizedHashes $Skill.path $trimTrailingWhitespace
+        $up = Get-NormalizedHashes $upPath $trimTrailingWhitespace
+        $localKeys = [System.Collections.Generic.HashSet[string]]::new([string[]]$local.Keys)
+        $upKeys = [System.Collections.Generic.HashSet[string]]::new([string[]]$up.Keys)
+        foreach ($key in $upKeys) {
+            if (-not $localKeys.Contains($key)) { $result.missingLocalFiles++ }
+            elseif ($local[$key] -ne $up[$key]) { $result.changedFiles++ }
+        }
+        foreach ($key in $localKeys) {
+            if (-not $upKeys.Contains($key)) { $result.extraLocalFiles++ }
+        }
+
+        if (($result.missingLocalFiles + $result.extraLocalFiles + $result.changedFiles) -eq 0) {
+            $result.status = "current"
+        } elseif ($Entry.updatePolicy -eq "mapped") {
+            $result.status = "mapped-drift"
+        } else {
+            $result.status = "drift"
+        }
+
+        if ($Apply -and $result.status -eq "drift" -and $Entry.updatePolicy -eq "mirror") {
+            $allowedRoot = Find-ContainingSkillRoot -InstallPath $Skill.path -Roots $Roots
+            if (-not $allowedRoot) { throw "Installed path is not below an audited skill root." }
+            $result.backupPath = Sync-DirectoryMirror `
+                -SourceDir $upPath `
+                -TargetDir $Skill.path `
+                -AllowedRoot $allowedRoot `
+                -BackupRoot $BackupRoot `
+                -Label $Entry.name
+            $result.status = "updated"
+            $result.applied = $true
+        }
+
+        if ($Apply) {
+            if (-not $Entry.PSObject.Properties["lastChecked"]) {
+                $Entry | Add-Member -NotePropertyName lastChecked -NotePropertyValue ([pscustomobject]@{})
+            }
+            $Entry.lastChecked | Add-Member -Force -NotePropertyName date -NotePropertyValue (Get-Date -Format "yyyy-MM-dd")
+            $Entry.lastChecked | Add-Member -Force -NotePropertyName commit -NotePropertyValue $commit
+            $Entry | Add-Member -Force -NotePropertyName status -NotePropertyValue $result.status
+        }
+    } catch {
+        $result.status = "error: $($_.Exception.Message)"
+    }
+    return [pscustomobject]$result
+}
+
 function Invoke-LocalMode {
     if (-not $SkillRoots -or $SkillRoots.Count -eq 0) {
         $SkillRoots = Get-DefaultSkillRoots
@@ -406,13 +648,7 @@ function Invoke-LocalMode {
         throw "No skill roots found. Pass -SkillRoots explicitly."
     }
 
-    $skillFiles = @()
-    foreach ($root in $SkillRoots) {
-        if (-not (Test-Path $root)) { continue }
-        $resolvedRoot = (Resolve-Path -LiteralPath $root).Path
-        $skillFiles += Get-ChildItem -LiteralPath $resolvedRoot -Recurse -File -Filter "SKILL.md" -Force |
-            Where-Object { ($_.FullName -split '[\\/]') -notcontains ".git" }
-    }
+    $skillFiles = Get-InstalledSkillFiles $SkillRoots
 
     $skills = @()
     foreach ($file in $skillFiles) {
@@ -425,6 +661,18 @@ function Invoke-LocalMode {
             gitRoot = $gitRoot
             embeddedGitHubUrls = Get-GitHubUrls $file.FullName
         }
+    }
+
+    $sourceIndex = Read-SourceIndex $IndexPath
+    $sourceIndexInitiallyPresent = $null -ne $sourceIndex
+    if ($BootstrapIndex) {
+        if ($sourceIndex -and
+            ((-not $sourceIndex.PSObject.Properties["index_kind"]) -or
+             $sourceIndex.index_kind -ne "local-skill-upstreams")) {
+            throw "Refusing to bootstrap into a non-local source index: $IndexPath"
+        }
+        $sourceIndex = Add-MissingLocalIndexEntries -Index $sourceIndex -Skills $skills
+        Write-SourceIndex -Index $sourceIndex -Path $IndexPath
     }
 
     $repoResults = @()
@@ -482,29 +730,76 @@ function Invoke-LocalMode {
         }
     }
 
-    $standalone = @($skills | Where-Object { -not $_.gitRoot } | ForEach-Object {
-        [pscustomobject]@{
-            name = $_.name
-            path = $_.path
-            status = if ($_.embeddedGitHubUrls.Count -gt 0) { "candidate-url-found" } else { "local-or-unknown" }
-            embeddedGitHubUrls = $_.embeddedGitHubUrls
-            verificationPath = if ($_.embeddedGitHubUrls.Count -gt 0) {
-                "Compare full directory content against the linked repository/path before overwriting."
+    $standaloneInventory = @($skills | Where-Object { -not $_.gitRoot })
+    $standalone = @()
+    $mappedStandalone = @()
+    $discoveryQueue = @()
+    foreach ($skill in $standaloneInventory) {
+        $entry = Find-LocalSourceEntry -Index $sourceIndex -InstallPath $skill.path
+        if ($entry) {
+            $mappedResult = Compare-MappedStandalone -Skill $skill -Entry $entry -Roots $SkillRoots
+            $mappedStandalone += $mappedResult
+            if ($mappedResult.status -eq "unverified-mapping") {
+                $discoveryQueue += [pscustomobject]@{
+                    name = $skill.name
+                    path = $skill.path
+                    classification = $entry.classification
+                    candidates = if ($entry.PSObject.Properties["candidates"]) { $entry.candidates } else { @() }
+                    verificationPath = if ($entry.PSObject.Properties["verificationPath"]) { $entry.verificationPath } else { @() }
+                }
+            }
+            continue
+        }
+
+        $status = if ($skill.embeddedGitHubUrls.Count -gt 0) { "candidate-url-found" } else { "local-or-unknown" }
+        $standalone += [pscustomobject]@{
+            name = $skill.name
+            path = $skill.path
+            status = $status
+            embeddedGitHubUrls = $skill.embeddedGitHubUrls
+            verificationPath = if ($skill.embeddedGitHubUrls.Count -gt 0) {
+                "Bootstrap the source index, then verify the exact repository/path before overwriting."
             } else {
-                "Search exact frontmatter name and a unique phrase from SKILL.md before assigning an upstream."
+                "Bootstrap the source index, then search exact frontmatter name and distinctive SKILL.md phrases."
             }
         }
-    })
+        $discoveryQueue += [pscustomobject]@{
+            name = $skill.name
+            path = $skill.path
+            classification = "unmapped"
+            candidates = @($skill.embeddedGitHubUrls)
+            verificationPath = $standalone[-1].verificationPath
+        }
+    }
+
+    if ($Apply -and $sourceIndex) {
+        $sourceIndex | Add-Member -Force -NotePropertyName updated_at -NotePropertyValue (Get-Date -Format "yyyy-MM-dd")
+        Write-SourceIndex -Index $sourceIndex -Path $IndexPath
+    }
+
+    $mappedCount = @($mappedStandalone).Count
+    $verifiedMappedCount = @($mappedStandalone | Where-Object { $_.upstreamCommit }).Count
 
     return [pscustomobject]@{
         mode = "local"
         apply = [bool]$Apply
+        bootstrapIndex = [bool]$BootstrapIndex
+        sourceIndexPath = $IndexPath
+        sourceIndexInitiallyPresent = $sourceIndexInitiallyPresent
+        sourceIndexPresent = $null -ne $sourceIndex
         skillRoots = $SkillRoots
         skillCount = @($skills).Count
         gitRepositoryCount = @($repoResults).Count
-        standaloneCount = @($standalone).Count
+        standaloneCount = @($standaloneInventory).Count
         gitRepositories = $repoResults
+        mappedStandaloneSkills = $mappedStandalone
         standaloneSkills = $standalone
+        sourceIndexCoverage = [pscustomobject]@{
+            exactPathMappings = $mappedCount
+            verifiedMappingsCompared = $verifiedMappedCount
+            discoveryRequired = @($discoveryQueue).Count
+        }
+        sourceDiscoveryQueue = $discoveryQueue
     }
 }
 

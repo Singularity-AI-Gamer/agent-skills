@@ -67,8 +67,9 @@ Discover actual roots before editing. Common roots include:
 - Project roots: project-local skill directories.
 - Source checkouts: `_repos`, Skill Hub clones, submodules, or manual clones.
 - Managed roots: `.system` skills and plugin caches.
-- Evidence indexes: `_meta/skills-lock.json` and
-  `_meta/skill-upstreams.json`.
+- Evidence indexes: a repository `_meta/skill-upstreams.json` or a local
+  source index such as `~/.agents/skill-upstreams.json`; `skills-lock.json`
+  is an inventory, not proof of upstream identity.
 
 Treat managed roots as read-only unless the user explicitly authorizes an
 override. Treat source checkouts as source evidence, not automatically as the
@@ -134,12 +135,24 @@ for detailed evidence thresholds, quality checks, and report formats.
 Never upgrade by name alone. Separate source updates from active-install
 updates:
 
-1. Verify upstream source and immutable comparison ref.
-2. Compare SKILL.md, references, scripts, assets, and evals.
-3. Back up the target.
-4. Mirror only when policy and evidence permit exact replacement.
-5. Merge when local and upstream behavior both matter.
-6. Validate and report the final source/install relationship.
+1. Resolve the exact installed path in a source index. If no verified mapping
+   exists, run the source-discovery workflow and persist the result before
+   deciding whether an upgrade exists.
+2. Verify upstream repository, skill subdirectory, branch/ref, and immutable
+   comparison commit. A GitHub URL mentioned as a dependency or example is
+   only a candidate, not source proof.
+3. Compare SKILL.md, references, scripts, assets, and evals.
+4. Back up the target.
+5. Mirror only when policy and evidence permit exact replacement.
+6. Merge when local and upstream behavior both matter.
+7. Validate and report the final source/install relationship.
+
+Treat source mapping as reusable lifecycle state, not one-off research. Key
+local mappings by canonical installed path so two same-name skills cannot
+inherit each other's upstream. On each later audit, refresh the verified ref,
+record the observed commit, and compare the complete skill directory. Read
+[references/upstream-audit.md](references/upstream-audit.md) for the bootstrap,
+verification, index, and repeat-audit workflow.
 
 When both versions changed, summarize behavior-level differences before
 merging:

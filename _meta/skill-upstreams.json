@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "updated_at": "2026-07-16",
+  "updated_at": "2026-07-19",
   "purpose": "Track verified original upstream repositories for Skill-hub skills so future upgrades can compare evidence-backed sources instead of guessing by skill name.",
   "scope": {
     "startsFrom": [
@@ -180,11 +180,13 @@
       "status": "self-maintained-lifecycle-orchestrator",
       "evidence": [
         "Skill was created in this repository by merging the local skill lifecycle workflow with the predecessor skill-upgrade behavior.",
-        "The manager is now the canonical owner of check_upstreams.ps1, including strict path containment, automatic mirror backups, and a self-test."
+        "The manager is now the canonical owner of check_upstreams.ps1, including strict path containment, automatic mirror backups, and a self-test.",
+        "Local mode can bootstrap an exact-install-path source index, preserve unresolved candidates for evidence-backed discovery, and reuse verified mappings to compare or safely mirror standalone installed skills."
       ],
       "verificationPath": [
         "Use this repository history as the canonical source until an explicit upstream is published.",
-        "Run .\\skills\\01-agent-engineering\\skill-lifecycle-manager\\scripts\\check_upstreams.ps1 in read-only mode before applying upstream changes."
+        "Run .\\skills\\01-agent-engineering\\skill-lifecycle-manager\\scripts\\check_upstreams.ps1 in read-only mode before applying upstream changes.",
+        "For a first-time local user, create a local index with -Mode Local -BootstrapIndex, verify every candidate repository/path, then rerun with the same -IndexPath."
       ],
       "notes": "Self-maintained shared skill; external automatic updates disabled."
     },
