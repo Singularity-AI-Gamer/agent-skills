@@ -1,6 +1,5 @@
 <div align="center">
 
-[English](README_EN.md) | **中文**
 
 </div>
 
@@ -9,6 +8,8 @@
 <p align="center">
   <img src="assets/README/skill-hub-hero.png" alt="由模块化技能卡片构成的 AI Agent 技能库视觉图" width="100%">
 </p>
+
+[English](README_EN.md) | **中文**
 
 > 为 Codex、Claude Code、Antigravity 等 AI 编程工具查找、复用与维护结构化 Agent 技能。
 
