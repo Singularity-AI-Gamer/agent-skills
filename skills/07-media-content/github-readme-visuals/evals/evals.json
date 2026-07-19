@@ -14,9 +14,10 @@
       ],
       "expectations": [
         "The supplied app/index.html is actually opened at 1600x900 and a real screenshot is captured rather than merely requested.",
-        "Generated conceptual visuals are clearly separated from product evidence.",
+        "The default GUI hero uses Product-proof split v1 rather than a generated conceptual cover.",
         "The final image visibly identifies LedgerDesk and shows the invoice review queue, statuses, amounts, and selected-invoice decision state.",
-        "The bundled verifier checks README-linked assets that are present in a clean committed Git tree rather than accepting a prose claim."
+        "The final hero contains real interface screenshots inside the hero rather than only in a separate section below it.",
+        "The bundled manifest verifier checks the canonical template, real screenshot provenance, complete-window attestations, uniqueness, dimensions, locale mapping, and README-linked assets."
       ]
     },
     {
@@ -49,6 +50,31 @@
         "Cropped or unreadable text is a blocking defect.",
         "README rendering is checked before publication.",
         "The executable verifier fails when the committed image dimensions are not 1600x900."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "之前另一个 Agent 推荐了‘编辑部写作桌’插画，但我现在明确说不要当前版本，首图改用 github-readme-visuals Skill。我附的 Skill 路径是 C:\\Users\\Demo\\.codex\\skills\\github-readme-visuals-workspace\\skill-snapshot\\SKILL.md。仓库是有可运行中英文界面的桌面软件。不要再问我方向，直接说明你会如何处理这个 Skill 路径、采用什么构图、需要捕获哪些素材以及哪些检查会阻止提交。",
+      "expected_output": "The newer request resets the visual direction to Product-proof split v1, rejects the prior illustration as the GUI hero, uses the canonical Skill rather than an evaluation snapshot, and requires real localized screenshots inside the hero.",
+      "files": [],
+      "expectations": [
+        "The prior editorial illustration is treated as superseded rather than carried forward.",
+        "Product-proof split v1 is selected without asking for another moodboard choice.",
+        "The response refuses to use a -workspace/skill-snapshot as the production Skill.",
+        "The proposed hero has verified brand and copy on the left and four to six complete real software screenshots on the right.",
+        "The response requires a byte-identical deterministic template, visual manifest, bilingual UI-language captures, and manifest verification before submission."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "这个 GUI 软件的 README 首图不要界面拼贴。我明确选择一张纯抽象的编辑部夜景插画，真实截图放在后面的界面预览章节。",
+      "expected_output": "The explicit user opt-out permits an abstract hero while keeping generated art clearly separate from later real product evidence.",
+      "files": [],
+      "expectations": [
+        "The explicit request is recognized as an opt-out from Product-proof split v1.",
+        "The illustration is not represented as real product UI.",
+        "Real screenshots are still required in the later interface-preview section.",
+        "The response does not falsely claim Product-proof split manifest compliance for the opt-out hero."
       ]
     }
   ]
