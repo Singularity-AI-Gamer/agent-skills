@@ -4,7 +4,15 @@
 
 </div>
 
-# Skill-hub - Codex / Claude Code AI Agent Skill Library
+# Skill-hub - AI Agent Skills for Codex & Claude Code
+
+<p align="center">
+  <img src="assets/README/skill-hub-hero.png" alt="A modular library of reusable AI agent skills" width="100%">
+</p>
+
+> Find, reuse, and maintain structured AI agent skills for Codex, Claude Code, Antigravity, and related AI coding tools.
+
+**Start here:** [Browse every skill by name](./_meta/by-name.md) · [Explore by capability domain](./_meta/by-domain.md) · [Read the machine-readable index](./_meta/skills-lock.json) · [Check sources and maintenance boundaries](./_meta/skill-upstreams.json)
 
 Skill-hub is a public Chinese-first AI Agent skill library for Codex, Claude Code, Antigravity, and related AI coding tools. It collects reusable `SKILL.md` automation practices, AI coding workflows, and prompt templates. The repository currently contains **70** reusable skills: **62** shared skills organized by capability domain and **8** project-specific skills archived by project for lookup, local sync, source tracking, and ongoing maintenance.
 

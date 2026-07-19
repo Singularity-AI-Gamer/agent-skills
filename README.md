@@ -6,6 +6,14 @@
 
 # Skill-hub - Codex / Claude Code 中文 Agent 技能库
 
+<p align="center">
+  <img src="assets/README/skill-hub-hero.png" alt="由模块化技能卡片构成的 AI Agent 技能库视觉图" width="100%">
+</p>
+
+> 为 Codex、Claude Code、Antigravity 等 AI 编程工具查找、复用与维护结构化 Agent 技能。
+
+**从这里开始：** [按名字浏览全部技能](./_meta/by-name.md) · [按能力域探索](./_meta/by-domain.md) · [查看机器可读索引](./_meta/skills-lock.json) · [了解来源与维护边界](./_meta/skill-upstreams.json)
+
 Skill-hub 是一个面向 Codex、Claude Code、Antigravity 等 AI 编程工具的中文 Agent 技能库，收集可复用的 `SKILL.md` 自动化实践、AI 编程工作流和提示词模板。仓库当前包含 **70** 个可复用技能，其中 **62** 个共享技能按能力域组织，**8** 个项目私有技能按项目归档，便于检索、本地同步、来源追踪和持续维护。
 
 **适合搜索：** Codex 技能与 Claude Code 技能、中文 Agent 技能库、AI 编程工作流与提示词模板。
