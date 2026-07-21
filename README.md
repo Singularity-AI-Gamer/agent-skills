@@ -47,7 +47,7 @@ Skill-hub 不是单一提示词合集，而是面向 Agent 使用的技能仓库
 
 | 类别 | 数量 | 目录 | 适合查什么 |
 |---|---:|---|---|
-| <img src="assets/README/icons/overview.svg" width="20" alt=""> Agent 工程 | 7 | `skills/01-agent-engineering/` | Agent 构建、调试、自治循环、技能创建、自适应质量门、对抗验证、skill 生命周期管理。 |
+| <img src="assets/README/icons/overview.svg" width="20" alt=""> Agent 工程 | 7 | `skills/01-agent-engineering/` | Agent 构建、调试、自治循环、技能创建、质量门、skill 生命周期，以及 Windows 磁盘/项目垃圾与内存健康维护。 |
 | <img src="assets/README/icons/format.svg" width="20" alt=""> 编程语言 | 1 | `skills/02-coding-languages/` | 语言级编码标准、设计模式和测试规范。 |
 | <img src="assets/README/icons/package.svg" width="20" alt=""> 框架与技术栈 | 2 | `skills/03-frameworks/` | 前端设计、框架级实现模式和技术栈约束。 |
 | <img src="assets/README/icons/index.svg" width="20" alt=""> 数据与检索 | 15 | `skills/06-data-search/` | 数据抓取、搜索、深度研究、PubMed、临床试验和报告交付。 |

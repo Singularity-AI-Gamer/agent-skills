@@ -57,20 +57,20 @@
 | 51 | **pdf** | [skills/07-media-content/pdf/](../skills/07-media-content/pdf/) | "Use when tasks involve reading, creating, or reviewing PDF files where rendering and layout matter; prefer visual checks by rendering pages (Poppler) and use Python tools such as `reportlab`, `pdfplumber`, and `pypdf` for generation and extraction." |
 | 52 | **ppt-nano** | [skills/07-media-content/ppt-nano/](../skills/07-media-content/ppt-nano/) | 白板板书风格 PPT 生成，适合教学、汇报、头脑风暴。 |
 | 53 | **pptx** | [skills/07-media-content/pptx/](../skills/07-media-content/pptx/) | 演示文稿 .pptx 的创建、编辑、布局、评论与演讲者备注。 |
-| 54 | **project-cleanup-audit** | [skills/01-agent-engineering/project-cleanup-audit/](../skills/01-agent-engineering/project-cleanup-audit/) | 证据优先清理本地项目仓库：审计体积、分类无用文件、备份并安全删除生成物。 |
-| 55 | **pubmed-eutils** | [skills/06-data-search/pubmed-eutils/](../skills/06-data-search/pubmed-eutils/) | 通过 NCBI E-utilities 搜索 PubMed 并获取结构化生物医学文献。 |
-| 56 | **pubmed-search** | [skills/06-data-search/pubmed-search/](../skills/06-data-search/pubmed-search/) | 通过 Valyu 语义搜索以自然语言检索 PubMed 生物医学文献，支持全文。 |
-| 57 | **pubtator-entity-search** | [skills/06-data-search/pubtator-entity-search/](../skills/06-data-search/pubtator-entity-search/) | NLM PubTator3 实体级关系挖掘：疾病-药物-基因-化学品关联。 |
-| 58 | **qq-email-ground-truth** *(项目)* | [projects/codex-invoice/qq-email-ground-truth/](../projects/codex-invoice/qq-email-ground-truth/) | 构建/重建/审计/比对 QQ 邮箱发票真值集，验证跑批输出。 |
-| 59 | **remotion-video-creation** | [skills/07-media-content/remotion-video-creation/](../skills/07-media-content/remotion-video-creation/) | Remotion 在 React 中做视频创作的 29 条领域规则（3D、动画、字幕、过渡）。 |
-| 60 | **report-bundle-builder** | [skills/06-data-search/report-bundle-builder/](../skills/06-data-search/report-bundle-builder/) | 将多页 HTML 报告合并为单一独立 HTML/PDF/XLSX 交付物。 |
-| 61 | **santa-method** | [skills/01-agent-engineering/santa-method/](../skills/01-agent-engineering/santa-method/) | 多 Agent 对抗验证收敛循环，两个独立审查都通过后才出交付。 |
-| 62 | **session-resume** | [skills/10-business-industry/session-resume/](../skills/10-business-industry/session-resume/) | disease-market-sizing 管线中断后恢复，无需从头开始。 |
-| 63 | **skill-creator** | [skills/01-agent-engineering/skill-creator/](../skills/01-agent-engineering/skill-creator/) | 创建、修改和优化 skill，并可跑 eval 衡量触发准确率与性能。 |
-| 64 | **skill-lifecycle-manager** | [skills/01-agent-engineering/skill-lifecycle-manager/](../skills/01-agent-engineering/skill-lifecycle-manager/) | 管理本地/全局/项目级 skill 与 Skill-hub 生命周期：搜索、推荐、安装、升级、同步、合并、清理、来源校验、质量审计和发布。 |
-| 65 | **ui-ux-pro-max** | [skills/07-media-content/ui-ux-pro-max/](../skills/07-media-content/ui-ux-pro-max/) | 设计、构建或审查 Web/移动端 UI 时，检索风格、配色、字体、布局、UX、动效、图表及多技术栈实现建议。 |
-| 66 | **wechat-article** | [skills/07-media-content/wechat-article/](../skills/07-media-content/wechat-article/) | 傅盛风格的公众号文章创作：对话式、故事驱动、有观点。 |
-| 67 | **xhs-pharma-social-listening** | [skills/10-business-industry/xhs-pharma-social-listening/](../skills/10-business-industry/xhs-pharma-social-listening/) | 面向外资药企员工痛点的小红书证据化舆情研究：采集并分析药企、岗位、合规、医学事务与 AI 相关笔记和评论，按去重笔记加去重评论计算独立证据，并处理 MediaCrawler CAPTCHA/461 与 OpenCLI 回退。 |
-| 68 | **xlsx** | [skills/07-media-content/xlsx/](../skills/07-media-content/xlsx/) | 电子表格 .xlsx/.csv 等创建、编辑、公式、格式、数据分析与可视化。 |
-| 69 | **yq-article-style-imitation** | [skills/08-writing-marketing/yq-article-style-imitation/](../skills/08-writing-marketing/yq-article-style-imitation/) | 任意作家文章风格仿写：验证作者原文、拆解表达 DNA、生成并修复公众号/小红书稿。 |
-| 70 | **yq-editorial-presentation-html** | [skills/07-media-content/yq-editorial-presentation-html/](../skills/07-media-content/yq-editorial-presentation-html/) | Anthropic 暖色编辑设计语言，用于演示/case sharing/战略汇报。 |
+| 54 | **pubmed-eutils** | [skills/06-data-search/pubmed-eutils/](../skills/06-data-search/pubmed-eutils/) | 通过 NCBI E-utilities 搜索 PubMed 并获取结构化生物医学文献。 |
+| 55 | **pubmed-search** | [skills/06-data-search/pubmed-search/](../skills/06-data-search/pubmed-search/) | 通过 Valyu 语义搜索以自然语言检索 PubMed 生物医学文献，支持全文。 |
+| 56 | **pubtator-entity-search** | [skills/06-data-search/pubtator-entity-search/](../skills/06-data-search/pubtator-entity-search/) | NLM PubTator3 实体级关系挖掘：疾病-药物-基因-化学品关联。 |
+| 57 | **qq-email-ground-truth** *(项目)* | [projects/codex-invoice/qq-email-ground-truth/](../projects/codex-invoice/qq-email-ground-truth/) | 构建/重建/审计/比对 QQ 邮箱发票真值集，验证跑批输出。 |
+| 58 | **remotion-video-creation** | [skills/07-media-content/remotion-video-creation/](../skills/07-media-content/remotion-video-creation/) | Remotion 在 React 中做视频创作的 29 条领域规则（3D、动画、字幕、过渡）。 |
+| 59 | **report-bundle-builder** | [skills/06-data-search/report-bundle-builder/](../skills/06-data-search/report-bundle-builder/) | 将多页 HTML 报告合并为单一独立 HTML/PDF/XLSX 交付物。 |
+| 60 | **santa-method** | [skills/01-agent-engineering/santa-method/](../skills/01-agent-engineering/santa-method/) | 多 Agent 对抗验证收敛循环，两个独立审查都通过后才出交付。 |
+| 61 | **session-resume** | [skills/10-business-industry/session-resume/](../skills/10-business-industry/session-resume/) | disease-market-sizing 管线中断后恢复，无需从头开始。 |
+| 62 | **skill-creator** | [skills/01-agent-engineering/skill-creator/](../skills/01-agent-engineering/skill-creator/) | 创建、修改和优化 skill，并可跑 eval 衡量触发准确率与性能。 |
+| 63 | **skill-lifecycle-manager** | [skills/01-agent-engineering/skill-lifecycle-manager/](../skills/01-agent-engineering/skill-lifecycle-manager/) | 管理本地/全局/项目级 skill 与 Skill-hub 生命周期：搜索、推荐、安装、升级、同步、合并、清理、来源校验、质量审计和发布。 |
+| 64 | **ui-ux-pro-max** | [skills/07-media-content/ui-ux-pro-max/](../skills/07-media-content/ui-ux-pro-max/) | 设计、构建或审查 Web/移动端 UI 时，检索风格、配色、字体、布局、UX、动效、图表及多技术栈实现建议。 |
+| 65 | **wechat-article** | [skills/07-media-content/wechat-article/](../skills/07-media-content/wechat-article/) | 傅盛风格的公众号文章创作：对话式、故事驱动、有观点。 |
+| 66 | **xhs-pharma-social-listening** | [skills/10-business-industry/xhs-pharma-social-listening/](../skills/10-business-industry/xhs-pharma-social-listening/) | 面向外资药企员工痛点的小红书证据化舆情研究：采集并分析药企、岗位、合规、医学事务与 AI 相关笔记和评论，按去重笔记加去重评论计算独立证据，并处理 MediaCrawler CAPTCHA/461 与 OpenCLI 回退。 |
+| 67 | **xlsx** | [skills/07-media-content/xlsx/](../skills/07-media-content/xlsx/) | 电子表格 .xlsx/.csv 等创建、编辑、公式、格式、数据分析与可视化。 |
+| 68 | **yq-article-style-imitation** | [skills/08-writing-marketing/yq-article-style-imitation/](../skills/08-writing-marketing/yq-article-style-imitation/) | 任意作家文章风格仿写：验证作者原文、拆解表达 DNA、生成并修复公众号/小红书稿。 |
+| 69 | **yq-editorial-presentation-html** | [skills/07-media-content/yq-editorial-presentation-html/](../skills/07-media-content/yq-editorial-presentation-html/) | Anthropic 暖色编辑设计语言，用于演示/case sharing/战略汇报。 |
+| 70 | **yq-windows-trash-cleaner** | [skills/01-agent-engineering/yq-windows-trash-cleaner/](../skills/01-agent-engineering/yq-windows-trash-cleaner/) | Windows C盘、项目垃圾、Docker/WSL、Git worktree、CodeGraph、Agent 会话或内存异常需要安全审计、清理和验证时使用。 |

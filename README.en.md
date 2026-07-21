@@ -42,7 +42,7 @@ Shared skills live under `skills/`; project-specific skills live under `projects
 
 | Category | Count | Directory | What to look for |
 |---|---:|---|---|
-| <img src="assets/README/icons/overview.svg" width="20" alt=""> Agent Engineering | 7 | `skills/01-agent-engineering/` | Agent building, debugging, autonomy loops, skill creation, adaptive quality gates, adversarial verification, and skill lifecycle management. |
+| <img src="assets/README/icons/overview.svg" width="20" alt=""> Agent Engineering | 7 | `skills/01-agent-engineering/` | Agent building, debugging, autonomy loops, skill creation, quality gates, skill lifecycle management, and Windows disk/project/memory maintenance. |
 | <img src="assets/README/icons/format.svg" width="20" alt=""> Coding Languages | 1 | `skills/02-coding-languages/` | Language-level coding standards, design patterns, and testing conventions. |
 | <img src="assets/README/icons/package.svg" width="20" alt=""> Frameworks and Stacks | 2 | `skills/03-frameworks/` | Frontend design, framework-level implementation patterns, and stack constraints. |
 | <img src="assets/README/icons/index.svg" width="20" alt=""> Data and Search | 15 | `skills/06-data-search/` | Data scraping, search, deep research, PubMed, clinical trials, and report delivery. |

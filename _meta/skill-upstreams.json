@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "updated_at": "2026-07-19",
+  "updated_at": "2026-07-21",
   "purpose": "Track verified original upstream repositories for Skill-hub skills so future upgrades can compare evidence-backed sources instead of guessing by skill name.",
   "scope": {
     "startsFrom": [
@@ -104,21 +104,21 @@
       "notes": "Upstream directory verified. Local SKILL.md intentionally changes trigger language and install scope, so automatic mirror is disabled."
     },
     {
-      "name": "project-cleanup-audit",
-      "path": "skills/01-agent-engineering/project-cleanup-audit/",
+      "name": "yq-windows-trash-cleaner",
+      "path": "skills/01-agent-engineering/yq-windows-trash-cleaner/",
       "classification": "self",
       "updatePolicy": "none",
-      "status": "self-or-local-unverified",
+      "status": "self-maintained-merged-windows-cleaner",
       "evidence": [
-        "Skill enforces the same evidence-first cleanup rule as this repository AGENTS instruction.",
-        "Exact web search did not identify a matching original repository; a similarly named cleanup marketplace skill was not content-equivalent.",
-        "No explicit upstream URL appears in inspected local files."
+        "Merged the locally maintained windows-memory-disk-health and project-cleanup-audit workflows under one new skill name.",
+        "Skill-creator validation, PowerShell parser checks, read-only fixture tests, privacy scan, and rejection of an unallowlisted recursive-delete manifest passed before publication.",
+        "The report information architecture records concept-level provenance to KKKKhazix/khazix-skills storage-analyzer at commit 2b4a645cfdc894156ae347d897723562f719ce95; no upstream Python, HTML, CSS, JavaScript, or assets were copied."
       ],
       "verificationPath": [
-        "Run gh search code with exact title and unique operating-rule phrases when GitHub code search rate limit resets.",
-        "Compare the bundled scripts/references, not only SKILL.md, before marking open-source."
+        "Run skill-creator quick_validate.py against the complete skill directory.",
+        "Parse every bundled PowerShell script and rerun the project ignored-path, memory, Docker, report, and manifest-rejection fixtures before release."
       ],
-      "notes": "Manual maintenance only unless owner provides an explicit upstream and comparison commit."
+      "notes": "Self-maintained shared skill. External automatic updates are disabled; the cited khazix source is design provenance, not a mirror source."
     },
     {
       "name": "santa-method",
