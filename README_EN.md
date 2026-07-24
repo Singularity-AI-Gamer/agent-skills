@@ -12,7 +12,7 @@
 
 > Find, reuse, and maintain structured AI agent skills for Codex, Claude Code, Antigravity, and related AI coding tools.
 
-**Start here:** [Browse every skill by name](./_meta/by-name.md) · [Explore by capability domain](./_meta/by-domain.md) · [Read the machine-readable index](./_meta/skills-lock.json) · [Check sources and maintenance boundaries](./_meta/skill-upstreams.json)
+**Start here:** [Browse every skill by name](./_meta/by-name.md) · [Explore by capability domain](./_meta/by-domain.md) · [Read the machine-readable index](./_meta/skills-lock.json) · [Check sources and maintenance boundaries](./_meta/skill-upstreams.json) · [Browse complete external workflow packages](./docs/external-workflow-packs.md)
 
 Skill-hub is a public Chinese-first AI Agent skill library for Codex, Claude Code, Antigravity, and related AI coding tools. It collects reusable `SKILL.md` automation practices, AI coding workflows, and prompt templates. The repository currently contains **70** reusable skills: **62** shared skills organized by capability domain and **8** project-specific skills archived by project for lookup, local sync, source tracking, and ongoing maintenance.
 
@@ -20,7 +20,7 @@ Skill-hub is a public Chinese-first AI Agent skill library for Codex, Claude Cod
 
 **Trust boundary:** this is a public open-source personal skill repository. It is not an official OpenAI, Anthropic, Claude Code, or Antigravity skill registry, and it is not a general-purpose prompt marketplace. Because the repository is public, use placeholders for credentials and do not commit real secrets, customer data, internal documents, or personal information.
 
-**Start here:** [By Name](./_meta/by-name.md) | [By Domain](./_meta/by-domain.md) | [Machine-Readable Index](./_meta/skills-lock.json) | [Source Index](./_meta/skill-upstreams.json)
+**Start here:** [By Name](./_meta/by-name.md) | [By Domain](./_meta/by-domain.md) | [Machine-Readable Index](./_meta/skills-lock.json) | [Source Index](./_meta/skill-upstreams.json) | [External Workflow Packages](./docs/external-workflow-packs.md)
 
 ## <img src="assets/README/icons/map.svg" width="20" alt=""> Repository Positioning
 
@@ -79,6 +79,7 @@ If this is your first time reading the repository, start from the indexes instea
 | <img src="assets/README/icons/index.svg" width="20" alt=""> By Name | [`_meta/by-name.md`](./_meta/by-name.md) | You already know the skill name, such as `deep-research` or `skill-creator`. |
 | <img src="assets/README/icons/categories.svg" width="20" alt=""> By Domain | [`_meta/by-domain.md`](./_meta/by-domain.md) | You want to browse major categories such as agent engineering, data search, media content, or business workflows. |
 | <img src="assets/README/icons/source-index.svg" width="20" alt=""> Machine-Readable Index | [`_meta/skills-lock.json`](./_meta/skills-lock.json) | Scripts, automation, and external tools that need skill names, paths, categories, and counts. |
+| <img src="assets/README/icons/package.svg" width="20" alt=""> External Workflow Packages | [`docs/external-workflow-packs.md`](./docs/external-workflow-packs.md) | Use a third-party workflow package without breaking it into this repository's skill indexes. |
 
 ## <img src="assets/README/icons/source-index.svg" width="20" alt=""> Source Index
 
@@ -91,6 +92,12 @@ The source index answers three maintenance questions:
 - Which skills do not have enough evidence and must not be overwritten based only on a similar name.
 
 Skills without an explicit source-index entry should not be treated as automatically replaceable upstream mirrors.
+
+## <img src="assets/README/icons/package.svg" width="20" alt=""> Complete External Workflow Packages
+
+Some third-party repositories are complete workflow packages with root-level entrypoints, configuration steps, intentional grouping, or plugin metadata. They stay in dedicated organization forks and are recorded at package level in [`_meta/external-workflow-packs.json`](./_meta/external-workflow-packs.json), including a pinned version and install path. Their child skills are not flattened into `skills-lock.json` or the shared-skill sync flow.
+
+The first registered package is the [organization fork of mattpocock/skills](https://github.com/Singularity-AI-Gamer/skills). See [`docs/external-workflow-packs.md`](./docs/external-workflow-packs.md) for maintenance rules.
 
 ## <img src="assets/README/icons/format.svg" width="20" alt=""> Skill Format
 
