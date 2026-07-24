@@ -23,7 +23,9 @@
       "organizationFork": {
         "url": "https://github.com/Singularity-AI-Gamer/skills",
         "defaultBranch": "main",
-        "relationship": "GitHub fork preserving the upstream repository structure and history"
+        "relationship": "GitHub fork preserving the upstream repository structure and history",
+        "organizationMirrorMount": "external/mattpocock-skills",
+        "mountStrategy": "The organization mirror registers this fork as a pinned Git submodule; it is never copied into skills/."
       },
       "license": {
         "spdx": "MIT",

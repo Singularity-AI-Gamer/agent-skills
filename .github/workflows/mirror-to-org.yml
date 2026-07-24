@@ -46,6 +46,19 @@ jobs:
           echo "Remaining shared skills: $(find skills -name SKILL.md 2>/dev/null | wc -l)"
           echo "Remaining project skills: $(find projects -name SKILL.md 2>/dev/null | wc -l)"
 
+      - name: Mount complete external workflow packages
+        run: |
+          # Keep the package intact as a gitlink. It is deliberately excluded from
+          # skills/ and from the flat Skill-hub synchronization/indexing contract.
+          git submodule add --force https://github.com/Singularity-AI-Gamer/skills.git external/mattpocock-skills
+          git -C external/mattpocock-skills checkout ed37663cc5fbef691ddfecd080dff42f7e7e350d
+          git add .gitmodules external/mattpocock-skills
+          echo "Mounted external/mattpocock-skills at $(git -C external/mattpocock-skills rev-parse --short HEAD)"
+
+      - name: Set organization README hero
+        run: |
+          cp assets/README/agent-skills-hero.png assets/README/skill-hub-hero.png
+
       - name: Rebuild indexes for org repo
         run: |
           pwsh -File scripts/build-indexes.ps1
@@ -68,7 +81,6 @@ jobs:
             echo "::error::ORG_PUSH_TOKEN secret is empty or not set"
             exit 1
           fi
-          echo "Token length: ${#ORG_TOKEN} (prefix: ${ORG_TOKEN:0:4}***)"
           git remote add org "https://x-access-token:${ORG_TOKEN}@github.com/Singularity-AI-Gamer/agent-skills.git"
           git push org HEAD:main --force
           echo "=== Mirror complete ==="

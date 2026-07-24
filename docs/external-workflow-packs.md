@@ -18,6 +18,10 @@ npx skills@latest add Singularity-AI-Gamer/skills
 
 该命令已通过只读 `--list` 验证：组织 fork 可被 installer 克隆并发现 41 个 skill；本次验证没有把 skill 安装到任何本地运行时目录。
 
+## 组织镜像部署
+
+`Singularity-AI-Gamer/agent-skills` 在镜像生成时将该 fork 挂载为 [`external/mattpocock-skills`](https://github.com/Singularity-AI-Gamer/agent-skills/tree/main/external/mattpocock-skills) Git submodule，并固定到目录中记录的 commit。这样 GitHub 浏览、克隆与审查都能保留完整包边界和上游历史；`skills/`、`skills-lock.json`、`by-name.md`、`by-domain.md` 仍只表示 Skill-hub 自己维护的独立技能。
+
 ## 维护规则
 
 1. 不将外部包的子技能逐个复制到 `skills/`，也不将它们写入 `skills-lock.json`、`by-name.md` 或 `by-domain.md`。
