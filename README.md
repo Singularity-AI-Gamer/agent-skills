@@ -19,6 +19,8 @@
 
 **从这里开始：** [按名字浏览全部技能](./_meta/by-name.md) · [按能力域探索](./_meta/by-domain.md) · [查看机器可读索引](./_meta/skills-lock.json) · [了解来源与维护边界](./_meta/skill-upstreams.json) · [浏览完整外部工作流包](./docs/external-workflow-packs.md)
 
+> **群组维护入口：** `org-main` 是本仓库的正式主分支，团队新增、修改和索引更新都应通过以 `org-main` 为目标的 Pull Request 合并。`main` 仅用于接收上游仓库的自动镜像，可能被强制同步覆盖，请勿将群组独立改动直接提交到 `main`。
+
 Skill-hub 是一个面向 Codex、Claude Code、Antigravity 等 AI 编程工具的中文 Agent 技能库，收集可复用的 `SKILL.md` 自动化实践、AI 编程工作流和提示词模板。仓库当前包含 **29** 个可复用技能，其中 **29** 个共享技能按能力域组织，**0** 个项目私有技能按项目归档，便于检索、本地同步、来源追踪和持续维护。
 
 **适合搜索：** Codex 技能与 Claude Code 技能、中文 Agent 技能库、AI 编程工作流与提示词模板。
