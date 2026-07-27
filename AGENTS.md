@@ -6,18 +6,19 @@
 
 ---
 
-## 1. 仓库定位与双仓库关系
+## 1. 仓库定位与分支关系
 
 Skill-hub 是面向 Codex、Claude Code、Antigravity 等 Agent 的中文技能仓库。每个 skill 是一个目录，核心文件是 `SKILL.md`，让 AI 编程助手在相似任务中复用稳定流程。
 
-本仓库（个人仓库）是单一事实源，组织仓库是**选择性镜像**（自动同步，但排除 `.github/org-exclude.txt` 列出的 skill）：
+在本组织仓库中，`org-main` 是群组维护的单一事实源；`main` 是接收个人仓库自动同步的上游镜像分支：
 
-| 仓库 | 地址 | 角色 | 可见性 | 贡献方式 |
-|---|---|---|---|---|
-| 个人仓库 | `EthanYoQ/Skill-hub` | 单一事实源（全部 skill） | public | 直接编辑 |
-| 组织仓库 | `Singularity-AI-Gamer/agent-skills` | 选择性镜像（排除列表之外的 skill） | private | 通过个人仓库 PR，合并后自动镜像 |
+| 位置 | 角色 | 贡献方式 |
+|---|---|---|
+| `Singularity-AI-Gamer/agent-skills:org-main` | 群组正式主分支与默认分支 | 向群组仓库提交功能分支，并创建以 `org-main` 为目标的 PR |
+| `Singularity-AI-Gamer/agent-skills:main` | 上游只读镜像分支 | 不直接提交群组独立改动；该分支可能被自动同步强制覆盖 |
+| `EthanYoQ/Skill-hub` | 外部上游仓库 | 由其维护者独立管理；不作为群组改动的审批入口 |
 
-**镜像机制**：个人仓库 `push to mine` 时，GitHub Actions 自动把排除列表之外的 skill 同步到组织仓库。新增 skill 默认同步；不想同步的，加路径到 `.github/org-exclude.txt` 即可。朋友/团队成员通过个人仓库提 PR，合并后自动镜像到组织仓库。
+**贡献机制**：群组成员从 `org-main` 创建功能分支，完成 skill、索引和脱敏检查后，直接在本仓库创建 PR。群组维护者可以在不依赖外部上游维护者批准的情况下合并。外部镜像仍可更新 `main`，但不会覆盖 `org-main`。
 
 ---
 
@@ -143,7 +144,7 @@ Agent 上传一个新 skill 时，按顺序执行：
 6. **重建索引** — 运行 `.\scripts\build-indexes.ps1`（先 `-DryRun` 预览）
 7. **检查 lock** — 确认 `_meta/skills-lock.json` 已包含新 skill，`descriptionZh` 已填
 8. **git diff 审查** — 确认无敏感信息、无临时输出、分类正确
-9. **提交** — 提交到个人仓库 mine 分支，组织仓库自动镜像（排除列表中的 skill 不会同步）
+9. **提交** — 从 `org-main` 创建功能分支，推送到群组仓库，并创建以 `org-main` 为目标的 PR
 
 ---
 
