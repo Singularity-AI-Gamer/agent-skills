@@ -1,0 +1,4 @@
+interface:
+  display_name: "GPT 5.6 Sol Pro Consult"
+  short_description: "在 Codex 侧边 Browser 中进行 Sol Pro 方案审查"
+  default_prompt: "Use $gpt56-sol-pro-consult to review this plan with GPT 5.6 Sol Pro in the Codex in-app Browser and reconcile the advice with local evidence."

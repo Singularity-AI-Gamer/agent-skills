@@ -14,7 +14,7 @@
 
 **Start here:** [Browse every skill by name](./_meta/by-name.md) · [Explore by capability domain](./_meta/by-domain.md) · [Read the machine-readable index](./_meta/skills-lock.json) · [Check sources and maintenance boundaries](./_meta/skill-upstreams.json) · [Browse complete external workflow packages](./docs/external-workflow-packs.md)
 
-Skill-hub is a public Chinese-first AI Agent skill library for Codex, Claude Code, Antigravity, and related AI coding tools. It collects reusable `SKILL.md` automation practices, AI coding workflows, and prompt templates. The repository currently contains **70** reusable skills: **62** shared skills organized by capability domain and **8** project-specific skills archived by project for lookup, local sync, source tracking, and ongoing maintenance.
+Skill-hub is a public Chinese-first AI Agent skill library for Codex, Claude Code, Antigravity, and related AI coding tools. It collects reusable `SKILL.md` automation practices, AI coding workflows, and prompt templates. The repository currently contains **71** reusable skills: **63** shared skills organized by capability domain and **8** project-specific skills archived by project for lookup, local sync, source tracking, and ongoing maintenance.
 
 **Search intent:** Codex skills and Claude Code skills, Chinese AI Agent skill library, AI coding workflows, and prompt templates.
 
@@ -42,7 +42,7 @@ Shared skills live under `skills/`; project-specific skills live under `projects
 
 | Category | Count | Directory | What to look for |
 |---|---:|---|---|
-| <img src="assets/README/icons/overview.svg" width="20" alt=""> Agent Engineering | 7 | `skills/01-agent-engineering/` | Agent building, debugging, autonomy loops, skill creation, adaptive quality gates, adversarial verification, and skill lifecycle management. |
+| <img src="assets/README/icons/overview.svg" width="20" alt=""> Agent Engineering | 8 | `skills/01-agent-engineering/` | Agent building, debugging, autonomy loops, skill creation, Sol Pro plan review, adaptive quality gates, adversarial verification, and skill lifecycle management. |
 | <img src="assets/README/icons/format.svg" width="20" alt=""> Coding Languages | 1 | `skills/02-coding-languages/` | Language-level coding standards, design patterns, and testing conventions. |
 | <img src="assets/README/icons/package.svg" width="20" alt=""> Frameworks and Stacks | 2 | `skills/03-frameworks/` | Frontend design, framework-level implementation patterns, and stack constraints. |
 | <img src="assets/README/icons/index.svg" width="20" alt=""> Data and Search | 15 | `skills/06-data-search/` | Data scraping, search, deep research, PubMed, clinical trials, and report delivery. |
@@ -54,7 +54,7 @@ Shared skills live under `skills/`; project-specific skills live under `projects
 ## <img src="assets/README/icons/directory.svg" width="20" alt=""> Directory Structure
 
 ```text
-skills/                        # 62 shared skills, 7 capability domains
+skills/                        # 63 shared skills, 7 capability domains
 |-- 01-agent-engineering/      # Agent building, debugging, autonomy loops, harnesses
 |-- 02-coding-languages/       # Programming languages
 |-- 03-frameworks/             # Frameworks and technology stacks
@@ -76,7 +76,7 @@ If this is your first time reading the repository, start from the indexes instea
 
 | Entry point | File | Best for |
 |---|---|---|
-| <img src="assets/README/icons/index.svg" width="20" alt=""> By Name | [`_meta/by-name.md`](./_meta/by-name.md) | You already know the skill name, such as `deep-research` or `skill-creator`. |
+| <img src="assets/README/icons/index.svg" width="20" alt=""> By Name | [`_meta/by-name.md`](./_meta/by-name.md) | You already know the skill name, such as `deep-research`, `gpt56-sol-pro-consult`, or `skill-creator`. |
 | <img src="assets/README/icons/categories.svg" width="20" alt=""> By Domain | [`_meta/by-domain.md`](./_meta/by-domain.md) | You want to browse major categories such as agent engineering, data search, media content, or business workflows. |
 | <img src="assets/README/icons/source-index.svg" width="20" alt=""> Machine-Readable Index | [`_meta/skills-lock.json`](./_meta/skills-lock.json) | Scripts, automation, and external tools that need skill names, paths, categories, and counts. |
 | <img src="assets/README/icons/package.svg" width="20" alt=""> External Workflow Packages | [`docs/external-workflow-packs.md`](./docs/external-workflow-packs.md) | Use a third-party workflow package without breaking it into this repository's skill indexes. |

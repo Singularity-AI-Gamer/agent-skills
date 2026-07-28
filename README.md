@@ -19,7 +19,7 @@
 
 **从这里开始：** [按名字浏览全部技能](./_meta/by-name.md) · [按能力域探索](./_meta/by-domain.md) · [查看机器可读索引](./_meta/skills-lock.json) · [了解来源与维护边界](./_meta/skill-upstreams.json) · [浏览完整外部工作流包](./docs/external-workflow-packs.md)
 
-Skill-hub 是一个面向 Codex、Claude Code、Antigravity 等 AI 编程工具的中文 Agent 技能库，收集可复用的 `SKILL.md` 自动化实践、AI 编程工作流和提示词模板。仓库当前包含 **70** 个可复用技能，其中 **62** 个共享技能按能力域组织，**8** 个项目私有技能按项目归档，便于检索、本地同步、来源追踪和持续维护。
+Skill-hub 是一个面向 Codex、Claude Code、Antigravity 等 AI 编程工具的中文 Agent 技能库，收集可复用的 `SKILL.md` 自动化实践、AI 编程工作流和提示词模板。仓库当前包含 **71** 个可复用技能，其中 **63** 个共享技能按能力域组织，**8** 个项目私有技能按项目归档，便于检索、本地同步、来源追踪和持续维护。
 
 **适合搜索：** Codex 技能与 Claude Code 技能、中文 Agent 技能库、AI 编程工作流与提示词模板。
 
@@ -47,7 +47,7 @@ Skill-hub 不是单一提示词合集，而是面向 Agent 使用的技能仓库
 
 | 类别 | 数量 | 目录 | 适合查什么 |
 |---|---:|---|---|
-| <img src="assets/README/icons/overview.svg" width="20" alt=""> Agent 工程 | 7 | `skills/01-agent-engineering/` | Agent 构建、调试、自治循环、技能创建、质量门、skill 生命周期，以及 Windows 磁盘/项目垃圾与内存健康维护。 |
+| <img src="assets/README/icons/overview.svg" width="20" alt=""> Agent 工程 | 8 | `skills/01-agent-engineering/` | Agent 构建、调试、自治循环、技能创建、Sol Pro 方案审查、质量门、skill 生命周期，以及 Windows 磁盘/项目垃圾与内存健康维护。 |
 | <img src="assets/README/icons/format.svg" width="20" alt=""> 编程语言 | 1 | `skills/02-coding-languages/` | 语言级编码标准、设计模式和测试规范。 |
 | <img src="assets/README/icons/package.svg" width="20" alt=""> 框架与技术栈 | 2 | `skills/03-frameworks/` | 前端设计、框架级实现模式和技术栈约束。 |
 | <img src="assets/README/icons/index.svg" width="20" alt=""> 数据与检索 | 15 | `skills/06-data-search/` | 数据抓取、搜索、深度研究、PubMed、临床试验和报告交付。 |
@@ -59,7 +59,7 @@ Skill-hub 不是单一提示词合集，而是面向 Agent 使用的技能仓库
 ## <img src="assets/README/icons/directory.svg" width="20" alt=""> 目录结构
 
 ```text
-skills/                        # 62 个共享技能，分 7 个能力域
+skills/                        # 63 个共享技能，分 7 个能力域
 |-- 01-agent-engineering/      # Agent 构建、调试、自治循环、harness
 |-- 02-coding-languages/       # 编程语言
 |-- 03-frameworks/             # 框架与技术栈
@@ -81,7 +81,7 @@ assets/README/icons/           # README 使用的 Lucide SVG 图标
 
 | 入口 | 文件 | 适合场景 |
 |---|---|---|
-| <img src="assets/README/icons/index.svg" width="20" alt=""> 按名字查 | [`_meta/by-name.md`](./_meta/by-name.md) | 已经知道技能名，例如 `deep-research` 或 `skill-creator`。 |
+| <img src="assets/README/icons/index.svg" width="20" alt=""> 按名字查 | [`_meta/by-name.md`](./_meta/by-name.md) | 已经知道技能名，例如 `deep-research`、`gpt56-sol-pro-consult` 或 `skill-creator`。 |
 | <img src="assets/README/icons/categories.svg" width="20" alt=""> 按能力域查 | [`_meta/by-domain.md`](./_meta/by-domain.md) | 想浏览 Agent 工程、数据检索、媒体内容、行业业务等大类。 |
 | <img src="assets/README/icons/source-index.svg" width="20" alt=""> 机器可读索引 | [`_meta/skills-lock.json`](./_meta/skills-lock.json) | 给脚本、自动化、外部工具读取技能清单、路径、分类和数量。 |
 | <img src="assets/README/icons/package.svg" width="20" alt=""> 完整外部工作流包 | [`docs/external-workflow-packs.md`](./docs/external-workflow-packs.md) | 使用保留原始结构和入口的第三方工作流包；不将其拆入本仓库技能索引。 |

@@ -1,11 +1,11 @@
 {
     "version":  "2.0",
-    "generated_at":  "2026-07-21T15:40:17+08:00",
-    "note":  "Rebuilt indexes from repository SKILL.md files. Total: 62 shared + 8 projects = 70 total",
+    "generated_at":  "2026-07-28T10:45:29+08:00",
+    "note":  "Rebuilt indexes from repository SKILL.md files. Total: 63 shared + 8 projects = 71 total",
     "counts":  {
-                   "shared":  62,
+                   "shared":  63,
                    "projects":  8,
-                   "total":  70
+                   "total":  71
                },
     "shared":  [
                    {
@@ -25,6 +25,12 @@
                        "domain":  "01-agent-engineering",
                        "path":  "skills/01-agent-engineering/find-skills/",
                        "descriptionZh":  "自动发现与推荐可用 Agent 技能，回答\"有没有能做 X 的技能\"。"
+                   },
+                   {
+                       "name":  "gpt56-sol-pro-consult",
+                       "domain":  "01-agent-engineering",
+                       "path":  "skills/01-agent-engineering/gpt56-sol-pro-consult/",
+                       "descriptionZh":  "凡需方案、Plan 或本地材料审查，均用 Codex 侧边 Browser 咨询 Sol Pro；点名或要求 Pro 编排循环时也触发。"
                    },
                    {
                        "name":  "santa-method",

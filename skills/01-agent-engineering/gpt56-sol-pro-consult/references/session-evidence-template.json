@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0",
+  "task_run_id": "<unique-current-task-run-id>",
+  "executed_by": "main-codex-task",
+  "case_id": "<optional-eval-case-id>",
+  "candidate_sha256": "<optional-frozen-candidate-sha256>",
+  "browser": {
+    "type": "iab",
+    "browser_id": "<browser-session-id>",
+    "tab_id": "<controlled-tab-id>",
+    "tab_url": "<chatgpt-conversation-url>",
+    "captured_at": "<iso-8601>"
+  },
+  "model_gate": {
+    "binding_ref": {
+      "browser_id": "<same-browser-session-id>",
+      "tab_id": "<same-controlled-tab-id>",
+      "tab_url": "<same-chatgpt-conversation-url>"
+    },
+    "captured_at": "<iso-8601>",
+    "gpt_5_6_sol_checked": true,
+    "pro_tier_checked": true,
+    "observed_signals": [
+      "menuitemradio GPT-5.6 Sol [checked]",
+      "menuitemradio Pro [checked]"
+    ]
+  },
+  "packet": {
+    "sha256": "<64-lowercase-hex>",
+    "distinctive_prefix": "<unique-prefix>",
+    "sentinel": "GPT56_SOL_PRO_RESULT_<unique-suffix>",
+    "visible_attachments": []
+  },
+  "dispatch": {
+    "binding_ref": {
+      "browser_id": "<same-browser-session-id>",
+      "tab_id": "<same-controlled-tab-id>",
+      "tab_url": "<same-chatgpt-conversation-url>"
+    },
+    "captured_at": "<iso-8601>",
+    "state": "SENT",
+    "send_click_count": 1,
+    "submit_signal": "<user-turn|composer-cleared|active-generation>"
+  },
+  "response": {
+    "binding_ref": {
+      "browser_id": "<same-browser-session-id>",
+      "tab_id": "<same-controlled-tab-id>",
+      "tab_url": "<same-chatgpt-conversation-url>"
+    },
+    "captured_at": "<iso-8601>",
+    "generation_complete": true,
+    "assistant_turn_sha256": "<64-lowercase-hex>",
+    "assistant_sentinel_verified": true
+  },
+  "route_exclusions": {
+    "chrome_extension_used": false,
+    "chrome_cli_used": false,
+    "opencli_used": false,
+    "external_playwright_used": false
+  },
+  "binding_verified": true,
+  "status": "completed"
+}
