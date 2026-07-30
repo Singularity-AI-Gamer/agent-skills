@@ -17,7 +17,12 @@ Skill-hub 是面向 Codex、Claude Code、Antigravity 等 Agent 的中文技能�
 | 个人仓库 | `EthanYoQ/Skill-hub` | 单一事实源（全部 skill） | public | 直接编辑 |
 | 组织仓库 | `Singularity-AI-Gamer/agent-skills` | 选择性镜像（排除列表之外的 skill） | private | 通过个人仓库 PR，合并后自动镜像 |
 
-**镜像机制**：个人仓库 `push to mine` 时，GitHub Actions 自动把排除列表之外的 skill 同步到组织仓库。新增 skill 默认同步；不想同步的，加路径到 `.github/org-exclude.txt` 即可。朋友/团队成员通过个人仓库提 PR，合并后自动镜像到组织仓库。
+**镜像机制**：个人仓库 `push to mine` 时，GitHub Actions 自动把排除列表之外的 skill 同步到组织仓库。新增 skill 默认同步；不想同步的两种方式：
+
+- **傻瓜式（推荐）**：在 SKILL.md frontmatter 加 `org-sync: false`，创建 skill 时加一行即可
+- **批量排除**：加路径到 `.github/org-exclude.txt`（适合已有 skill 的批量管理）
+
+朋友/团队成员通过个人仓库提 PR，合并后自动镜像到组织仓库。
 
 ---
 
@@ -78,10 +83,18 @@ assets/                        # README 使用的图标
 ---
 name: skill-name
 description: 一句话触发条件：什么场景下 Agent 应该使用这个技能。
+org-sync: false          # 可选。设为 false 则不同步到组织仓库（默认同步）
 ---
 
 # 正文：指令、参考、示例
 ```
+
+### `org-sync` 字段（可选）
+
+- 不写或写 `true`：skill 会同步到组织仓库（默认）
+- 写 `false`：skill 只保留在个人仓库，不镜像到组织仓库
+
+创建 skill 时加一行 `org-sync: false` 即可，无需编辑其他文件。
 
 ### `description` 写法（关键）
 

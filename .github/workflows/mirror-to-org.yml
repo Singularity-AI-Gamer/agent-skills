@@ -2,7 +2,9 @@ name: Mirror to org repo
 
 # 将个人仓库 mine 分支选择性镜像到组织仓库 Singularity-AI-Gamer/agent-skills。
 # 个人仓库保留全部 skill；组织仓库只镜像 .github/org-exclude.txt 列表之外的 skill。
-# 新增 skill 默认同步到组织仓库；不想同步的，加路径到 org-exclude.txt 即可。
+# 新增 skill 默认同步到组织仓库；不想同步的两种方式：
+#   ① 在 SKILL.md frontmatter 加 org-sync: false（傻瓜式，推荐）
+#   ② 加路径到 .github/org-exclude.txt（批量排除已有 skill）
 # 日常只在个人仓库编辑，push 到 mine 后自动同步，组织仓库零维护。
 
 on:
@@ -45,6 +47,21 @@ jobs:
           echo "=== Removed $removed paths ==="
           echo "Remaining shared skills: $(find skills -name SKILL.md 2>/dev/null | wc -l)"
           echo "Remaining project skills: $(find projects -name SKILL.md 2>/dev/null | wc -l)"
+
+      - name: Remove skills marked org-sync: false
+        run: |
+          echo "=== Removing skills with org-sync: false in SKILL.md frontmatter ==="
+          excluded=0
+          for f in $(find skills -name SKILL.md); do
+            org_sync=$(awk '/^---$/{n++; next} n==1 && /^org-sync:[[:space:]]*false/{found=1} END{print found+0}' "$f")
+            if [ "$org_sync" = "1" ]; then
+              dir=$(dirname "$f")
+              rm -rf "$dir"
+              echo "  excluded by frontmatter: $dir"
+              excluded=$((excluded + 1))
+            fi
+          done
+          echo "=== Excluded $excluded skills by frontmatter ==="
 
       - name: Mount complete external workflow packages
         run: |
