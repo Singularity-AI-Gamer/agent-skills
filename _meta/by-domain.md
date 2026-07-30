@@ -1,23 +1,22 @@
 # 按能力域索引
 
-共 71 个技能，按 7 个能力域 + projects（项目私有）分组。
+共 68 个技能，按 7 个能力域 + projects（项目私有）分组。
 
 ## 目录
 
-- [01 Agent 工程](#01-agent-工程)（8）
+- [01 Agent 工程](#01-agent-工程)（7）
 - [02 编程语言](#02-编程语言)（1）
 - [03 框架与技术栈](#03-框架与技术栈)（2）
 - [06 数据与检索](#06-数据与检索)（15）
 - [07 媒体与内容制作](#07-媒体与内容制作)（15）
-- [08 写作与营销](#08-写作与营销)（4）
+- [08 写作与营销](#08-写作与营销)（2）
 - [10 行业与业务](#10-行业与业务)（18）
 - [Projects 项目私有](#projects-项目私有)（8）
 
-## 01 Agent 工程（8）
+## 01 Agent 工程（7）
 
 | 技能名 | 路径 | 中文简介 |
 |---|---|---|
-| **adaptive-quality-gate** | [skills/01-agent-engineering/adaptive-quality-gate/](../skills/01-agent-engineering/adaptive-quality-gate/) | 为任意重要任务自动判断并设置风险自适应质量门：从目标反推阈值、验证方法、证据和失败动作，证据不足时阻止无依据交付。 |
 | **deep-research** | [skills/01-agent-engineering/deep-research/](../skills/01-agent-engineering/deep-research/) | 多源深度研究，使用 firecrawl/exa 搜索并综合发现。 |
 | **find-skills** | [skills/01-agent-engineering/find-skills/](../skills/01-agent-engineering/find-skills/) | 自动发现与推荐可用 Agent 技能，回答"有没有能做 X 的技能"。 |
 | **gpt56-sol-pro-consult** | [skills/01-agent-engineering/gpt56-sol-pro-consult/](../skills/01-agent-engineering/gpt56-sol-pro-consult/) | 凡需方案、Plan 或本地材料审查，均用 Codex 侧边 Browser 咨询 Sol Pro；点名或要求 Pro 编排循环时也触发。 |
@@ -79,13 +78,11 @@
 | **xlsx** | [skills/07-media-content/xlsx/](../skills/07-media-content/xlsx/) | 电子表格 .xlsx/.csv 等创建、编辑、公式、格式、数据分析与可视化。 |
 | **yq-editorial-presentation-html** | [skills/07-media-content/yq-editorial-presentation-html/](../skills/07-media-content/yq-editorial-presentation-html/) | Anthropic 暖色编辑设计语言，用于演示/case sharing/战略汇报。 |
 
-## 08 写作与营销（4）
+## 08 写作与营销（2）
 
 | 技能名 | 路径 | 中文简介 |
 |---|---|---|
 | **decision-tree-with-lp-embedding** | [skills/08-writing-marketing/decision-tree-with-lp-embedding/](../skills/08-writing-marketing/decision-tree-with-lp-embedding/) | 生成包含 LP 嵌入的 Mermaid 临床决策树。 |
-| **github-repo-seo-standard** | [skills/08-writing-marketing/github-repo-seo-standard/](../skills/08-writing-marketing/github-repo-seo-standard/) | 审计、规划、测量和实施 GitHub 仓库可发现性优化，覆盖中英文 README、Description、Topics、Release、搜索排名、竞品词、百度/Bing/AI 搜索与站点资产，并严格区分审计、规划和授权实施。 |
-| **github-seo-evaluation-loop** | [skills/08-writing-marketing/github-seo-evaluation-loop/](../skills/08-writing-marketing/github-seo-evaluation-loop/) | 运行可重复的 GitHub SEO 评估循环：比较中文宽泛词与场景词的可见性、生成指标证据和中文周报、安排百度/Bing/AI 搜索任务，并判断实验是否具备继续优化的证据。 |
 | **yq-article-style-imitation** | [skills/08-writing-marketing/yq-article-style-imitation/](../skills/08-writing-marketing/yq-article-style-imitation/) | 任意作家文章风格仿写：验证作者原文、拆解表达 DNA、生成并修复公众号/小红书稿。 |
 
 ## 10 行业与业务（18）

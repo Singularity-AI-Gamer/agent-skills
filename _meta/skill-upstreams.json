@@ -1,14 +1,14 @@
 {
   "version": "1.1",
-  "updated_at": "2026-07-28",
+  "updated_at": "2026-07-21",
   "purpose": "Track verified original upstream repositories for Skill-hub skills so future upgrades can compare evidence-backed sources instead of guessing by skill name.",
   "scope": {
     "startsFrom": [
       "_meta/skill-upstreams.json",
       "_meta/skills-lock.json"
     ],
-    "localSkillCount": 69,
-    "sharedSkillCount": 61,
+    "localSkillCount": 68,
+    "sharedSkillCount": 60,
     "projectSkillCount": 8
   },
   "rules": [
@@ -27,7 +27,7 @@
   "verificationSummary": {
     "countsByClassification": {
       "open-source": 24,
-      "self": 12,
+      "self": 11,
       "local": 32,
       "candidate": 1
     },
@@ -35,22 +35,6 @@
     "readOnlyAuditCommand": ".\\skills\\01-agent-engineering\\skill-lifecycle-manager\\scripts\\check_upstreams.ps1"
   },
   "sources": [
-    {
-      "name": "adaptive-quality-gate",
-      "path": "skills/01-agent-engineering/adaptive-quality-gate/",
-      "classification": "self",
-      "updatePolicy": "none",
-      "status": "self-maintained-adaptive-quality-gate",
-      "evidence": [
-        "Skill was created and evaluated in this Skill-hub repository as a domain-independent, risk-adaptive quality gate.",
-        "No external upstream package was used as its source."
-      ],
-      "verificationPath": [
-        "Use this repository history as the canonical source until an explicit upstream is published.",
-        "Validate SKILL.md and evals/evals.json with the repository skill-creator tooling before release."
-      ],
-      "notes": "Self-maintained shared skill; external automatic updates disabled."
-    },
     {
       "name": "deep-research",
       "path": "skills/01-agent-engineering/deep-research/",
@@ -1388,38 +1372,6 @@
       "notes": "Self-maintained shared skill; external automatic updates disabled."
     },
     {
-      "name": "github-repo-seo-standard",
-      "path": "skills/08-writing-marketing/github-repo-seo-standard/",
-      "classification": "self",
-      "updatePolicy": "none",
-      "status": "self-maintained-github-seo-standard",
-      "evidence": [
-        "Skill was developed locally as the policy and implementation gate for owner-directed GitHub discoverability work.",
-        "No external skill package or upstream repository is declared in the skill files."
-      ],
-      "verificationPath": [
-        "Use this repository history as the canonical source until an explicit upstream is published.",
-        "Validate mode-gate, evidence-boundary, and cross-channel evals with skill-creator before release."
-      ],
-      "notes": "Self-maintained shared skill; external automatic updates disabled."
-    },
-    {
-      "name": "github-seo-evaluation-loop",
-      "path": "skills/08-writing-marketing/github-seo-evaluation-loop/",
-      "classification": "self",
-      "updatePolicy": "none",
-      "status": "self-maintained-github-seo-evaluation-loop",
-      "evidence": [
-        "Skill was developed locally for recurring, read-only GitHub SEO measurement and evidence comparison.",
-        "No external skill package or upstream repository is declared in the skill files."
-      ],
-      "verificationPath": [
-        "Use this repository history as the canonical source until an explicit upstream is published.",
-        "Validate project-root resolution, completed-run gating, and confounder handling with skill-creator before release."
-      ],
-      "notes": "Self-maintained shared skill; external automatic updates disabled."
-    },
-    {
       "name": "xhs-pharma-social-listening",
       "path": "skills/10-business-industry/xhs-pharma-social-listening/",
       "classification": "self",
@@ -1444,11 +1396,11 @@
       "evidence": [
         "Skill was redesigned locally from an owner-directed Codex in-app Browser workflow for GPT 5.6 Sol Pro review and orchestration.",
         "The predecessor Chrome/OpenCLI implementation was retained only as an evaluation baseline and is not an upstream package for automatic mirroring.",
-        "Real iab forward tests, paired baseline grading, human viewer review, and isolated Terra/Xhigh trigger-routing tests were completed before publication."
+        "Real iab forward tests, paired baseline grading, human viewer review, and isolated Terra/Xhigh trigger-routing tests were completed before local installation."
       ],
       "verificationPath": [
-        "Run the bundled scripts against the locally retained evaluation evidence and validate SKILL.md with skill-creator.",
-        "Compare the published runtime file manifest with the evaluated local candidate before release."
+        "Run the bundled contract tests and system skill-creator quick_validate.py.",
+        "Verify the installed folder hash manifest matches the frozen evaluated candidate before release."
       ],
       "notes": "Self-maintained shared skill; external automatic updates disabled."
     }

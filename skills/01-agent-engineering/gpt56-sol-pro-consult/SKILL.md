@@ -12,7 +12,7 @@ description: 凡需方案、Plan 或本地材料审查，均用 Codex 侧边 Bro
 默认且唯一的执行面是 Codex 内置侧边 Browser（in-app Browser）。先完整读取并遵循 `browser:control-in-app-browser` Skill，再读取 [侧边 Browser 工作流](references/in-app-browser-workflow.md)。
 
 - 实际 Browser 操作必须由触发本 Skill 的当前主 Codex task 执行。隔离子代理可整理材料或复审结果，但不得代替主 task 打开 ChatGPT、选模型、上传、发送或抽取回复；子代理报告 `iab` 不可用不能证明主 task 的侧边 Browser 不可用。
-- 选择独立的 `iab` 绑定，在 Codex 侧边栏打开或复用 `https://chatgpt.com/`。
+- 选择独立的 `iab` 绑定。每个新 Codex task 都新建专用 ChatGPT tab，并从 `https://chatgpt.com/` 开始；不得复用其他 task 留下的对话、Project、composer 草稿、附件或上传状态。只有同一 task 持有匹配 `task_run_id` 的 evidence ledger 时，才可继续原 tab。新 tab 的首次空白快照不够：打开或确认模型菜单后、写入本次内容前，必须再次读取 composer 和附件区，执行延迟净空门（late clean gate）。
 - 不调用 Chrome 扩展、Chrome CLI、OpenCLI、Playwright CLI 或外部浏览器自动化进程。
 - 不检查 cookies、local storage、密码、浏览器配置或 session 文件。
 - 如果当前会话没有 Browser Skill、无法取得 `iab` 绑定、未登录 ChatGPT，或账号没有 Pro，停止并准确说明缺少什么；不要静默换模型或换浏览器。
@@ -80,7 +80,7 @@ python <skill-dir>/scripts/check_packet_safety.py <packet.md>
 
 这些字段必须来自同一 Browser session 和同一对话。任何字段缺失、来源仅为代理自述、或无法与本次 dispatch 关联时，状态保持 `incomplete`；静态路由测试、模拟文本和子代理口头报告都不能替代真实 `iab` 证据。
 
-咨询完成前运行：
+完成所有 Browser 读取并执行 cleanup/finalize 后，把 cleanup 结果追加到 ledger，再运行：
 
 ```powershell
 python <skill-dir>/scripts/validate_session_evidence.py <iab-consultation-evidence.json>
@@ -94,11 +94,14 @@ python <skill-dir>/scripts/validate_session_evidence.py <iab-consultation-eviden
 2. 先形成 Codex 的本地判断：事实、证据、约束、方案、风险、尝试和未知项。
 3. 按 [上下文包模板](references/context-packet-template.md) 生成 packet；普通 Review 保持紧凑，复杂架构或 Orchestrator 任务才使用更完整材料。
 4. 选择最小充分证据集。结构、格式、源码或日志细节会影响结论时上传真实附件。
-5. 运行安全扫描，再按 [侧边 Browser 工作流](references/in-app-browser-workflow.md) 在主 task 的真实 `iab` 中打开 ChatGPT、确认登录与模型，并建立 evidence ledger。
-6. 在发送前把当前 Browser session、tab、模型信号、composer prefix、唯一 sentinel、内容 hash 和全部附件名写入同一 ledger；只发送一次。
-7. 记录 dispatch state 和提交后证据，等待同一对话完整生成。仍在生成、只有开场白或没有 assistant sentinel 都不算完成。
-8. 抽取同一 tab 的最新完整 assistant turn，验证 sentinel，完成 session-bound ledger，并由 Codex 对照本地证据给出 Adopt / Reject / Modify 决策。
-9. 若为 Orchestrator loop，把实现差异和真实验证结果送回同一对话继续复审；每轮新增独立 dispatch 记录，不要开启重复咨询。
+5. 运行安全扫描，再按 [侧边 Browser 工作流](references/in-app-browser-workflow.md) 在主 task 的真实 `iab` 中新建专用 tab。先确认处于非 Project 的新对话，composer 为空且没有附件、草稿或上传任务。
+6. 打开或确认模型菜单后、写入或上传本次材料前，重新获取 composer 并执行延迟净空门。若旧草稿、Project 状态、附件或上传任务此时恢复，立即停止本轮，不发送、不上传、不在污染页修补；关闭本 task 新建的污染 tab后最多重试一个全新 tab。若再次出现，标记 `STALE_COMPOSER_BLOCKER` 并进入 finalize。Temporary Chat 不能作为隔离回退。
+7. 延迟净空门通过后，在发送前把当前 Browser session、tab、模型信号、composer prefix、唯一 sentinel、内容 hash、全部附件名和净空观测写入同一 ledger；只发送一次。
+8. 记录 dispatch state 和提交后证据，等待同一对话完整生成。仍在生成、只有开场白或没有 assistant sentinel 都不算完成。
+9. 抽取同一 tab 的最新完整 assistant turn，验证 sentinel，记录 response 证据，并由 Codex 对照本地证据给出 Adopt / Reject / Modify 决策；此时不要先运行最终 validator。
+10. 若为 Orchestrator loop，把实现差异和真实验证结果送回同一对话继续复审；每轮新增独立 dispatch 记录，不要开启重复咨询。
+11. 返回结果前按 Browser documentation 调用 `iab.tabs.finalize({ keep })`，并把它作为本次 turn 的最后一个 Browser 动作。默认 `keep` 为空；只有用户需要查看成品页面时保留 `deliverable`，或同一 task 明确暂停等待继续时保留一个无上传残留的 `handoff`。即使失败、超时、登录受阻、`STALE_COMPOSER_BLOCKER` 或 dispatch 为 `UNKNOWN` 也必须 finalize，不能让会话占用侧边 Browser。
+12. finalize 后只做本地工作：在 ledger 追加 cleanup 结果并运行 `validate_session_evidence.py`。validator 通过后才可把本次咨询标为 completed。
 
 ## 上下文要求
 
@@ -119,11 +122,13 @@ python <skill-dir>/scripts/validate_session_evidence.py <iab-consultation-eviden
 只有以下条件全部满足，咨询才是 `completed`：
 
 - 已确认 GPT 5.6 Sol Pro。
+- 模型菜单交互后的延迟净空门已通过；不能只依赖新 tab 初次加载时的空白快照。
 - session-bound evidence ledger 证明 Browser 类型、session、tab、模型、dispatch 和回复属于同一 `iab` run。
 - 发送前已确认 prompt prefix、sentinel 与所需附件。
 - 发送结果明确，且没有重复提交风险。
 - Pro 已停止生成，完整 assistant turn 已抽取。
 - assistant turn 内出现预期 `GPT56_SOL_PRO_RESULT_...` sentinel。
+- 已执行本 turn 的 tab cleanup/finalize；正常完成时没有遗留草稿、附件、上传任务或 Project 上下文。
 
 若用户说答案已在侧边栏显示，先从现有对话重新抽取；不要重复发送。若点击 Send 后连接中断且结果不明，恢复原对话，无法唯一确认时标记 incomplete。
 
@@ -161,8 +166,12 @@ python <skill-dir>/scripts/validate_session_evidence.py <iab-consultation-eviden
 - **未登录**：请用户在 Codex 侧边 Browser 登录 ChatGPT，完成后继续同一任务。
 - **Pro 不可用或无法确认**：停止，不静默选择其他模型。
 - **附件失败**：重新获取当前 composer 与文件选择器；小文件可粘贴，多个文本文件可打成一个 Markdown bundle。没有可见附件证据就不得声称上传成功。
+- **发现其他 task 残留**：不要复用或清空后继续。关闭本 task 新建的污染 tab，另建专用 tab，从 ChatGPT 根页面开始，并在模型菜单交互后重新执行延迟净空门；最多重试一次。再次恢复相同或其他旧内容时标记 `STALE_COMPOSER_BLOCKER`，不发送并 finalize。不要关闭、编辑或清空无法证明属于本 task 的用户 tab。
+- **Temporary Chat**：实测中全局或其他任务草稿可能继续恢复到 Temporary Chat；不得把它当作净空或隔离证明。
+- **用户明确要求清理残留**：清理前记录旧内容的非敏感指纹和可识别前缀；清空后必须再触发一次模型菜单交互并复查。旧内容再次出现即判定清理未成功，停止发送并报告仍有其他会话或全局状态在恢复它。
 - **composer 为空**：重新获取可编辑区并验证 rendered text；未确认 prefix 和 sentinel 时不得发送。
 - **发送结果不明**：恢复现有对话并检查用户 turn 或生成状态；不要创建新对话或重复发送。
 - **仍在生成**：继续等待同一对话，不刷新、不发“继续”。
 - **没有 sentinel**：完整抽取一次最新 assistant turn；仍缺失则标记 incomplete。
 - **答案质量低**：只采纳有支持的部分；最终责任仍在 Codex。
+- **任意退出路径**：在所有必要 Browser 读取完成后执行一次 `iab.tabs.finalize({ keep })`，此后不再调用 Browser；不得把未完成上传或含附件草稿的 tab 标为 `handoff`。

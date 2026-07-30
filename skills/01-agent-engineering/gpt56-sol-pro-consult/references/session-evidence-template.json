@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.2",
   "task_run_id": "<unique-current-task-run-id>",
   "executed_by": "main-codex-task",
   "case_id": "<optional-eval-case-id>",
@@ -24,6 +24,20 @@
       "menuitemradio GPT-5.6 Sol [checked]",
       "menuitemradio Pro [checked]"
     ]
+  },
+  "late_clean_gate": {
+    "binding_ref": {
+      "browser_id": "<same-browser-session-id>",
+      "tab_id": "<same-controlled-tab-id>",
+      "tab_url": "<same-chatgpt-conversation-url>"
+    },
+    "captured_at": "<iso-8601-after-model-menu-before-current-input>",
+    "checked_after_model_menu": true,
+    "composer_empty": true,
+    "composer_text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "project_context": false,
+    "pending_upload_count": 0,
+    "unexpected_attachments": []
   },
   "packet": {
     "sha256": "<64-lowercase-hex>",
@@ -58,6 +72,16 @@
     "chrome_cli_used": false,
     "opencli_used": false,
     "external_playwright_used": false
+  },
+  "cleanup": {
+    "captured_at": "<iso-8601-after-finalize>",
+    "finalize_called": true,
+    "finalize_was_last_browser_action": true,
+    "retained_tab_status": "none",
+    "pre_finalize_project_context": false,
+    "pre_finalize_draft_present": false,
+    "pre_finalize_pending_upload_count": 0,
+    "pre_finalize_unexpected_attachments": []
   },
   "binding_verified": true,
   "status": "completed"

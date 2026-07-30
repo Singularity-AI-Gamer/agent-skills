@@ -11,6 +11,7 @@ from typing import Any
 
 
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
+EMPTY_SHA256 = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 
 
 def nested(payload: dict[str, Any], *keys: str) -> Any:
@@ -30,6 +31,7 @@ def validate(payload: dict[str, Any]) -> list[str]:
             errors.append(message)
 
     require(payload.get("executed_by") == "main-codex-task", "executed_by must be main-codex-task")
+    require(payload.get("schema_version") == "1.2", "schema_version must be 1.2")
     require(bool(payload.get("task_run_id")), "task_run_id is required")
     require(nested(payload, "browser", "type") == "iab", "browser.type must be iab")
 
@@ -40,7 +42,7 @@ def validate(payload: dict[str, Any]) -> list[str]:
     }
     require(all(browser_ref.values()), "browser_id, tab_id, and tab_url are required")
 
-    for section in ("model_gate", "dispatch", "response"):
+    for section in ("model_gate", "late_clean_gate", "dispatch", "response"):
         section_ref = nested(payload, section, "binding_ref")
         require(isinstance(section_ref, dict), f"{section}.binding_ref is required")
         if isinstance(section_ref, dict):
@@ -53,6 +55,20 @@ def validate(payload: dict[str, Any]) -> list[str]:
     require(nested(payload, "model_gate", "pro_tier_checked") is True, "Pro tier must be checked")
     signals = nested(payload, "model_gate", "observed_signals")
     require(isinstance(signals, list) and len(signals) >= 2, "two model selection signals are required")
+
+    require(
+        nested(payload, "late_clean_gate", "checked_after_model_menu") is True,
+        "late clean gate must run after model menu interaction",
+    )
+    require(nested(payload, "late_clean_gate", "composer_empty") is True, "late clean gate must prove empty composer")
+    require(
+        nested(payload, "late_clean_gate", "composer_text_sha256") == EMPTY_SHA256,
+        "late clean gate composer hash must equal empty text SHA-256",
+    )
+    require(nested(payload, "late_clean_gate", "project_context") is False, "late clean gate must prove no Project context")
+    require(nested(payload, "late_clean_gate", "pending_upload_count") == 0, "late clean gate must prove no pending uploads")
+    late_unexpected = nested(payload, "late_clean_gate", "unexpected_attachments")
+    require(isinstance(late_unexpected, list) and not late_unexpected, "late clean gate must prove no unexpected attachments")
 
     require(bool(SHA256_RE.fullmatch(str(nested(payload, "packet", "sha256") or ""))), "packet.sha256 must be lowercase SHA-256")
     require(bool(nested(payload, "packet", "distinctive_prefix")), "packet distinctive_prefix is required")
@@ -69,6 +85,31 @@ def validate(payload: dict[str, Any]) -> list[str]:
 
     for key in ("chrome_extension_used", "chrome_cli_used", "opencli_used", "external_playwright_used"):
         require(nested(payload, "route_exclusions", key) is False, f"route_exclusions.{key} must be false")
+
+    require(bool(nested(payload, "cleanup", "captured_at")), "cleanup.captured_at is required")
+    require(nested(payload, "cleanup", "finalize_called") is True, "cleanup.finalize_called must be true")
+    require(
+        nested(payload, "cleanup", "finalize_was_last_browser_action") is True,
+        "cleanup.finalize_was_last_browser_action must be true",
+    )
+    require(
+        nested(payload, "cleanup", "retained_tab_status") in {"none", "deliverable"},
+        "completed consultations may retain only none or deliverable",
+    )
+    require(
+        nested(payload, "cleanup", "pre_finalize_project_context") is False,
+        "cleanup must prove no Project context",
+    )
+    require(
+        nested(payload, "cleanup", "pre_finalize_draft_present") is False,
+        "cleanup must prove no leftover draft",
+    )
+    require(
+        nested(payload, "cleanup", "pre_finalize_pending_upload_count") == 0,
+        "cleanup must prove no pending uploads",
+    )
+    unexpected = nested(payload, "cleanup", "pre_finalize_unexpected_attachments")
+    require(isinstance(unexpected, list) and not unexpected, "cleanup must prove no unexpected attachments")
 
     require(payload.get("binding_verified") is True, "binding_verified must be true")
     require(payload.get("status") == "completed", "status must be completed")
