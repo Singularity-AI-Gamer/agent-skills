@@ -48,7 +48,7 @@ jobs:
           echo "Remaining shared skills: $(find skills -name SKILL.md 2>/dev/null | wc -l)"
           echo "Remaining project skills: $(find projects -name SKILL.md 2>/dev/null | wc -l)"
 
-      - name: Remove skills marked org-sync: false
+      - name: "Remove skills marked org-sync: false"
         run: |
           echo "=== Removing skills with org-sync: false in SKILL.md frontmatter ==="
           excluded=0
