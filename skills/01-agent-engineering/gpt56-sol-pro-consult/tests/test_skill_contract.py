@@ -20,15 +20,19 @@ class SkillContractTests(unittest.TestCase):
         self.assertIn("不调用 Chrome 扩展、Chrome CLI、OpenCLI", skill)
         self.assertIn("不切换 Chrome 或 CLI", skill)
 
-    def test_trigger_contract_covers_plan_review_and_explicit_sol_pro(self) -> None:
+    def test_trigger_contract_is_explicit_sol_pro_only(self) -> None:
         skill = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")
-        for phrase in (
-            "方案 Review",
-            "Plan 审查",
-            "GPT 5.6 Sol Pro",
-            "Pro 编排循环",
-        ):
-            self.assertIn(phrase, skill)
+        description = skill.split("---", 2)[1]
+        self.assertIn(
+            "description: 仅当用户点名或明确要求使用 Sol Pro 时调用侧边 Browser。",
+            description,
+        )
+        self.assertIn("显式点名 `$gpt56-sol-pro-consult`", skill)
+        self.assertIn("普通的方案 Review、Plan 审查、本地材料审查", skill)
+        self.assertIn("不触发", skill)
+        self.assertIn("不因 Codex 自行判断", skill)
+        for broad_trigger in ("凡需方案", "均用 Codex", "Pro 编排循环时也触发"):
+            self.assertNotIn(broad_trigger, description)
 
     def test_reviewer_and_orchestrator_modes_are_defined(self) -> None:
         skill = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")

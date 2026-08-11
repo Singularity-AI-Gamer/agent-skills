@@ -19,7 +19,7 @@
 | 13 | **find-skills** | [skills/01-agent-engineering/find-skills/](../skills/01-agent-engineering/find-skills/) | 自动发现与推荐可用 Agent 技能，回答"有没有能做 X 的技能"。 |
 | 14 | **frontend-design** | [skills/03-frameworks/frontend-design/](../skills/03-frameworks/frontend-design/) | 创建具有高设计质量的生产级前端界面。 |
 | 15 | **github-readme-visuals** | [skills/07-media-content/github-readme-visuals/](../skills/07-media-content/github-readme-visuals/) | 为 GitHub 仓库创建或更新产品主视觉、完整软件界面截图及中英文 README 图片区，并支持按参考图进行可验证的几何复刻。 |
-| 16 | **gpt56-sol-pro-consult** | [skills/01-agent-engineering/gpt56-sol-pro-consult/](../skills/01-agent-engineering/gpt56-sol-pro-consult/) | 凡需方案、Plan 或本地材料审查，均用 Codex 侧边 Browser 咨询 Sol Pro；点名或要求 Pro 编排循环时也触发。 |
+| 16 | **gpt56-sol-pro-consult** | [skills/01-agent-engineering/gpt56-sol-pro-consult/](../skills/01-agent-engineering/gpt56-sol-pro-consult/) | 仅当用户点名或明确要求使用 Sol Pro 时调用 Codex 侧边 Browser。 |
 | 17 | **healthcare-cdss-patterns** | [skills/10-business-industry/healthcare-cdss-patterns/](../skills/10-business-industry/healthcare-cdss-patterns/) | 临床决策支持系统开发：药物互作、剂量校验、临床评分、告警分级与 EMR 集成。 |
 | 18 | **healthcare-emr-patterns** | [skills/10-business-industry/healthcare-emr-patterns/](../skills/10-business-industry/healthcare-emr-patterns/) | 医疗 EMR/EHR 开发模式：临床安全、就诊流程、处方生成、CDSS 集成、无障碍 UI。 |
 | 19 | **healthcare-eval-harness** | [skills/10-business-industry/healthcare-eval-harness/](../skills/10-business-industry/healthcare-eval-harness/) | 医疗发布的病人安全评测 harness：CDSS、PHI、临床流程与集成合规，失败阻断上线。 |

@@ -19,7 +19,7 @@
 
 **从这里开始：** [按名字浏览全部技能](./_meta/by-name.md) · [按能力域探索](./_meta/by-domain.md) · [查看机器可读索引](./_meta/skills-lock.json) · [了解来源与维护边界](./_meta/skill-upstreams.json) · [浏览完整外部工作流包](./docs/external-workflow-packs.md)
 
-Skill-hub 是一个面向 Codex、Claude Code、Antigravity 等 AI 编程工具的中文 Agent 技能库，收集可复用的 `SKILL.md` 自动化实践、AI 编程工作流和提示词模板。仓库当前包含 **71** 个可复用技能，其中 **63** 个共享技能按能力域组织，**8** 个项目私有技能按项目归档，便于检索、本地同步、来源追踪和持续维护。
+Skill-hub 是一个面向 Codex、Claude Code、Antigravity 等 AI 编程工具的中文 Agent 技能库，收集可复用的 `SKILL.md` 自动化实践、AI 编程工作流和提示词模板。仓库当前包含 **42** 个可复用技能，其中 **34** 个共享技能按能力域组织，**8** 个项目私有技能按项目归档，便于检索、本地同步、来源追踪和持续维护。
 
 **适合搜索：** Codex 技能与 Claude Code 技能、中文 Agent 技能库、AI 编程工作流与提示词模板。
 
@@ -59,7 +59,7 @@ Skill-hub 不是单一提示词合集，而是面向 Agent 使用的技能仓库
 ## <img src="assets/README/icons/directory.svg" width="20" alt=""> 目录结构
 
 ```text
-skills/                        # 63 个共享技能，分 7 个能力域
+skills/                        # 34 个共享技能，分 7 个能力域
 |-- 01-agent-engineering/      # Agent 构建、调试、自治循环、harness
 |-- 02-coding-languages/       # 编程语言
 |-- 03-frameworks/             # 框架与技术栈

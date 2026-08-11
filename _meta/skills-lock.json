@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "generated_at": "2026-08-11T16:57:17+08:00",
+  "generated_at": "2026-08-11T17:26:34+08:00",
   "note": "Rebuilt indexes from repository SKILL.md files. Total: 34 shared + 8 projects = 42 total",
   "counts": {
     "shared": 34,
@@ -24,7 +24,7 @@
       "name": "gpt56-sol-pro-consult",
       "domain": "01-agent-engineering",
       "path": "skills/01-agent-engineering/gpt56-sol-pro-consult/",
-      "descriptionZh": "凡需方案、Plan 或本地材料审查，均用 Codex 侧边 Browser 咨询 Sol Pro；点名或要求 Pro 编排循环时也触发。"
+      "descriptionZh": "仅当用户点名或明确要求使用 Sol Pro 时调用 Codex 侧边 Browser。"
     },
     {
       "name": "santa-method",

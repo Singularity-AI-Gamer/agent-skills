@@ -1,11 +1,19 @@
 ---
 name: gpt56-sol-pro-consult
-description: 凡需方案、Plan 或本地材料审查，均用 Codex 侧边 Browser 咨询 Sol Pro；点名或要求 Pro 编排循环时也触发。
+description: 仅当用户点名或明确要求使用 Sol Pro 时调用侧边 Browser。
 ---
 
 # GPT 5.6 Sol Pro Consult
 
 把 ChatGPT Web 的 GPT 5.6 Sol Pro 作为 Codex 的外部审查者或 Orchestrator：Pro 负责挑战方案、发现盲点和提出修订；Codex 负责读取本地证据、实施、运行验证并决定是否采纳。
+
+## 触发边界
+
+仅在用户显式点名 `$gpt56-sol-pro-consult`，或明确要求使用 `Sol Pro` / `GPT 5.6 Sol Pro` 时执行本 Skill。
+
+- 普通的方案 Review、Plan 审查、本地材料审查、规划或“给第二意见”请求不触发。
+- 单独出现泛称 `Pro`、“高推理模型”或“最强模型”不触发，除非当前用户请求已无歧义地指向 Sol Pro。
+- 不因 Codex 自行判断“这项任务适合 Pro”而主动升级；是否调用由用户明确决定。
 
 ## 执行位置与原生 Browser 路由
 
