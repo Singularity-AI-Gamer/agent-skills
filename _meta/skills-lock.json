@@ -1,11 +1,11 @@
 {
   "version": "2.0",
-  "generated_at": "2026-07-28T09:36:57+08:00",
-  "note": "Rebuilt indexes from repository SKILL.md files. Total: 60 shared + 8 projects = 68 total",
+  "generated_at": "2026-08-11T16:57:17+08:00",
+  "note": "Rebuilt indexes from repository SKILL.md files. Total: 34 shared + 8 projects = 42 total",
   "counts": {
-    "shared": 60,
+    "shared": 34,
     "projects": 8,
-    "total": 68
+    "total": 42
   },
   "shared": [
     {
@@ -70,94 +70,10 @@
       "descriptionZh": "使用 Netlify CLI 完成安装、认证、站点关联、本地开发、环境变量管理与部署。"
     },
     {
-      "name": "bioc-fulltext-fetch",
-      "domain": "06-data-search",
-      "path": "skills/06-data-search/bioc-fulltext-fetch/",
-      "descriptionZh": "从 PubMed/PMC 获取结构化全文并按章节切分为 RAG 友好的 chunk。"
-    },
-    {
-      "name": "clinical-trials-v2",
-      "domain": "06-data-search",
-      "path": "skills/06-data-search/clinical-trials-v2/",
-      "descriptionZh": "实时查询 ClinicalTrials.gov 试验协议、结果和招募状态。"
-    },
-    {
-      "name": "cn-clinical-guidelines-fetch",
-      "domain": "06-data-search",
-      "path": "skills/06-data-search/cn-clinical-guidelines-fetch/",
-      "descriptionZh": "抓取中国权威医学指南（CSCO/NCCN 中文版/NMPA/CDE/NHC）。"
-    },
-    {
       "name": "data-scraper-agent",
       "domain": "06-data-search",
       "path": "skills/06-data-search/data-scraper-agent/",
       "descriptionZh": "构建全自动 AI 数据采集 Agent：按计划抓取公开源并用 LLM 富化入库。"
-    },
-    {
-      "name": "europepmc-search",
-      "domain": "06-data-search",
-      "path": "skills/06-data-search/europepmc-search/",
-      "descriptionZh": "多源文献聚合检索：PubMed + PMC + 预印本 + NCBI Bookshelf + 专利。"
-    },
-    {
-      "name": "evidence-appendix-sync",
-      "domain": "06-data-search",
-      "path": "skills/06-data-search/evidence-appendix-sync/",
-      "descriptionZh": "最终确定市场研究报告附录 C（参考文献清单）。"
-    },
-    {
-      "name": "market-research-reports",
-      "domain": "06-data-search",
-      "path": "skills/06-data-search/market-research-reports/",
-      "descriptionZh": "生成 50+ 页专业市场研究报告，McKinsey/BCG/Gartner 质量。"
-    },
-    {
-      "name": "market-sizing-mece-foundation",
-      "domain": "06-data-search",
-      "path": "skills/06-data-search/market-sizing-mece-foundation/",
-      "descriptionZh": "所有医学市场规模任务的 MECE 基础。"
-    },
-    {
-      "name": "medical-evidence-grading",
-      "domain": "06-data-search",
-      "path": "skills/06-data-search/medical-evidence-grading/",
-      "descriptionZh": "医学证据分级：按证据金字塔自动分级 A/B/C/D。"
-    },
-    {
-      "name": "medical-research",
-      "domain": "06-data-search",
-      "path": "skills/06-data-search/medical-research/",
-      "descriptionZh": "从 PubMed 获取论文并生成通俗易懂的研究摘要，覆盖医学/临床/科研主题。"
-    },
-    {
-      "name": "nmpa-drug-registry-lookup",
-      "domain": "06-data-search",
-      "path": "skills/06-data-search/nmpa-drug-registry-lookup/",
-      "descriptionZh": "中国药品权威数据库：NMPA + CDE + DrugBank + PubChem 融合查询。"
-    },
-    {
-      "name": "pubmed-eutils",
-      "domain": "06-data-search",
-      "path": "skills/06-data-search/pubmed-eutils/",
-      "descriptionZh": "通过 NCBI E-utilities 搜索 PubMed 并获取结构化生物医学文献。"
-    },
-    {
-      "name": "pubmed-search",
-      "domain": "06-data-search",
-      "path": "skills/06-data-search/pubmed-search/",
-      "descriptionZh": "通过 Valyu 语义搜索以自然语言检索 PubMed 生物医学文献，支持全文。"
-    },
-    {
-      "name": "pubtator-entity-search",
-      "domain": "06-data-search",
-      "path": "skills/06-data-search/pubtator-entity-search/",
-      "descriptionZh": "NLM PubTator3 实体级关系挖掘：疾病-药物-基因-化学品关联。"
-    },
-    {
-      "name": "report-bundle-builder",
-      "domain": "06-data-search",
-      "path": "skills/06-data-search/report-bundle-builder/",
-      "descriptionZh": "将多页 HTML 报告合并为单一独立 HTML/PDF/XLSX 交付物。"
     },
     {
       "name": "docx",
@@ -250,40 +166,10 @@
       "descriptionZh": "Anthropic 暖色编辑设计语言，用于演示/case sharing/战略汇报。"
     },
     {
-      "name": "decision-tree-with-lp-embedding",
-      "domain": "08-writing-marketing",
-      "path": "skills/08-writing-marketing/decision-tree-with-lp-embedding/",
-      "descriptionZh": "生成包含 LP 嵌入的 Mermaid 临床决策树。"
-    },
-    {
       "name": "yq-article-style-imitation",
       "domain": "08-writing-marketing",
       "path": "skills/08-writing-marketing/yq-article-style-imitation/",
       "descriptionZh": "任意作家文章风格仿写：验证作者原文、拆解表达 DNA、生成并修复公众号/小红书稿。"
-    },
-    {
-      "name": "citation-anchor-resolver",
-      "domain": "10-business-industry",
-      "path": "skills/10-business-industry/citation-anchor-resolver/",
-      "descriptionZh": "Cite-or-Block 架构基石：解析报告中引用锚点。"
-    },
-    {
-      "name": "cite-bound-content-generator",
-      "domain": "10-business-industry",
-      "path": "skills/10-business-industry/cite-bound-content-generator/",
-      "descriptionZh": "生成带强制引用锚点的报告 HTML。"
-    },
-    {
-      "name": "content-verification-layer",
-      "domain": "10-business-industry",
-      "path": "skills/10-business-industry/content-verification-layer/",
-      "descriptionZh": "审核 compose 输出，确保每个引用锚点可逆解析到源文件。"
-    },
-    {
-      "name": "contract-elicitor",
-      "domain": "10-business-industry",
-      "path": "skills/10-business-industry/contract-elicitor/",
-      "descriptionZh": "疾病市场规模调研的合同引导阶段，输出启动问题。"
     },
     {
       "name": "contract-review",
@@ -296,36 +182,6 @@
       "domain": "10-business-industry",
       "path": "skills/10-business-industry/creating-financial-models/",
       "descriptionZh": "高级财务建模套件，含 DCF 估值、敏感性分析、蒙特卡洛模拟。"
-    },
-    {
-      "name": "design-system-injector",
-      "domain": "10-business-industry",
-      "path": "skills/10-business-industry/design-system-injector/",
-      "descriptionZh": "向报告 HTML 注入咨询公司配色（navy/gold/blue）+ 基础 CSS。"
-    },
-    {
-      "name": "disease-market-sizing-html-template",
-      "domain": "10-business-industry",
-      "path": "skills/10-business-industry/disease-market-sizing-html-template/",
-      "descriptionZh": "多页 HTML 市场研究报告模板，含主页和 N 个子页。"
-    },
-    {
-      "name": "disease-market-sizing-orchestration",
-      "domain": "10-business-industry",
-      "path": "skills/10-business-industry/disease-market-sizing-orchestration/",
-      "descriptionZh": "跨疾病市场规模入口 skill，自动运行 5 阶段管线。"
-    },
-    {
-      "name": "disease-stratifier",
-      "domain": "10-business-industry",
-      "path": "skills/10-business-industry/disease-stratifier/",
-      "descriptionZh": "发现疾病特异性分层维度，输出 staging.json。"
-    },
-    {
-      "name": "drug-citation-verifier",
-      "domain": "10-business-industry",
-      "path": "skills/10-business-industry/drug-citation-verifier/",
-      "descriptionZh": "药品名交叉验证：检查药品提及与引用源的一致性。"
     },
     {
       "name": "healthcare-cdss-patterns",
@@ -350,18 +206,6 @@
       "domain": "10-business-industry",
       "path": "skills/10-business-industry/healthcare-phi-compliance/",
       "descriptionZh": "医疗应用 PHI/PII 合规：数据分级、访问控制、审计、加密、常见泄漏路径。"
-    },
-    {
-      "name": "ifi-market-sizing-skill",
-      "domain": "10-business-industry",
-      "path": "skills/10-business-industry/ifi-market-sizing-skill/",
-      "descriptionZh": "用于医学/制药市场规模的临床路径重建与患者流瀑布图。"
-    },
-    {
-      "name": "session-resume",
-      "domain": "10-business-industry",
-      "path": "skills/10-business-industry/session-resume/",
-      "descriptionZh": "disease-market-sizing 管线中断后恢复，无需从头开始。"
     },
     {
       "name": "xhs-pharma-social-listening",

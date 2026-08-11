@@ -1,16 +1,16 @@
 # 按能力域索引
 
-共 68 个技能，按 7 个能力域 + projects（项目私有）分组。
+共 42 个技能，按 7 个能力域 + projects（项目私有）分组。
 
 ## 目录
 
 - [01 Agent 工程](#01-agent-工程)（7）
 - [02 编程语言](#02-编程语言)（1）
 - [03 框架与技术栈](#03-框架与技术栈)（2）
-- [06 数据与检索](#06-数据与检索)（15）
+- [06 数据与检索](#06-数据与检索)（1）
 - [07 媒体与内容制作](#07-媒体与内容制作)（15）
-- [08 写作与营销](#08-写作与营销)（2）
-- [10 行业与业务](#10-行业与业务)（18）
+- [08 写作与营销](#08-写作与营销)（1）
+- [10 行业与业务](#10-行业与业务)（7）
 - [Projects 项目私有](#projects-项目私有)（8）
 
 ## 01 Agent 工程（7）
@@ -38,25 +38,11 @@
 | **frontend-design** | [skills/03-frameworks/frontend-design/](../skills/03-frameworks/frontend-design/) | 创建具有高设计质量的生产级前端界面。 |
 | **netlify-cli** | [skills/03-frameworks/netlify-cli/](../skills/03-frameworks/netlify-cli/) | 使用 Netlify CLI 完成安装、认证、站点关联、本地开发、环境变量管理与部署。 |
 
-## 06 数据与检索（15）
+## 06 数据与检索（1）
 
 | 技能名 | 路径 | 中文简介 |
 |---|---|---|
-| **bioc-fulltext-fetch** | [skills/06-data-search/bioc-fulltext-fetch/](../skills/06-data-search/bioc-fulltext-fetch/) | 从 PubMed/PMC 获取结构化全文并按章节切分为 RAG 友好的 chunk。 |
-| **clinical-trials-v2** | [skills/06-data-search/clinical-trials-v2/](../skills/06-data-search/clinical-trials-v2/) | 实时查询 ClinicalTrials.gov 试验协议、结果和招募状态。 |
-| **cn-clinical-guidelines-fetch** | [skills/06-data-search/cn-clinical-guidelines-fetch/](../skills/06-data-search/cn-clinical-guidelines-fetch/) | 抓取中国权威医学指南（CSCO/NCCN 中文版/NMPA/CDE/NHC）。 |
 | **data-scraper-agent** | [skills/06-data-search/data-scraper-agent/](../skills/06-data-search/data-scraper-agent/) | 构建全自动 AI 数据采集 Agent：按计划抓取公开源并用 LLM 富化入库。 |
-| **europepmc-search** | [skills/06-data-search/europepmc-search/](../skills/06-data-search/europepmc-search/) | 多源文献聚合检索：PubMed + PMC + 预印本 + NCBI Bookshelf + 专利。 |
-| **evidence-appendix-sync** | [skills/06-data-search/evidence-appendix-sync/](../skills/06-data-search/evidence-appendix-sync/) | 最终确定市场研究报告附录 C（参考文献清单）。 |
-| **market-research-reports** | [skills/06-data-search/market-research-reports/](../skills/06-data-search/market-research-reports/) | 生成 50+ 页专业市场研究报告，McKinsey/BCG/Gartner 质量。 |
-| **market-sizing-mece-foundation** | [skills/06-data-search/market-sizing-mece-foundation/](../skills/06-data-search/market-sizing-mece-foundation/) | 所有医学市场规模任务的 MECE 基础。 |
-| **medical-evidence-grading** | [skills/06-data-search/medical-evidence-grading/](../skills/06-data-search/medical-evidence-grading/) | 医学证据分级：按证据金字塔自动分级 A/B/C/D。 |
-| **medical-research** | [skills/06-data-search/medical-research/](../skills/06-data-search/medical-research/) | 从 PubMed 获取论文并生成通俗易懂的研究摘要，覆盖医学/临床/科研主题。 |
-| **nmpa-drug-registry-lookup** | [skills/06-data-search/nmpa-drug-registry-lookup/](../skills/06-data-search/nmpa-drug-registry-lookup/) | 中国药品权威数据库：NMPA + CDE + DrugBank + PubChem 融合查询。 |
-| **pubmed-eutils** | [skills/06-data-search/pubmed-eutils/](../skills/06-data-search/pubmed-eutils/) | 通过 NCBI E-utilities 搜索 PubMed 并获取结构化生物医学文献。 |
-| **pubmed-search** | [skills/06-data-search/pubmed-search/](../skills/06-data-search/pubmed-search/) | 通过 Valyu 语义搜索以自然语言检索 PubMed 生物医学文献，支持全文。 |
-| **pubtator-entity-search** | [skills/06-data-search/pubtator-entity-search/](../skills/06-data-search/pubtator-entity-search/) | NLM PubTator3 实体级关系挖掘：疾病-药物-基因-化学品关联。 |
-| **report-bundle-builder** | [skills/06-data-search/report-bundle-builder/](../skills/06-data-search/report-bundle-builder/) | 将多页 HTML 报告合并为单一独立 HTML/PDF/XLSX 交付物。 |
 
 ## 07 媒体与内容制作（15）
 
@@ -78,34 +64,22 @@
 | **xlsx** | [skills/07-media-content/xlsx/](../skills/07-media-content/xlsx/) | 电子表格 .xlsx/.csv 等创建、编辑、公式、格式、数据分析与可视化。 |
 | **yq-editorial-presentation-html** | [skills/07-media-content/yq-editorial-presentation-html/](../skills/07-media-content/yq-editorial-presentation-html/) | Anthropic 暖色编辑设计语言，用于演示/case sharing/战略汇报。 |
 
-## 08 写作与营销（2）
+## 08 写作与营销（1）
 
 | 技能名 | 路径 | 中文简介 |
 |---|---|---|
-| **decision-tree-with-lp-embedding** | [skills/08-writing-marketing/decision-tree-with-lp-embedding/](../skills/08-writing-marketing/decision-tree-with-lp-embedding/) | 生成包含 LP 嵌入的 Mermaid 临床决策树。 |
 | **yq-article-style-imitation** | [skills/08-writing-marketing/yq-article-style-imitation/](../skills/08-writing-marketing/yq-article-style-imitation/) | 任意作家文章风格仿写：验证作者原文、拆解表达 DNA、生成并修复公众号/小红书稿。 |
 
-## 10 行业与业务（18）
+## 10 行业与业务（7）
 
 | 技能名 | 路径 | 中文简介 |
 |---|---|---|
-| **citation-anchor-resolver** | [skills/10-business-industry/citation-anchor-resolver/](../skills/10-business-industry/citation-anchor-resolver/) | Cite-or-Block 架构基石：解析报告中引用锚点。 |
-| **cite-bound-content-generator** | [skills/10-business-industry/cite-bound-content-generator/](../skills/10-business-industry/cite-bound-content-generator/) | 生成带强制引用锚点的报告 HTML。 |
-| **content-verification-layer** | [skills/10-business-industry/content-verification-layer/](../skills/10-business-industry/content-verification-layer/) | 审核 compose 输出，确保每个引用锚点可逆解析到源文件。 |
-| **contract-elicitor** | [skills/10-business-industry/contract-elicitor/](../skills/10-business-industry/contract-elicitor/) | 疾病市场规模调研的合同引导阶段，输出启动问题。 |
 | **contract-review** | [skills/10-business-industry/contract-review/](../skills/10-business-industry/contract-review/) | 合同审核：三层审查（基础/业务/法律）、结构化注释、摘要与 Mermaid 流程图。 |
 | **creating-financial-models** | [skills/10-business-industry/creating-financial-models/](../skills/10-business-industry/creating-financial-models/) | 高级财务建模套件，含 DCF 估值、敏感性分析、蒙特卡洛模拟。 |
-| **design-system-injector** | [skills/10-business-industry/design-system-injector/](../skills/10-business-industry/design-system-injector/) | 向报告 HTML 注入咨询公司配色（navy/gold/blue）+ 基础 CSS。 |
-| **disease-market-sizing-html-template** | [skills/10-business-industry/disease-market-sizing-html-template/](../skills/10-business-industry/disease-market-sizing-html-template/) | 多页 HTML 市场研究报告模板，含主页和 N 个子页。 |
-| **disease-market-sizing-orchestration** | [skills/10-business-industry/disease-market-sizing-orchestration/](../skills/10-business-industry/disease-market-sizing-orchestration/) | 跨疾病市场规模入口 skill，自动运行 5 阶段管线。 |
-| **disease-stratifier** | [skills/10-business-industry/disease-stratifier/](../skills/10-business-industry/disease-stratifier/) | 发现疾病特异性分层维度，输出 staging.json。 |
-| **drug-citation-verifier** | [skills/10-business-industry/drug-citation-verifier/](../skills/10-business-industry/drug-citation-verifier/) | 药品名交叉验证：检查药品提及与引用源的一致性。 |
 | **healthcare-cdss-patterns** | [skills/10-business-industry/healthcare-cdss-patterns/](../skills/10-business-industry/healthcare-cdss-patterns/) | 临床决策支持系统开发：药物互作、剂量校验、临床评分、告警分级与 EMR 集成。 |
 | **healthcare-emr-patterns** | [skills/10-business-industry/healthcare-emr-patterns/](../skills/10-business-industry/healthcare-emr-patterns/) | 医疗 EMR/EHR 开发模式：临床安全、就诊流程、处方生成、CDSS 集成、无障碍 UI。 |
 | **healthcare-eval-harness** | [skills/10-business-industry/healthcare-eval-harness/](../skills/10-business-industry/healthcare-eval-harness/) | 医疗发布的病人安全评测 harness：CDSS、PHI、临床流程与集成合规，失败阻断上线。 |
 | **healthcare-phi-compliance** | [skills/10-business-industry/healthcare-phi-compliance/](../skills/10-business-industry/healthcare-phi-compliance/) | 医疗应用 PHI/PII 合规：数据分级、访问控制、审计、加密、常见泄漏路径。 |
-| **ifi-market-sizing-skill** | [skills/10-business-industry/ifi-market-sizing-skill/](../skills/10-business-industry/ifi-market-sizing-skill/) | 用于医学/制药市场规模的临床路径重建与患者流瀑布图。 |
-| **session-resume** | [skills/10-business-industry/session-resume/](../skills/10-business-industry/session-resume/) | disease-market-sizing 管线中断后恢复，无需从头开始。 |
 | **xhs-pharma-social-listening** | [skills/10-business-industry/xhs-pharma-social-listening/](../skills/10-business-industry/xhs-pharma-social-listening/) | 面向外资药企员工痛点的小红书证据化舆情研究：采集并分析药企、岗位、合规、医学事务与 AI 相关笔记和评论，按去重笔记加去重评论计算独立证据，并处理 MediaCrawler CAPTCHA/461 与 OpenCLI 回退。 |
 
 ## Projects 项目私有（8）

@@ -1,14 +1,14 @@
 {
   "version": "1.1",
-  "updated_at": "2026-07-21",
+  "updated_at": "2026-08-11",
   "purpose": "Track verified original upstream repositories for Skill-hub skills so future upgrades can compare evidence-backed sources instead of guessing by skill name.",
   "scope": {
     "startsFrom": [
       "_meta/skill-upstreams.json",
       "_meta/skills-lock.json"
     ],
-    "localSkillCount": 68,
-    "sharedSkillCount": 60,
+    "localSkillCount": 42,
+    "sharedSkillCount": 34,
     "projectSkillCount": 8
   },
   "rules": [
@@ -26,9 +26,9 @@
   },
   "verificationSummary": {
     "countsByClassification": {
-      "open-source": 24,
+      "open-source": 22,
       "self": 11,
-      "local": 32,
+      "local": 8,
       "candidate": 1
     },
     "githubCodeSearch": "Blocked by GitHub API rate limit during broad exact-name search; unresolved entries keep verificationPath commands for later retry.",
@@ -226,60 +226,6 @@
       "notes": "Likely source exists, but the current upstream tree or immutable source commit is not proven safe for overwrite."
     },
     {
-      "name": "bioc-fulltext-fetch",
-      "path": "skills/06-data-search/bioc-fulltext-fetch/",
-      "classification": "local",
-      "updatePolicy": "none",
-      "status": "local-pipeline-skill-unverified-upstream",
-      "evidence": [
-        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
-        "No explicit upstream repository URL was found in inspected local files.",
-        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
-      ],
-      "verificationPath": [
-        "gh search code '\"name: bioc-fulltext-fetch\" filename:SKILL.md' --limit 10",
-        "Search one unique body phrase from SKILL.md via web/GitHub.",
-        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
-      ],
-      "notes": "Local/manual until an original upstream repository is proven."
-    },
-    {
-      "name": "clinical-trials-v2",
-      "path": "skills/06-data-search/clinical-trials-v2/",
-      "classification": "local",
-      "updatePolicy": "none",
-      "status": "local-pipeline-skill-unverified-upstream",
-      "evidence": [
-        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
-        "No explicit upstream repository URL was found in inspected local files.",
-        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
-      ],
-      "verificationPath": [
-        "gh search code '\"name: clinical-trials-v2\" filename:SKILL.md' --limit 10",
-        "Search one unique body phrase from SKILL.md via web/GitHub.",
-        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
-      ],
-      "notes": "Local/manual until an original upstream repository is proven."
-    },
-    {
-      "name": "cn-clinical-guidelines-fetch",
-      "path": "skills/06-data-search/cn-clinical-guidelines-fetch/",
-      "classification": "local",
-      "updatePolicy": "none",
-      "status": "local-pipeline-skill-unverified-upstream",
-      "evidence": [
-        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
-        "No explicit upstream repository URL was found in inspected local files.",
-        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
-      ],
-      "verificationPath": [
-        "gh search code '\"name: cn-clinical-guidelines-fetch\" filename:SKILL.md' --limit 10",
-        "Search one unique body phrase from SKILL.md via web/GitHub.",
-        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
-      ],
-      "notes": "Local/manual until an original upstream repository is proven."
-    },
-    {
       "name": "data-scraper-agent",
       "path": "skills/06-data-search/data-scraper-agent/",
       "classification": "open-source",
@@ -304,220 +250,6 @@
         "Compare normalized file hashes before any mirror or mapped update."
       ],
       "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit."
-    },
-    {
-      "name": "europepmc-search",
-      "path": "skills/06-data-search/europepmc-search/",
-      "classification": "local",
-      "updatePolicy": "none",
-      "status": "local-pipeline-skill-unverified-upstream",
-      "evidence": [
-        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
-        "No explicit upstream repository URL was found in inspected local files.",
-        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
-      ],
-      "verificationPath": [
-        "gh search code '\"name: europepmc-search\" filename:SKILL.md' --limit 10",
-        "Search one unique body phrase from SKILL.md via web/GitHub.",
-        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
-      ],
-      "notes": "Local/manual until an original upstream repository is proven."
-    },
-    {
-      "name": "evidence-appendix-sync",
-      "path": "skills/06-data-search/evidence-appendix-sync/",
-      "classification": "local",
-      "updatePolicy": "none",
-      "status": "local-pipeline-skill-unverified-upstream",
-      "evidence": [
-        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
-        "No explicit upstream repository URL was found in inspected local files.",
-        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
-      ],
-      "verificationPath": [
-        "gh search code '\"name: evidence-appendix-sync\" filename:SKILL.md' --limit 10",
-        "Search one unique body phrase from SKILL.md via web/GitHub.",
-        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
-      ],
-      "notes": "Local/manual until an original upstream repository is proven."
-    },
-    {
-      "name": "market-research-reports",
-      "path": "skills/06-data-search/market-research-reports/",
-      "classification": "local",
-      "updatePolicy": "none",
-      "status": "local-pipeline-skill-unverified-upstream",
-      "evidence": [
-        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
-        "No explicit upstream repository URL was found in inspected local files.",
-        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
-      ],
-      "verificationPath": [
-        "gh search code '\"name: market-research-reports\" filename:SKILL.md' --limit 10",
-        "Search one unique body phrase from SKILL.md via web/GitHub.",
-        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
-      ],
-      "notes": "Local/manual until an original upstream repository is proven."
-    },
-    {
-      "name": "market-sizing-mece-foundation",
-      "path": "skills/06-data-search/market-sizing-mece-foundation/",
-      "classification": "local",
-      "updatePolicy": "none",
-      "status": "local-pipeline-skill-unverified-upstream",
-      "evidence": [
-        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
-        "No explicit upstream repository URL was found in inspected local files.",
-        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
-      ],
-      "verificationPath": [
-        "gh search code '\"name: market-sizing-mece-foundation\" filename:SKILL.md' --limit 10",
-        "Search one unique body phrase from SKILL.md via web/GitHub.",
-        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
-      ],
-      "notes": "Local/manual until an original upstream repository is proven."
-    },
-    {
-      "name": "medical-evidence-grading",
-      "path": "skills/06-data-search/medical-evidence-grading/",
-      "classification": "local",
-      "updatePolicy": "none",
-      "status": "local-pipeline-skill-unverified-upstream",
-      "evidence": [
-        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
-        "No explicit upstream repository URL was found in inspected local files.",
-        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
-      ],
-      "verificationPath": [
-        "gh search code '\"name: medical-evidence-grading\" filename:SKILL.md' --limit 10",
-        "Search one unique body phrase from SKILL.md via web/GitHub.",
-        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
-      ],
-      "notes": "Local/manual until an original upstream repository is proven."
-    },
-    {
-      "name": "medical-research",
-      "path": "skills/06-data-search/medical-research/",
-      "classification": "open-source",
-      "upstream": {
-        "url": "https://github.com/gexijin/vibe",
-        "path": ".claude/skills/medical-research/",
-        "ref": "main"
-      },
-      "lastChecked": {
-        "date": "2026-07-04",
-        "commit": "7ad9fd231d406376d2ee4d6021338c432f23094c"
-      },
-      "updatePolicy": "mirror",
-      "status": "current",
-      "evidence": [
-        "Prior source index entry existed or explicit local URL was present.",
-        "Repository cloned or fetched during this audit.",
-        "Read-only normalized hash audit verified the recorded upstream directory/status."
-      ],
-      "verificationPath": [
-        ".\\skills\\01-agent-engineering\\skill-lifecycle-manager\\scripts\\check_upstreams.ps1",
-        "Compare normalized file hashes before any mirror or mapped update."
-      ],
-      "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit."
-    },
-    {
-      "name": "nmpa-drug-registry-lookup",
-      "path": "skills/06-data-search/nmpa-drug-registry-lookup/",
-      "classification": "local",
-      "updatePolicy": "none",
-      "status": "local-pipeline-skill-unverified-upstream",
-      "evidence": [
-        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
-        "No explicit upstream repository URL was found in inspected local files.",
-        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
-      ],
-      "verificationPath": [
-        "gh search code '\"name: nmpa-drug-registry-lookup\" filename:SKILL.md' --limit 10",
-        "Search one unique body phrase from SKILL.md via web/GitHub.",
-        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
-      ],
-      "notes": "Local/manual until an original upstream repository is proven."
-    },
-    {
-      "name": "pubmed-eutils",
-      "path": "skills/06-data-search/pubmed-eutils/",
-      "classification": "local",
-      "updatePolicy": "none",
-      "status": "local-pipeline-skill-unverified-upstream",
-      "evidence": [
-        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
-        "No explicit upstream repository URL was found in inspected local files.",
-        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
-      ],
-      "verificationPath": [
-        "gh search code '\"name: pubmed-eutils\" filename:SKILL.md' --limit 10",
-        "Search one unique body phrase from SKILL.md via web/GitHub.",
-        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
-      ],
-      "notes": "Local/manual until an original upstream repository is proven."
-    },
-    {
-      "name": "pubmed-search",
-      "path": "skills/06-data-search/pubmed-search/",
-      "classification": "open-source",
-      "upstream": {
-        "url": "https://github.com/yorkeccak/scientific-skills",
-        "path": "skills/pubmed-search/",
-        "ref": "main"
-      },
-      "lastChecked": {
-        "date": "2026-07-04",
-        "commit": "20b3d503700656f847e6de873753335bf90e63e3"
-      },
-      "updatePolicy": "mirror",
-      "status": "current",
-      "evidence": [
-        "Prior source index entry existed or explicit local URL was present.",
-        "Repository cloned or fetched during this audit.",
-        "Read-only normalized hash audit verified the recorded upstream directory/status."
-      ],
-      "verificationPath": [
-        ".\\skills\\01-agent-engineering\\skill-lifecycle-manager\\scripts\\check_upstreams.ps1",
-        "Compare normalized file hashes before any mirror or mapped update."
-      ],
-      "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit."
-    },
-    {
-      "name": "pubtator-entity-search",
-      "path": "skills/06-data-search/pubtator-entity-search/",
-      "classification": "local",
-      "updatePolicy": "none",
-      "status": "local-pipeline-skill-unverified-upstream",
-      "evidence": [
-        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
-        "No explicit upstream repository URL was found in inspected local files.",
-        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
-      ],
-      "verificationPath": [
-        "gh search code '\"name: pubtator-entity-search\" filename:SKILL.md' --limit 10",
-        "Search one unique body phrase from SKILL.md via web/GitHub.",
-        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
-      ],
-      "notes": "Local/manual until an original upstream repository is proven."
-    },
-    {
-      "name": "report-bundle-builder",
-      "path": "skills/06-data-search/report-bundle-builder/",
-      "classification": "local",
-      "updatePolicy": "none",
-      "status": "local-pipeline-skill-unverified-upstream",
-      "evidence": [
-        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
-        "No explicit upstream repository URL was found in inspected local files.",
-        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
-      ],
-      "verificationPath": [
-        "gh search code '\"name: report-bundle-builder\" filename:SKILL.md' --limit 10",
-        "Search one unique body phrase from SKILL.md via web/GitHub.",
-        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
-      ],
-      "notes": "Local/manual until an original upstream repository is proven."
     },
     {
       "name": "docx",
@@ -848,24 +580,6 @@
       }
     },
     {
-      "name": "decision-tree-with-lp-embedding",
-      "path": "skills/08-writing-marketing/decision-tree-with-lp-embedding/",
-      "classification": "local",
-      "updatePolicy": "none",
-      "status": "local-pipeline-skill-unverified-upstream",
-      "evidence": [
-        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
-        "No explicit upstream repository URL was found in inspected local files.",
-        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
-      ],
-      "verificationPath": [
-        "gh search code '\"name: decision-tree-with-lp-embedding\" filename:SKILL.md' --limit 10",
-        "Search one unique body phrase from SKILL.md via web/GitHub.",
-        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
-      ],
-      "notes": "Local/manual until an original upstream repository is proven."
-    },
-    {
       "name": "yq-article-style-imitation",
       "path": "skills/08-writing-marketing/yq-article-style-imitation/",
       "classification": "self",
@@ -880,78 +594,6 @@
         "If no public repo exists, keep updatePolicy=none as self-authored."
       ],
       "notes": "Manual maintenance only unless owner provides an explicit upstream and comparison commit."
-    },
-    {
-      "name": "citation-anchor-resolver",
-      "path": "skills/10-business-industry/citation-anchor-resolver/",
-      "classification": "local",
-      "updatePolicy": "none",
-      "status": "local-pipeline-skill-unverified-upstream",
-      "evidence": [
-        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
-        "No explicit upstream repository URL was found in inspected local files.",
-        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
-      ],
-      "verificationPath": [
-        "gh search code '\"name: citation-anchor-resolver\" filename:SKILL.md' --limit 10",
-        "Search one unique body phrase from SKILL.md via web/GitHub.",
-        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
-      ],
-      "notes": "Local/manual until an original upstream repository is proven."
-    },
-    {
-      "name": "cite-bound-content-generator",
-      "path": "skills/10-business-industry/cite-bound-content-generator/",
-      "classification": "local",
-      "updatePolicy": "none",
-      "status": "local-pipeline-skill-unverified-upstream",
-      "evidence": [
-        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
-        "No explicit upstream repository URL was found in inspected local files.",
-        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
-      ],
-      "verificationPath": [
-        "gh search code '\"name: cite-bound-content-generator\" filename:SKILL.md' --limit 10",
-        "Search one unique body phrase from SKILL.md via web/GitHub.",
-        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
-      ],
-      "notes": "Local/manual until an original upstream repository is proven."
-    },
-    {
-      "name": "content-verification-layer",
-      "path": "skills/10-business-industry/content-verification-layer/",
-      "classification": "local",
-      "updatePolicy": "none",
-      "status": "local-pipeline-skill-unverified-upstream",
-      "evidence": [
-        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
-        "No explicit upstream repository URL was found in inspected local files.",
-        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
-      ],
-      "verificationPath": [
-        "gh search code '\"name: content-verification-layer\" filename:SKILL.md' --limit 10",
-        "Search one unique body phrase from SKILL.md via web/GitHub.",
-        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
-      ],
-      "notes": "Local/manual until an original upstream repository is proven."
-    },
-    {
-      "name": "contract-elicitor",
-      "path": "skills/10-business-industry/contract-elicitor/",
-      "classification": "local",
-      "updatePolicy": "none",
-      "status": "local-pipeline-skill-unverified-upstream",
-      "evidence": [
-        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
-        "No explicit upstream repository URL was found in inspected local files.",
-        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
-      ],
-      "verificationPath": [
-        "gh search code '\"name: contract-elicitor\" filename:SKILL.md' --limit 10",
-        "Search one unique body phrase from SKILL.md via web/GitHub.",
-        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
-      ],
-      "notes": "Local/manual until an original upstream repository is proven."
     },
     {
       "name": "contract-review",
@@ -1004,96 +646,6 @@
         "Compare normalized file hashes before any mirror or mapped update."
       ],
       "notes": "Upstream verified, but local repo keeps scripts under scripts/ and has Chinese trigger text. Audit found mapped drift; do not mirror without reviewing local adaptations."
-    },
-    {
-      "name": "design-system-injector",
-      "path": "skills/10-business-industry/design-system-injector/",
-      "classification": "local",
-      "updatePolicy": "none",
-      "status": "local-pipeline-skill-unverified-upstream",
-      "evidence": [
-        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
-        "No explicit upstream repository URL was found in inspected local files.",
-        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
-      ],
-      "verificationPath": [
-        "gh search code '\"name: design-system-injector\" filename:SKILL.md' --limit 10",
-        "Search one unique body phrase from SKILL.md via web/GitHub.",
-        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
-      ],
-      "notes": "Local/manual until an original upstream repository is proven."
-    },
-    {
-      "name": "disease-market-sizing-html-template",
-      "path": "skills/10-business-industry/disease-market-sizing-html-template/",
-      "classification": "local",
-      "updatePolicy": "none",
-      "status": "local-pipeline-skill-unverified-upstream",
-      "evidence": [
-        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
-        "No explicit upstream repository URL was found in inspected local files.",
-        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
-      ],
-      "verificationPath": [
-        "gh search code '\"name: disease-market-sizing-html-template\" filename:SKILL.md' --limit 10",
-        "Search one unique body phrase from SKILL.md via web/GitHub.",
-        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
-      ],
-      "notes": "Local/manual until an original upstream repository is proven."
-    },
-    {
-      "name": "disease-market-sizing-orchestration",
-      "path": "skills/10-business-industry/disease-market-sizing-orchestration/",
-      "classification": "local",
-      "updatePolicy": "none",
-      "status": "local-pipeline-skill-unverified-upstream",
-      "evidence": [
-        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
-        "No explicit upstream repository URL was found in inspected local files.",
-        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
-      ],
-      "verificationPath": [
-        "gh search code '\"name: disease-market-sizing-orchestration\" filename:SKILL.md' --limit 10",
-        "Search one unique body phrase from SKILL.md via web/GitHub.",
-        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
-      ],
-      "notes": "Local/manual until an original upstream repository is proven."
-    },
-    {
-      "name": "disease-stratifier",
-      "path": "skills/10-business-industry/disease-stratifier/",
-      "classification": "local",
-      "updatePolicy": "none",
-      "status": "local-pipeline-skill-unverified-upstream",
-      "evidence": [
-        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
-        "No explicit upstream repository URL was found in inspected local files.",
-        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
-      ],
-      "verificationPath": [
-        "gh search code '\"name: disease-stratifier\" filename:SKILL.md' --limit 10",
-        "Search one unique body phrase from SKILL.md via web/GitHub.",
-        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
-      ],
-      "notes": "Local/manual until an original upstream repository is proven."
-    },
-    {
-      "name": "drug-citation-verifier",
-      "path": "skills/10-business-industry/drug-citation-verifier/",
-      "classification": "local",
-      "updatePolicy": "none",
-      "status": "local-pipeline-skill-unverified-upstream",
-      "evidence": [
-        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
-        "No explicit upstream repository URL was found in inspected local files.",
-        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
-      ],
-      "verificationPath": [
-        "gh search code '\"name: drug-citation-verifier\" filename:SKILL.md' --limit 10",
-        "Search one unique body phrase from SKILL.md via web/GitHub.",
-        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
-      ],
-      "notes": "Local/manual until an original upstream repository is proven."
     },
     {
       "name": "healthcare-cdss-patterns",
@@ -1198,42 +750,6 @@
         "Compare normalized file hashes before any mirror or mapped update."
       ],
       "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit."
-    },
-    {
-      "name": "ifi-market-sizing-skill",
-      "path": "skills/10-business-industry/ifi-market-sizing-skill/",
-      "classification": "local",
-      "updatePolicy": "none",
-      "status": "local-pipeline-skill-unverified-upstream",
-      "evidence": [
-        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
-        "No explicit upstream repository URL was found in inspected local files.",
-        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
-      ],
-      "verificationPath": [
-        "gh search code '\"name: ifi-market-sizing-skill\" filename:SKILL.md' --limit 10",
-        "Search one unique body phrase from SKILL.md via web/GitHub.",
-        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
-      ],
-      "notes": "Local/manual until an original upstream repository is proven."
-    },
-    {
-      "name": "session-resume",
-      "path": "skills/10-business-industry/session-resume/",
-      "classification": "local",
-      "updatePolicy": "none",
-      "status": "local-pipeline-skill-unverified-upstream",
-      "evidence": [
-        "Skill body participates in the local medical market-sizing or Cite-or-Block pipeline.",
-        "No explicit upstream repository URL was found in inspected local files.",
-        "GitHub code search was rate-limited during broad exact-name discovery; no open-source classification is claimed from incomplete evidence."
-      ],
-      "verificationPath": [
-        "gh search code '\"name: session-resume\" filename:SKILL.md' --limit 10",
-        "Search one unique body phrase from SKILL.md via web/GitHub.",
-        "If a repository is found, compare the entire local directory tree and record commit before changing classification."
-      ],
-      "notes": "Local/manual until an original upstream repository is proven."
     },
     {
       "name": "aliyun-openapi-mcp-ops",
