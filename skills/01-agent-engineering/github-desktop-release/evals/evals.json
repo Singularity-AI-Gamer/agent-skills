@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "cases": [
+    {
+      "prompt": "修改 Electron preload 和 IPC 白名单，并在本地运行测试。",
+      "expected": { "invoke": false, "reason": "local Electron implementation without GitHub Actions release work" }
+    },
+    {
+      "prompt": "用 GitHub Actions 为这个 Electron 项目构建 Windows NSIS 和 macOS DMG，并从同一 SHA 发布 Release。",
+      "expected": { "invoke": true, "alsoInvoke": ["electron-development"], "branches": ["windows", "promotion", "readback"], "macosOwner": "electron-development" }
+    },
+    {
+      "prompt": "GitHub Actions 的 Windows qualification 已成功，但 promotion 在 Linux 上比较 pnpm-lock.yaml raw hash 失败，判断是否需要重建。",
+      "expected": { "invoke": true, "classification": "gate-false-positive", "rebuildByDefault": false }
+    },
+    {
+      "prompt": "帮我在 GitLab CI 构建 Windows 安装包。",
+      "expected": { "invoke": false, "reason": "non-GitHub CI" }
+    },
+    {
+      "prompt": "Actions 是绿色的，确认 GitHub Release 是否真的公开并包含正确资产。",
+      "expected": { "invoke": true, "branches": ["authoritative-readback"] }
+    },
+    {
+      "prompt": "第三次重跑 GitHub Actions Windows 云端门禁，前两次失败原因仍不清楚。",
+      "expected": { "invoke": true, "mustStop": true, "reason": "two consecutive failures in one stage" }
+    },
+    {
+      "prompt": "把已有 Windows qualification artifact 原字节 promotion 到 GitHub Release。",
+      "expected": { "invoke": true, "branches": ["promotion", "readback"], "rebuildByDefault": false }
+    },
+    {
+      "prompt": "GitHub Actions 发布 Tauri Windows MSI。",
+      "expected": { "invoke": true, "branches": ["windows", "promotion", "readback"] }
+    },
+    {
+      "prompt": "排查 macOS ad-hoc 签名为什么在 DMG qualification 阶段失败。",
+      "expected": { "invoke": false, "owner": "electron-development", "reason": "macOS build and qualification diagnostics are outside this Skill" }
+    },
+    {
+      "prompt": "已 qualification 的 macOS artifact 被 GitHub promotion 门禁拒绝，判断是否需要重建。",
+      "expected": { "invoke": true, "branches": ["promotion-failure-classification"], "rebuildByDefault": false }
+    },
+    {
+      "prompt": "本地 electron-builder 打 Windows 目录包，不上云。",
+      "expected": { "invoke": false, "reason": "local Electron packaging belongs to electron-development" }
+    },
+    {
+      "prompt": "实现 electron-updater 检查更新 UI。",
+      "expected": { "invoke": false, "reason": "Electron application implementation belongs to electron-development" }
+    },
+    {
+      "prompt": "GitHub Actions 构建 Docker 镜像并发布到 GHCR。",
+      "expected": { "invoke": false, "reason": "container delivery is outside desktop installer releases" }
+    },
+    {
+      "prompt": "README 增加最新版安装包下载链接。",
+      "expected": { "invoke": false, "reason": "README-only change" }
+    },
+    {
+      "prompt": "只修改 electron-builder.yml 的 NSIS target，然后在本地验证。",
+      "expected": { "invoke": false, "reason": "local Electron packaging configuration belongs to electron-development until GitHub qualification or publication is requested" }
+    },
+    {
+      "prompt": "修改 Electron 的 NSIS 配置，并更新 GitHub Actions 做 Windows qualification 后发布 Release。",
+      "expected": { "invoke": true, "alsoInvoke": ["electron-development"], "branches": ["windows", "promotion", "readback"] }
+    },
+    {
+      "prompt": "只用 GitHub Actions 从同一 SHA 构建并发布 macOS DMG。",
+      "expected": { "invoke": true, "alsoInvoke": ["electron-development"], "branches": ["promotion", "readback"], "macosOwner": "electron-development" }
+    },
+    {
+      "prompt": "GitHub Actions 构建并发布 PyInstaller Windows EXE 安装器。",
+      "expected": { "invoke": true, "branches": ["windows", "promotion", "readback"] }
+    },
+    {
+      "prompt": "GitHub Actions 构建并发布 .NET MSIX 安装包。",
+      "expected": { "invoke": true, "branches": ["windows", "promotion", "readback"] }
+    },
+    {
+      "prompt": "GitHub Release 的 draft 已存在且部分资产已上传，安全恢复 promotion 并权威读回。",
+      "expected": { "invoke": true, "branches": ["safe-resume", "promotion", "readback"] }
+    }
+  ]
+}

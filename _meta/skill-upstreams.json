@@ -919,6 +919,47 @@
         "Verify the installed folder hash manifest matches the frozen evaluated candidate before release."
       ],
       "notes": "Self-maintained shared skill; external automatic updates disabled."
+    },
+    {
+      "name": "electron-development",
+      "path": "skills/03-frameworks/electron-development/",
+      "classification": "open-source",
+      "upstream": {
+        "url": "https://github.com/sickn33/agentic-awesome-skills",
+        "path": "skills/electron-development/",
+        "ref": "main"
+      },
+      "lastChecked": {
+        "date": "2026-08-06",
+        "commit": "fb4655797cd8450878d7c870a81321fa5106feda"
+      },
+      "updatePolicy": "mapped",
+      "status": "locally-adapted-platform-boundaries",
+      "evidence": [
+        "The original global installation was verified as an exact upstream copy at the recorded commit.",
+        "Owner-directed edits define non-overlapping GitHub Actions ownership: this Skill builds and qualifies macOS Electron installers, while github-desktop-release owns Windows qualification and shared promotion/publication."
+      ],
+      "verificationPath": [
+        "Compare the complete upstream directory before adopting any future upstream change.",
+        "Preserve the platform-ownership routing and run skill-creator validation plus the bundled routing evals before publishing an update."
+      ],
+      "notes": "Derived shared skill with an upstream provenance record. Do not mirror automatically because the local platform-routing adaptation is intentional."
+    },
+    {
+      "name": "github-desktop-release",
+      "path": "skills/01-agent-engineering/github-desktop-release/",
+      "classification": "self",
+      "updatePolicy": "none",
+      "status": "self-maintained-desktop-release-orchestrator",
+      "evidence": [
+        "Skill was created from owner-directed GitHub Actions desktop release qualification and promotion lessons.",
+        "Owner-directed routing confines Windows qualification and shared GitHub Release promotion/publication to this Skill; Electron macOS build and qualification remain owned by electron-development."
+      ],
+      "verificationPath": [
+        "Run skill-creator quick_validate.py against the complete skill directory.",
+        "Parse bundled evals and run the promotion script self-tests before publishing future changes."
+      ],
+      "notes": "Self-maintained shared skill. External automatic updates are disabled."
     }
   ],
   "alternateCandidates": [

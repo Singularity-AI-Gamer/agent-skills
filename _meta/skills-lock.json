@@ -1,11 +1,11 @@
 {
   "version": "2.0",
-  "generated_at": "2026-08-11T17:26:34+08:00",
-  "note": "Rebuilt indexes from repository SKILL.md files. Total: 34 shared + 8 projects = 42 total",
+  "generated_at": "2026-08-14T00:19:52+08:00",
+  "note": "Rebuilt indexes from repository SKILL.md files. Total: 36 shared + 8 projects = 44 total",
   "counts": {
-    "shared": 34,
+    "shared": 36,
     "projects": 8,
-    "total": 42
+    "total": 44
   },
   "shared": [
     {
@@ -19,6 +19,12 @@
       "domain": "01-agent-engineering",
       "path": "skills/01-agent-engineering/find-skills/",
       "descriptionZh": "自动发现与推荐可用 Agent 技能，回答\"有没有能做 X 的技能\"。"
+    },
+    {
+      "name": "github-desktop-release",
+      "domain": "01-agent-engineering",
+      "path": "skills/01-agent-engineering/github-desktop-release/",
+      "descriptionZh": "GitHub Actions 验收 Windows 安装包，并编排跨平台安装包的提升、发布与权威回读。"
     },
     {
       "name": "gpt56-sol-pro-consult",
@@ -56,6 +62,12 @@
       "path": "skills/02-coding-languages/swift/liquid-glass-design/",
       "subdomain": "swift",
       "descriptionZh": "iOS 26 Liquid Glass 设计系统：SwiftUI/UIKit/WidgetKit 的玻璃材质与交互。"
+    },
+    {
+      "name": "electron-development",
+      "domain": "03-frameworks",
+      "path": "skills/03-frameworks/electron-development/",
+      "descriptionZh": "开发 Electron 应用、本地打包，并在 GitHub Actions 构建和验收 macOS 安装包。"
     },
     {
       "name": "frontend-design",

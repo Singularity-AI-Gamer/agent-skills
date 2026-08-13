@@ -1,6 +1,6 @@
 # 按技能名 A-Z 索引
 
-共 42 个技能（34 个共享 + 8 个项目私有）。项目私有技能以 *(项目)* 标注。
+共 44 个技能（36 个共享 + 8 个项目私有）。项目私有技能以 *(项目)* 标注。
 
 | # | 技能名 | 路径 | 中文简介 |
 |---|---|---|---|
@@ -13,36 +13,38 @@
 | 7 | **data-scraper-agent** | [skills/06-data-search/data-scraper-agent/](../skills/06-data-search/data-scraper-agent/) | 构建全自动 AI 数据采集 Agent：按计划抓取公开源并用 LLM 富化入库。 |
 | 8 | **deep-research** | [skills/01-agent-engineering/deep-research/](../skills/01-agent-engineering/deep-research/) | 多源深度研究，使用 firecrawl/exa 搜索并综合发现。 |
 | 9 | **docx** | [skills/07-media-content/docx/](../skills/07-media-content/docx/) | 全面处理 .docx：创建、编辑、修订跟踪、评论、格式保留与文本提取。 |
-| 10 | **email-batch-test** *(项目)* | [projects/codex-invoice/email-batch-test/](../projects/codex-invoice/email-batch-test/) | 跑批测试标准与双邮箱回归门禁：P0/P1/P2 标准与保护区改动的双邮箱验证。 |
-| 11 | **feishu-automation** *(项目)* | [projects/ai-seed-project/feishu-automation/](../projects/ai-seed-project/feishu-automation/) | 飞书自动化能力，优先用官方 OpenAPI MCP/CLI，不把后台配置动作误判为 MCP 能力。 |
-| 12 | **feishu-card-ws** *(项目)* | [projects/ai-seed-project-phase-one-feishu/feishu-card-ws/](../projects/ai-seed-project-phase-one-feishu/feishu-card-ws/) | 飞书交互式卡片在 WebSocket 长连接模式下的配置指南与回调处理。 |
-| 13 | **find-skills** | [skills/01-agent-engineering/find-skills/](../skills/01-agent-engineering/find-skills/) | 自动发现与推荐可用 Agent 技能，回答"有没有能做 X 的技能"。 |
-| 14 | **frontend-design** | [skills/03-frameworks/frontend-design/](../skills/03-frameworks/frontend-design/) | 创建具有高设计质量的生产级前端界面。 |
-| 15 | **github-readme-visuals** | [skills/07-media-content/github-readme-visuals/](../skills/07-media-content/github-readme-visuals/) | 为 GitHub 仓库创建或更新产品主视觉、完整软件界面截图及中英文 README 图片区，并支持按参考图进行可验证的几何复刻。 |
-| 16 | **gpt56-sol-pro-consult** | [skills/01-agent-engineering/gpt56-sol-pro-consult/](../skills/01-agent-engineering/gpt56-sol-pro-consult/) | 仅当用户点名或明确要求使用 Sol Pro 时调用 Codex 侧边 Browser。 |
-| 17 | **healthcare-cdss-patterns** | [skills/10-business-industry/healthcare-cdss-patterns/](../skills/10-business-industry/healthcare-cdss-patterns/) | 临床决策支持系统开发：药物互作、剂量校验、临床评分、告警分级与 EMR 集成。 |
-| 18 | **healthcare-emr-patterns** | [skills/10-business-industry/healthcare-emr-patterns/](../skills/10-business-industry/healthcare-emr-patterns/) | 医疗 EMR/EHR 开发模式：临床安全、就诊流程、处方生成、CDSS 集成、无障碍 UI。 |
-| 19 | **healthcare-eval-harness** | [skills/10-business-industry/healthcare-eval-harness/](../skills/10-business-industry/healthcare-eval-harness/) | 医疗发布的病人安全评测 harness：CDSS、PHI、临床流程与集成合规，失败阻断上线。 |
-| 20 | **healthcare-phi-compliance** | [skills/10-business-industry/healthcare-phi-compliance/](../skills/10-business-industry/healthcare-phi-compliance/) | 医疗应用 PHI/PII 合规：数据分级、访问控制、审计、加密、常见泄漏路径。 |
-| 21 | **html-design-polish** | [skills/07-media-content/html-design-polish/](../skills/07-media-content/html-design-polish/) | 网页需要产品清晰度、信息层级、响应式或视觉系统美化、重设计或设计审计时使用。 |
-| 22 | **imagegen** | [skills/07-media-content/imagegen/](../skills/07-media-content/imagegen/) | 生成或编辑光栅图像（照片、插画、纹理、UI 模型等）。 |
-| 23 | **impeccable** | [skills/07-media-content/impeccable/](../skills/07-media-content/impeccable/) | 设计、重设计、审计或精修生产级前端界面，涵盖信息架构、视觉层级、响应式、无障碍、动效与设计系统时使用。 |
-| 24 | **jianying-editor** | [skills/07-media-content/jianying-editor/](../skills/07-media-content/jianying-editor/) | 剪映 AI 自动剪辑高级封装 API（JyWrapper）：录屏、素材、字幕、Web 动效。 |
-| 25 | **liquid-glass-design** | [skills/02-coding-languages/swift/liquid-glass-design/](../skills/02-coding-languages/swift/liquid-glass-design/) | iOS 26 Liquid Glass 设计系统：SwiftUI/UIKit/WidgetKit 的玻璃材质与交互。 |
-| 26 | **make-interfaces-feel-better** | [skills/07-media-content/make-interfaces-feel-better/](../skills/07-media-content/make-interfaces-feel-better/) | 构建或审查 UI 细节、动画、排版、阴影、圆角、光学对齐和微交互，让界面更精致自然时使用。 |
-| 27 | **netlify-cli** | [skills/03-frameworks/netlify-cli/](../skills/03-frameworks/netlify-cli/) | 使用 Netlify CLI 完成安装、认证、站点关联、本地开发、环境变量管理与部署。 |
-| 28 | **pdf** | [skills/07-media-content/pdf/](../skills/07-media-content/pdf/) | "Use when tasks involve reading, creating, or reviewing PDF files where rendering and layout matter; prefer visual checks by rendering pages (Poppler) and use Python tools such as `reportlab`, `pdfplumber`, and `pypdf` for generation and extraction." |
-| 29 | **ppt-nano** | [skills/07-media-content/ppt-nano/](../skills/07-media-content/ppt-nano/) | 白板板书风格 PPT 生成，适合教学、汇报、头脑风暴。 |
-| 30 | **pptx** | [skills/07-media-content/pptx/](../skills/07-media-content/pptx/) | 演示文稿 .pptx 的创建、编辑、布局、评论与演讲者备注。 |
-| 31 | **qq-email-ground-truth** *(项目)* | [projects/codex-invoice/qq-email-ground-truth/](../projects/codex-invoice/qq-email-ground-truth/) | 构建/重建/审计/比对 QQ 邮箱发票真值集，验证跑批输出。 |
-| 32 | **remotion-video-creation** | [skills/07-media-content/remotion-video-creation/](../skills/07-media-content/remotion-video-creation/) | Remotion 在 React 中做视频创作的 29 条领域规则（3D、动画、字幕、过渡）。 |
-| 33 | **santa-method** | [skills/01-agent-engineering/santa-method/](../skills/01-agent-engineering/santa-method/) | 多 Agent 对抗验证收敛循环，两个独立审查都通过后才出交付。 |
-| 34 | **skill-creator** | [skills/01-agent-engineering/skill-creator/](../skills/01-agent-engineering/skill-creator/) | 创建、修改和优化 skill，并可跑 eval 衡量触发准确率与性能。 |
-| 35 | **skill-lifecycle-manager** | [skills/01-agent-engineering/skill-lifecycle-manager/](../skills/01-agent-engineering/skill-lifecycle-manager/) | 管理本地/全局/项目级 skill 与 Skill-hub 生命周期：搜索、推荐、安装、升级、同步、合并、清理、来源校验、质量审计和发布。 |
-| 36 | **ui-ux-pro-max** | [skills/07-media-content/ui-ux-pro-max/](../skills/07-media-content/ui-ux-pro-max/) | 设计、构建或审查 Web/移动端 UI 时，检索风格、配色、字体、布局、UX、动效、图表及多技术栈实现建议。 |
-| 37 | **wechat-article** | [skills/07-media-content/wechat-article/](../skills/07-media-content/wechat-article/) | 傅盛风格的公众号文章创作：对话式、故事驱动、有观点。 |
-| 38 | **xhs-pharma-social-listening** | [skills/10-business-industry/xhs-pharma-social-listening/](../skills/10-business-industry/xhs-pharma-social-listening/) | 面向外资药企员工痛点的小红书证据化舆情研究：采集并分析药企、岗位、合规、医学事务与 AI 相关笔记和评论，按去重笔记加去重评论计算独立证据，并处理 MediaCrawler CAPTCHA/461 与 OpenCLI 回退。 |
-| 39 | **xlsx** | [skills/07-media-content/xlsx/](../skills/07-media-content/xlsx/) | 电子表格 .xlsx/.csv 等创建、编辑、公式、格式、数据分析与可视化。 |
-| 40 | **yq-article-style-imitation** | [skills/08-writing-marketing/yq-article-style-imitation/](../skills/08-writing-marketing/yq-article-style-imitation/) | 任意作家文章风格仿写：验证作者原文、拆解表达 DNA、生成并修复公众号/小红书稿。 |
-| 41 | **yq-editorial-presentation-html** | [skills/07-media-content/yq-editorial-presentation-html/](../skills/07-media-content/yq-editorial-presentation-html/) | Anthropic 暖色编辑设计语言，用于演示/case sharing/战略汇报。 |
-| 42 | **yq-windows-trash-cleaner** | [skills/01-agent-engineering/yq-windows-trash-cleaner/](../skills/01-agent-engineering/yq-windows-trash-cleaner/) | Windows C盘、项目垃圾、Docker/WSL、Git worktree、CodeGraph、Agent 会话或内存异常需要安全审计、清理和验证时使用。 |
+| 10 | **electron-development** | [skills/03-frameworks/electron-development/](../skills/03-frameworks/electron-development/) | 开发 Electron 应用、本地打包，并在 GitHub Actions 构建和验收 macOS 安装包。 |
+| 11 | **email-batch-test** *(项目)* | [projects/codex-invoice/email-batch-test/](../projects/codex-invoice/email-batch-test/) | 跑批测试标准与双邮箱回归门禁：P0/P1/P2 标准与保护区改动的双邮箱验证。 |
+| 12 | **feishu-automation** *(项目)* | [projects/ai-seed-project/feishu-automation/](../projects/ai-seed-project/feishu-automation/) | 飞书自动化能力，优先用官方 OpenAPI MCP/CLI，不把后台配置动作误判为 MCP 能力。 |
+| 13 | **feishu-card-ws** *(项目)* | [projects/ai-seed-project-phase-one-feishu/feishu-card-ws/](../projects/ai-seed-project-phase-one-feishu/feishu-card-ws/) | 飞书交互式卡片在 WebSocket 长连接模式下的配置指南与回调处理。 |
+| 14 | **find-skills** | [skills/01-agent-engineering/find-skills/](../skills/01-agent-engineering/find-skills/) | 自动发现与推荐可用 Agent 技能，回答"有没有能做 X 的技能"。 |
+| 15 | **frontend-design** | [skills/03-frameworks/frontend-design/](../skills/03-frameworks/frontend-design/) | 创建具有高设计质量的生产级前端界面。 |
+| 16 | **github-desktop-release** | [skills/01-agent-engineering/github-desktop-release/](../skills/01-agent-engineering/github-desktop-release/) | GitHub Actions 验收 Windows 安装包，并编排跨平台安装包的提升、发布与权威回读。 |
+| 17 | **github-readme-visuals** | [skills/07-media-content/github-readme-visuals/](../skills/07-media-content/github-readme-visuals/) | 为 GitHub 仓库创建或更新产品主视觉、完整软件界面截图及中英文 README 图片区，并支持按参考图进行可验证的几何复刻。 |
+| 18 | **gpt56-sol-pro-consult** | [skills/01-agent-engineering/gpt56-sol-pro-consult/](../skills/01-agent-engineering/gpt56-sol-pro-consult/) | 仅当用户点名或明确要求使用 Sol Pro 时调用 Codex 侧边 Browser。 |
+| 19 | **healthcare-cdss-patterns** | [skills/10-business-industry/healthcare-cdss-patterns/](../skills/10-business-industry/healthcare-cdss-patterns/) | 临床决策支持系统开发：药物互作、剂量校验、临床评分、告警分级与 EMR 集成。 |
+| 20 | **healthcare-emr-patterns** | [skills/10-business-industry/healthcare-emr-patterns/](../skills/10-business-industry/healthcare-emr-patterns/) | 医疗 EMR/EHR 开发模式：临床安全、就诊流程、处方生成、CDSS 集成、无障碍 UI。 |
+| 21 | **healthcare-eval-harness** | [skills/10-business-industry/healthcare-eval-harness/](../skills/10-business-industry/healthcare-eval-harness/) | 医疗发布的病人安全评测 harness：CDSS、PHI、临床流程与集成合规，失败阻断上线。 |
+| 22 | **healthcare-phi-compliance** | [skills/10-business-industry/healthcare-phi-compliance/](../skills/10-business-industry/healthcare-phi-compliance/) | 医疗应用 PHI/PII 合规：数据分级、访问控制、审计、加密、常见泄漏路径。 |
+| 23 | **html-design-polish** | [skills/07-media-content/html-design-polish/](../skills/07-media-content/html-design-polish/) | 网页需要产品清晰度、信息层级、响应式或视觉系统美化、重设计或设计审计时使用。 |
+| 24 | **imagegen** | [skills/07-media-content/imagegen/](../skills/07-media-content/imagegen/) | 生成或编辑光栅图像（照片、插画、纹理、UI 模型等）。 |
+| 25 | **impeccable** | [skills/07-media-content/impeccable/](../skills/07-media-content/impeccable/) | 设计、重设计、审计或精修生产级前端界面，涵盖信息架构、视觉层级、响应式、无障碍、动效与设计系统时使用。 |
+| 26 | **jianying-editor** | [skills/07-media-content/jianying-editor/](../skills/07-media-content/jianying-editor/) | 剪映 AI 自动剪辑高级封装 API（JyWrapper）：录屏、素材、字幕、Web 动效。 |
+| 27 | **liquid-glass-design** | [skills/02-coding-languages/swift/liquid-glass-design/](../skills/02-coding-languages/swift/liquid-glass-design/) | iOS 26 Liquid Glass 设计系统：SwiftUI/UIKit/WidgetKit 的玻璃材质与交互。 |
+| 28 | **make-interfaces-feel-better** | [skills/07-media-content/make-interfaces-feel-better/](../skills/07-media-content/make-interfaces-feel-better/) | 构建或审查 UI 细节、动画、排版、阴影、圆角、光学对齐和微交互，让界面更精致自然时使用。 |
+| 29 | **netlify-cli** | [skills/03-frameworks/netlify-cli/](../skills/03-frameworks/netlify-cli/) | 使用 Netlify CLI 完成安装、认证、站点关联、本地开发、环境变量管理与部署。 |
+| 30 | **pdf** | [skills/07-media-content/pdf/](../skills/07-media-content/pdf/) | "Use when tasks involve reading, creating, or reviewing PDF files where rendering and layout matter; prefer visual checks by rendering pages (Poppler) and use Python tools such as `reportlab`, `pdfplumber`, and `pypdf` for generation and extraction." |
+| 31 | **ppt-nano** | [skills/07-media-content/ppt-nano/](../skills/07-media-content/ppt-nano/) | 白板板书风格 PPT 生成，适合教学、汇报、头脑风暴。 |
+| 32 | **pptx** | [skills/07-media-content/pptx/](../skills/07-media-content/pptx/) | 演示文稿 .pptx 的创建、编辑、布局、评论与演讲者备注。 |
+| 33 | **qq-email-ground-truth** *(项目)* | [projects/codex-invoice/qq-email-ground-truth/](../projects/codex-invoice/qq-email-ground-truth/) | 构建/重建/审计/比对 QQ 邮箱发票真值集，验证跑批输出。 |
+| 34 | **remotion-video-creation** | [skills/07-media-content/remotion-video-creation/](../skills/07-media-content/remotion-video-creation/) | Remotion 在 React 中做视频创作的 29 条领域规则（3D、动画、字幕、过渡）。 |
+| 35 | **santa-method** | [skills/01-agent-engineering/santa-method/](../skills/01-agent-engineering/santa-method/) | 多 Agent 对抗验证收敛循环，两个独立审查都通过后才出交付。 |
+| 36 | **skill-creator** | [skills/01-agent-engineering/skill-creator/](../skills/01-agent-engineering/skill-creator/) | 创建、修改和优化 skill，并可跑 eval 衡量触发准确率与性能。 |
+| 37 | **skill-lifecycle-manager** | [skills/01-agent-engineering/skill-lifecycle-manager/](../skills/01-agent-engineering/skill-lifecycle-manager/) | 管理本地/全局/项目级 skill 与 Skill-hub 生命周期：搜索、推荐、安装、升级、同步、合并、清理、来源校验、质量审计和发布。 |
+| 38 | **ui-ux-pro-max** | [skills/07-media-content/ui-ux-pro-max/](../skills/07-media-content/ui-ux-pro-max/) | 设计、构建或审查 Web/移动端 UI 时，检索风格、配色、字体、布局、UX、动效、图表及多技术栈实现建议。 |
+| 39 | **wechat-article** | [skills/07-media-content/wechat-article/](../skills/07-media-content/wechat-article/) | 傅盛风格的公众号文章创作：对话式、故事驱动、有观点。 |
+| 40 | **xhs-pharma-social-listening** | [skills/10-business-industry/xhs-pharma-social-listening/](../skills/10-business-industry/xhs-pharma-social-listening/) | 面向外资药企员工痛点的小红书证据化舆情研究：采集并分析药企、岗位、合规、医学事务与 AI 相关笔记和评论，按去重笔记加去重评论计算独立证据，并处理 MediaCrawler CAPTCHA/461 与 OpenCLI 回退。 |
+| 41 | **xlsx** | [skills/07-media-content/xlsx/](../skills/07-media-content/xlsx/) | 电子表格 .xlsx/.csv 等创建、编辑、公式、格式、数据分析与可视化。 |
+| 42 | **yq-article-style-imitation** | [skills/08-writing-marketing/yq-article-style-imitation/](../skills/08-writing-marketing/yq-article-style-imitation/) | 任意作家文章风格仿写：验证作者原文、拆解表达 DNA、生成并修复公众号/小红书稿。 |
+| 43 | **yq-editorial-presentation-html** | [skills/07-media-content/yq-editorial-presentation-html/](../skills/07-media-content/yq-editorial-presentation-html/) | Anthropic 暖色编辑设计语言，用于演示/case sharing/战略汇报。 |
+| 44 | **yq-windows-trash-cleaner** | [skills/01-agent-engineering/yq-windows-trash-cleaner/](../skills/01-agent-engineering/yq-windows-trash-cleaner/) | Windows C盘、项目垃圾、Docker/WSL、Git worktree、CodeGraph、Agent 会话或内存异常需要安全审计、清理和验证时使用。 |

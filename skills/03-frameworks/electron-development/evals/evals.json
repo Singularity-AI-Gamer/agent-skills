@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "cases": [
+    {
+      "prompt": "用 GitHub Actions 为 Electron 项目构建 macOS ARM64 DMG，并挂载后做 packaged smoke。",
+      "expected": { "invoke": true, "branches": ["macos-build", "mounted-smoke", "qualification"] }
+    },
+    {
+      "prompt": "用 GitHub Actions 构建 Windows NSIS，并验证安装、升级和卸载。",
+      "expected": { "invoke": false, "owner": "github-desktop-release", "reason": "Windows GitHub Actions qualification is outside this Skill" }
+    },
+    {
+      "prompt": "从同一 SHA 云端构建 Windows NSIS 和 macOS DMG，随后发布 GitHub Release。",
+      "expected": { "invoke": true, "alsoInvoke": ["github-desktop-release"], "branches": ["macos-build", "macos-qualification"], "windowsAndReleaseOwner": "github-desktop-release" }
+    },
+    {
+      "prompt": "macOS DMG 已 qualification 成功，把 Win/mac 产物 promotion 到公开 Release 并权威回读。",
+      "expected": { "invoke": false, "owner": "github-desktop-release", "reason": "promotion and publication are outside this Skill" }
+    },
+    {
+      "prompt": "修改 preload IPC 白名单并在本地运行 Electron 测试。",
+      "expected": { "invoke": true, "branches": ["electron-implementation", "local-test"] }
+    }
+  ]
+}
