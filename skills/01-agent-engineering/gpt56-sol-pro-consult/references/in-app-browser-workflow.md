@@ -54,9 +54,7 @@ UI 文案或属性可能更新，因此不要依赖写死的旧 test id。无法
 - attachment cards、等待或失败的 file chooser、pending upload 都必须为空；
 - 记录观测时间、tab 绑定和 `composer_text_sha256`（空字符串的 SHA-256）。
 
-若旧草稿或附件在此时恢复，dispatch 保持 `NOT_SENT`。不要写入本次 packet、不要上传、不要点击 Send，也不要用 Temporary Chat 规避。关闭本 task 新建的污染 tab，最多新建一个 tab 重试；若第二个 tab 也在模型菜单交互后恢复旧内容，记为 `STALE_COMPOSER_BLOCKER`，直接进入 finalize。
-
-除非用户明确要求清理残留，否则不要清空旧内容。获得清理授权时，先记录非敏感前缀和内容 hash；清空后必须再次打开/关闭模型菜单并重新执行本门。旧内容再次出现说明仍有其他会话或全局状态在恢复它，清理未成功。
+若仅有旧 composer 草稿恢复，且该 tab 可证明由当前 task 新建并仍是非 Project 专用页，dispatch 保持 `NOT_SENT`：先记录旧内容的非敏感前缀和内容 hash，再直接清空 composer。随后再次打开/关闭模型菜单并重新执行本门；复查通过才可写入本次 packet。草稿再次出现，或同时发现 Project、附件或上传任务时，记为 `STALE_COMPOSER_BLOCKER`，不发送并 finalize。不要清空、编辑或关闭无法证明属于当前 task 的 tab，也不要用 Temporary Chat 规避。
 
 ## 3. 上传所需文件
 

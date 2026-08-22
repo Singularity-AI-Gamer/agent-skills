@@ -103,7 +103,7 @@ python <skill-dir>/scripts/validate_session_evidence.py <iab-consultation-eviden
 3. 按 [上下文包模板](references/context-packet-template.md) 生成 packet；普通 Review 保持紧凑，复杂架构或 Orchestrator 任务才使用更完整材料。
 4. 选择最小充分证据集。结构、格式、源码或日志细节会影响结论时上传真实附件。
 5. 运行安全扫描，再按 [侧边 Browser 工作流](references/in-app-browser-workflow.md) 在主 task 的真实 `iab` 中新建专用 tab。先确认处于非 Project 的新对话，composer 为空且没有附件、草稿或上传任务。
-6. 打开或确认模型菜单后、写入或上传本次材料前，重新获取 composer 并执行延迟净空门。若旧草稿、Project 状态、附件或上传任务此时恢复，立即停止本轮，不发送、不上传、不在污染页修补；关闭本 task 新建的污染 tab后最多重试一个全新 tab。若再次出现，标记 `STALE_COMPOSER_BLOCKER` 并进入 finalize。Temporary Chat 不能作为隔离回退。
+6. 打开或确认模型菜单后、写入或上传本次材料前，重新获取 composer 并执行延迟净空门。发现残留草稿时，按[侧边 Browser 工作流](references/in-app-browser-workflow.md)的延迟净空门清理规则处理；Project、附件或上传任务仍是 blocker。Temporary Chat 不能作为隔离回退。
 7. 延迟净空门通过后，在发送前把当前 Browser session、tab、模型信号、composer prefix、唯一 sentinel、内容 hash、全部附件名和净空观测写入同一 ledger；只发送一次。
 8. 记录 dispatch state 和提交后证据，等待同一对话完整生成。仍在生成、只有开场白或没有 assistant sentinel 都不算完成。
 9. 抽取同一 tab 的最新完整 assistant turn，验证 sentinel，记录 response 证据，并由 Codex 对照本地证据给出 Adopt / Reject / Modify 决策；此时不要先运行最终 validator。
@@ -174,9 +174,8 @@ python <skill-dir>/scripts/validate_session_evidence.py <iab-consultation-eviden
 - **未登录**：请用户在 Codex 侧边 Browser 登录 ChatGPT，完成后继续同一任务。
 - **Pro 不可用或无法确认**：停止，不静默选择其他模型。
 - **附件失败**：重新获取当前 composer 与文件选择器；小文件可粘贴，多个文本文件可打成一个 Markdown bundle。没有可见附件证据就不得声称上传成功。
-- **发现其他 task 残留**：不要复用或清空后继续。关闭本 task 新建的污染 tab，另建专用 tab，从 ChatGPT 根页面开始，并在模型菜单交互后重新执行延迟净空门；最多重试一次。再次恢复相同或其他旧内容时标记 `STALE_COMPOSER_BLOCKER`，不发送并 finalize。不要关闭、编辑或清空无法证明属于本 task 的用户 tab。
+- **延迟净空门发现残留草稿**：仅当 tab 可证明由当前 task 新建、且仍是非 Project 专用页时，记录草稿的非敏感前缀和内容 hash 后直接清空 composer；再触发一次模型菜单交互并复查。草稿复现，或同时发现 Project、附件或上传任务时，标记 `STALE_COMPOSER_BLOCKER`，不发送并 finalize。不要关闭、编辑或清空无法证明属于本 task 的用户 tab。
 - **Temporary Chat**：实测中全局或其他任务草稿可能继续恢复到 Temporary Chat；不得把它当作净空或隔离证明。
-- **用户明确要求清理残留**：清理前记录旧内容的非敏感指纹和可识别前缀；清空后必须再触发一次模型菜单交互并复查。旧内容再次出现即判定清理未成功，停止发送并报告仍有其他会话或全局状态在恢复它。
 - **composer 为空**：重新获取可编辑区并验证 rendered text；未确认 prefix 和 sentinel 时不得发送。
 - **发送结果不明**：恢复现有对话并检查用户 turn 或生成状态；不要创建新对话或重复发送。
 - **仍在生成**：继续等待同一对话，不刷新、不发“继续”。
