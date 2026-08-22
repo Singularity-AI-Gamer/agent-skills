@@ -1,4 +1,0 @@
-interface:
-  display_name: "QQ Ground Truth"
-  short_description: "Build and audit QQ mailbox ground truth for this repo."
-  default_prompt: "Use $qq-email-ground-truth to build or audit a QQ mailbox invoice ground truth dataset for this repository."
