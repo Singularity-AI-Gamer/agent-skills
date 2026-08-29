@@ -2,13 +2,36 @@
 
 只在 preflight 和项目配置同时证明 Electron、electron-builder 与 NSIS 时使用本页。先核对当前 electron-builder、Electron、Node、包管理器与 NSIS 配置的官方文档；这些版本与命令不是跨项目常量。
 
-## Qualification 顺序
+## Qualification tiers
 
-1. 从冻结 commit 的 lockfile 解析包管理器和依赖版本，执行项目的 locked install。
-2. 在 Windows runner 上执行项目的 build/package 入口，并把实际 runner/toolchain 写入 ledger。
-3. 若项目共享原生 Node 模块，验证 Electron ABI 所需 rebuild、打包后的 smoke，以及回到开发 Node ABI 后的 restore/verify。不要因打包成功而假设开发 ABI 仍可用。
-4. 对生成的 NSIS installer 做真实 install、launch、quiet-window、error-dialog、uninstall 和升级数据保留验证。离线或 local-only fixture 应避免浏览器/网络依赖。
-5. 仅上传 contract 中列出的 installer、blockmap、updater metadata、manifest 和 acceptance evidence。
+Use a small non-promotable target preflight before a formal installer run: resolve the current runner label, perform the locked install, load release-critical native bindings for the actual Windows architecture, and resolve the intended assets. It is an early compatibility check, not an installer qualification.
+
+The selected profile must name the exact receipt set. Keep two committed profiles when both modes are needed:
+
+- **Standard**: one frozen installer build; real install, launch/packaged smoke, bounded quiet/error observation, quiet uninstall, signing disclosure, exact byte hashes, and promotion evidence.
+- **Deep**: standard plus upgrade-data, native-ABI/rebuild, and any migration or installer-specific checks.
+
+Use deep acceptance only for a first installer-path qualification; a change to NSIS/electron-builder, app identity/install scope, signing/updater policy, persistent-data/upgrade behavior, Electron/Node/native modules, or an explicit project requirement. Ordinary source-only changes still need their normal tests, but do not automatically require an upgrade fixture or duplicate ABI test.
+
+## Qualification sequence
+
+1. From the frozen commit's lockfile, resolve the package manager and dependency versions, then execute the project locked install.
+2. On a Windows runner, execute the build/package entry point once and record the actual runner/toolchain in the ledger.
+3. Perform the standard installer acceptance against the exact built bytes: real install, launch, packaged smoke, error-dialog check, bounded quiet window, and quiet uninstall. Offline or local-only fixtures should avoid browser/network dependencies.
+4. When the selected tier is deep, validate the Electron ABI rebuild/load and upgrade-data preservation with isolated fixtures. Do not infer either fact from a successful package command.
+5. Upload only the contract-listed installer, blockmap, updater metadata, manifest, and acceptance evidence.
+
+## Packaged helper and runner boundary
+
+Release-critical helper/runner code must be tested as packaged code, not through repository `node_modules`:
+
+1. contract-test the producer and helper protocol together, including required identity/capability fields, byte limits, and fail-closed error cases;
+2. build the exact bundle used by the packaged application and treat CJS/ESM interop warnings such as unusable `import.meta` as blockers;
+3. inspect the bundle for development-only Electron package code and unresolved runtime imports that the packaged process cannot resolve;
+4. run it from an isolated package-like directory or installed application, with repository module-resolution paths absent;
+5. make any build-time stub narrow and fail closed if its unreachable API is invoked.
+
+A helper smoke that passes only from the checkout does not prove the installed package. Keep this boundary in the staged canary whenever helper protocol, bundling, Electron/Node, or module resolution changes.
 
 ## 进程与窗口证据
 
@@ -40,9 +63,17 @@ electron-builder 的 NSIS 模板可能调用 PowerShell、`cmd.exe` 或 `find.ex
 
 NSIS uninstaller 可能复制到当前 TEMP 下的 `~nsu*.tmp` helper。`QueryFullProcessImageName` 有时给出 8.3 路径，因此只在以下狭窄情形规范化：文件仍可解析、解析后的完整路径位于可信的当前 TEMP 祖先内、名称与已验证的 NSIS helper 模式匹配、并且完整父链回到 armed root。不要因为路径字符串包含 `Temp`、`~` 或 `RUNNER~1` 就接受它，也不要为任意 TEMP executable 开豁免。
 
-## 升级与卸载
+原始路径字符串不是文件身份：Windows 短路径、junction、大小写与用户目录别名都可能指向同一对象。安全判断应在打开目标后比较稳定文件身份（例如 volume serial + file index；其他平台用等价的 device + inode）并在解析后的可信根内验证 containment。测试要覆盖真实路径与别名路径指向同一对象、相似字符串指向不同对象、对象被替换、以及身份不可取得的 fail-closed 分支。只做 `realpath` 或字符串小写化不能证明身份。
 
-升级验收应在安装前 seed 隔离的真实用户数据 fixture，在新版本安装/启动后验证预期 schema、项目、资产、recent-state 或其它 contract 列出的数据仍存在，再运行 uninstaller 并检查产品范围的残留。fixture 内容、旧版来源和断言写入 evidence；不要用“安装命令成功”替代数据保留证明。
+## Deterministic asynchronous tests
+
+Installer monitor、mock fetch、helper handshake 与退出观察要由被测事件触发的 deferred/promise、进程信号或受控 fake time 同步。短 `waitFor` 或固定 sleep 只能作为最终超时边界，不能作为步骤完成条件；提升任意 timeout 会把竞态延后到较慢 runner。对 release-critical 异步测试保留一个慢调度或重复执行的本地/canary profile，再进入完整 qualification。
+
+## Deep upgrade acceptance
+
+When deep acceptance is required, seed an isolated real-user-data fixture before installation; after the new version installs/starts, verify that the contract-listed schema, project, assets, recent state, or other data persists. Record fixture content, old-version source, and assertions as evidence. Do not use a successful install command as a substitute for data-preservation proof.
+
+Uninstall remains a standard core check. Check only product-scoped residuals after the tested process tree exits; do not require the installer directory itself to disappear when the package manager legitimately leaves it behind.
 
 ## 常见边界
 

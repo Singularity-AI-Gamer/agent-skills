@@ -19,7 +19,7 @@
 
 **从这里开始：** [按名字浏览全部技能](./_meta/by-name.md) · [按能力域探索](./_meta/by-domain.md) · [查看机器可读索引](./_meta/skills-lock.json) · [了解来源与维护边界](./_meta/skill-upstreams.json) · [浏览完整外部工作流包](./docs/external-workflow-packs.md)
 
-Skill-hub 是一个面向 Codex、Claude Code、Antigravity 等 AI 编程工具的中文 Agent 技能库，收集可复用的 `SKILL.md` 自动化实践、AI 编程工作流和提示词模板。仓库当前包含 **42** 个可复用技能，其中 **34** 个共享技能按能力域组织，**8** 个项目私有技能按项目归档，便于检索、本地同步、来源追踪和持续维护。
+Skill-hub 是一个面向 Codex、Claude Code、Antigravity 等 AI 编程工具的中文 Agent 技能库，收集可复用的 `SKILL.md` 自动化实践、AI 编程工作流和提示词模板。仓库当前包含 **44** 个可复用技能，其中 **36** 个共享技能按能力域组织，**8** 个项目私有技能按项目归档，便于检索、本地同步、来源追踪和持续维护。
 
 **适合搜索：** Codex 技能与 Claude Code 技能、中文 Agent 技能库、AI 编程工作流与提示词模板。
 
@@ -49,17 +49,17 @@ Skill-hub 不是单一提示词合集，而是面向 Agent 使用的技能仓库
 |---|---:|---|---|
 | <img src="assets/README/icons/overview.svg" width="20" alt=""> Agent 工程 | 8 | `skills/01-agent-engineering/` | Agent 构建、调试、自治循环、技能创建、Sol Pro 方案审查、质量门、skill 生命周期，以及 Windows 磁盘/项目垃圾与内存健康维护。 |
 | <img src="assets/README/icons/format.svg" width="20" alt=""> 编程语言 | 1 | `skills/02-coding-languages/` | 语言级编码标准、设计模式和测试规范。 |
-| <img src="assets/README/icons/package.svg" width="20" alt=""> 框架与技术栈 | 2 | `skills/03-frameworks/` | 前端设计、框架级实现模式和技术栈约束。 |
-| <img src="assets/README/icons/index.svg" width="20" alt=""> 数据与检索 | 15 | `skills/06-data-search/` | 数据抓取、搜索、深度研究、PubMed、临床试验和报告交付。 |
+| <img src="assets/README/icons/package.svg" width="20" alt=""> 框架与技术栈 | 3 | `skills/03-frameworks/` | 前端设计、框架级实现模式和技术栈约束。 |
+| <img src="assets/README/icons/index.svg" width="20" alt=""> 数据与检索 | 1 | `skills/06-data-search/` | 数据抓取、搜索、深度研究、PubMed、临床试验和报告交付。 |
 | <img src="assets/README/icons/format.svg" width="20" alt=""> 媒体与内容制作 | 15 | `skills/07-media-content/` | PPT、PDF、DOCX、XLSX、图像、视频、GitHub README 视觉、公众号文章和演示内容。 |
-| <img src="assets/README/icons/writing.svg" width="20" alt=""> 写作与营销 | 4 | `skills/08-writing-marketing/` | 风格仿写、营销写作、GitHub SEO 标准与周期评估。 |
-| <img src="assets/README/icons/source-index.svg" width="20" alt=""> 行业与业务 | 18 | `skills/10-business-industry/` | 医疗、法律、金融、市场规模、引用校验、药企舆情研究和行业报告流程。 |
+| <img src="assets/README/icons/writing.svg" width="20" alt=""> 写作与营销 | 1 | `skills/08-writing-marketing/` | 风格仿写、营销写作、GitHub SEO 标准与周期评估。 |
+| <img src="assets/README/icons/source-index.svg" width="20" alt=""> 行业与业务 | 7 | `skills/10-business-industry/` | 医疗、法律、金融、市场规模、引用校验、药企舆情研究和行业报告流程。 |
 | <img src="assets/README/icons/directory.svg" width="20" alt=""> 项目私有 | 8 | `projects/` | 只对特定项目生效的技能，例如邮箱测试、飞书、阿里云或发票项目流程。 |
 
 ## <img src="assets/README/icons/directory.svg" width="20" alt=""> 目录结构
 
 ```text
-skills/                        # 34 个共享技能，分 7 个能力域
+skills/                        # 36 个共享技能，分 7 个能力域
 |-- 01-agent-engineering/      # Agent 构建、调试、自治循环、harness
 |-- 02-coding-languages/       # 编程语言
 |-- 03-frameworks/             # 框架与技术栈
@@ -149,6 +149,7 @@ Windows 上常用 Directory Junction 让多个 Agent 共享同一份技能目录
 | <img src="assets/README/icons/push.svg" width="20" alt=""> 推送到仓库 | [`scripts/sync-push.ps1`](./scripts/sync-push.ps1) | 把本地扁平技能目录同步到仓库分组目录。 |
 | <img src="assets/README/icons/install.svg" width="20" alt=""> 拉回本地 | [`scripts/sync-pull.ps1`](./scripts/sync-pull.ps1) | 把仓库分组目录同步回本地扁平目录。 |
 | <img src="assets/README/icons/index.svg" width="20" alt=""> 重建索引 | [`scripts/build-indexes.ps1`](./scripts/build-indexes.ps1) | 根据仓库中的 `SKILL.md` 重建 `_meta/` 下的索引文件。 |
+| <img src="assets/README/icons/upgrade.svg" width="20" alt=""> 审计上游 | [`scripts/refresh-upstream-skills.ps1`](./scripts/refresh-upstream-skills.ps1) | 检查全部已登记上游；只自动更新 `mirror`，并把 `mapped` 差异列为人工合并项。 |
 
 同步前建议先查看 `git status` 和 `git diff`，确认没有把真实凭据、临时输出或项目私有草稿带入公开仓库。
 
@@ -163,6 +164,8 @@ Windows 上常用 Directory Junction 让多个 Agent 共享同一份技能目录
 5. 用 `git diff` 审查技能内容、索引变化和脱敏情况，再提交。
 
 仓库内的 [`skills/01-agent-engineering/skill-lifecycle-manager/`](./skills/01-agent-engineering/skill-lifecycle-manager/) 提供跨 Codex 与 Claude Code 的 skill 搜索、安装、升级、同步、来源校验和质量审计流程，可维护 Skill-hub 来源索引，识别个人/项目级安装，并安全处理 Claude Code 插件缓存。
+
+云端的 [`refresh-upstream-skills.yml`](./.github/workflows/refresh-upstream-skills.yml) 每周一自动执行，也支持手动触发。它只把来源索引中 `classification=open-source`、`updatePolicy=mirror` 且全树比对有变化的 Skill 更新到固定自动化分支并创建或刷新 PR；`mapped`、`candidate`、`self` 和 `local` 不会被云端直接覆盖。这样无需重复提出更新请求，同时保留对外部 Skill 指令变更的人工审查门。
 
 ## <img src="assets/README/icons/maintenance.svg" width="20" alt=""> 维护约定
 

@@ -1,6 +1,10 @@
 ---
 name: electron-development
 description: "Use for Electron desktop application implementation, local packaging, and macOS Electron installer builds in GitHub Actions. Covers secure IPC, preload and multi-process architecture, electron-builder/Forge configuration, native modules, signing/notarization setup, DMG/ZIP packaging, mounted packaged smoke, and macOS qualification evidence. For cloud releases, this Skill owns macOS build and qualification; use github-desktop-release for Windows GitHub Actions qualification and for shared artifact promotion, GitHub Release publication, resume, or authoritative readback. Do not use this Skill to build or qualify Windows installers in GitHub Actions."
+metadata:
+  risk: safe
+  source: community
+  date_added: "2026-03-12"
 ---
 
 # Electron Development
@@ -40,9 +44,13 @@ You are a senior Electron engineer specializing in secure, production-grade desk
 4. Implement, test, and build with appropriate tooling.
 5. Validate against the Production Security Checklist before shipping.
 
+For any macOS GitHub Actions build or qualification, read [macOS cloud qualification](references/macos-cloud-qualification.md) completely before editing a workflow or dispatching a run. It defines the risk-based canary decision, package-like preflight, retry stop conditions, and same-SHA evidence contract.
+
 ## Cloud platform ownership
 
 - Own Electron macOS packaging and qualification in GitHub Actions: locked install, DMG/ZIP build, mounted smoke, architecture checks, signing/notarization disclosure, exact asset projection, checksums, and sanitized evidence upload.
+- Freeze one commit SHA before qualification. Select staged canary or parallel architecture jobs from the risk table in [macOS cloud qualification](references/macos-cloud-qualification.md); do not default every release to the slower path.
+- Treat qualification as `preflight -> cloud gate -> package -> mounted smoke -> evidence`. A SHA change invalidates prior qualification, while a publication-tool failure after qualification does not.
 - Keep the macOS builder output directory separate from the exact qualification asset directory. Preserve builder intermediates; project only the frozen release assets and their evidence into the qualification artifact.
 - Hand the qualified macOS artifact to `github-desktop-release` without rebuilding when promotion or publication is requested.
 - Do not dispatch, diagnose, or qualify Windows GitHub Actions installer jobs. Route those tasks to `github-desktop-release`.

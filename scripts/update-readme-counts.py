@@ -73,15 +73,15 @@ def main():
         )
 
         # --- 2. 能力域表格：用 skills/<domain>/ 作为锚点替换前面的数字 ---
+        # README 表格的第一列是图标/类别，数量位于第二列。
         for domain, count in domain_counts.items():
-            pattern = rf'\| \d+ \| `skills/{re.escape(domain)}/` \|'
-            replacement = f"| {count} | `skills/{domain}/` |"
-            content = re.sub(pattern, replacement, content)
+            pattern = rf'(\|[^\n|]*\|\s*)\d+(\s*\|\s*`skills/{re.escape(domain)}/`\s*\|)'
+            content = re.sub(pattern, rf'\g<1>{count}\g<2>', content)
 
         # --- 2b. 项目私有能力域行 ---
         content = re.sub(
-            r'\| \d+ \| `projects/` \|',
-            f'| {projects_count} | `projects/` |',
+            r'(\|[^\n|]*\|\s*)\d+(\s*\|\s*`projects/`\s*\|)',
+            rf'\g<1>{projects_count}\g<2>',
             content,
         )
 

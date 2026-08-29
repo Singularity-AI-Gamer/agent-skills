@@ -16,6 +16,8 @@ UNQUALIFIED
 
 `READ_ONLY_PLAN` 不得写 tag 或 Release。它验证 workflow run、head SHA、默认分支祖先、artifact ID/name、contract、ledger、manifest、checksum 和 existing remote state。
 
+进入 `READ_ONLY_PLAN` 前先完成 [promotion-preflight.md](promotion-preflight.md)。本地缺少解压工具、磁盘不足、账号选择错误或 output/cache 计划无效时，在下载大 artifact 前停止；修复这些本地条件后沿用同一 immutable run identities，不重新 qualification。
+
 不要让每个项目重写这套状态机。将 Skill 的 `scripts/github-desktop-promotion.mjs` 与 `scripts/validate-release-profile.mjs` 原样复制到项目的 `.release/scripts/`，保留文件名，并复制 promotion workflow 模板。项目只维护 release profile 与 qualification acceptance adapters。
 
 ## 最小权限分层
@@ -33,6 +35,8 @@ UNQUALIFIED
 3. 对每个 required platform 按 workflow、run ID、attempt 和 artifact ID 选择唯一、未过期 artifact；名字相同但来自别的 run 不够。所有 run 的 `head_sha` 必须等于同一个 expected SHA。
 4. 读取 tag、Release 和 assets。若只读 token 对 draft Release 的 tag endpoint 返回 404，记录 `draftState: unknown`；权限不足或可见性延迟不能被解释为“可创建”。
 5. 下载全部 required platform artifact 后逐字节复核 evidence，聚合 exact release asset set，再创建仅本次 promotion 可用的 verified package artifact。
+
+下载前先用 API metadata 确认 artifact 大小、未过期状态和 immutable identity。qualification 已绿而本地下载、解压或 verifier runtime 失败属于 promotion 环境故障；只要 source、bytes 与 acceptance meaning 未变，就修复本地环境并从只读计划恢复。
 
 每个平台的 schema-v2 manifest 和 run ledger 都必须记录同一个 `contractRawBytesSha256` 与 `profileRawBytesSha256`。`release-contract.json` 必须属于 manifest/checksum exact set，且其 raw SHA-256 等于前者；promotion 当下读取的 profile 原始字节 SHA-256 必须等于后者。所有 required platform 的两个 hash 必须完全一致。`signing.evidencePath` 也必须指向 manifest evidence 中已经 raw-hash 绑定的文件。
 

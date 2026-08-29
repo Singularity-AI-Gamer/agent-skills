@@ -4,7 +4,7 @@ Windows 目标先用 `scripts/preflight-windows-release.ps1` 的信号决定 sta
 
 | 检测信号 | 适配器 | 共用的发布边界 | 不可假设的内容 |
 | --- | --- | --- | --- |
-| `electron` + `electron-builder` 依赖，或 build 配置含 `nsis` | Electron/NSIS（深度） | contract、Windows qualification、artifact bytes、promotion 状态机 | pnpm 版本、产物路径、NSIS 命令、native ABI、升级 fixture |
+| `electron` + `electron-builder` 依赖，或 build 配置含 `nsis` | Electron/NSIS | contract、Windows qualification、artifact bytes、promotion 状态机 | qualification tier、pnpm 版本、产物路径、NSIS 命令、native ABI、升级 fixture |
 | `src-tauri/tauri.conf.*`、`Cargo.toml` 或 Tauri 依赖 | Tauri | contract、Windows qualification、artifact bytes、promotion 状态机 | installer 是 MSI 还是 NSIS、cargo/toolchain、bundler config、签名 |
 | `.spec`、`PyInstaller`、Python build 配置 | PyInstaller | contract、Windows qualification、artifact bytes、promotion 状态机 | 是否有 installer、Python env、收集 hook、升级路径 |
 | `.csproj`/`.sln`，并有 WiX `.wxs` 或 MSIX manifest | .NET/WiX/MSIX | contract、Windows qualification、artifact bytes、promotion 状态机 | WiX/MSIX 版本、Package Identity、证书、upgrade code、bootstrapper |
@@ -12,7 +12,7 @@ Windows 目标先用 `scripts/preflight-windows-release.ps1` 的信号决定 sta
 
 ## Electron/NSIS
 
-读 [electron-nsis.md](electron-nsis.md)。共享 native module 时，Electron 打包 ABI 与开发 Node ABI 常不同；qualification 要验证打包应用，同时在必要时恢复并验证开发 ABI。只有明确从配置检测到 NSIS 时才应用 NSIS helper 规则。
+读 [electron-nsis.md](electron-nsis.md)。适配器类型不决定 qualification tier：普通应用代码发布默认 Standard，只有该页列出的 installer、升级、runtime/native 或明确项目触发器才进入 Deep。共享 native module 时，Electron 打包 ABI 与开发 Node ABI 常不同；qualification 要验证打包应用，同时在必要时恢复并验证开发 ABI。只有明确从配置检测到 NSIS 时才应用 NSIS helper 规则。
 
 ## Tauri
 

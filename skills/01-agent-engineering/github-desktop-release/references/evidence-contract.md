@@ -36,6 +36,8 @@ Producer 必须直接读取 `profile.platforms.<platform>.acceptanceReceipts`，
 
 `run-ledger.json` 只记录上传前可知的 repository、workflow、run ID、attempt、actor、dispatch inputs、head SHA、runner image、开始/结束时间、命令结果，以及 `contractRawBytesSha256` / `profileRawBytesSha256`。这两个 hash 必须与 manifest 及 promotion 当前读取的 profile 原始字节一致。ledger 的 `signing` 必须与 manifest `signing` 使用同一四字段 envelope：`status`、`validationResult`、`unsignedDistributionImpact`、`evidencePath`；该路径必须是 profile 声明、已存在且已被 manifest raw hash 绑定的 signing receipt。artifact ID、digest、URL 只能在上传后由 job outputs、step summary 或独立外层 attestation 记录；不要回写已上传 evidence artifact 或 ledger。避免记录 token、证书、私钥或用户数据。
 
+跨进程 ledger 不能假设 runner wall clock 单调。每个事件记录递增 `sequence` 作为权威顺序；时间戳用于观察和持续时间。若既有 schema 要求时间戳非递减，writer 将新时间夹紧到前一已提交时间并另记 `clockRollbackObserved` 与原始观察值，而不是重排或拒绝真实命令。用跨进程时钟回拨 fixture 覆盖 writer、finalizer 和 verifier；不要通过放宽命令顺序门禁掩盖回拨。
+
 ## Hash 语义
 
 | 对象 | 规则 |
@@ -56,6 +58,8 @@ normalised lockfile hash 用于 Windows / Linux 之间的来源比较，不能�
 3. 枚举 contract 的精确 artifact set，写入每个文件的相对路径、大小、raw SHA-256 和 role。
 4. 写 manifest，再计算并写 `SHA256SUMS.txt`。checksum 表可以包含 manifest 本身，但不把 checksum 文件自身加入自己的清单。
 5. 上传 evidence artifact；在上传后的 job outputs、step summary 或独立外层 attestation 记录 artifact ID、digest、URL，不回写 artifact 内的 ledger。
+
+验证命令顺序时优先使用 `sequence` 与明确的 stage transition；不能用两个独立进程采集到的 wall-clock 大小关系代替顺序证据。
 
 模板 artifact 名是 profile 的固定身份：Windows 为 `qualified-windows`，macOS 为 `qualified-macos`。禁止拼接 SHA、run ID 或 attempt 形成动态 artifact 名；不可变身份由 workflow/run/attempt/artifact ID 共同提供。
 

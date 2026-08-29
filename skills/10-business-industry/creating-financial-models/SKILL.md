@@ -1,7 +1,8 @@
 ---
 name: creating-financial-models
 description: 高级财务建模套件，包含DCF估值、敏感性分析、蒙特卡洛模拟和场景规划。当用户需要对企业、项目或并购交易进行投资分析、股权估值、IRR/MOIC计算、WACC建模，或要求建立DCF模型、运行概率模拟、制作敏感性表格时，请主动使用此技能。
-compatibility: 可选依赖 Python 3.9+（pandas、numpy、openpyxl）用于脚本输出；核心功能无需额外依赖
+metadata:
+  compatibility: 可选依赖 Python 3.9+（pandas、numpy、openpyxl）用于脚本输出；核心功能无需额外依赖
 ---
 
 # Financial Modeling Suite
@@ -143,22 +144,19 @@ A comprehensive financial modeling toolkit for investment analysis, valuation, a
 
 "Develop three scenarios for this expansion project with probability weights"
 
-**示例输出格式（DCF 汇总）：**
-| 指标 | 数值 |
-|------|------|
-| 企业价值（EV） | $450M |
-| 净债务 | $80M |
-| 股权价值 | $370M |
-| 隐含 EV/EBITDA | 12.5x |
-
 ## Scripts Included
 
-暂无可执行脚本。DCF 计算和敏感性分析由 Claude 直接以表格/代码块形式输出。
-如需 Python 脚本版本，请在请求中注明，Claude 将即时生成。
+- `scripts/dcf_model.py`: Complete DCF valuation engine
+- `scripts/sensitivity_analysis.py`: Sensitivity testing framework
 
-## 注意事项
+## Limitations and Disclaimers
 
-所有模型输出均基于用户提供的假设，不构成投资建议。重大决策前请结合专业判断。
+- Models are only as good as their assumptions
+- Past performance doesn't guarantee future results
+- Market conditions can change rapidly
+- Regulatory and tax changes may impact results
+- Professional judgment required for interpretation
+- Not a substitute for professional financial advice
 
 ## Quality Checks
 
@@ -168,3 +166,10 @@ The model automatically performs:
 3. Circular reference resolution
 4. Sensitivity bound checking
 5. Statistical validation of Monte Carlo results
+
+## Updates and Maintenance
+
+- Models use latest financial theory and practices
+- Regular updates for market parameter defaults
+- Incorporation of regulatory changes
+- Continuous improvement based on usage patterns

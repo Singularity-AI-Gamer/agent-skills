@@ -22,8 +22,6 @@ The profile defines stable project policy, not a release instance. The release c
         "acceptance/quiet-window.json",
         "acceptance/error-dialogs.json",
         "acceptance/uninstall.json",
-        "acceptance/upgrade-data.json",
-        "acceptance/native-abi.json",
         "acceptance/packaged-smoke.json",
         "acceptance/signing.json"
       ],
@@ -79,6 +77,9 @@ The profile defines stable project policy, not a release instance. The release c
 
 - List exact workflow paths, artifact names, receipt paths, platform architectures, release asset names, retention, release channel, and signing policies. Reject globs and ambiguous same-name artifacts.
 - Keep project-specific receipt counts, workflow filenames, smoke commands, signing choices, and asset names here rather than in `SKILL.md`.
+- The example Windows receipt set is the **standard** core: install, launch/packaged smoke, bounded quiet/error observation, uninstall, and signing. It is sufficient only while installer, upgrade, and native-ABI boundaries are unchanged.
+- For deep Windows acceptance, use a separate committed profile (for example `release-profile.windows-deep.json`) that adds exact `acceptance/upgrade-data.json`, `acceptance/native-abi.json`, and any project-specific migration receipts. Select the profile before qualification; its raw hash binds every qualification and promotion run, so an undeclared deep receipt or a late profile edit is rejected.
+- A profile may describe either tier, never an implicit mixture. Do not use a wildcard, an optional receipt, or an undeclared extra JSON file to make a deep check conditional.
 - Use `{version}` only as an explicit asset-name placeholder; resolve it when freezing the release contract.
 - List one or more architecture tokens per platform. Tokens are non-empty and limited to ASCII letters, digits, dot, underscore, and hyphen (for example `x64`, `arm64`, or `universal`); comparison is case-insensitive.
 - Select artifacts by workflow, run ID, attempt, and artifact ID; an equal artifact name is not identity.
