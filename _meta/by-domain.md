@@ -1,19 +1,19 @@
 # 按能力域索引
 
-共 44 个技能，按 7 个能力域 + projects（项目私有）分组。
+共 50 个技能，按 7 个能力域 + projects（项目私有）分组。
 
 ## 目录
 
-- [01 Agent 工程](#01-agent-工程)（8）
+- [01 Agent 工程](#01-agent-工程)（10）
 - [02 编程语言](#02-编程语言)（1）
 - [03 框架与技术栈](#03-框架与技术栈)（3）
 - [06 数据与检索](#06-数据与检索)（1）
 - [07 媒体与内容制作](#07-媒体与内容制作)（15）
-- [08 写作与营销](#08-写作与营销)（1）
+- [08 写作与营销](#08-写作与营销)（5）
 - [10 行业与业务](#10-行业与业务)（7）
 - [Projects 项目私有](#projects-项目私有)（8）
 
-## 01 Agent 工程（8）
+## 01 Agent 工程（10）
 
 | 技能名 | 路径 | 中文简介 |
 |---|---|---|
@@ -24,6 +24,8 @@
 | **santa-method** | [skills/01-agent-engineering/santa-method/](../skills/01-agent-engineering/santa-method/) | 多 Agent 对抗验证收敛循环，两个独立审查都通过后才出交付。 |
 | **skill-creator** | [skills/01-agent-engineering/skill-creator/](../skills/01-agent-engineering/skill-creator/) | 创建、修改和优化 skill，并可跑 eval 衡量触发准确率与性能。 |
 | **skill-lifecycle-manager** | [skills/01-agent-engineering/skill-lifecycle-manager/](../skills/01-agent-engineering/skill-lifecycle-manager/) | 管理本地/全局/项目级 skill 与 Skill-hub 生命周期：搜索、推荐、安装、升级、同步、合并、清理、来源校验、质量审计和发布。 |
+| **yq-pre-push-checks** | [skills/01-agent-engineering/yq-pre-push-checks/](../skills/01-agent-engineering/yq-pre-push-checks/) | 推送或宣称就绪前，选择与变更风险匹配的最小验证。 |
+| **yq-simplify-code** | [skills/01-agent-engineering/yq-simplify-code/](../skills/01-agent-engineering/yq-simplify-code/) | 审计代码、测试或门禁是否重复、过度设计或失去用途。 |
 | **yq-windows-trash-cleaner** | [skills/01-agent-engineering/yq-windows-trash-cleaner/](../skills/01-agent-engineering/yq-windows-trash-cleaner/) | Windows C盘、项目垃圾、Docker/WSL、Git worktree、CodeGraph、Agent 会话或内存异常需要安全审计、清理和验证时使用。 |
 
 ## 02 编程语言（1）
@@ -66,11 +68,15 @@
 | **xlsx** | [skills/07-media-content/xlsx/](../skills/07-media-content/xlsx/) | 电子表格 .xlsx/.csv 等创建、编辑、公式、格式、数据分析与可视化。 |
 | **yq-editorial-presentation-html** | [skills/07-media-content/yq-editorial-presentation-html/](../skills/07-media-content/yq-editorial-presentation-html/) | Anthropic 暖色编辑设计语言，用于演示/case sharing/战略汇报。 |
 
-## 08 写作与营销（1）
+## 08 写作与营销（5）
 
 | 技能名 | 路径 | 中文简介 |
 |---|---|---|
 | **yq-article-style-imitation** | [skills/08-writing-marketing/yq-article-style-imitation/](../skills/08-writing-marketing/yq-article-style-imitation/) | 任意作家文章风格仿写：验证作者原文、拆解表达 DNA、生成并修复公众号/小红书稿。 |
+| **yq-doc-maintenance** | [skills/08-writing-marketing/yq-doc-maintenance/](../skills/08-writing-marketing/yq-doc-maintenance/) | 文档出现腐化、冲突、重复、导航或归档混乱时使用。 |
+| **yq-remove-reasoning-leaks** | [skills/08-writing-marketing/yq-remove-reasoning-leaks/](../skills/08-writing-marketing/yq-remove-reasoning-leaks/) | 技术文本残留评审过程、草稿引用或推理旁白时使用。 |
+| **yq-technical-writing** | [skills/08-writing-marketing/yq-technical-writing/](../skills/08-writing-marketing/yq-technical-writing/) | 编写或精简技术文档、注释、提示词和界面文案时使用。 |
+| **yq-translate-docs** | [skills/08-writing-marketing/yq-translate-docs/](../skills/08-writing-marketing/yq-translate-docs/) | 维护中英双语文档的语义一致、结构对应和自然表达。 |
 
 ## 10 行业与业务（7）
 

@@ -1,11 +1,11 @@
 {
   "version": "2.0",
-  "generated_at": "2026-08-29T18:12:46+08:00",
-  "note": "Rebuilt indexes from repository SKILL.md files. Total: 36 shared + 8 projects = 44 total",
+  "generated_at": "2026-09-03T21:23:47+08:00",
+  "note": "Rebuilt indexes from repository SKILL.md files. Total: 42 shared + 8 projects = 50 total",
   "counts": {
-    "shared": 36,
+    "shared": 42,
     "projects": 8,
-    "total": 44
+    "total": 50
   },
   "shared": [
     {
@@ -49,6 +49,20 @@
       "domain": "01-agent-engineering",
       "path": "skills/01-agent-engineering/skill-lifecycle-manager/",
       "descriptionZh": "管理本地/全局/项目级 skill 与 Skill-hub 生命周期：搜索、推荐、安装、升级、同步、合并、清理、来源校验、质量审计和发布。"
+    },
+    {
+      "name": "yq-pre-push-checks",
+      "domain": "01-agent-engineering",
+      "path": "skills/01-agent-engineering/yq-pre-push-checks/",
+      "descriptionZh": "推送或宣称就绪前，选择与变更风险匹配的最小验证。",
+      "_todo": "需要翻译 descriptionZh"
+    },
+    {
+      "name": "yq-simplify-code",
+      "domain": "01-agent-engineering",
+      "path": "skills/01-agent-engineering/yq-simplify-code/",
+      "descriptionZh": "审计代码、测试或门禁是否重复、过度设计或失去用途。",
+      "_todo": "需要翻译 descriptionZh"
     },
     {
       "name": "yq-windows-trash-cleaner",
@@ -182,6 +196,34 @@
       "domain": "08-writing-marketing",
       "path": "skills/08-writing-marketing/yq-article-style-imitation/",
       "descriptionZh": "任意作家文章风格仿写：验证作者原文、拆解表达 DNA、生成并修复公众号/小红书稿。"
+    },
+    {
+      "name": "yq-doc-maintenance",
+      "domain": "08-writing-marketing",
+      "path": "skills/08-writing-marketing/yq-doc-maintenance/",
+      "descriptionZh": "文档出现腐化、冲突、重复、导航或归档混乱时使用。",
+      "_todo": "需要翻译 descriptionZh"
+    },
+    {
+      "name": "yq-remove-reasoning-leaks",
+      "domain": "08-writing-marketing",
+      "path": "skills/08-writing-marketing/yq-remove-reasoning-leaks/",
+      "descriptionZh": "技术文本残留评审过程、草稿引用或推理旁白时使用。",
+      "_todo": "需要翻译 descriptionZh"
+    },
+    {
+      "name": "yq-technical-writing",
+      "domain": "08-writing-marketing",
+      "path": "skills/08-writing-marketing/yq-technical-writing/",
+      "descriptionZh": "编写或精简技术文档、注释、提示词和界面文案时使用。",
+      "_todo": "需要翻译 descriptionZh"
+    },
+    {
+      "name": "yq-translate-docs",
+      "domain": "08-writing-marketing",
+      "path": "skills/08-writing-marketing/yq-translate-docs/",
+      "descriptionZh": "维护中英双语文档的语义一致、结构对应和自然表达。",
+      "_todo": "需要翻译 descriptionZh"
     },
     {
       "name": "contract-review",

@@ -1,14 +1,14 @@
 {
   "version": "1.1",
-  "updated_at": "2026-08-29",
+  "updated_at": "2026-09-03",
   "purpose": "Track verified original upstream repositories for Skill-hub skills so future upgrades can compare evidence-backed sources instead of guessing by skill name.",
   "scope": {
     "startsFrom": [
       "_meta/skill-upstreams.json",
       "_meta/skills-lock.json"
     ],
-    "localSkillCount": 44,
-    "sharedSkillCount": 36,
+    "localSkillCount": 50,
+    "sharedSkillCount": 42,
     "projectSkillCount": 8
   },
   "rules": [
@@ -27,7 +27,7 @@
   "verificationSummary": {
     "countsByClassification": {
       "open-source": 23,
-      "self": 10,
+      "self": 16,
       "local": 10,
       "candidate": 1
     },
@@ -992,6 +992,102 @@
         "Keep external automatic updates disabled while provenance is unverified."
       ],
       "notes": "Shared owner-maintained Skill imported from the prior organization repository; no verified external upstream is recorded."
+    },
+    {
+      "name": "yq-doc-maintenance",
+      "path": "skills/08-writing-marketing/yq-doc-maintenance/",
+      "classification": "self",
+      "updatePolicy": "none",
+      "status": "self-maintained-yq-doc-maintenance",
+      "evidence": [
+        "Owner-directed YQ documentation-governance workflow maintained in this Skill-hub repository.",
+        "The current design combines claim ownership, corpus repair, and future-decision-value classification as one locally maintained skill."
+      ],
+      "verificationPath": [
+        "Use this repository history as the canonical source.",
+        "Run skill-creator quick_validate.py and the documented behavior cases after changes."
+      ],
+      "notes": "Self-maintained shared skill; external automatic updates are disabled."
+    },
+    {
+      "name": "yq-simplify-code",
+      "path": "skills/01-agent-engineering/yq-simplify-code/",
+      "classification": "self",
+      "updatePolicy": "none",
+      "status": "self-maintained-yq-simplify-code",
+      "evidence": [
+        "Owner-directed YQ simplification workflow maintained in this Skill-hub repository.",
+        "The current design audits code, tests, and gates as one evidence-based portfolio without creating additional validation machinery."
+      ],
+      "verificationPath": [
+        "Use this repository history as the canonical source.",
+        "Run skill-creator quick_validate.py and the documented behavior cases after changes."
+      ],
+      "notes": "Self-maintained shared skill; external automatic updates are disabled."
+    },
+    {
+      "name": "yq-pre-push-checks",
+      "path": "skills/01-agent-engineering/yq-pre-push-checks/",
+      "classification": "self",
+      "updatePolicy": "none",
+      "status": "self-maintained-yq-pre-push-checks",
+      "evidence": [
+        "Owner-directed YQ pre-push evidence-selection workflow maintained in this Skill-hub repository.",
+        "The current design selects the smallest credible checks from each repository's own risk and tooling."
+      ],
+      "verificationPath": [
+        "Use this repository history as the canonical source.",
+        "Run skill-creator quick_validate.py and the documented behavior cases after changes."
+      ],
+      "notes": "Self-maintained shared skill; external automatic updates are disabled."
+    },
+    {
+      "name": "yq-technical-writing",
+      "path": "skills/08-writing-marketing/yq-technical-writing/",
+      "classification": "self",
+      "updatePolicy": "none",
+      "status": "self-maintained-yq-technical-writing",
+      "evidence": [
+        "Owner-directed YQ technical-writing workflow maintained in this Skill-hub repository.",
+        "The current design preserves complete technical propositions while removing repetition and authoring residue."
+      ],
+      "verificationPath": [
+        "Use this repository history as the canonical source.",
+        "Run skill-creator quick_validate.py and the documented behavior cases after changes."
+      ],
+      "notes": "Self-maintained shared skill; external automatic updates are disabled."
+    },
+    {
+      "name": "yq-remove-reasoning-leaks",
+      "path": "skills/08-writing-marketing/yq-remove-reasoning-leaks/",
+      "classification": "self",
+      "updatePolicy": "none",
+      "status": "self-maintained-yq-remove-reasoning-leaks",
+      "evidence": [
+        "Owner-directed YQ reasoning-leak cleanup workflow maintained in this Skill-hub repository.",
+        "The current design combines a local residue taxonomy with proposition-preserving keep and rewrite rules."
+      ],
+      "verificationPath": [
+        "Use this repository history as the canonical source.",
+        "Run skill-creator quick_validate.py and the documented behavior cases after changes."
+      ],
+      "notes": "Self-maintained shared skill; external automatic updates are disabled."
+    },
+    {
+      "name": "yq-translate-docs",
+      "path": "skills/08-writing-marketing/yq-translate-docs/",
+      "classification": "self",
+      "updatePolicy": "none",
+      "status": "self-maintained-yq-translate-docs",
+      "evidence": [
+        "Owner-directed YQ bilingual-document workflow maintained in this Skill-hub repository.",
+        "The current design supports minimal updates, complete-pair translation, conflict reconciliation, and explicit-only invocation without imposing new project machinery."
+      ],
+      "verificationPath": [
+        "Use this repository history as the canonical source.",
+        "Run skill-creator quick_validate.py and the documented behavior cases after changes."
+      ],
+      "notes": "Self-maintained explicit-only shared skill; external automatic updates are disabled."
     }
   ],
   "alternateCandidates": [

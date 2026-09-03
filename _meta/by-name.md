@@ -1,6 +1,6 @@
 # 按技能名 A-Z 索引
 
-共 44 个技能（36 个共享 + 8 个项目私有）。项目私有技能以 *(项目)* 标注。
+共 50 个技能（42 个共享 + 8 个项目私有）。项目私有技能以 *(项目)* 标注。
 
 | # | 技能名 | 路径 | 中文简介 |
 |---|---|---|---|
@@ -46,5 +46,11 @@
 | 40 | **xhs-pharma-social-listening** | [skills/10-business-industry/xhs-pharma-social-listening/](../skills/10-business-industry/xhs-pharma-social-listening/) | 面向外资药企员工痛点的小红书证据化舆情研究：采集并分析药企、岗位、合规、医学事务与 AI 相关笔记和评论，按去重笔记加去重评论计算独立证据，并处理 MediaCrawler CAPTCHA/461 与 OpenCLI 回退。 |
 | 41 | **xlsx** | [skills/07-media-content/xlsx/](../skills/07-media-content/xlsx/) | 电子表格 .xlsx/.csv 等创建、编辑、公式、格式、数据分析与可视化。 |
 | 42 | **yq-article-style-imitation** | [skills/08-writing-marketing/yq-article-style-imitation/](../skills/08-writing-marketing/yq-article-style-imitation/) | 任意作家文章风格仿写：验证作者原文、拆解表达 DNA、生成并修复公众号/小红书稿。 |
-| 43 | **yq-editorial-presentation-html** | [skills/07-media-content/yq-editorial-presentation-html/](../skills/07-media-content/yq-editorial-presentation-html/) | Anthropic 暖色编辑设计语言，用于演示/case sharing/战略汇报。 |
-| 44 | **yq-windows-trash-cleaner** | [skills/01-agent-engineering/yq-windows-trash-cleaner/](../skills/01-agent-engineering/yq-windows-trash-cleaner/) | Windows C盘、项目垃圾、Docker/WSL、Git worktree、CodeGraph、Agent 会话或内存异常需要安全审计、清理和验证时使用。 |
+| 43 | **yq-doc-maintenance** | [skills/08-writing-marketing/yq-doc-maintenance/](../skills/08-writing-marketing/yq-doc-maintenance/) | 文档出现腐化、冲突、重复、导航或归档混乱时使用。 |
+| 44 | **yq-editorial-presentation-html** | [skills/07-media-content/yq-editorial-presentation-html/](../skills/07-media-content/yq-editorial-presentation-html/) | Anthropic 暖色编辑设计语言，用于演示/case sharing/战略汇报。 |
+| 45 | **yq-pre-push-checks** | [skills/01-agent-engineering/yq-pre-push-checks/](../skills/01-agent-engineering/yq-pre-push-checks/) | 推送或宣称就绪前，选择与变更风险匹配的最小验证。 |
+| 46 | **yq-remove-reasoning-leaks** | [skills/08-writing-marketing/yq-remove-reasoning-leaks/](../skills/08-writing-marketing/yq-remove-reasoning-leaks/) | 技术文本残留评审过程、草稿引用或推理旁白时使用。 |
+| 47 | **yq-simplify-code** | [skills/01-agent-engineering/yq-simplify-code/](../skills/01-agent-engineering/yq-simplify-code/) | 审计代码、测试或门禁是否重复、过度设计或失去用途。 |
+| 48 | **yq-technical-writing** | [skills/08-writing-marketing/yq-technical-writing/](../skills/08-writing-marketing/yq-technical-writing/) | 编写或精简技术文档、注释、提示词和界面文案时使用。 |
+| 49 | **yq-translate-docs** | [skills/08-writing-marketing/yq-translate-docs/](../skills/08-writing-marketing/yq-translate-docs/) | 维护中英双语文档的语义一致、结构对应和自然表达。 |
+| 50 | **yq-windows-trash-cleaner** | [skills/01-agent-engineering/yq-windows-trash-cleaner/](../skills/01-agent-engineering/yq-windows-trash-cleaner/) | Windows C盘、项目垃圾、Docker/WSL、Git worktree、CodeGraph、Agent 会话或内存异常需要安全审计、清理和验证时使用。 |
