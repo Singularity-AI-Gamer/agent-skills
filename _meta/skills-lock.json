@@ -1,19 +1,13 @@
 {
   "version": "2.0",
-  "generated_at": "2026-09-05T23:10:12+08:00",
-  "note": "Rebuilt indexes from repository SKILL.md files. Total: 52 shared + 8 projects = 60 total",
+  "generated_at": "2026-09-05T15:17:07+00:00",
+  "note": "Rebuilt indexes from repository SKILL.md files. Total: 39 shared + 0 projects = 39 total",
   "counts": {
-    "shared": 52,
-    "projects": 8,
-    "total": 60
+    "shared": 39,
+    "projects": 0,
+    "total": 39
   },
   "shared": [
-    {
-      "name": "deep-research",
-      "domain": "01-agent-engineering",
-      "path": "skills/01-agent-engineering/deep-research/",
-      "descriptionZh": "多源深度研究，使用 firecrawl/exa 搜索并综合发现。"
-    },
     {
       "name": "find-skills",
       "domain": "01-agent-engineering",
@@ -69,13 +63,6 @@
       "descriptionZh": "Windows C盘、项目垃圾、Docker/WSL、Git worktree、CodeGraph、Agent 会话或内存异常需要安全审计、清理和验证时使用。"
     },
     {
-      "name": "liquid-glass-design",
-      "domain": "02-coding-languages",
-      "path": "skills/02-coding-languages/swift/liquid-glass-design/",
-      "subdomain": "swift",
-      "descriptionZh": "iOS 26 Liquid Glass 设计系统：SwiftUI/UIKit/WidgetKit 的玻璃材质与交互。"
-    },
-    {
       "name": "electron-development",
       "domain": "03-frameworks",
       "path": "skills/03-frameworks/electron-development/",
@@ -92,18 +79,6 @@
       "domain": "03-frameworks",
       "path": "skills/03-frameworks/netlify-cli/",
       "descriptionZh": "使用 Netlify CLI 完成安装、认证、站点关联、本地开发、环境变量管理与部署。"
-    },
-    {
-      "name": "data-scraper-agent",
-      "domain": "06-data-search",
-      "path": "skills/06-data-search/data-scraper-agent/",
-      "descriptionZh": "构建全自动 AI 数据采集 Agent：按计划抓取公开源并用 LLM 富化入库。"
-    },
-    {
-      "name": "docx",
-      "domain": "07-media-content",
-      "path": "skills/07-media-content/docx/",
-      "descriptionZh": "全面处理 .docx：创建、编辑、修订跟踪、评论、格式保留与文本提取。"
     },
     {
       "name": "general-video",
@@ -184,12 +159,6 @@
       "descriptionZh": "设计、重设计、审计或精修生产级前端界面，涵盖信息架构、视觉层级、响应式、无障碍、动效与设计系统时使用。"
     },
     {
-      "name": "jianying-editor",
-      "domain": "07-media-content",
-      "path": "skills/07-media-content/jianying-editor/",
-      "descriptionZh": "剪映 AI 自动剪辑高级封装 API（JyWrapper）：录屏、素材、字幕、Web 动效。"
-    },
-    {
       "name": "make-interfaces-feel-better",
       "domain": "07-media-content",
       "path": "skills/07-media-content/make-interfaces-feel-better/",
@@ -202,40 +171,16 @@
       "descriptionZh": "为 HyperFrames 解析、生成、处理并复用音频、图像和品牌素材。"
     },
     {
-      "name": "pdf",
-      "domain": "07-media-content",
-      "path": "skills/07-media-content/pdf/",
-      "descriptionZh": "\"Use when tasks involve reading, creating, or reviewing PDF files where rendering and layout matter; prefer visual checks by rendering pages (Poppler) and use Python tools such as `reportlab`, `pdfplumber`, and `pypdf` for generation and extraction.\""
-    },
-    {
       "name": "ppt-nano",
       "domain": "07-media-content",
       "path": "skills/07-media-content/ppt-nano/",
       "descriptionZh": "白板板书风格 PPT 生成，适合教学、汇报、头脑风暴。"
     },
     {
-      "name": "pptx",
-      "domain": "07-media-content",
-      "path": "skills/07-media-content/pptx/",
-      "descriptionZh": "演示文稿 .pptx 的创建、编辑、布局、评论与演讲者备注。"
-    },
-    {
-      "name": "remotion-video-creation",
-      "domain": "07-media-content",
-      "path": "skills/07-media-content/remotion-video-creation/",
-      "descriptionZh": "Remotion 在 React 中做视频创作的 29 条领域规则（3D、动画、字幕、过渡）。"
-    },
-    {
       "name": "ui-ux-pro-max",
       "domain": "07-media-content",
       "path": "skills/07-media-content/ui-ux-pro-max/",
       "descriptionZh": "设计、构建或审查 Web/移动端 UI 时，检索风格、配色、字体、布局、UX、动效、图表及多技术栈实现建议。"
-    },
-    {
-      "name": "wechat-article",
-      "domain": "07-media-content",
-      "path": "skills/07-media-content/wechat-article/",
-      "descriptionZh": "傅盛风格的公众号文章创作：对话式、故事驱动、有观点。"
     },
     {
       "name": "xlsx",
@@ -292,84 +237,11 @@
       "descriptionZh": "高级财务建模套件，含 DCF 估值、敏感性分析、蒙特卡洛模拟。"
     },
     {
-      "name": "healthcare-cdss-patterns",
-      "domain": "10-business-industry",
-      "path": "skills/10-business-industry/healthcare-cdss-patterns/",
-      "descriptionZh": "临床决策支持系统开发：药物互作、剂量校验、临床评分、告警分级与 EMR 集成。"
-    },
-    {
-      "name": "healthcare-emr-patterns",
-      "domain": "10-business-industry",
-      "path": "skills/10-business-industry/healthcare-emr-patterns/",
-      "descriptionZh": "医疗 EMR/EHR 开发模式：临床安全、就诊流程、处方生成、CDSS 集成、无障碍 UI。"
-    },
-    {
-      "name": "healthcare-eval-harness",
-      "domain": "10-business-industry",
-      "path": "skills/10-business-industry/healthcare-eval-harness/",
-      "descriptionZh": "医疗发布的病人安全评测 harness：CDSS、PHI、临床流程与集成合规，失败阻断上线。"
-    },
-    {
-      "name": "healthcare-phi-compliance",
-      "domain": "10-business-industry",
-      "path": "skills/10-business-industry/healthcare-phi-compliance/",
-      "descriptionZh": "医疗应用 PHI/PII 合规：数据分级、访问控制、审计、加密、常见泄漏路径。"
-    },
-    {
       "name": "xhs-pharma-social-listening",
       "domain": "10-business-industry",
       "path": "skills/10-business-industry/xhs-pharma-social-listening/",
       "descriptionZh": "面向外资药企员工痛点的小红书证据化舆情研究：采集并分析药企、岗位、合规、医学事务与 AI 相关笔记和评论，按去重笔记加去重评论计算独立证据，并处理 MediaCrawler CAPTCHA/461 与 OpenCLI 回退。"
     }
   ],
-  "projects": [
-    {
-      "name": "aliyun-openapi-mcp-ops",
-      "project": "ai-seed-project",
-      "path": "projects/ai-seed-project/aliyun-openapi-mcp-ops/",
-      "descriptionZh": "通过自建 OpenAPI MCP 运维阿里云，聚焦 SWAS 部署：OAuth、选择器更新、诊断、预发验证。"
-    },
-    {
-      "name": "feishu-automation",
-      "project": "ai-seed-project",
-      "path": "projects/ai-seed-project/feishu-automation/",
-      "descriptionZh": "飞书自动化能力，优先用官方 OpenAPI MCP/CLI，不把后台配置动作误判为 MCP 能力。"
-    },
-    {
-      "name": "aliyun-swas-manage",
-      "project": "ai-seed-project-phase-one-feishu",
-      "path": "projects/ai-seed-project-phase-one-feishu/aliyun-swas-manage/",
-      "descriptionZh": "端到端管理阿里云 SWAS：实例、命令、磁盘快照、防火墙、监控与轻量数据库。"
-    },
-    {
-      "name": "feishu-card-ws",
-      "project": "ai-seed-project-phase-one-feishu",
-      "path": "projects/ai-seed-project-phase-one-feishu/feishu-card-ws/",
-      "descriptionZh": "飞书交互式卡片在 WebSocket 长连接模式下的配置指南与回调处理。"
-    },
-    {
-      "name": "163-email-ground-truth",
-      "project": "codex-invoice",
-      "path": "projects/codex-invoice/163-email-ground-truth/",
-      "descriptionZh": "163/网易邮箱真值集构建、审计与跑批，含 IMAP ID 命令等特殊处理。"
-    },
-    {
-      "name": "controlled-lockcheck-autofix",
-      "project": "codex-invoice",
-      "path": "projects/codex-invoice/controlled-lockcheck-autofix/",
-      "descriptionZh": "QQ 受控前端 lockcheck 自动化：失败分类、受限自动修复、打包门的证据留存。"
-    },
-    {
-      "name": "email-batch-test",
-      "project": "codex-invoice",
-      "path": "projects/codex-invoice/email-batch-test/",
-      "descriptionZh": "跑批测试标准与双邮箱回归门禁：P0/P1/P2 标准与保护区改动的双邮箱验证。"
-    },
-    {
-      "name": "qq-email-ground-truth",
-      "project": "codex-invoice",
-      "path": "projects/codex-invoice/qq-email-ground-truth/",
-      "descriptionZh": "构建/重建/审计/比对 QQ 邮箱发票真值集，验证跑批输出。"
-    }
-  ]
+  "projects": []
 }
