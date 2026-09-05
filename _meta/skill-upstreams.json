@@ -1,14 +1,14 @@
 {
   "version": "1.1",
-  "updated_at": "2026-09-03",
+  "updated_at": "2026-09-05",
   "purpose": "Track verified original upstream repositories for Skill-hub skills so future upgrades can compare evidence-backed sources instead of guessing by skill name.",
   "scope": {
     "startsFrom": [
       "_meta/skill-upstreams.json",
       "_meta/skills-lock.json"
     ],
-    "localSkillCount": 50,
-    "sharedSkillCount": 42,
+    "localSkillCount": 60,
+    "sharedSkillCount": 52,
     "projectSkillCount": 8
   },
   "rules": [
@@ -26,7 +26,7 @@
   },
   "verificationSummary": {
     "countsByClassification": {
-      "open-source": 23,
+      "open-source": 33,
       "self": 16,
       "local": 10,
       "candidate": 1
@@ -327,6 +327,136 @@
       "notes": "Mapped import preserves the complete upstream directory, repository-level MIT license, and two privacy-required local-path sanitizations."
     },
     {
+      "name": "general-video",
+      "path": "skills/07-media-content/general-video/",
+      "classification": "open-source",
+      "upstream": { "url": "https://github.com/heygen-com/hyperframes", "path": "skills/general-video/", "ref": "main" },
+      "lastChecked": { "date": "2026-09-05", "commit": "ae3d80c30f89f8811e27189838f8a1f34572d062" },
+      "license": "Apache-2.0",
+      "updatePolicy": "mapped",
+      "status": "installed-snapshot-current",
+      "evidence": ["Installed tree matched the pinned upstream directory file-for-file before backup."],
+      "verificationPath": ["Compare the installed-source hash in docs/astra-transition-skill-snapshots.md and the pinned upstream tree."],
+      "notes": "Backup of the installed Skill removed from the active Codex roots during the Astra transition."
+    },
+    {
+      "name": "hyperframes",
+      "path": "skills/07-media-content/hyperframes/",
+      "classification": "open-source",
+      "upstream": { "url": "https://github.com/heygen-com/hyperframes", "path": "skills/hyperframes/", "ref": "main" },
+      "lastChecked": { "date": "2026-09-05", "commit": "ae3d80c30f89f8811e27189838f8a1f34572d062" },
+      "license": "Apache-2.0",
+      "updatePolicy": "mapped",
+      "status": "installed-snapshot-current",
+      "evidence": ["Installed tree matched the pinned upstream directory file-for-file before backup."],
+      "verificationPath": ["Compare the installed-source hash in docs/astra-transition-skill-snapshots.md and the pinned upstream tree."],
+      "notes": "Backup of the installed Skill removed from the active Codex roots during the Astra transition."
+    },
+    {
+      "name": "hyperframes-animation",
+      "path": "skills/07-media-content/hyperframes-animation/",
+      "classification": "open-source",
+      "upstream": { "url": "https://github.com/heygen-com/hyperframes", "path": "skills/hyperframes-animation/", "ref": "main" },
+      "lastChecked": { "date": "2026-09-05", "commit": "ae3d80c30f89f8811e27189838f8a1f34572d062" },
+      "license": "Apache-2.0",
+      "updatePolicy": "mapped",
+      "status": "installed-snapshot-current",
+      "evidence": ["Installed tree matched the pinned upstream directory file-for-file before backup."],
+      "verificationPath": ["Compare the installed-source hash in docs/astra-transition-skill-snapshots.md and the pinned upstream tree."],
+      "notes": "Backup of the installed Skill removed from the active Codex roots during the Astra transition."
+    },
+    {
+      "name": "hyperframes-audio",
+      "path": "skills/07-media-content/hyperframes-audio/",
+      "classification": "open-source",
+      "upstream": { "url": "https://github.com/heygen-com/hyperframes", "path": "skills/hyperframes-audio/", "ref": "main" },
+      "lastChecked": { "date": "2026-09-05", "commit": "ae3d80c30f89f8811e27189838f8a1f34572d062" },
+      "license": "Apache-2.0",
+      "updatePolicy": "mapped",
+      "status": "installed-snapshot-validator-mapped",
+      "evidence": ["Installed tree matched the pinned upstream before a description-only angle-bracket normalization required by the repository validator."],
+      "verificationPath": ["Compare the installed-source hash in docs/astra-transition-skill-snapshots.md and the pinned upstream tree."],
+      "notes": "Automatic mirror is disabled because the public Skill Hub copy normalizes one custom-element mention in frontmatter."
+    },
+    {
+      "name": "hyperframes-cli",
+      "path": "skills/07-media-content/hyperframes-cli/",
+      "classification": "open-source",
+      "upstream": { "url": "https://github.com/heygen-com/hyperframes", "path": "skills/hyperframes-cli/", "ref": "main" },
+      "lastChecked": { "date": "2026-09-05", "commit": "ae3d80c30f89f8811e27189838f8a1f34572d062" },
+      "license": "Apache-2.0",
+      "updatePolicy": "mapped",
+      "status": "installed-snapshot-current",
+      "evidence": ["Installed tree matched the pinned upstream directory file-for-file before backup."],
+      "verificationPath": ["Compare the installed-source hash in docs/astra-transition-skill-snapshots.md and the pinned upstream tree."],
+      "notes": "Backup of the installed Skill removed from the active Codex roots during the Astra transition."
+    },
+    {
+      "name": "hyperframes-core",
+      "path": "skills/07-media-content/hyperframes-core/",
+      "classification": "open-source",
+      "upstream": { "url": "https://github.com/heygen-com/hyperframes", "path": "skills/hyperframes-core/", "ref": "main" },
+      "lastChecked": { "date": "2026-09-05", "commit": "ae3d80c30f89f8811e27189838f8a1f34572d062" },
+      "license": "Apache-2.0",
+      "updatePolicy": "mapped",
+      "status": "installed-snapshot-current",
+      "evidence": ["Installed tree matched the pinned upstream directory file-for-file before backup."],
+      "verificationPath": ["Compare the installed-source hash in docs/astra-transition-skill-snapshots.md and the pinned upstream tree."],
+      "notes": "Backup of the installed Skill removed from the active Codex roots during the Astra transition."
+    },
+    {
+      "name": "hyperframes-creative",
+      "path": "skills/07-media-content/hyperframes-creative/",
+      "classification": "open-source",
+      "upstream": { "url": "https://github.com/heygen-com/hyperframes", "path": "skills/hyperframes-creative/", "ref": "main" },
+      "lastChecked": { "date": "2026-09-05", "commit": "ae3d80c30f89f8811e27189838f8a1f34572d062" },
+      "license": "Apache-2.0",
+      "updatePolicy": "mapped",
+      "status": "installed-snapshot-with-declared-divergence",
+      "evidence": ["The installed snapshot differs from the pinned upstream only at references/house-style.md."],
+      "verificationPath": ["Compare the installed-source hash and declared divergence in docs/astra-transition-skill-snapshots.md."],
+      "notes": "The older installed file is intentionally preserved; updates require review."
+    },
+    {
+      "name": "hyperframes-keyframes",
+      "path": "skills/07-media-content/hyperframes-keyframes/",
+      "classification": "open-source",
+      "upstream": { "url": "https://github.com/heygen-com/hyperframes", "path": "skills/hyperframes-keyframes/", "ref": "main" },
+      "lastChecked": { "date": "2026-09-05", "commit": "ae3d80c30f89f8811e27189838f8a1f34572d062" },
+      "license": "Apache-2.0",
+      "updatePolicy": "mapped",
+      "status": "installed-snapshot-current",
+      "evidence": ["Installed tree matched the pinned upstream directory file-for-file before backup."],
+      "verificationPath": ["Compare the installed-source hash in docs/astra-transition-skill-snapshots.md and the pinned upstream tree."],
+      "notes": "Backup of the installed Skill removed from the active Codex roots during the Astra transition."
+    },
+    {
+      "name": "hyperframes-registry",
+      "path": "skills/07-media-content/hyperframes-registry/",
+      "classification": "open-source",
+      "upstream": { "url": "https://github.com/heygen-com/hyperframes", "path": "skills/hyperframes-registry/", "ref": "main" },
+      "lastChecked": { "date": "2026-09-05", "commit": "ae3d80c30f89f8811e27189838f8a1f34572d062" },
+      "license": "Apache-2.0",
+      "updatePolicy": "mapped",
+      "status": "installed-snapshot-with-declared-divergence",
+      "evidence": ["The installed snapshot differs from the pinned upstream only at references/contributing.md."],
+      "verificationPath": ["Compare the installed-source hash and declared divergence in docs/astra-transition-skill-snapshots.md."],
+      "notes": "The older installed file is intentionally preserved; updates require review."
+    },
+    {
+      "name": "media-use",
+      "path": "skills/07-media-content/media-use/",
+      "classification": "open-source",
+      "upstream": { "url": "https://github.com/heygen-com/hyperframes", "path": "skills/media-use/", "ref": "main" },
+      "lastChecked": { "date": "2026-09-05", "commit": "ae3d80c30f89f8811e27189838f8a1f34572d062" },
+      "license": "Apache-2.0",
+      "updatePolicy": "mapped",
+      "status": "installed-snapshot-privacy-mapped",
+      "evidence": ["Installed tree matched the pinned upstream before one repository-only PostHog project-key redaction."],
+      "verificationPath": ["Compare the installed-source hash and privacy mapping in docs/astra-transition-skill-snapshots.md."],
+      "notes": "Automatic mirror is disabled because the public Skill Hub copy intentionally redacts the embedded telemetry project key."
+    },
+    {
       "name": "impeccable",
       "path": "skills/07-media-content/impeccable/",
       "classification": "open-source",
@@ -513,26 +643,27 @@
       "path": "skills/07-media-content/remotion-video-creation/",
       "classification": "open-source",
       "upstream": {
-        "url": "https://github.com/affaan-m/ECC",
-        "path": "skills/remotion-video-creation/",
+        "url": "https://github.com/remotion-dev/remotion",
+        "path": "packages/agent-plugin/",
         "ref": "main"
       },
       "lastChecked": {
-        "date": "2026-08-29",
-        "commit": "656d4b5746413e4e78f9c62cb34d686515931f4f"
+        "date": "2026-09-05",
+        "commit": "cb053ab25292f8e7559dc5295f4286cde2268481"
       },
-      "updatePolicy": "mirror",
-      "status": "updated",
+      "license": "MIT",
+      "updatePolicy": "mapped",
+      "status": "openai-curated-plugin-snapshot-1.0.3",
       "evidence": [
-        "Prior source index entry existed or explicit local URL was present.",
-        "Repository cloned or fetched during this audit.",
-        "Read-only normalized hash audit verified the recorded upstream directory/status."
+        "The installed remotion@openai-curated 1.0.3 manifest declares Remotion as author, this repository, and the MIT license.",
+        "The complete installed skill tree was copied before plugin uninstall and its source hash is recorded in docs/astra-transition-skill-snapshots.md.",
+        "The repository folder name is retained in frontmatter as a deliberate Skill Hub mapping."
       ],
       "verificationPath": [
-        ".\\skills\\01-agent-engineering\\skill-lifecycle-manager\\scripts\\check_upstreams.ps1",
-        "Compare normalized file hashes before any mirror or mapped update."
+        "Compare the installed-source hash and declared mapping in docs/astra-transition-skill-snapshots.md.",
+        "Reinstall remotion@openai-curated to validate the managed plugin independently."
       ],
-      "notes": "Exact upstream directory verified by prior index and read-only normalized hash audit. Remotion official skill is tracked only as an alternative candidate."
+      "notes": "Deliberate migration from the prior ECC mirror to the installed official Remotion plugin snapshot; automatic mirror remains disabled."
     },
     {
       "name": "wechat-article",
@@ -1091,20 +1222,6 @@
     }
   ],
   "alternateCandidates": [
-    {
-      "name": "remotion-video-creation",
-      "path": "skills/07-media-content/remotion-video-creation/",
-      "candidate": {
-        "url": "https://github.com/remotion-dev/skills",
-        "path": "skills/remotion/",
-        "ref": "main"
-      },
-      "evidence": [
-        "Remotion maintains an official skill repository, but the local skill exactly matched ECC remotion-video-creation in the prior normalized audit.",
-        "Do not replace the ECC source without a deliberate migration decision."
-      ],
-      "status": "alternative-upstream-not-used"
-    },
     {
       "name": "frontend-design",
       "path": "skills/03-frameworks/frontend-design/",

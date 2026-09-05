@@ -1,11 +1,11 @@
 {
   "version": "2.0",
-  "generated_at": "2026-09-03T21:23:47+08:00",
-  "note": "Rebuilt indexes from repository SKILL.md files. Total: 42 shared + 8 projects = 50 total",
+  "generated_at": "2026-09-05T23:10:12+08:00",
+  "note": "Rebuilt indexes from repository SKILL.md files. Total: 52 shared + 8 projects = 60 total",
   "counts": {
-    "shared": 42,
+    "shared": 52,
     "projects": 8,
-    "total": 50
+    "total": 60
   },
   "shared": [
     {
@@ -54,15 +54,13 @@
       "name": "yq-pre-push-checks",
       "domain": "01-agent-engineering",
       "path": "skills/01-agent-engineering/yq-pre-push-checks/",
-      "descriptionZh": "推送或宣称就绪前，选择与变更风险匹配的最小验证。",
-      "_todo": "需要翻译 descriptionZh"
+      "descriptionZh": "推送或宣称就绪前，选择与变更风险匹配的最小验证。"
     },
     {
       "name": "yq-simplify-code",
       "domain": "01-agent-engineering",
       "path": "skills/01-agent-engineering/yq-simplify-code/",
-      "descriptionZh": "审计代码、测试或门禁是否重复、过度设计或失去用途。",
-      "_todo": "需要翻译 descriptionZh"
+      "descriptionZh": "审计代码、测试或门禁是否重复、过度设计或失去用途。"
     },
     {
       "name": "yq-windows-trash-cleaner",
@@ -108,6 +106,12 @@
       "descriptionZh": "全面处理 .docx：创建、编辑、修订跟踪、评论、格式保留与文本提取。"
     },
     {
+      "name": "general-video",
+      "domain": "07-media-content",
+      "path": "skills/07-media-content/general-video/",
+      "descriptionZh": "没有专用流程时，用 HyperFrames 制作或编辑多场景视频。"
+    },
+    {
       "name": "github-readme-visuals",
       "domain": "07-media-content",
       "path": "skills/07-media-content/github-readme-visuals/",
@@ -118,6 +122,54 @@
       "domain": "07-media-content",
       "path": "skills/07-media-content/html-design-polish/",
       "descriptionZh": "网页需要产品清晰度、信息层级、响应式或视觉系统美化、重设计或设计审计时使用。"
+    },
+    {
+      "name": "hyperframes",
+      "domain": "07-media-content",
+      "path": "skills/07-media-content/hyperframes/",
+      "descriptionZh": "创建、编辑、动画化或渲染 HyperFrames 视频时的必读入口。"
+    },
+    {
+      "name": "hyperframes-animation",
+      "domain": "07-media-content",
+      "path": "skills/07-media-content/hyperframes-animation/",
+      "descriptionZh": "为 HyperFrames 选择动作规则、场景蓝图、转场及动画运行时。"
+    },
+    {
+      "name": "hyperframes-audio",
+      "domain": "07-media-content",
+      "path": "skills/07-media-content/hyperframes-audio/",
+      "descriptionZh": "混合 HyperFrames 现有音频的淡入淡出、压限、自动化与总线。"
+    },
+    {
+      "name": "hyperframes-cli",
+      "domain": "07-media-content",
+      "path": "skills/07-media-content/hyperframes-cli/",
+      "descriptionZh": "使用 HyperFrames CLI 初始化、检查、预览、渲染和发布作品。"
+    },
+    {
+      "name": "hyperframes-core",
+      "domain": "07-media-content",
+      "path": "skills/07-media-content/hyperframes-core/",
+      "descriptionZh": "编写 HyperFrames 可渲染项目的结构、时间轴、轨道和确定性契约。"
+    },
+    {
+      "name": "hyperframes-creative",
+      "domain": "07-media-content",
+      "path": "skills/07-media-content/hyperframes-creative/",
+      "descriptionZh": "规划 HyperFrames 的画面、配色、字体、旁白、节拍和品牌风格。"
+    },
+    {
+      "name": "hyperframes-keyframes",
+      "domain": "07-media-content",
+      "path": "skills/07-media-content/hyperframes-keyframes/",
+      "descriptionZh": "为 HyperFrames 添加缩放、重构图、镜头移动和可跳转关键帧。"
+    },
+    {
+      "name": "hyperframes-registry",
+      "domain": "07-media-content",
+      "path": "skills/07-media-content/hyperframes-registry/",
+      "descriptionZh": "发现、安装并接入 HyperFrames registry 的区块和组件。"
     },
     {
       "name": "imagegen",
@@ -142,6 +194,12 @@
       "domain": "07-media-content",
       "path": "skills/07-media-content/make-interfaces-feel-better/",
       "descriptionZh": "构建或审查 UI 细节、动画、排版、阴影、圆角、光学对齐和微交互，让界面更精致自然时使用。"
+    },
+    {
+      "name": "media-use",
+      "domain": "07-media-content",
+      "path": "skills/07-media-content/media-use/",
+      "descriptionZh": "为 HyperFrames 解析、生成、处理并复用音频、图像和品牌素材。"
     },
     {
       "name": "pdf",
@@ -201,29 +259,25 @@
       "name": "yq-doc-maintenance",
       "domain": "08-writing-marketing",
       "path": "skills/08-writing-marketing/yq-doc-maintenance/",
-      "descriptionZh": "文档出现腐化、冲突、重复、导航或归档混乱时使用。",
-      "_todo": "需要翻译 descriptionZh"
+      "descriptionZh": "文档出现腐化、冲突、重复、导航或归档混乱时使用。"
     },
     {
       "name": "yq-remove-reasoning-leaks",
       "domain": "08-writing-marketing",
       "path": "skills/08-writing-marketing/yq-remove-reasoning-leaks/",
-      "descriptionZh": "技术文本残留评审过程、草稿引用或推理旁白时使用。",
-      "_todo": "需要翻译 descriptionZh"
+      "descriptionZh": "技术文本残留评审过程、草稿引用或推理旁白时使用。"
     },
     {
       "name": "yq-technical-writing",
       "domain": "08-writing-marketing",
       "path": "skills/08-writing-marketing/yq-technical-writing/",
-      "descriptionZh": "编写或精简技术文档、注释、提示词和界面文案时使用。",
-      "_todo": "需要翻译 descriptionZh"
+      "descriptionZh": "编写或精简技术文档、注释、提示词和界面文案时使用。"
     },
     {
       "name": "yq-translate-docs",
       "domain": "08-writing-marketing",
       "path": "skills/08-writing-marketing/yq-translate-docs/",
-      "descriptionZh": "维护中英双语文档的语义一致、结构对应和自然表达。",
-      "_todo": "需要翻译 descriptionZh"
+      "descriptionZh": "维护中英双语文档的语义一致、结构对应和自然表达。"
     },
     {
       "name": "contract-review",

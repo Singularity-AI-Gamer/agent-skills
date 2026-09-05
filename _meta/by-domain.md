@@ -1,6 +1,6 @@
 # 按能力域索引
 
-共 50 个技能，按 7 个能力域 + projects（项目私有）分组。
+共 60 个技能，按 7 个能力域 + projects（项目私有）分组。
 
 ## 目录
 
@@ -8,7 +8,7 @@
 - [02 编程语言](#02-编程语言)（1）
 - [03 框架与技术栈](#03-框架与技术栈)（3）
 - [06 数据与检索](#06-数据与检索)（1）
-- [07 媒体与内容制作](#07-媒体与内容制作)（15）
+- [07 媒体与内容制作](#07-媒体与内容制作)（25）
 - [08 写作与营销](#08-写作与营销)（5）
 - [10 行业与业务](#10-行业与业务)（7）
 - [Projects 项目私有](#projects-项目私有)（8）
@@ -48,17 +48,27 @@
 |---|---|---|
 | **data-scraper-agent** | [skills/06-data-search/data-scraper-agent/](../skills/06-data-search/data-scraper-agent/) | 构建全自动 AI 数据采集 Agent：按计划抓取公开源并用 LLM 富化入库。 |
 
-## 07 媒体与内容制作（15）
+## 07 媒体与内容制作（25）
 
 | 技能名 | 路径 | 中文简介 |
 |---|---|---|
 | **docx** | [skills/07-media-content/docx/](../skills/07-media-content/docx/) | 全面处理 .docx：创建、编辑、修订跟踪、评论、格式保留与文本提取。 |
+| **general-video** | [skills/07-media-content/general-video/](../skills/07-media-content/general-video/) | 没有专用流程时，用 HyperFrames 制作或编辑多场景视频。 |
 | **github-readme-visuals** | [skills/07-media-content/github-readme-visuals/](../skills/07-media-content/github-readme-visuals/) | 为 GitHub 仓库创建或更新产品主视觉、完整软件界面截图及中英文 README 图片区，并支持按参考图进行可验证的几何复刻。 |
 | **html-design-polish** | [skills/07-media-content/html-design-polish/](../skills/07-media-content/html-design-polish/) | 网页需要产品清晰度、信息层级、响应式或视觉系统美化、重设计或设计审计时使用。 |
+| **hyperframes** | [skills/07-media-content/hyperframes/](../skills/07-media-content/hyperframes/) | 创建、编辑、动画化或渲染 HyperFrames 视频时的必读入口。 |
+| **hyperframes-animation** | [skills/07-media-content/hyperframes-animation/](../skills/07-media-content/hyperframes-animation/) | 为 HyperFrames 选择动作规则、场景蓝图、转场及动画运行时。 |
+| **hyperframes-audio** | [skills/07-media-content/hyperframes-audio/](../skills/07-media-content/hyperframes-audio/) | 混合 HyperFrames 现有音频的淡入淡出、压限、自动化与总线。 |
+| **hyperframes-cli** | [skills/07-media-content/hyperframes-cli/](../skills/07-media-content/hyperframes-cli/) | 使用 HyperFrames CLI 初始化、检查、预览、渲染和发布作品。 |
+| **hyperframes-core** | [skills/07-media-content/hyperframes-core/](../skills/07-media-content/hyperframes-core/) | 编写 HyperFrames 可渲染项目的结构、时间轴、轨道和确定性契约。 |
+| **hyperframes-creative** | [skills/07-media-content/hyperframes-creative/](../skills/07-media-content/hyperframes-creative/) | 规划 HyperFrames 的画面、配色、字体、旁白、节拍和品牌风格。 |
+| **hyperframes-keyframes** | [skills/07-media-content/hyperframes-keyframes/](../skills/07-media-content/hyperframes-keyframes/) | 为 HyperFrames 添加缩放、重构图、镜头移动和可跳转关键帧。 |
+| **hyperframes-registry** | [skills/07-media-content/hyperframes-registry/](../skills/07-media-content/hyperframes-registry/) | 发现、安装并接入 HyperFrames registry 的区块和组件。 |
 | **imagegen** | [skills/07-media-content/imagegen/](../skills/07-media-content/imagegen/) | 生成或编辑光栅图像（照片、插画、纹理、UI 模型等）。 |
 | **impeccable** | [skills/07-media-content/impeccable/](../skills/07-media-content/impeccable/) | 设计、重设计、审计或精修生产级前端界面，涵盖信息架构、视觉层级、响应式、无障碍、动效与设计系统时使用。 |
 | **jianying-editor** | [skills/07-media-content/jianying-editor/](../skills/07-media-content/jianying-editor/) | 剪映 AI 自动剪辑高级封装 API（JyWrapper）：录屏、素材、字幕、Web 动效。 |
 | **make-interfaces-feel-better** | [skills/07-media-content/make-interfaces-feel-better/](../skills/07-media-content/make-interfaces-feel-better/) | 构建或审查 UI 细节、动画、排版、阴影、圆角、光学对齐和微交互，让界面更精致自然时使用。 |
+| **media-use** | [skills/07-media-content/media-use/](../skills/07-media-content/media-use/) | 为 HyperFrames 解析、生成、处理并复用音频、图像和品牌素材。 |
 | **pdf** | [skills/07-media-content/pdf/](../skills/07-media-content/pdf/) | "Use when tasks involve reading, creating, or reviewing PDF files where rendering and layout matter; prefer visual checks by rendering pages (Poppler) and use Python tools such as `reportlab`, `pdfplumber`, and `pypdf` for generation and extraction." |
 | **ppt-nano** | [skills/07-media-content/ppt-nano/](../skills/07-media-content/ppt-nano/) | 白板板书风格 PPT 生成，适合教学、汇报、头脑风暴。 |
 | **pptx** | [skills/07-media-content/pptx/](../skills/07-media-content/pptx/) | 演示文稿 .pptx 的创建、编辑、布局、评论与演讲者备注。 |
