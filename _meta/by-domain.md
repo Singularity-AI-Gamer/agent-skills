@@ -44,7 +44,7 @@
 | **electron-development** | [skills/03-frameworks/electron-development/](../skills/03-frameworks/electron-development/) | 开发 Electron 应用、本地打包，并在 GitHub Actions 构建和验收 macOS 安装包。 |
 | **frontend-design** | [skills/03-frameworks/frontend-design/](../skills/03-frameworks/frontend-design/) | 创建具有高设计质量的生产级前端界面。 |
 | **netlify-cli** | [skills/03-frameworks/netlify-cli/](../skills/03-frameworks/netlify-cli/) | 使用 Netlify CLI 完成安装、认证、站点关联、本地开发、环境变量管理与部署。 |
-| **yq-vps-vpn-deploy** | [skills/03-frameworks/yq-vps-vpn-deploy/](../skills/03-frameworks/yq-vps-vpn-deploy/) | 引导新手用 Agent 为搬瓦工等 VPS 部署双协议代理并导入客户端。 |
+| **yq-vps-vpn-deploy** | [skills/03-frameworks/yq-vps-vpn-deploy/](../skills/03-frameworks/yq-vps-vpn-deploy/) | 部署、复核和维护 VPS 双协议代理，验证 REALITY 的 HTTPS 回落、收敛公网入口、验证 TUIC 续期，并交付 Clash Verge 和 Shadowrocket 配置。 |
 
 ## 06 数据与检索（1）
 

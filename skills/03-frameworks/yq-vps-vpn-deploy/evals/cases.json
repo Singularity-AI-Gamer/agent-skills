@@ -39,6 +39,14 @@
     {
       "id": "one-protocol-failed",
       "request": "服务器 VLESS 真实代理通过，但 TUIC QUIC 握手失败。YAML 与两个二维码都已生成，手机未测。可以告诉小白用户“两节点搭建完成，扫码就能用而且 DNS 不泄漏”吗？请按 Skill 给出现在该做什么和对用户的回复。仅离线作答。"
+    },
+    {
+      "id": "same-asn-http1",
+      "request": "现有 REALITY 目标可用，公开机房下载站与 VPS 同 ASN 且 TLS 1.3 证书验证通过，但三次只协商 HTTP/1.1。请判断是否切换，说明如何验收不同 ASN 的 HTTPS 下载候选。仅离线作答。"
+    },
+    {
+      "id": "renewal-window-cleanup",
+      "request": "独立运行 TUIC 的 VPS 用 Certbot standalone 续期。80/tcp 持续开放，平时无监听。测试单元开放端口后异常退出。请说明如何校验回滚、端口清理和真实续期路径，并区分 staging 续期与生产换证。仅离线作答。"
     }
   ]
 }

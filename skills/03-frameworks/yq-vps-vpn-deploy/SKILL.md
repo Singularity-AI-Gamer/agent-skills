@@ -1,6 +1,6 @@
 ---
 name: yq-vps-vpn-deploy
-description: 引导新手用 Agent 为搬瓦工等 VPS 部署双协议代理并导入客户端。
+description: 部署、复核和维护 VPS 双协议代理，验证 REALITY 的 HTTPS 回落、收敛公网入口、验证 TUIC 续期，并交付 Clash Verge 和 Shadowrocket 配置。
 ---
 
 # 引导新手部署 VPS 双协议代理
@@ -10,6 +10,8 @@ description: 引导新手用 Agent 为搬瓦工等 VPS 部署双协议代理并�
 用户不需要先懂 SSH、ASN、SNI 或证书。默认向用户索取邮件，不假设 Agent 能连接邮箱。不要要求用户先手抄端口、选择伪装域名或运行整套安装命令。每次只说明当前需要的资料、Agent 将完成的工作及用户能看到的结果。
 
 ## 先引导用户提供邮件
+
+复核或维护已部署 VPS 时，优先使用当前 SSH 资料、运行配置和既有交付。把用户附带的评估报告当作待验证的建议。用 [部署与恢复](references/deployment.md) 盘点真实公网入口，用 [伪装目标筛选](references/target-selection.md) 比较候选。涉及证书验证窗口时同时读 [时钟与 TUIC](references/clock-tuic.md)。修改后重新验收并按用户指定的名称交付。
 
 读 [邮件与资料收集](references/intake.md)。首次收到“我买了搬瓦工，帮我搭 VPN”时，直接给出该文档的开场请求。引导用户在注册邮箱搜索以下三个标题，粘贴邮件全文，或保存为仅本机可读的文件后提供路径：
 
@@ -35,7 +37,7 @@ description: 引导新手用 Agent 为搬瓦工等 VPS 部署双协议代理并�
 
 1. 读 [部署与恢复](references/deployment.md)，检查官方文档和版本兼容性。新部署生成新凭据；维护时保留未要求轮换的凭据。新增 TUIC 使用独立服务，保留已工作的 VLESS；旧兼容账户等用户确认导入成功后再按授权清理。
 2. 新增 TUIC、证书或排查间歇断流时，读 [时钟与 TUIC](references/clock-tuic.md)。先核对系统实际偏差，不能只看 NTP 服务已启动。
-3. 需要部署或更换 REALITY 目标时，读 [伪装目标筛选](references/target-selection.md)。从 VPS 实测候选，没有明确改善就保留现状。
+3. 需要部署或更换 REALITY 目标时，读 [伪装目标筛选](references/target-selection.md)。预筛候选实际握手与 HTTPS 行为，再比较真实代理。让明确改善和可恢复性共同决定是否切换。
 4. 建立仅本地保存的私密参数记录，包含服务器、SSH、版本和按协议区分的凭据。读 [客户端与交付](references/delivery.md)，从该记录生成 YAML、各协议 URI、本地二维码、备份和 MD。用户提供的密码不在回复中复述，生成的密钥不进入仓库、聊天正文或外部二维码服务。
 5. 读 [验收](references/verification.md)，逐协议验证真实代理、失败认证和交付一致性。长流、多客户端、证书续期分别记录；失败则按明确回滚命令恢复已验证状态。
 6. 读 [用户导入引导](references/import-guide.md)，将模板中的文件名、节点名和已测状态替换为本次产物，写入私密 MD，并在最终回复给出操作步骤。默认由用户自行导入，不能交付文件后就声称客户端已连接。用户发回具体卡点时继续协助，不重复索取已有凭据。

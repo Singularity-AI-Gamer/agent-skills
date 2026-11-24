@@ -60,5 +60,5 @@
 | 54 | **yq-technical-writing** | [skills/08-writing-marketing/yq-technical-writing/](../skills/08-writing-marketing/yq-technical-writing/) | 编写或精简技术文档、注释、提示词和界面文案时使用。 |
 | 55 | **yq-translate-docs** | [skills/08-writing-marketing/yq-translate-docs/](../skills/08-writing-marketing/yq-translate-docs/) | 维护中英双语文档的语义一致、结构对应和自然表达。 |
 | 56 | **yq-ui-checks** | [skills/07-media-content/yq-ui-checks/](../skills/07-media-content/yq-ui-checks/) | 开发或审查界面的反馈、可读性和交互边界时使用。 |
-| 57 | **yq-vps-vpn-deploy** | [skills/03-frameworks/yq-vps-vpn-deploy/](../skills/03-frameworks/yq-vps-vpn-deploy/) | 引导新手用 Agent 为搬瓦工等 VPS 部署双协议代理并导入客户端。 |
+| 57 | **yq-vps-vpn-deploy** | [skills/03-frameworks/yq-vps-vpn-deploy/](../skills/03-frameworks/yq-vps-vpn-deploy/) | 部署、复核和维护 VPS 双协议代理，验证 REALITY 的 HTTPS 回落、收敛公网入口、验证 TUIC 续期，并交付 Clash Verge 和 Shadowrocket 配置。 |
 | 58 | **yq-windows-trash-cleaner** | [skills/01-agent-engineering/yq-windows-trash-cleaner/](../skills/01-agent-engineering/yq-windows-trash-cleaner/) | Windows C盘、项目垃圾、Docker/WSL、Git worktree、CodeGraph、Agent 会话或内存异常需要安全审计、清理和验证时使用。 |

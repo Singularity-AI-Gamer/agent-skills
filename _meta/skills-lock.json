@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "generated_at": "2026-11-07T14:36:19+08:00",
+  "generated_at": "2026-11-24T20:39:40+08:00",
   "note": "Rebuilt indexes from repository SKILL.md files. Total: 58 shared + 0 projects = 58 total",
   "counts": {
     "shared": 58,
@@ -115,7 +115,7 @@
       "name": "yq-vps-vpn-deploy",
       "domain": "03-frameworks",
       "path": "skills/03-frameworks/yq-vps-vpn-deploy/",
-      "descriptionZh": "引导新手用 Agent 为搬瓦工等 VPS 部署双协议代理并导入客户端。"
+      "descriptionZh": "部署、复核和维护 VPS 双协议代理，验证 REALITY 的 HTTPS 回落、收敛公网入口、验证 TUIC 续期，并交付 Clash Verge 和 Shadowrocket 配置。"
     },
     {
       "name": "data-scraper-agent",
