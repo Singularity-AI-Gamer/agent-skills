@@ -62,6 +62,8 @@ CI runs the same suite on Windows and on POSIX hosts, and a value the operating 
 - Windows matches environment variable names case-insensitively, so a fixture seeding `http_proxy` and `HTTP_PROXY` as separate keys holds one entry there.
 - Windows releases file handles asynchronously, so a rename or removal that completes at once on a POSIX host needs a bounded retry sized to the observed contention.
 - Windows has no POSIX permission or signal semantics. A case that depends on them takes an explicit platform skip naming the reason, rather than an assertion weakened everywhere.
+- `fs.watch` events are not a record of what happened. Node does not guarantee the filename argument, and macOS FSEvents can replay changes made before the watch started, reporting the watched directory's own name. To prove nothing was created, compare directory listings and modification times before and after instead of counting watch events.
+- Keyboard shortcuts take the platform's primary modifier. A test that presses `Ctrl+End` fails on macOS, where the app expects `Meta+End`; use the platform-mapped modifier (for example Playwright's `ControlOrMeta`) or pick it from `process.platform`.
 
 Prefer an observation that holds on every platform. When a case genuinely cannot, exclude it on that platform explicitly.
 
@@ -72,6 +74,8 @@ A `describe` or case timeout overrides the runner's `--testTimeout` instead of y
 Raise the hook budget with the test budget. Setup and teardown pay the same contention, so lifting only the case budget moves a contended failure into `afterEach`.
 
 Where a timeout is the subject, keep the outer wait far larger than the timeout under test. A case proving that a 20 ms deadline fires must not race the harness's own wait, or load decides which deadline reports first.
+
+A wall-clock ceiling such as "finishes within 2 s" measures the runner's load, not the code. Keep it out of merge-gating suites; put it in a separate performance lane that does not block merges, and in the gated test assert the observable result or fake the clock.
 
 ## Synchronize on state
 
@@ -93,6 +97,7 @@ Calling `abort()`, `close()`, or `kill()` without awaiting the owned completion 
 
 - Observe an ordinary regression fail before the fix when practical.
 - For a new static or corpus guard, temporarily introduce the rejected case and observe the intended failure.
+- A corpus guard decides membership from declarations or imports, not from a regex over how code calls an API. A guard that found directory-listing tests by matching `readdirSync` text drew a new counterexample call shape in every review round, and a newly added test that listed a directory turned the guard red on the base branch for every open PR. A registry each test declares itself into, or the import graph, gives a membership the guard can decide exactly.
 - For a race, use barriers to prove overlap; repeated execution alone is not a race test.
 - For ports, sockets, shared paths, subprocesses, or other host resources, run independent test processes concurrently when cross-process isolation is part of the fix.
 - Where a fixture spawns with its own deadline, assert that no signal or timeout ended the child before asserting its exit status, so a killed child reports as a timeout instead of as a status mismatch.

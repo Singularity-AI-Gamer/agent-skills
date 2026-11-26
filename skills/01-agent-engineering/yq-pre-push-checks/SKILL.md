@@ -25,6 +25,8 @@ git branch --show-current
 
 After a base merge or rebase, recompute the scope. Reuse only evidence whose covered behavior and inputs were not invalidated.
 
+When the remote base has changed a registry-style file since your merge base (a guard registry, a scenario index, an error catalog, a lockfile), merge the latest base before validating. A registry check that passes against a stale base can fail as soon as your branch meets the entries other PRs added.
+
 ## Map risk to evidence
 
 Every behavior change needs the narrowest available check that would fail for its regression. Add broader checks only for surfaces the diff can credibly affect.
@@ -40,6 +42,8 @@ Every behavior change needs the narrowest available check that would fail for it
 - **Security or permission boundaries:** run the relevant policy, negative, and abuse-path checks rather than relying on a happy-path test.
 
 Inspect what each check proves. A command finishing successfully is not evidence for behavior it never exercised.
+
+Guards that scan the whole repository (an inventory of tests, a ban on a pattern anywhere in the source, a catalog that must match its callers) are relevant to every diff, whatever files it touches. Run the repository's guard set before every push; a focused test selection never nominates them.
 
 ### Coverage must follow affected source
 
