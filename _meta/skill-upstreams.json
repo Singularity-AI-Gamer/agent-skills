@@ -1,14 +1,14 @@
 {
   "version": "1.1",
-  "updated_at": "2026-11-07",
+  "updated_at": "2026-11-28",
   "purpose": "Track verified original upstream repositories for Skill-hub skills so future upgrades can compare evidence-backed sources instead of guessing by skill name.",
   "scope": {
     "startsFrom": [
       "_meta/skill-upstreams.json",
       "_meta/skills-lock.json"
     ],
-    "localSkillCount": 66,
-    "sharedSkillCount": 58,
+    "localSkillCount": 67,
+    "sharedSkillCount": 59,
     "projectSkillCount": 8
   },
   "rules": [
@@ -27,7 +27,7 @@
   "verificationSummary": {
     "countsByClassification": {
       "open-source": 36,
-      "self": 19,
+      "self": 20,
       "local": 10,
       "candidate": 1
     },
@@ -1432,6 +1432,22 @@
         "Protocol references point to official Xray and mihomo documentation; no server credentials or instance artifacts are included."
       ],
       "notes": "Reusable procedure covering REALITY plus independent TUIC, measured clock correction, verified TLS and certificate renewal, and bounded concurrency and long-stream acceptance. Target and version selection require fresh testing for each deployment. Guided intake defaults to user-supplied mail text or private files, with no mailbox-connector prerequisite; delivery includes novice client import steps."
+    },
+    {
+      "name": "yq-software-promo-video",
+      "path": "skills/07-media-content/yq-software-promo-video/",
+      "classification": "self",
+      "updatePolicy": "none",
+      "status": "self-maintained-yq-software-promo-video",
+      "evidence": [
+        "Owner-authored reusable 45-second software promo short-video workflow created following skill-creator conventions.",
+        "Passed skill-creator quick_validate.py, Python py_compile + synthetic audio checks, and public privacy/decoupling scan."
+      ],
+      "verificationPath": [
+        "Use this repository history as the canonical source.",
+        "Run skill-creator quick_validate.py and bundled script self-checks after changes."
+      ],
+      "notes": "Self-maintained shared skill for reusable 45s software promo videos (full-window + zoomed callouts, continuous built-in TTS timing, global-clock stereo mixing gate, and 4-platform safe-zone covers); external automatic updates disabled."
     }
   ],
   "alternateCandidates": [

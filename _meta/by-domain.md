@@ -1,6 +1,6 @@
 # 按能力域索引
 
-共 58 个技能，按 7 个能力域 + projects（项目私有）分组。
+共 59 个技能，按 7 个能力域 + projects（项目私有）分组。
 
 ## 目录
 
@@ -8,7 +8,7 @@
 - [02 编程语言](#02-编程语言)（1）
 - [03 框架与技术栈](#03-框架与技术栈)（4）
 - [06 数据与检索](#06-数据与检索)（1）
-- [07 媒体与内容制作](#07-媒体与内容制作)（26）
+- [07 媒体与内容制作](#07-媒体与内容制作)（27）
 - [08 写作与营销](#08-写作与营销)（5）
 - [10 行业与业务](#10-行业与业务)（8）
 - [Projects 项目私有](#projects-项目私有)（0）
@@ -52,7 +52,7 @@
 |---|---|---|
 | **data-scraper-agent** | [skills/06-data-search/data-scraper-agent/](../skills/06-data-search/data-scraper-agent/) | 构建全自动 AI 数据采集 Agent：按计划抓取公开源并用 LLM 富化入库。 |
 
-## 07 媒体与内容制作（26）
+## 07 媒体与内容制作（27）
 
 | 技能名 | 路径 | 中文简介 |
 |---|---|---|
@@ -81,6 +81,7 @@
 | **wechat-article** | [skills/07-media-content/wechat-article/](../skills/07-media-content/wechat-article/) | 傅盛风格的公众号文章创作：对话式、故事驱动、有观点。 |
 | **xlsx** | [skills/07-media-content/xlsx/](../skills/07-media-content/xlsx/) | 电子表格 .xlsx/.csv 等创建、编辑、公式、格式、数据分析与可视化。 |
 | **yq-editorial-presentation-html** | [skills/07-media-content/yq-editorial-presentation-html/](../skills/07-media-content/yq-editorial-presentation-html/) | Anthropic 暖色编辑设计语言，用于演示/case sharing/战略汇报。 |
+| **yq-software-promo-video** | [skills/07-media-content/yq-software-promo-video/](../skills/07-media-content/yq-software-promo-video/) | 制作 45 秒软件拉新宣传短视频（纸艺定格或实机动效），涵盖痛点钩子分镜、全屏实机与局部放大双层构图、原速连贯 TTS 配音反推切镜、全局节拍立体声配乐混音校验及多平台防限流封面文案；当用户要为桌面软件、Web 应用、CLI 或开源项目制作 30-60 秒宣传片、产品功能演示短视频或 B站/抖音/小红书/知乎投放物料时使用。 |
 | **yq-ui-checks** | [skills/07-media-content/yq-ui-checks/](../skills/07-media-content/yq-ui-checks/) | 开发或审查界面的反馈、可读性和交互边界时使用。 |
 
 ## 08 写作与营销（5）

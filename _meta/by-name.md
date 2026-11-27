@@ -1,6 +1,6 @@
 # 按技能名 A-Z 索引
 
-共 58 个技能（58 个共享 + 0 个项目私有）。项目私有技能以 *(项目)* 标注。
+共 59 个技能（59 个共享 + 0 个项目私有）。项目私有技能以 *(项目)* 标注。
 
 | # | 技能名 | 路径 | 中文简介 |
 |---|---|---|---|
@@ -56,9 +56,10 @@
 | 50 | **yq-pre-push-checks** | [skills/01-agent-engineering/yq-pre-push-checks/](../skills/01-agent-engineering/yq-pre-push-checks/) | 推送或宣称就绪前，选择与变更风险匹配的最小验证。 |
 | 51 | **yq-remove-reasoning-leaks** | [skills/08-writing-marketing/yq-remove-reasoning-leaks/](../skills/08-writing-marketing/yq-remove-reasoning-leaks/) | 技术文本残留评审过程、草稿引用或推理旁白时使用。 |
 | 52 | **yq-simplify-code** | [skills/01-agent-engineering/yq-simplify-code/](../skills/01-agent-engineering/yq-simplify-code/) | 审计代码、测试或门禁是否重复、过度设计或失去用途。 |
-| 53 | **yq-stable-tests** | [skills/01-agent-engineering/yq-stable-tests/](../skills/01-agent-engineering/yq-stable-tests/) | 测试出现偶发失败、资源争用或异步清理问题时使用。 |
-| 54 | **yq-technical-writing** | [skills/08-writing-marketing/yq-technical-writing/](../skills/08-writing-marketing/yq-technical-writing/) | 编写或精简技术文档、注释、提示词和界面文案时使用。 |
-| 55 | **yq-translate-docs** | [skills/08-writing-marketing/yq-translate-docs/](../skills/08-writing-marketing/yq-translate-docs/) | 维护中英双语文档的语义一致、结构对应和自然表达。 |
-| 56 | **yq-ui-checks** | [skills/07-media-content/yq-ui-checks/](../skills/07-media-content/yq-ui-checks/) | 开发或审查界面的反馈、可读性和交互边界时使用。 |
-| 57 | **yq-vps-vpn-deploy** | [skills/03-frameworks/yq-vps-vpn-deploy/](../skills/03-frameworks/yq-vps-vpn-deploy/) | 部署、复核和维护 VPS 双协议代理，验证 REALITY 的 HTTPS 回落、收敛公网入口、验证 TUIC 续期，并交付 Clash Verge 和 Shadowrocket 配置。 |
-| 58 | **yq-windows-trash-cleaner** | [skills/01-agent-engineering/yq-windows-trash-cleaner/](../skills/01-agent-engineering/yq-windows-trash-cleaner/) | Windows C盘、项目垃圾、Docker/WSL、Git worktree、CodeGraph、Agent 会话或内存异常需要安全审计、清理和验证时使用。 |
+| 53 | **yq-software-promo-video** | [skills/07-media-content/yq-software-promo-video/](../skills/07-media-content/yq-software-promo-video/) | 制作 45 秒软件拉新宣传短视频（纸艺定格或实机动效），涵盖痛点钩子分镜、全屏实机与局部放大双层构图、原速连贯 TTS 配音反推切镜、全局节拍立体声配乐混音校验及多平台防限流封面文案；当用户要为桌面软件、Web 应用、CLI 或开源项目制作 30-60 秒宣传片、产品功能演示短视频或 B站/抖音/小红书/知乎投放物料时使用。 |
+| 54 | **yq-stable-tests** | [skills/01-agent-engineering/yq-stable-tests/](../skills/01-agent-engineering/yq-stable-tests/) | 测试出现偶发失败、资源争用或异步清理问题时使用。 |
+| 55 | **yq-technical-writing** | [skills/08-writing-marketing/yq-technical-writing/](../skills/08-writing-marketing/yq-technical-writing/) | 编写或精简技术文档、注释、提示词和界面文案时使用。 |
+| 56 | **yq-translate-docs** | [skills/08-writing-marketing/yq-translate-docs/](../skills/08-writing-marketing/yq-translate-docs/) | 维护中英双语文档的语义一致、结构对应和自然表达。 |
+| 57 | **yq-ui-checks** | [skills/07-media-content/yq-ui-checks/](../skills/07-media-content/yq-ui-checks/) | 开发或审查界面的反馈、可读性和交互边界时使用。 |
+| 58 | **yq-vps-vpn-deploy** | [skills/03-frameworks/yq-vps-vpn-deploy/](../skills/03-frameworks/yq-vps-vpn-deploy/) | 部署、复核和维护 VPS 双协议代理，验证 REALITY 的 HTTPS 回落、收敛公网入口、验证 TUIC 续期，并交付 Clash Verge 和 Shadowrocket 配置。 |
+| 59 | **yq-windows-trash-cleaner** | [skills/01-agent-engineering/yq-windows-trash-cleaner/](../skills/01-agent-engineering/yq-windows-trash-cleaner/) | Windows C盘、项目垃圾、Docker/WSL、Git worktree、CodeGraph、Agent 会话或内存异常需要安全审计、清理和验证时使用。 |
